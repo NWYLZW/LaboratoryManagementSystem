@@ -1,0 +1,5 @@
+# local data files
+log/
+
+# local setting files
+.idea
