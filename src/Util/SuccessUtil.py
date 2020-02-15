@@ -1,6 +1,6 @@
-from src.Bean.InformationBean import InformationBean
+from src.Bean.Information import Information
 
-class SuccessUtil(InformationBean):
+class SuccessUtil(Information):
     def __init__(self):
         super().__init__({
         },{
