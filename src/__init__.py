@@ -5,7 +5,9 @@ from flask_script import Manager
 from src.Router import bluePrints
 from src.ComandManager import initManager
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder="../res/web",
+            static_url_path='',)
 CORS(app, supports_credentials=True)
 
 # 导入各个模块
