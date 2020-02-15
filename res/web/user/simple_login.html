@@ -5,16 +5,22 @@
 		<title></title>
 	</head>
 	<body>
-		<form action="login" method="post">
-			<div class="mui-input-row">
-				<label>用户名</label>
-				<input type="text" placeholder="用户名" value="admin">
-			</div>
-			<div class="mui-input-row">
-				<label>密码</label>
-				<input type="password" placeholder="密码" value="admin">
-			</div>
-			<input type="submit" id="" name="" />
-		</form>
+		<form method="POST">
+            <!--启动CSRF-->
+            {{form.hidden_tag()}}
+            <p>
+                用户：{{form.userName(size=20,id='userName')}}
+                {%for e in form.userName.errors%}
+                <span style="color: red">*{{e}}</span>
+                {%endfor%}
+            </p>
+            <p>
+                密码：{{form.password(size=20,id='password')}}
+               {%for e in form.password.errors%}
+                <span style="color: red">*{{e}}</span>
+                {%endfor%}
+            </p>
+            <p><button style="float: left" type="submit">登录</button></p>
+        </form>
 	</body>
 </html>
