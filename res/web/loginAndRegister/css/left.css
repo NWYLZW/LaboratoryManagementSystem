@@ -1,0 +1,72 @@
+.login-left-top{
+	width: 100%;
+	height: 15%;
+	background-color: #000066;
+}
+.login-left-top-left,.login-left-top-right{
+	float: left;
+	height: 100%;
+}
+.login-left-top-left{
+	width: 40%;
+	background-color: #006600;
+}
+.login-left-top-right{
+	width: 60%;
+	background-color: #660000;
+}
+
+.login-left-mid{
+	position: relative;
+	width: 100%;height: 70%;
+	background-color: #dd0000;
+}
+.input{
+	position: relative;
+	padding-top: 2.5%;
+	padding-left: 5%;padding-right: 5%;
+	width: 90%;height: 25%;
+	background-color: #00ffff;
+}
+.input .title{
+	position: relative;
+	margin-bottom: 20px;
+	width: 100%;height: 50px;
+	background-color: #00dd00;
+}
+.input .login{
+	position: relative;
+	left: 10%;
+	width: 80%;height: 60px;
+	background-color: #0000dd;
+}
+
+.input-VerificationCode{
+	position: relative;
+	padding-top: 5%;
+	width: 100%;height: 15%;
+	background-color: #00dddd;
+}
+.input-VerificationCode .inputx{
+	float: left;
+	width: 70%;height: 60px;
+	background-color: #00ff00;
+}
+.input-VerificationCode .imgx{
+	float: left;
+	width: 30%;height: 60px;
+	background-color: #ff00ff;
+}
+
+.login-btn{
+	position: absolute;
+	left: 5%;
+	width: 90%;height: 20%;
+	background-color: #0000ff;
+}
+
+.login-left-bottom{
+	width: 100%;
+	height: 15%;
+	background-color: #00ff00;
+}
