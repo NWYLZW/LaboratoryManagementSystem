@@ -1,0 +1,15 @@
+.main .top{
+	left: 250px;
+	width: calc(100% - 250px);
+}
+.main .left_nav{
+	width: 250px;
+	box-shadow: 5px 0 15px gray;
+}
+.left_nav .topx .topx_icon i{
+	top: 26px;left: 24px;
+	font-size: 2rem;
+}
+.left_nav .topx .topx_title{
+	color: rgba(0,0,0,1);
+}
