@@ -1,6 +1,6 @@
-from src.Bean.InformationBean import InformationBean
+from src.Bean.Information import Information
 
-class ErrorUtil(InformationBean):
+class ErrorUtil(Information):
     def __init__(self):
         super().__init__({
             'get':0,
