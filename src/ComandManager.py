@@ -17,6 +17,7 @@ class pro(MyCommand):
             host="0.0.0.0",
             port=16000,
         )
+
 def initManager(manager,appx):
     manager.add_command("dev", dev(appx))
     manager.add_command("pro", pro(appx))
