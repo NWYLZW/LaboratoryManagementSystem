@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from flask_login import login_required
 
 from src import templatePath
 
@@ -9,5 +10,6 @@ panelBluePrint = Blueprint(
     template_folder=templatePath+"/panel",)
 
 @panelBluePrint.route("/")
+@login_required
 def index():
     return render_template("main.html")
