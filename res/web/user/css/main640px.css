@@ -1,5 +1,8 @@
 .login-left{
+	border-radius: 32px;
+	box-shadow: 0 0 10px gray;
 	margin-left: calc(50% - 325px);
+	background-color: rgba(248,248,248,.5);
 }
 .login-right{
 	width: 0;

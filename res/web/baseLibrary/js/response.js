@@ -46,3 +46,4 @@ class response {
 		linke_response.href = "../"+this.proName+"/css/main"+name+"px.css";
 	}
 }
+// TODO 将link标签做成自动生成
