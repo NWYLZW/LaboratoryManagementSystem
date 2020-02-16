@@ -13,7 +13,7 @@ MainLog.setIgnoreLevel({
 })
 
 # 应用初始化
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_cors import *
 from flask_login import LoginManager
 app = Flask(__name__,
@@ -37,3 +37,7 @@ for bluePrint in bluePrints:
 from flask_script import Manager
 manager = Manager(app)
 initManager(manager,app)
+
+@app.route("/")
+def index():
+    return redirect(url_for('main.index'))
