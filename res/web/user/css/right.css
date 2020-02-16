@@ -7,8 +7,8 @@
 }
 .btn{
 	position: relative;
-	width: 10%;
-	top: 45%;
+	width: 50px;
+	top: 46%;
 	height: 80px;
 	background-color: #006600;
 	transition: .5s;
