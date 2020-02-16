@@ -1,0 +1,6 @@
+.login-left{
+	margin-left: calc(50% - 325px);
+}
+.login-right{
+	width: 0;
+}
