@@ -5,73 +5,16 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
-		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/centerx_menu.css"/>
 		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
-		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/main.css"/>
-		<link id="link_response" rel="stylesheet" type="text/css" href="../baseLibrary/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="../panel/css/centerx_menu.css"/>
+		<link rel="stylesheet" type="text/css" href="../panel/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="../panel/css/main.css" id="link_response"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../iscroll/build/iscroll-probe.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/generateMenu.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/navigation.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			window.onload = function(){
-				var dictm = [{
-					'name':"常用",
-					'url':'#1',
-					'ico-class':'fa fa-tags fa-1_5x',
-					'child':[{
-						'name':"常用0",
-						'url':'../userx/',
-						'ico-class':'fa fa-tag fa-1_5x',
-					},]
-				},{
-					'name':"我的",
-					'url':'#2',
-					'ico-class':'fa fa-user-circle-o fa-1_5x',
-					'child':[{
-						'name':"我的主页",
-						'url':'../userx/',
-						'ico-class':'fa fa-building fa-1_5x',
-					},{
-						'name':"个人信息",
-						'url':'../userx/',
-						'ico-class':'fa fa-vcard fa-1_5x',
-					},]
-				},{
-					'name':"人员管理",
-					'url':'#3',
-					'ico-class':'fa fa-users fa-1_5x',
-					'child':[{
-						'name':"查询",
-						'url':'../userx/',
-						'ico-class':'fa fa-address-book fa-1_5x',
-					},{
-						'name':"人员异动",
-						'url':'../userx/',
-						'ico-class':'fa fa-user-plus fa-1_5x',
-					},]
-				},{
-					'name':"资源管理",
-					'url':'#4',
-					'ico-class':'fa fa-area-chart fa-1_5x',
-					'child':[]
-				},{
-					'name':"资金管理",
-					'url':'#5',
-					'ico-class':'fa fa-bank fa-1_5x',
-					'child':[]
-				},{
-					'name':"工作管理",
-					'url':'#6',
-					'ico-class':'fa fa-tasks fa-1_5x',
-					'child':[]
-				},];
-				generateMenu(dictm,'.iscroll');
-				new navigationResponse("baseLibrary",640,1000,myScroll);
-			}
-		</script>
 	</head>
 	<body>
 		<div class="main">
@@ -90,5 +33,60 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+			var dictm = [{
+				'name':"常用",
+				'url':'#1',
+				'ico-class':'fa fa-tags fa-1_5x',
+				'child':[{
+					'name':"常用0",
+					'url':'../userx/',
+					'ico-class':'fa fa-tag fa-1_5x',
+				},]
+			},{
+				'name':"我的",
+				'url':'#2',
+				'ico-class':'fa fa-user-circle-o fa-1_5x',
+				'child':[{
+					'name':"我的主页",
+					'url':'../userx/',
+					'ico-class':'fa fa-building fa-1_5x',
+				},{
+					'name':"个人信息",
+					'url':'../userx/',
+					'ico-class':'fa fa-vcard fa-1_5x',
+				},]
+			},{
+				'name':"人员管理",
+				'url':'#3',
+				'ico-class':'fa fa-users fa-1_5x',
+				'child':[{
+					'name':"查询",
+					'url':'../userx/',
+					'ico-class':'fa fa-address-book fa-1_5x',
+				},{
+					'name':"人员异动",
+					'url':'../userx/',
+					'ico-class':'fa fa-user-plus fa-1_5x',
+				},]
+			},{
+				'name':"资源管理",
+				'url':'#4',
+				'ico-class':'fa fa-area-chart fa-1_5x',
+				'child':[]
+			},{
+				'name':"资金管理",
+				'url':'#5',
+				'ico-class':'fa fa-bank fa-1_5x',
+				'child':[]
+			},{
+				'name':"工作管理",
+				'url':'#6',
+				'ico-class':'fa fa-tasks fa-1_5x',
+				'child':[]
+			},];
+			generateMenu(dictm,'.iscroll');
+			new navigationResponse("panel",640,1000,myScroll);
+		</script>
 	</body>
 </html>
