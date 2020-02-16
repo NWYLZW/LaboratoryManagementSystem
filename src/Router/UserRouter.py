@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_user, logout_user
 
-from src import templatePath, login_manager, MainLog, db
+from src import templatePath, login_manager, db
 from src.form.LoginForm import LoginForm
 from src.Model.UserModel import User
 
@@ -13,14 +13,12 @@ userBluePrint = Blueprint(
 
 @userBluePrint.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            user = User.query.filter_by(userName=form.userName.data).first()
-            if user is not None:
-                if user.verify_password(form.password.data):
-                    login_user(user)
-                    return redirect(url_for('panel.index'))
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User.query.filter_by(userName=form.userName.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user)
+            return redirect(url_for('panel.index'))
     return render_template('simple_login.html', form=form)
 @userBluePrint.route('/logout', methods=['GET', 'POST'])
 def logout():

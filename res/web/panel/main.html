@@ -13,6 +13,7 @@
 		<script src="../iscroll/build/iscroll-probe.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/generateMenu.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/navigation.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			window.onload = function(){
@@ -68,7 +69,7 @@
 					'child':[]
 				},];
 				generateMenu(dictm,'.iscroll');
-				var temp = new response(myScroll);
+				new navigationResponse("baseLibrary",640,1000,myScroll);
 			}
 		</script>
 	</head>

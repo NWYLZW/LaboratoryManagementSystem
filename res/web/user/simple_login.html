@@ -3,24 +3,21 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-		<form method="POST">
-            <!--启动CSRF-->
-            {{form.hidden_tag()}}
-            <p>
-                用户：{{form.userName(size=20,id='userName')}}
-                {%for e in form.userName.errors%}
-                <span style="color: red">*{{e}}</span>
-                {%endfor%}
-            </p>
-            <p>
-                密码：{{form.password(size=20,id='password')}}
-               {%for e in form.password.errors%}
-                <span style="color: red">*{{e}}</span>
-                {%endfor%}
-            </p>
-            <p><button style="float: left" type="submit">登录</button></p>
-        </form>
+		<form method="POST" action="/user/login">
+			{{form.hidden_tag()}}
+			<div>
+				<label>用户名</label>
+				<input name="userName" id="userName" placeholder="用户名" type="text">
+			</div>
+			<div>
+				<label>密码</label>
+				<input name="password" id="password" placeholder="密码" type="password">
+			</div>
+			<p><button style="float: left" type="submit">登录</button></p>
+		</form>
 	</body>
 </html>
