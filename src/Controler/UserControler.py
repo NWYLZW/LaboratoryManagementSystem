@@ -1,4 +1,4 @@
-from src import db
+from src import db, MainLog
 from src.Model.UserModel import User
 
 
@@ -26,5 +26,6 @@ class UserControler:
             db.session.commit()
             return True
         except:
+            MainLog.record(MainLog.level.ERROR,form.userName.data+"用户添加失败")
             return False
     pass

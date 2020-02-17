@@ -25,6 +25,7 @@ def login():
             login_user(user)
             return redirect(url_for('panel.index'))
     return render_template('login.html', form=form)
+
 @userBluePrint.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
@@ -36,7 +37,7 @@ def register():
         if form.validate_on_submit() and form.validate_userName(form.userName):
             userControler.addUser(form)
             return redirect(url_for('user.login'))
-    return render_template('login.html', form=form)
+    return render_template('simple_register.html', form=form)
 
 @login_manager.user_loader
 def load_user(user_id):

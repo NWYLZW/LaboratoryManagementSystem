@@ -9,10 +9,10 @@ class User(UserMixin, db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
     userName = db.Column(db.String(32), unique=True)
-    nickname = db.Column(db.String(32), unique=True)
+    nickName = db.Column(db.String(32), unique=False)
     passwordHash = db.Column(db.String(128), unique=False)
 
-    male = db.Column(db.Boolean, unique=False)
+    maleBool = db.Column(db.Boolean, unique=False)
     directionName = db.Column(db.String(64), unique=False)
     qqNum = db.Column(db.String(64), unique=False)
     laboratoryName = db.Column(db.String(64), unique=False)
@@ -26,6 +26,18 @@ class User(UserMixin, db.Model):
         return False
 
     @property
+    def male(self):
+        if self.maleBool:
+            return "man"
+        else:
+            return "woman"
+    @male.setter
+    def male(self,male):
+        if male=="man" :
+            self.maleBool = True
+        else:
+            self.maleBool = False
+    @property
     def password(self):
         raise AttributeError('不能直接获取明文密码！')
     @password.setter
@@ -33,5 +45,6 @@ class User(UserMixin, db.Model):
         self.passwordHash = generate_password_hash(password)
     def verify_password(self, password):
         return check_password_hash(self.passwordHash, password)
+
     def __repr__(self):
         return "<User '{:s}>".format(self.userName)
