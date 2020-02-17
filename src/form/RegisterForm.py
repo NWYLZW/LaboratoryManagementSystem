@@ -16,6 +16,9 @@ class RegisterForm(FlaskForm):
     )
     male = SelectField(
         'male',
+        choices=[(1, 'man'),
+                 (2, 'woman')],
+        coerce=int,
         validators=[DataRequired('male is null')]
     )
     directionName = StringField(
@@ -34,9 +37,7 @@ class RegisterForm(FlaskForm):
         'professionalClass',
         validators=[DataRequired('professionalClass is null')]
     )
-    submit = SubmitField(
-        'submit'
-    )
+    submit = SubmitField()
 
     def validate_userName(self, field):
         '''

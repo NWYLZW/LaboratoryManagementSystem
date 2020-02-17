@@ -19,7 +19,6 @@ def login():
     form = LoginForm(request.form)
     MainLog.record(MainLog.level.DEBUG,request.method)
     if request.method == 'POST' and form.validate():
-        MainLog.record(MainLog.level.DEBUG,"form.validate")
         user = User.query.filter_by(userName=form.userName.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user)

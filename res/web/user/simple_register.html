@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="/user/register" method="post">
+			{{form.hidden_tag()}}
+			<div>
+				<label>userName</label>
+				<input value="None" name="userName" id="userName" placeholder="userName" type="text">
+			</div>
+			<div>
+				<label>password</label>
+				<input value="None" name="password" id="password" placeholder="password" type="password">
+			</div>
+			<div>
+				<label>male</label>
+				<select name="male">
+					<option value="1">man</option>
+					<option value="2">woman</option>
+				</select>
+			</div>
+			<div>
+				<label>directionName</label>
+				<input value="None" name="directionName" id="directionName" placeholder="directionName" type="text">
+			</div>
+			<div>
+				<label>qqNum</label>
+				<input value="None" name="qqNum" id="qqNum" placeholder="qqNum" type="text">
+			</div>
+			<div>
+				<label>laboratoryName</label>
+				<input value="None" name="laboratoryName" id="laboratoryName" placeholder="laboratoryName" type="text">
+			</div>
+			<div>
+				<label>professionalClass</label>
+				<input value="None" name="professionalClass" id="professionalClass" placeholder="professionalClass" type="text">
+			</div>
+			<input type="submit"/>
+		</form>
+	</body>
+</html>
