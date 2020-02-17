@@ -13,6 +13,16 @@
 	background-color: #00DDDD;
 	transition: .5s;
 }
+.mid-side input{
+	position:relative;
+	float: left;
+	width: 80px;
+	height: 40px;
+	top:50%;
+	margin-top:-20px;
+	margin-right:10px;
+	margin-left:10px;
+}
 .mid-top .mid-mid-in{
 	position: relative;
 	left: 10%;
