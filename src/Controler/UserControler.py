@@ -1,3 +1,5 @@
+import traceback
+
 from src import db, MainLog
 from src.Model.UserModel import User
 
@@ -18,14 +20,17 @@ class UserControler:
                 male=form.male.data,
                 directionName=form.directionName.data,
                 qqNum=form.password.data,
+                telNum=form.telNum.data,
                 laboratoryName=form.laboratoryName.data,
-                professionalClass=form.professionalClass.data,
+                professionalClassX=
+                str(form.professional.data)+'-'+str(form.gradle.data)+'-'+str(form.classNum.data),
             )
             user = User(**params)
             db.session.add(user)
             db.session.commit()
             return True
-        except:
-            MainLog.record(MainLog.level.ERROR,form.userName.data+"用户添加失败")
+        except Exception:
+            MainLog.record(MainLog.level.ERROR,form.userName.data+"用户添加失败 错误信息:")
+            traceback.print_exc()
             return False
     pass

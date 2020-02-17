@@ -17,7 +17,6 @@ userControler = UserControler()
 @userBluePrint.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
-    MainLog.record(MainLog.level.DEBUG,request.method)
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(userName=form.userName.data).first()
         if user is not None and user.verify_password(form.password.data):
@@ -33,9 +32,15 @@ def logout():
 def register():
     form = RegisterForm()
     if request.method == 'POST':
-        if form.validate_on_submit() and form.validate_userName(form.userName):
-            userControler.addUser(form)
-            return redirect(url_for('user.login'))
+        if form.validate_on_submit():
+            if form.validate_userName(form.userName):
+                userControler.addUser(form)
+                return redirect(url_for('user.login'))
+            return "用户名已存在"
+        # allFiled = form.getAllFiled()
+        # for key in allFiled:
+        #     MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+allFiled[key].errors.__str__())
+        return "表单数据有误"
     return render_template('simple_register.html', form=form)
 
 @login_manager.user_loader

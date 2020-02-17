@@ -15,8 +15,11 @@ class User(UserMixin, db.Model):
     maleBool = db.Column(db.Boolean, unique=False)
     directionName = db.Column(db.String(64), unique=False)
     qqNum = db.Column(db.String(64), unique=False)
+    telNum = db.Column(db.String(64), unique=False)
     laboratoryName = db.Column(db.String(64), unique=False)
     professionalClass = db.Column(db.String(64), unique=False)
+    def __init__(self,id,userName,nickName,passwordHash,maleBool,directionName,qqNum,telNum,laboratoryName,professional,gradle,classNum):
+        pass
     def is_authenticated(self):
         return True
     @property
@@ -25,6 +28,16 @@ class User(UserMixin, db.Model):
     def is_anonymous(self):
         return False
 
+    @property
+    def professionalClassX(self):
+        return self.professionalClass
+    @professionalClassX.setter
+    def professionalClassX(self, professionalClassX):
+        '''
+        :param professionalClass: professional+'-'+gradle+'-'+classNum
+        :return:
+        '''
+        self.professionalClass = professionalClassX
     @property
     def male(self):
         if self.maleBool:
