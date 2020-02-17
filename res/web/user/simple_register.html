@@ -3,26 +3,29 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../user/js/register.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-		<form action="/user/register" method="post">
-			{{form.hidden_tag()}}
-			<div>
+		<form id="register-form" action="/user/register" method="post">
+			{{form.hidden_tag()}} <-这个你不用管
+			<div class="user-name">
 				<label>userName</label>
-				<input value="" name="userName" id="userName" placeholder="userName" type="text">
+				<input value="123123" name="userName" id="userName" placeholder="userName" type="text">
 			</div>
-			<div>
+			<div class="password">
 				<label>password</label>
-				<input value="" name="password" id="password" placeholder="password" type="password">
+				<input value="123123123" name="password" id="password" placeholder="password" type="password">
 			</div>
-			<div>
+			<div class="male">
 				<label>male</label>
 				<select name="male">
 					<option value="1">man</option>
 					<option value="2">woman</option>
 				</select>
 			</div>
-			<div>
+			<div class="direction-name">
 				<label>directionName</label>
 				<select name="directionName">
 					<option value="Java">Java</option>
@@ -32,15 +35,15 @@
 					<option value="Php">Php</option>
 				</select>
 			</div>
-			<div>
+			<div class="qq-num">
 				<label>qqNum</label>
-				<input value="" name="qqNum" id="qqNum" placeholder="qqNum" type="text">
+				<input value="123123123" name="qqNum" id="qqNum" placeholder="qqNum" type="text">
 			</div>
-			<div>
+			<div class="tel-num">
 				<label>telNum</label>
-				<input value="" name="telNum" id="telNum" placeholder="telNum" type="text">
+				<input value="12312312311" name="telNum" id="telNum" placeholder="telNum" type="text">
 			</div>
-			<div>
+			<div class="laboratory-name">
 				<label>laboratoryName</label>
 				<select name="laboratoryName">
 					<option value="E601">E601</option>
@@ -48,7 +51,7 @@
 					<option value="F608">F608</option>
 				</select>
 			</div>
-			<div>
+			<div class="professional-class">
 				<label>professionalClass</label>
 				<select name="professional">
 					<option value="网络工程">网络工程</option>
@@ -71,4 +74,10 @@
 			<input type="submit"/>
 		</form>
 	</body>
+	<script type="text/javascript">
+		$("#register-form").submit(function(){
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+	</script>
 </html>
