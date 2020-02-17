@@ -23,12 +23,12 @@ class RegisterForm(FlaskForm):
     )
     directionName = SelectField(
         'directionName',
-        choices=[(1, 'man'),
-                 (2, 'Web前端'),
-                 (3, 'Web后端'),
-                 (4, '人工智能'),
-                 (5, 'Php'),],
-        coerce=int,
+        choices=[('Java', 'Java'),
+                 ('Web前端', 'Web前端'),
+                 ('Web后端', 'Web后端'),
+                 ('人工智能', '人工智能'),
+                 ('Php', 'Php'),],
+        coerce=str,
         validators=[DataRequired('directionName is null')]
     )
     qqNum = StringField(
@@ -41,36 +41,36 @@ class RegisterForm(FlaskForm):
     )
     laboratoryName = SelectField(
         'laboratoryName',
-        choices=[(1, 'E314'),
-                 (2, 'E601'),
-                 (3, 'F608'),],
-        coerce=int,
+        choices=[('E314', 'E314'),
+                 ('E601', 'E601'),
+                 ('F608', 'F608'),],
+        coerce=str,
         validators=[DataRequired('laboratoryName is null')]
     )
     professional = SelectField(
         'professional',
-        choices=[(1, '网络工程'),
-                 (2, '软件工程'),
-                 (3, '通信工程'),
-                 (4, '计算机科学与技术'),
-                 (5, '人工智能'),],
-        coerce=int,
+        choices=[('网络工程', '网络工程'),
+                 ('软件工程', '软件工程'),
+                 ('通信工程', '通信工程'),
+                 ('计算机科学与技术', '计算机科学与技术'),
+                 ('人工智能', '人工智能'),],
+        coerce=str,
         validators=[DataRequired('professional is null')]
     )
     gradle = SelectField(
         'gradle',
-        choices=[(1, '16'),
-                 (2, '17'),
-                 (3, '18'),
-                 (4, '19'),],
-        coerce=int,
+        choices=[('16', '16'),
+                 ('17', '17'),
+                 ('18', '18'),
+                 ('19', '19'),],
+        coerce=str,
         validators=[DataRequired('gradle is null')]
     )
     classNum = SelectField(
         'classNum',
-        choices=[(1, '01'),
-                 (2, '02'),],
-        coerce=int,
+        choices=[('01', '01'),
+                 ('02', '02'),],
+        coerce=str,
         validators=[DataRequired('classNum is null')]
     )
     submit = SubmitField()

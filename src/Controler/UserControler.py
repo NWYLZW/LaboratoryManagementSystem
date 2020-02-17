@@ -13,7 +13,7 @@ class UserControler:
         :return: 返回是否成功
         '''
         try:
-            params = dict(
+            user = User(
                 userName=form.userName.data,
                 nickName=form.userName.data,
                 password=form.password.data,
@@ -22,10 +22,10 @@ class UserControler:
                 qqNum=form.password.data,
                 telNum=form.telNum.data,
                 laboratoryName=form.laboratoryName.data,
-                professionalClassX=
-                str(form.professional.data)+'-'+str(form.gradle.data)+'-'+str(form.classNum.data),
+                professional=form.professional.data,
+                gradle=form.gradle.data,
+                classNum=form.classNum.data,
             )
-            user = User(**params)
             db.session.add(user)
             db.session.commit()
             return True

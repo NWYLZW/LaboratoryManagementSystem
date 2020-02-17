@@ -18,7 +18,19 @@ class User(UserMixin, db.Model):
     telNum = db.Column(db.String(64), unique=False)
     laboratoryName = db.Column(db.String(64), unique=False)
     professionalClass = db.Column(db.String(64), unique=False)
-    def __init__(self,id,userName,nickName,passwordHash,maleBool,directionName,qqNum,telNum,laboratoryName,professional,gradle,classNum):
+    def __init__(self,
+                 userName: str = "", nickName: str = "", password: str = "", male: int = 1,
+                 directionName: str = "", qqNum: str = "", telNum: str = "", laboratoryName: str = "",
+                 professional: str = "",gradle: str = "",classNum: str = ""):
+        self.userName = userName
+        self.nickName = nickName
+        self.password = password
+        self.male = male
+        self.directionName = directionName
+        self.qqNum = qqNum
+        self.telNum = telNum
+        self.laboratoryName = laboratoryName
+        self.professionalClass = professional + '-' + gradle + '-' + classNum
         pass
     def is_authenticated(self):
         return True
