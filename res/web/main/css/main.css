@@ -1,0 +1,33 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+	overflow-x:hidden; 
+	overflow-y:hidden;
+}
+.main{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transition: .5s;
+	min-height: 910px;
+}
+.left,.right{
+	position: absolute;
+	width: calc(50% - 450px);
+	height: 100%;
+	background-color: #FEF190;
+}
+.right{
+	left: calc(50% + 450px);
+}
+.mid{
+	position: absolute;
+	left: calc(50% - 450px);
+	width: 900px;
+	height: 100%;
+	background-color: #1EFF90;
+}

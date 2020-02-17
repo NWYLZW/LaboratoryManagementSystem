@@ -1,0 +1,51 @@
+.mid-top{
+	position: relative;
+	top: 30%;
+	width: 100%;
+	height: 100%;
+	transition: .5s;
+}
+
+.mid-side{
+	position: relative;
+	left: calc(50% - 100px);
+	width: 200px;height: 10%;
+	background-color: #00DDDD;
+	transition: .5s;
+}
+.mid-top .mid-mid-in{
+	position: relative;
+	left: 10%;
+	width: 80%;height: 0;
+	background-color: #0DD0DD;
+	transition: .5s;
+}
+.mid-top .line{
+	position: relative;
+	left: 10%;
+	width: 80%;height: 2px;
+	background-color: #000000;
+}
+.mid-top .verticalLine{
+	position: relative;
+	left: calc(50% - 2px);
+	width: 4px;height: 10%;
+	background-color: #000000;
+	transition: 5s;
+}
+
+.mid-top-open{
+	top: 10%;
+}
+.mid-top-open .mid-mid-in{
+	height: 30%;
+}
+.mid-bottom{
+	position: absolute;
+	width: 80%;
+	height: 10%;
+	left: 10%;
+	bottom: 0;
+	background-color: #00AA00;
+	transition: .5s;
+}
