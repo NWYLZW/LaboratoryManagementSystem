@@ -74,7 +74,7 @@ class RegisterForm(FlaskForm):
         validators=[DataRequired('classNum is null')]
     )
     submit = SubmitField()
-    def validate_userName(self, field):
+    def validate_userName(self,field):
         '''
         检验用户名是否存在
         :param field: 用户名
@@ -83,6 +83,11 @@ class RegisterForm(FlaskForm):
         if User.query.filter_by(userName=field.data).count() == 0:
             return True
         return False
+    def validata_Num(self):
+        if self.userName.data.isdigit() and self.telNum.data.isdigit() and self.qqNum.data.isdigit():
+            return True
+        else:
+            return False
     def getAllFiled(self)->dict:
         allFiled = {}
         allFiled['classNum'] = self.classNum

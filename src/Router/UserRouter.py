@@ -40,8 +40,10 @@ def register():
     if request.method == 'POST':
         if form.validate_on_submit():
             if form.validate_userName(form.userName):
-                userControler.addUser(form)
-                return successUtil.getData('registerSuccess')
+                if form.validata_Num():
+                    userControler.addUser(form)
+                    return successUtil.getData('registerSuccess')
+                return errorUtil.getData('FormDataWrong')
             return errorUtil.getData('UserNameExist')
         errorDict = {}
         allFiled = form.getAllFiled()
