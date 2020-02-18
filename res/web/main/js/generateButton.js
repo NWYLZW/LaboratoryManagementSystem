@@ -9,18 +9,11 @@ function generateButton(list) {
 		button.onclick = function() {
 			gotoUrl(this.urlStr);
 		}
-		mid_side1.appendChild(button);
+		setTimeout((function(mButton) {
+			mid_side1.appendChild(mButton);
+		}), 1000, button);
 		width += 100;
 	}
 	mid_side1.style.width = width + 'px';
 	mid_side1.style.left = 'calc(50% - ' + width / 2 + 'px)';
 }
-
-var list = [{
-	'title': '用户中心',
-	'url': '/panel#user'
-}, {
-	'title': '用户中心',
-	'url': '/user'
-}, ]
-generateButton(list);

@@ -1,25 +1,18 @@
-*{
-	margin: 0;
-	padding: 0;
-}
 html,body{
-	width: 100%;
 	height: 100%;
-	overflow-x:hidden; 
-	overflow-y:hidden;
+	overflow-x:hidden;
 }
 .main{
 	position: relative;
 	width: 100%;
 	height: 100%;
-	transition: .5s;
 	min-height: 910px;
+	transition: .5s;
 }
 .left,.right{
 	position: absolute;
 	width: calc(50% - 450px);
 	height: 100%;
-	background-color: #FEF190;
 }
 .right{
 	left: calc(50% + 450px);
@@ -29,5 +22,42 @@ html,body{
 	left: calc(50% - 450px);
 	width: 900px;
 	height: 100%;
-	background-color: #1EFF90;
+}
+.mainBackGroundImage{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	min-height: 910px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url(../img/PCBackImage.jpg);
+	-webkit-filter: blur(6px);
+	   -moz-filter: blur(6px);
+		-ms-filter: blur(6px);
+			filter: blur(6px);
+	-webkit-animation-name: blur; /*动画名称*/
+	-webkit-animation-duration: 4s; /*动画持续时间*/
+	-webkit-animation-iteration-count: 1; /*动画次数*/
+	-webkit-animation-delay: 0s; /*延迟时间*/
+}
+@-webkit-keyframes blur {
+    0% {
+		-webkit-filter: blur(2px);
+		   -moz-filter: blur(2px);
+			-ms-filter: blur(2px);
+				filter: blur(2px);
+    }
+    50% {
+		-webkit-filter: blur(4px);
+		   -moz-filter: blur(4px);
+			-ms-filter: blur(4px);
+				filter: blur(4px);
+    }
+    100% {
+		-webkit-filter: blur(6px);
+		   -moz-filter: blur(6px);
+			-ms-filter: blur(6px);
+				filter: blur(6px);
+    }
 }
