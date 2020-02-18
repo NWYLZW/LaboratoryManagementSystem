@@ -13,7 +13,6 @@ function validate(formData, jqForm, options){
 	var form = jqForm[0];              //将jqForm转换为DOM对象
 	if(!checkValue(form.userName,true,function(){
 		// 检测userName的值
-		console.log(this.checkValueX);
 		if (this.checkValueX.length!=12){
 			this.failed('1',"用户名长度错误");
 			return false;
@@ -151,20 +150,20 @@ function checkValue(filed,checkNull,check,failedx){
 }
 
 function response(data){
-	alert("发生未知错误");
 	var JSONObject = JSON.parse(data);
+	console.log(JSONObject.type);
 	switch (JSONObject.type){
+	case 0:
 		// "注册成功"
+		alert("表单数据错误")
+		break;
 	case -1001:
+		// "注册成功"
+		alert("注册成功")
 		break;
-		// "用户名不存在"
-	case 1001:
-		break;
-		// "密码错误"
-	case 1002:
-		break;
-		// "用户名已存在"
 	case 1003:
+		// "用户名已存在"
+		alert("用户名已存在")
 		break;
 	default:
 		alert("发生未知错误");
