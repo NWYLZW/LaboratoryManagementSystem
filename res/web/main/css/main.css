@@ -32,32 +32,32 @@ html,body{
 	background-repeat: no-repeat;
 	background-position: center;
 	background-image: url(../img/PCBackImage.jpg);
-	-webkit-filter: blur(6px);
-	   -moz-filter: blur(6px);
-		-ms-filter: blur(6px);
-			filter: blur(6px);
+	-webkit-filter: blur(0px);
+	   -moz-filter: blur(0px);
+		-ms-filter: blur(0px);
+			filter: blur(0px);
 	-webkit-animation-name: blur; /*动画名称*/
-	-webkit-animation-duration: 4s; /*动画持续时间*/
+	-webkit-animation-duration: 2s; /*动画持续时间*/
 	-webkit-animation-iteration-count: 1; /*动画次数*/
 	-webkit-animation-delay: 0s; /*延迟时间*/
 }
 @-webkit-keyframes blur {
     0% {
-		-webkit-filter: blur(2px);
-		   -moz-filter: blur(2px);
-			-ms-filter: blur(2px);
-				filter: blur(2px);
+		-webkit-filter: blur(16px);
+		   -moz-filter: blur(16px);
+			-ms-filter: blur(16px);
+				filter: blur(16px);
     }
     50% {
-		-webkit-filter: blur(4px);
-		   -moz-filter: blur(4px);
-			-ms-filter: blur(4px);
-				filter: blur(4px);
+		-webkit-filter: blur(8px);
+		   -moz-filter: blur(8px);
+			-ms-filter: blur(8px);
+				filter: blur(8px);
     }
     100% {
-		-webkit-filter: blur(6px);
-		   -moz-filter: blur(6px);
-			-ms-filter: blur(6px);
-				filter: blur(6px);
+		-webkit-filter: blur(0px);
+		   -moz-filter: blur(0px);
+			-ms-filter: blur(0px);
+				filter: blur(0px);
     }
 }
