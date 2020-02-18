@@ -11,6 +11,9 @@
 		<link rel="stylesheet" type="text/css" href="../main/css/mid.css"/>
 		<link rel="stylesheet" type="text/css" href="../main/css/right.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../main/js/generateButton.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="mainBackGroundImage">
@@ -39,28 +42,21 @@
 					</div>
 				</div>
 				<div class="mid-bottom">
-					<div class="login-left-bottom">
-						<h5>Copyright © 2020 LMS</h5>
-						<h5>Powered by Fengzli · Theme by Fengzli</h5>
-					</div>
 				</div>
+				<script type="text/javascript">
+					$(".mid-bottom").load("../baseLibrary/bottom.html .Wed-bottom");
+				</script>
 			</div>
 			<div class="right">
 				
 			</div>
 		</div>
 	</body>
-	<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../main/js/generateButton.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		new response("main",640,1400).start();
-		
-		window.onload = function(){
-			setTimeout(function() {
-				$(".mid-top")[0].classList.add("mid-top-open");
-			}, 800);
-		}
+		setTimeout(function() {
+			$(".mid-top")[0].classList.add("mid-top-open");
+		}, 800);
 		
 		var list = [{
 			'title': '面板',
