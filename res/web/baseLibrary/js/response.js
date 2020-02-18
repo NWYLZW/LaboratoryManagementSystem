@@ -1,9 +1,10 @@
 class response {
-	constructor(proName,left,right) {
+	constructor(proName,left,right,htmlName) {
 		this.statux = 1;
 		this.left = left || 640;
 		this.right = right || 640;
 		this.proName = proName || "baseLibrary";
+		this.htmlName = htmlName || "main";
 		this.linke_response = document.getElementById('link_response');
 		if(this.linke_response==null){
 			this.linke_response = document.createElement('link');
@@ -50,6 +51,6 @@ class response {
 		this.link(linkArr[this.statux]);
 	}
 	link(name){
-		this.linke_response.href = "../"+this.proName+"/css/main"+name+"px.css";
+		this.linke_response.href = "../"+this.proName+"/css/"+this.htmlName+name+"px.css";
 	}
 }
