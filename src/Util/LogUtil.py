@@ -24,9 +24,10 @@ class log:
     def record(self,TAG:logLevel,message:str):
         if not TAG in self.__ignoreLevelDict:
             if TAG.value >= self.__ignoreLevel.value:
-                print("["+self.__logLevelName.get(TAG.value)+"]  "
-                      +time.strftime("%Y-%m-%d %H:%M:%S  ", time.localtime())
-                      +message)
+                print(
+                    "["+self.__logLevelName.get(TAG.value)+"]"+"\t"
+                    +time.strftime("%Y-%m-%d %H:%M:%S  ", time.localtime())+"\t"
+                    +message)
     def setIgnoreMinLevel(self, ignoreLevel:logLevel):
         self.__ignoreLevel = ignoreLevel
     def setIgnoreLevel(self, ignoreLevelDict:dict):

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../user/js/register.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<form id="register-form" action="/user/register" method="post">
+			{{form.hidden_tag()}} <-这个你不用管
+			<div class="user-name">
+				<label>userName</label>
+				<input value="123123" name="userName" id="userName" placeholder="userName" type="text">
+			</div>
+			<div class="password">
+				<label>password</label>
+				<input value="123123123" name="password" id="password" placeholder="password" type="password">
+			</div>
+			<div class="male">
+				<label>male</label>
+				<select name="male">
+					<option value="1">man</option>
+					<option value="2">woman</option>
+				</select>
+			</div>
+			<div class="direction-name">
+				<label>directionName</label>
+				<select name="directionName">
+					<option value="Java">Java</option>
+					<option value="Web前端">Web前端</option>
+					<option value="Web后端">Web后端</option>
+					<option value="人工智能">人工智能</option>
+					<option value="Php">Php</option>
+				</select>
+			</div>
+			<div class="qq-num">
+				<label>qqNum</label>
+				<input value="123123123" name="qqNum" id="qqNum" placeholder="qqNum" type="text">
+			</div>
+			<div class="tel-num">
+				<label>telNum</label>
+				<input value="12312312311" name="telNum" id="telNum" placeholder="telNum" type="text">
+			</div>
+			<div class="laboratory-name">
+				<label>laboratoryName</label>
+				<select name="laboratoryName">
+					<option value="E601">E601</option>
+					<option value="E314">E314</option>
+					<option value="F608">F608</option>
+				</select>
+			</div>
+			<div class="professional-class">
+				<label>professionalClass</label>
+				<select name="professional">
+					<option value="网络工程">网络工程</option>
+					<option value="软件工程">软件工程</option>
+					<option value="通信工程">通信工程</option>
+					<option value="计算机科学与技术">计算机科学与技术</option>
+					<option value="人工智能">人工智能</option>
+				</select>
+				<select name="gradle">
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+				</select>
+				<select name="classNum">
+					<option value="01">01</option>
+					<option value="02">02</option>
+				</select>
+			</div>
+			<input type="submit"/>
+		</form>
+	</body>
+	<script type="text/javascript">
+		$("#register-form").submit(function(){
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+	</script>
+</html>

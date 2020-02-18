@@ -3,11 +3,18 @@ from src.Bean.Information import Information
 class ErrorUtil(Information):
     def __init__(self):
         super().__init__({
-            'get':0,
-            'post':1,
-            'dataValidation':2,
+            "FormDataWrong":0,
+            "backEndWrong0":1,
+            "backEndWrong1":2,
+            'UserNameNone':1001,
+            'PasswordWrong':1002,
+            'UserNameExist':1003,
         }, {
-            0:"禁止以Get形式获取资源",
-            1:"禁止以Post形式获取资源",
-            2:"数据验证错误",
+            0:"表单数据错误",
+            1:"后端Error对象未配置参数，请附上url通知后端检查该接口",
+            2:"后端Error对象参数配置错误，请附上url通知后端检查该接口",
+            1001:"用户名不存在",
+            1002:"密码错误",
+            1003:"用户名已存在",
         })
+errorUtil = ErrorUtil()

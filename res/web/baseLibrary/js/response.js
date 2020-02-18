@@ -4,6 +4,14 @@ class response {
 		this.left = left || 640;
 		this.right = right || 640;
 		this.proName = proName || "baseLibrary";
+		this.linke_response = document.getElementById('link_response');
+		if(this.linke_response==null){
+			this.linke_response = document.createElement('link');
+			this.linke_response.rel = "stylesheet";
+			this.linke_response.type = "text/css";
+			this.linke_response.href = "../"+this.proName+"/css/main.css";
+			document.head.appendChild(this.linke_response);
+		}
 	}
 	start(){
 		window.response = this;
@@ -42,7 +50,6 @@ class response {
 		this.link(linkArr[this.statux]);
 	}
 	link(name){
-		var linke_response = document.getElementById('link_response');
-		linke_response.href = "../"+this.proName+"/css/main"+name+"px.css";
+		this.linke_response.href = "../"+this.proName+"/css/main"+name+"px.css";
 	}
 }

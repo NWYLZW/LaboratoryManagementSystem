@@ -1,6 +1,9 @@
 html,body{
 	height: 100%;
 	width: 100%;
+	min-width: 0;
+	min-height: 900px;
+	background: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
 }
 .login-main{
 	width: 100%;
@@ -8,15 +11,17 @@ html,body{
 	transition: .5s;
 }
 .login-left{
-	float: left;
+	position: absolute;
+	top: 3%;
 	width: 650px;
 	min-width: 650px;
-	min-height: 900px;
-	height: 100%;
+	min-height: 850px;
+	height: 94%;
 	transition: .5s;
 }
 .login-right{
-	float: left;
+	position: absolute;
+	left: 650px;
 	width: calc(100% - 650px);
 	height: 100%;
 	min-height: 900px;
