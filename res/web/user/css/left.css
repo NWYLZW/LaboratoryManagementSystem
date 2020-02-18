@@ -130,21 +130,28 @@
 	position: relative;
 	left: calc(50% - 80px);
 	width: 160px;height: 80px;
-	background-color: #3Eb9FF;
+	background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
 	border-radius: 38px;box-shadow: 0 0 1px gray;
 	font-size: 24px;font-weight: 600;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 	
 	transition: .5s;
 }
 .login-btn .login-btn-top button:hover{
 	border-radius: 16px;
+	color: white;
 	box-shadow: 0 0 10px gray;
 	text-shadow: 0 0 4px white;
 }
 .login-btn .login-btn-bottom{
 	width: 100%;height: 40%;
-	transition: .5s;
 	text-align: center;
+	transition: .5s;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
 .login-btn .login-btn-bottom i{
 	position: relative;
@@ -152,12 +159,15 @@
 	transition: .5s;
 }
 .login-btn .login-btn-bottom i:hover{
-	color: #3EB9FF;
+	color: powderblue;
 }
 .login-btn .login-btn-bottom a{
 	margin-left: 20px;margin-right: 20px;
 	font-size: 18px;
 	transition: .5s;
+}
+.login-btn .login-btn-bottom a:hover{
+	color: white;
 }
 
 .login-left-bottom{
@@ -169,5 +179,8 @@
 
 .login-left-bottom h5{
 	margin-top: 12px;
-	color: #AEAEAE;
+	color: #EAEAEA;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }

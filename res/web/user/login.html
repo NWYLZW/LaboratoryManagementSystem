@@ -72,14 +72,15 @@
 			</div>
 			<div class="login-right">
 				<div class="rotation">
-					<div class="btn" style="float: left;">
-						
+					<div class="rotation-wrraper" id="rotation-wrraper">
 					</div>
-					<div class="btn" style="float: right;">
-						
+					<div id="left" class="btn" style="left: 30px;">
+						<i class="fa fa-angle-left fa-5x"></i>
 					</div>
-					<div class="rotationBtn">
-						
+					<div id="right" class="btn" style="right: 30px;">
+						<i class="fa fa-angle-right fa-5x"></i>
+					</div>
+					<div class="rotationListBtn" id="rotationListBtn">
 					</div>
 				</div>
 				<div class="rigth-bottom">
@@ -93,8 +94,26 @@
 			</div>
 		</div>
 	</body>
+	<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../user/js/rotation.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		new response("user",640,1400).start();
+		var imageDict = [
+			{
+				"title":"Hello World",
+				"content":"Hello World!!!,Welcome to there.",
+				"backgroundImageSrc":"img/rotation/01Hello.jpg",
+				"href":"../../",
+			},
+			{
+				"title":"坠空",
+				"content":"Down WoW WoW",
+				"backgroundImageSrc":"img/rotation/02FallingShort.jpg",
+				"href":"../../",
+			},
+		]
+		var loginRotationX = new loginRotation(imageDict,3000);
+		loginRotationX.init();
 	</script>
 </html>

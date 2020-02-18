@@ -1,43 +1,86 @@
 .rotation{
 	position: relative;
-	width: 100%;
-	height: 80%;
-	background-color: #000066;
+	left: 1%;top: 1%;
+	width: 98%;height: 720px;
+	overflow: hidden;
+	border-radius: 16px;
+	box-shadow: 0 0 16px gray;
 	transition: .5s;
 }
-.btn{
-	position: relative;
-	width: 50px;
-	top: 46%;
-	height: 80px;
-	background-color: #006600;
-	transition: .5s;
-}
-.rotationBtn{
+.rotation .rotation-wrraper{
 	position: absolute;
-	float: right;
-    right: 0;
-    bottom: 0;
-	width: 100px;
-	height: 40px;
-	background-color: #660000;
+	left: 0%;
+	height: 100%;width: 100%;
+	background: rgba(40,40,40,.2);
 	transition: .5s;
+}
+.rotation .rotation-wrraper .backImage{
+	float: left;
+	background-repeat: no-repeat;
+	background-position: center;
+	filter:alpha(opacity=80);-moz-opacity:0.8;opacity:0.80;
+	background-size: 100%;
+	width: 100%;height: 100%;
+}
+.rotation .btn{
+	position: absolute;
+	top: calc(50% - 32px);
+	width: 22.86px;
+	height: 64px;
+	transition: .5s;
+}
+.rotation .btn i{
+	top: calc(50% -24px);
+	transition: .5s;
+}
+.rotation .btn i:hover{
+	color: white;
+}
+.rotation .rotationListBtn{
+	position: absolute;
+	right: 64px;bottom: 16px;
+	width: 240px;height: 48px;
+	transition: .5s;
+}
+.rotation .rotationListBtn i{
+	color: rgba(255,255,255,.5);
+	margin-left: 16px;margin-top: 16px;
+	transition: .5s;
+}
+.rotation .rotationListBtn i:hover{
+	color: rgba(255,255,255,0.8);
+}
+.rotation .rotationListBtn .onThis{
+	color: rgba(55,155,255,1);
 }
 .rigth-bottom{
+	position: relative;
+	left: 1%;top: 1%;
 	width: 100%;
-	height: 20%;
-	background-color: #0000aa;
+	height: calc(99% - 720px);
 	transition: .5s;
 }
 .rigth-bottom-top{
-	width: 200px;
-	height: 20%;
-	background-color: #00aa00;
+	width: 500px;
+	height: 64px;line-height: 64px;
+	padding-left: 10px;
 	transition: .5s;
+}
+.rigth-bottom-top a{
+	color: lightgray;
+}
+.rigth-bottom-top a:hover{
+	color: black;
 }
 .rigth-bottom-bottom{
 	width: 100%;
-	height: 80%;
-	background-color: #aa0000;
+	height: calc(100% - 64px);
+	padding: 20px;
 	transition: .5s;
+}
+.rigth-bottom-bottom a{
+	color: lightgray;
+}
+.rigth-bottom-bottom a:hover{
+	color: white;
 }
