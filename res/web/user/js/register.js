@@ -142,7 +142,7 @@ function checkValue(filed,checkNull,check,failedx){
 		failedx(errorType);
 	};
 	this.errorTypeDict = {};
-	if(checkNull&&filed.value==""){
+	if(checkNull&&filed.value===""){
 		this.failed('0',"值不能为空");
 		return false;
 	}
@@ -155,15 +155,15 @@ function response(data){
 	switch (JSONObject.type){
 	case 0:
 		// "注册成功"
-		alert("表单数据错误")
+		alert("表单数据错误");
 		break;
 	case -1001:
 		// "注册成功"
-		alert("注册成功")
+		alert("注册成功");
 		break;
 	case 1003:
 		// "用户名已存在"
-		alert("用户名已存在")
+		alert("用户名已存在");
 		break;
 	default:
 		alert("发生未知错误");
