@@ -1,5 +1,8 @@
 # config=utf-8
 import pymysql
+
+from src.Model.RoleModel import Role, Permission
+
 pymysql.install_as_MySQLdb()
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -11,6 +14,8 @@ class User(UserMixin, db.Model):
     userName = db.Column(db.String(32), unique=True)
     nickName = db.Column(db.String(32), unique=False)
     passwordHash = db.Column(db.String(128), unique=False)
+
+    roleId = db.Column(db.Integer, db.ForeignKey('Role.id'))
 
     maleBool = db.Column(db.Boolean, unique=False)
     directionName = db.Column(db.String(64), unique=False)
@@ -31,6 +36,9 @@ class User(UserMixin, db.Model):
         self.telNum = telNum
         self.laboratoryName = laboratoryName
         self.professionalClass = professional + '-' + gradle + '-' + classNum
+        if self.role is None:
+            if self.role is None:
+                self.role = Role.query.filter_by(default=True).first()
         pass
     def is_authenticated(self):
         return True
@@ -39,6 +47,12 @@ class User(UserMixin, db.Model):
         return True
     def is_anonymous(self):
         return False
+    def __repr__(self):
+        return "<User '{:s}>".format(self.userName)
+    def can(self, permissions):
+        return self.role is not None and (self.role.permissions & permissions) == permissions
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
 
     @property
     def professionalClassX(self):
@@ -70,6 +84,3 @@ class User(UserMixin, db.Model):
         self.passwordHash = generate_password_hash(password)
     def verify_password(self, password):
         return check_password_hash(self.passwordHash, password)
-
-    def __repr__(self):
-        return "<User '{:s}>".format(self.userName)

@@ -13,7 +13,7 @@ MainLog.setIgnoreLevel({
 })
 
 # 应用初始化
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 from flask_cors import *
 from flask_login import LoginManager
 app = Flask(__name__,
@@ -41,3 +41,10 @@ initManager(manager,app)
 @app.route("/")
 def index():
     return redirect(url_for('main.index'))
+# TODO 写几个错误响应页面
+@app.errorhandler(404)
+def pageNotFound():
+    return render_template("error/404.html")
+@app.errorhandler(403)
+def pageNotFound():
+    return render_template("error/404.html")
