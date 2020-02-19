@@ -189,7 +189,7 @@ function jsonResponse(data){
 		break;
 	case -1001:
 		// "注册成功"
-		alert("注册成功");
+		gotoUrl('./login');
 		break;
 	case 1003:
 		// "用户名已存在"

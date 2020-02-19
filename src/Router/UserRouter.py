@@ -1,12 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 from src import templatePath, login_manager, MainLog
 from src.Controler.UserControler import UserControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
-from src.Wrap.LoginWrap import login_required
 from src.form.LoginForm import LoginForm
 from src.Model.UserModel import User
 from src.form.RegisterForm import RegisterForm
