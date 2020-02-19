@@ -6,6 +6,7 @@ from src.Controler.UserControler import UserControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
+from src.Wrap.LoginWrap import login_required
 from src.form.LoginForm import LoginForm
 from src.Model.UserModel import User
 from src.form.RegisterForm import RegisterForm
@@ -31,9 +32,11 @@ def login():
     return render_template('login.html', form=form)
 
 @userBluePrint.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('user.login'))
+
 @userBluePrint.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()

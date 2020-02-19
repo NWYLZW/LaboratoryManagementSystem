@@ -16,12 +16,12 @@ function alertError(node,shakeName,message){
 		node.classList.remove(shakeName);
 		node.style.backgroundColor = "";
 	}, 1000);
-	var d = dialog({
-		title: '错误',
+	dialog({
+		title: '信息错误',
 		content: message,
-		okValue: '确 定'
-	});
-	d.show();
+		padding: '40px',
+		drag: true,
+	}).show();
 }
 function validate(formData, jqForm, options){
 	//jqForm:   jQuery对象，封装了表单的元素
