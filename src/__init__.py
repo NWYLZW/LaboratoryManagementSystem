@@ -45,9 +45,9 @@ Role().insert_roles()
 def index():
     return redirect(url_for('main.index'))
 # TODO 写几个错误响应页面
-@app.errorhandler(404)
-def pageNotFound():
-    return render_template("error/404.html")
-@app.errorhandler(403)
-def pageNotFound():
-    return render_template("error/404.html")
+# @app.errorhandler(404)
+# def pageNotFound():
+#     return 'This page does not exist', 404
+# @app.errorhandler(403)
+# def cantDoIt():
+#     return 'Your permission can\'t do it', 403

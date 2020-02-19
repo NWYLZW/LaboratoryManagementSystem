@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, abort
 from flask_login import login_user, logout_user, login_required, current_user
 
 from src import templatePath, login_manager, MainLog
@@ -54,8 +54,10 @@ def register():
         if form.validate_on_submit():
             if form.validate_userName(form.userName):
                 if form.validata_Num():
-                    userControler.addUser(form)
-                    return successUtil.getData('registerSuccess')
+                    if userControler.addUser(form):
+                        return successUtil.getData('registerSuccess')
+                    else:
+                        return errorUtil.getData('backEndWrong2')
                 return errorUtil.getData('FormDataWrong')
             return errorUtil.getData('UserNameExist')
         errorDict = {}

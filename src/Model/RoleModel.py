@@ -36,7 +36,7 @@ class Role(db.Model):
             'CommonUser':(
                 Permission.PERSON_DATA_ADSC |
                 Permission.LABORATORY_MONEY_S
-                ,False),
+                ,True),
             'LaboratiryModerator':(
                 Permission.PERSON_DATA_ADSC |
                 Permission.LABORATORY_DATA_ADSC |

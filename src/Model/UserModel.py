@@ -36,9 +36,8 @@ class User(UserMixin, db.Model):
         self.telNum = telNum
         self.laboratoryName = laboratoryName
         self.professionalClass = professional + '-' + gradle + '-' + classNum
-        if self.role is None:
-            if self.role is None:
-                self.role = Role.query.filter_by(default=True).first()
+        if self.roleId is None:
+            self.roleId = Role.query.filter_by(default=True).first().id
         pass
     def is_authenticated(self):
         return True
@@ -54,6 +53,14 @@ class User(UserMixin, db.Model):
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
+    @property
+    def role(self):
+        if self.roleId is None:
+            self.roleId = Role.query.filter_by(default=True).first().id
+        return Role.query.filter_by(id=self.roleId).first()
+    @role.setter
+    def role(self,roleId):
+        self.roleId = roleId
     @property
     def professionalClassX(self):
         return self.professionalClass
