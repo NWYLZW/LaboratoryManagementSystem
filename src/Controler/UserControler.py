@@ -19,7 +19,7 @@ class UserControler:
                 password=form.password.data,
                 male=form.male.data,
                 directionName=form.directionName.data,
-                qqNum=form.password.data,
+                qqNum=form.qqNum.data,
                 telNum=form.telNum.data,
                 laboratoryName=form.laboratoryName.data,
                 professional=form.professional.data,

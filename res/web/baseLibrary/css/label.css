@@ -2,10 +2,13 @@
 html,body{
 	width: 100%;
 }
-input,button{
+input,button,select{
 	padding: 0;margin: 0;
 	border: none;
 	outline: none;
+	appearance:none;
+	-moz-appearance:none; /* Firefox */
+	-webkit-appearance:none; /* Safari 和 Chrome */
 }
 a{
 	color: gray;

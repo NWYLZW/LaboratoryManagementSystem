@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 from src import templatePath, login_manager, MainLog
 from src.Controler.UserControler import UserControler
@@ -31,9 +31,11 @@ def login():
     return render_template('login.html', form=form)
 
 @userBluePrint.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('user.login'))
+
 @userBluePrint.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -52,8 +54,9 @@ def register():
                 errorDict[key] = allFiled[key].errors.__str__()
                 # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+str(len(allFiled[key].errors)))
                 # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+allFiled[key].errors.__str__())
+        MainLog.record(MainLog.level.DEBUG,"下"+JsonUtil().dictToJson(errorDict))
         return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(errorDict))
-    return render_template('simple_register.html', form=form)
+    return render_template('register.html', form=form)
 
 @login_manager.user_loader
 def load_user(user_id):

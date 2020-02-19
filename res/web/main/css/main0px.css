@@ -1,9 +1,31 @@
 .left{
+	width: 0;
 	height: 0;
 }
 .right{
+	width: 0;
 	height: 0;
 }
-.mid-top{
-	height: 80%;
+.mid{
+	position: absolute;
+	left: calc(50% - 350px);
+	width: 700px;
+	height: 100%;
+}
+.mid-top .mid-mid-in{
+	left: 20%;
+	width: 56%;
+}
+.mid-top .bottom{
+	height: 60px;
+}
+.mid-top .line{
+	left: 20%;
+	width: 60%;
+}
+.mid-top-open .mid-mid-in{
+	height: 200px;
+}
+.mainBackGroundImage{
+	background-image: url(../img/PEBackImage.jpg);
 }
