@@ -185,15 +185,23 @@ function jsonResponse(data){
 	switch (JSONObject.type){
 	case 0:
 		// "表单数据错误"
-		alert("表单数据错误");
+		alertError($('.form')[0],"shake","表单数据错误");
 		break;
 	case -1001:
 		// "注册成功"
-		gotoUrl('./login');
+		dialog({
+			title: '信息',
+			content: '注册成功',
+			padding: '40px',
+			drag: true,
+		}).show();
+		setTimeout(function() {
+			gotoUrl('./login');
+		}, 1000);
 		break;
 	case 1003:
 		// "用户名已存在"
-		alert("用户名已存在");
+		alertError($('.form .user-name input')[0],"shake","用户名已存在");
 		break;
 	default:
 		alert("发生未知错误");
