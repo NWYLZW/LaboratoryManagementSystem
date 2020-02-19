@@ -52,22 +52,19 @@
 			</div>
 		</div>
 	</body>
+	<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		new response("main",640,1400).start();
 		setTimeout(function() {
 			$(".mid-top")[0].classList.add("mid-top-open");
 		}, 800);
-		
-		var list = [{
-			'title': '面板',
-			'url': '/panel'
-		}, {
-			'title': '用户中心',
-			'url': '/user'
-		}, {
-			'title': '关于',
-			'url': '#info'
-		}, ];
-		generateButton(list);
+		new myAjax({
+			url:"./buttonList",
+			data:"",
+			method:"GET",
+			success:function(result){
+				generateButton(JSON.parse(result));
+			}
+		}).ajax();
 	</script>
 </html>
