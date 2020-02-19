@@ -10,8 +10,12 @@
 		<link rel="stylesheet" type="text/css" href="../user/css/left.css"/>
 		<link rel="stylesheet" type="text/css" href="../user/css/right.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../artDialog/dist/dialog.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../user/js/rotation.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../user/js/login.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="login-main">
@@ -31,13 +35,13 @@
 					</div>
 				</div>
 				
-				<form class="login-left-mid" method="POST" action="/user/login">
+				<form id="login-form" class="login-left-mid" method="POST" action="/user/login">
 					 {{form.hidden_tag()}}
 					<div class="input">
 						<div class="title">
 							userName
 						</div>
-						<div class="login">
+						<div class="login user-name">
 							<input name="userName" id="userName" placeholder="userName" type="text">
 						</div>
 					</div>
@@ -46,7 +50,7 @@
 							password
 							<a href="#" style="float: right;margin-right: 20px;">forget</a>
 						</div>
-						<div class="login">
+						<div class="login password">
 							<input name="password" id="password" placeholder="password" type="password">
 						</div>
 					</div>
@@ -116,5 +120,9 @@
 		]
 		var loginRotationX = new loginRotation(imageDict,3000);
 		loginRotationX.init();
+		$("#login-form").submit(function(){
+			$(this).ajaxSubmit(options);
+			return false;
+		});
 	</script>
 </html>
