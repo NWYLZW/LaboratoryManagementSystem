@@ -112,6 +112,7 @@
 		
 		new response("user",500,1000,"register").start();
 		$("#register-form").submit(function(){
+			// TODO lgh 弹出对话框,如果和password的值不同就返回false
 			$(this).ajaxSubmit(options);
 			return false;
 		});
