@@ -5,7 +5,7 @@ var options = {
 	//type: type,               //默认是form的method（get or post），如果申明，则会覆盖
 	//dataType: null,           //html(默认), xml, script, json...接受服务端返回的类型
 	//clearForm: true,          //成功提交后，清除所有表单元素的值
-	resetForm: true,            //成功提交后，重置所有表单元素的值
+	//resetForm: true,          //成功提交后，重置所有表单元素的值
 	timeout: 3000               //限制请求的时间，当请求大于3秒后，跳出请求
 };
 function validate(formData, jqForm, options){
@@ -26,7 +26,6 @@ function validate(formData, jqForm, options){
 		return true;
 	},function(errorType){
 		// 失败的话执行的函数
-		console.log(this.errorTypeDict[errorType]);
 		switch (errorType){
 			case '0':
 				alert(this.errorTypeDict[errorType]);
@@ -54,7 +53,6 @@ function validate(formData, jqForm, options){
 		return true;
 	},function(errorType){
 		// 失败的话执行的函数
-		console.log(this.errorTypeDict[errorType]);
 		switch (errorType){
 			case '0':
 				alert(this.errorTypeDict[errorType]);
@@ -86,7 +84,6 @@ function validate(formData, jqForm, options){
 		return true;
 	},function(errorType){
 		// 失败的话执行的函数
-		console.log(this.errorTypeDict[errorType]);
 		switch (errorType){
 			case '0':
 				alert(this.errorTypeDict[errorType]);
@@ -119,7 +116,6 @@ function validate(formData, jqForm, options){
 		return true;
 	},function(errorType){
 		// 失败的话执行的函数
-		console.log(this.errorTypeDict[errorType]);
 		switch (errorType){
 			case '0':
 				alert(this.errorTypeDict[errorType]);
@@ -154,6 +150,7 @@ function checkValue(filed,checkNull,check,failedx){
 function jsonResponse(data){
 	var JSONObject = JSON.parse(data);
 	console.log(JSONObject.type);
+	console.log(JSONObject.message);
 	switch (JSONObject.type){
 	case 0:
 		// "注册成功"

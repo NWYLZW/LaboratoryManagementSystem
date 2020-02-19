@@ -52,8 +52,9 @@ def register():
                 errorDict[key] = allFiled[key].errors.__str__()
                 # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+str(len(allFiled[key].errors)))
                 # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+allFiled[key].errors.__str__())
+        MainLog.record(MainLog.level.DEBUG,"下"+JsonUtil().dictToJson(errorDict))
         return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(errorDict))
-    return render_template('simple_register.html', form=form)
+    return render_template('register.html', form=form)
 
 @login_manager.user_loader
 def load_user(user_id):
