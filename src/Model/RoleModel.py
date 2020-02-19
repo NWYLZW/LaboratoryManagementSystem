@@ -29,7 +29,7 @@ class Role(db.Model):
     # 以数字表示权限等级
     permissions = db.Column(db.Integer)
     # 动态关联
-    users = db.relationship('User', backref='role', lazy='dynamic')
+    user = db.relationship('User', backref='Role', lazy='dynamic')
     @staticmethod
     def insert_roles():
         roles = {

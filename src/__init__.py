@@ -38,6 +38,9 @@ from flask_script import Manager
 manager = Manager(app)
 initManager(manager,app)
 
+from src.Model.RoleModel import Role
+Role().insert_roles()
+
 @app.route("/")
 def index():
     return redirect(url_for('main.index'))
