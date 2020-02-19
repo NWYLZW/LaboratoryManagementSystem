@@ -17,6 +17,7 @@
 			<div class="form">
 				<h1 style="text-align: center;">注册</h1>
 				<form id="register-form" action="/user/register" method="post">
+					{{form.hidden_tag()}}
 					<div class="register-form-line">
 						<div class="user-name">
 							<div class="title">用户名</div>
@@ -44,12 +45,12 @@
 							<option value="2">female</option>
 						</select>
 						<i class="fa fa-male fa-2x" onclick="
-						$('#male')[0].value = 1;
+						$('#male option:selected').val('1');
 						this.style.color = 'lightgreen';
 						$('.fa-female')[0].style.color = 'pink';
 						"></i>
 						<i class="fa fa-female fa-2x" onclick="
-						$('#male')[0].value = 2;
+						$('#male option:selected').val('2');
 						this.style.color = 'lightgreen';
 						$('.fa-male')[0].style.color = '#00BFFF';
 						"></i>

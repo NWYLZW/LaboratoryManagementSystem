@@ -74,11 +74,11 @@ function validate(formData, jqForm, options){
 			return false;
 		}
 		if(this.checkValueX.length < 5 || this.checkValueX.length > 11){
-			this.failed('1',"QQ长度不得小于5大于11");//最少5最多11
+			this.failed('2',"QQ长度不得小于5大于11");//最少5最多11
 			return false;
 		}
 		if(!(/^[0-9]+$/.test(this.checkValueX))){
-			this.failed('1',"QQ要全为数字");//全都是数字
+			this.failed('3',"QQ要全为数字");//全都是数字
 			return false;
 		}
 		return true;
@@ -110,7 +110,7 @@ function validate(formData, jqForm, options){
 		}
 		if (this.checkValueX[0] === '0'){
 			// 不符合标准 将序号和错误信息加到字典中执行下面的函数，并return false
-			this.failed('1',"手机号开头不为零");
+			this.failed('2',"手机号开头不为零");
 			return false;
 		}
 		return true;
@@ -153,7 +153,7 @@ function jsonResponse(data){
 	console.log(JSONObject.message);
 	switch (JSONObject.type){
 	case 0:
-		// "注册成功"
+		// "表单数据错误"
 		alert("表单数据错误");
 		break;
 	case -1001:

@@ -17,16 +17,14 @@ class RegisterForm(FlaskForm):
     male = SelectField(
         'male',
         choices=[
-            ("0", 'null'),
-            ("1", 'male'),
-            ("2", 'female')],
+            ('1', 'male'),
+            ('2', 'female')],
         coerce=str,
         validators=[DataRequired('male is null')]
     )
     directionName = SelectField(
         'directionName',
         choices=[
-            ('0', '选择方向'),
             ('Java', 'Java'),
             ('Web前端', 'Web前端'),
             ('Web后端', 'Web后端'),
@@ -46,7 +44,6 @@ class RegisterForm(FlaskForm):
     laboratoryName = SelectField(
         'laboratoryName',
         choices=[
-            ('0', '实验室'),
             ('E314', 'E314'),
             ('E601', 'E601'),
             ('F608', 'F608'),],
@@ -56,7 +53,6 @@ class RegisterForm(FlaskForm):
     professional = SelectField(
         'professional',
         choices=[
-            ('0', '选择专业'),
             ('网络工程', '网络工程'),
             ('软件工程', '软件工程'),
             ('通信工程', '通信工程'),
@@ -68,7 +64,6 @@ class RegisterForm(FlaskForm):
     gradle = SelectField(
         'gradle',
         choices=[
-            ('0', '选择年级'),
             ('16', '16'),
             ('17', '17'),
             ('18', '18'),
@@ -79,7 +74,6 @@ class RegisterForm(FlaskForm):
     classNum = SelectField(
         'classNum',
         choices=[
-            ('0', '选择班级'),
             ('01', '01'),
             ('02', '02'),],
         coerce=str,

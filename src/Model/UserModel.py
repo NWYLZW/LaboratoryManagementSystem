@@ -53,12 +53,12 @@ class User(UserMixin, db.Model):
     @property
     def male(self):
         if self.maleBool:
-            return "man"
+            return "male"
         else:
-            return "woman"
+            return "female"
     @male.setter
     def male(self,male):
-        if male=="man" :
+        if male==1 or male=="1":
             self.maleBool = True
         else:
             self.maleBool = False

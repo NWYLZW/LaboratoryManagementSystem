@@ -3,6 +3,7 @@
 	<head>
 		<title></title>
 		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../user/js/register.js" type="text/javascript" charset="utf-8"></script>
@@ -10,6 +11,24 @@
 	<body>
 		<form id="register-form" action="/user/register" method="post">
 			{{form.hidden_tag()}}
+			<div class="male">
+				<label>male</label>
+				<select id="male" name="male">
+					<option value="0">null</option>
+					<option value="1">man</option>
+					<option value="2">woman</option>
+				</select>
+				<i class="fa fa-male fa-2x" onclick="
+				$('#male option:selected').val('1');
+				this.style.color = 'lightgreen';
+				$('.fa-female')[0].style.color = 'pink';
+				"></i>
+				<i class="fa fa-female fa-2x" onclick="
+				$('#male option:selected').val('2');
+				this.style.color = 'lightgreen';
+				$('.fa-male')[0].style.color = '#00BFFF';
+				"></i>
+			</div>
 			<div class="user-name">
 				<label>userName</label>
 				<input value="201803120101" name="userName" id="userName" placeholder="userName" type="text">
@@ -17,13 +36,6 @@
 			<div class="password">
 				<label>password</label>
 				<input value="AA123123123" name="password" id="password" placeholder="password" type="password">
-			</div>
-			<div class="male">
-				<label>male</label>
-				<select name="male">
-					<option value="1">man</option>
-					<option value="2">woman</option>
-				</select>
 			</div>
 			<div class="direction-name">
 				<label>directionName</label>
