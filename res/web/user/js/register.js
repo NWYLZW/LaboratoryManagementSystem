@@ -1,6 +1,6 @@
 var options = { 
 	beforeSubmit: validate,     //提交前的回调函数
-	success: response,          //提交后的回调函数
+	success: jsonResponse,      //提交后的回调函数
 	//url: url,                 //默认是form的action， 如果申明，则会覆盖
 	//type: type,               //默认是form的method（get or post），如果申明，则会覆盖
 	//dataType: null,           //html(默认), xml, script, json...接受服务端返回的类型
@@ -13,6 +13,8 @@ function validate(formData, jqForm, options){
 	var form = jqForm[0];              //将jqForm转换为DOM对象
 	if(!checkValue(form.userName,true,function(){
 		// 检测userName的值
+		// TODO 用户名有俩种形式一种是前面为T的老师号码
+		// 一种是学号
 		if (this.checkValueX.length!=12){
 			this.failed('1',"用户名长度错误");
 			return false;
@@ -149,7 +151,7 @@ function checkValue(filed,checkNull,check,failedx){
 	return this.check();
 }
 
-function response(data){
+function jsonResponse(data){
 	var JSONObject = JSON.parse(data);
 	console.log(JSONObject.type);
 	switch (JSONObject.type){

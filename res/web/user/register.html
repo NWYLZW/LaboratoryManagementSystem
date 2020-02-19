@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>加入我们</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
+		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="../user/css/register.css"/>
+		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../user/js/register.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div class="form">
+				<h1 style="text-align: center;">注册</h1>
+				<form id="register-form" action="/user/register" method="post">
+					<div class="register-form-line">
+						<div class="user-name">
+							<div class="title">用户名</div>
+							<input value="" name="userName" id="userName" placeholder="" type="text">
+						</div>
+						<div class="password">
+							<div class="title">密码</div>
+							<input value="" name="password" id="password" placeholder="" type="password">
+						</div>
+					</div>
+					<div class="register-form-line">
+						<div class="qq-num">
+							<div class="title">QQ</div>
+							<input value="" name="qqNum" id="qqNum" placeholder="" type="text">
+						</div>
+						<div class="tel-num">
+							<div class="title">电话</div>
+							<input value="" name="telNum" id="telNum" placeholder="" type="text">
+						</div>
+					</div>
+					<div class="male">
+						<select id="male" name="male">
+							<option value="0">null</option>
+							<option value="1">male</option>
+							<option value="2">female</option>
+						</select>
+						<i class="fa fa-male fa-2x" onclick="
+						$('#male')[0].value = 1;
+						this.style.color = 'lightgreen';
+						$('.fa-female')[0].style.color = 'pink';
+						"></i>
+						<i class="fa fa-female fa-2x" onclick="
+						$('#male')[0].value = 2;
+						this.style.color = 'lightgreen';
+						$('.fa-male')[0].style.color = '#00BFFF';
+						"></i>
+					</div>
+					<div class="register-form-line">
+						<div class="laboratory-name">
+							<select name="laboratoryName">
+								<option value="0" selected:disabled style="diaplay:none">实验室</option>
+								<option value="E601">E601</option>
+								<option value="E314">E314</option>
+								<option value="F608">F608</option>
+							</select>
+						</div>
+						<div class="direction-name">
+							<select name="directionName">
+								<option value="0" selected:disabled style="diaplay:none">选择方向</option>
+								<option value="Java">Java</option>
+								<option value="Web前端">Web前端</option>
+								<option value="Web后端">Web后端</option>
+								<option value="人工智能">人工智能</option>
+								<option value="Php">Php</option>
+							</select>
+						</div>
+					</div>
+					<div class="professional-class">
+						<select name="professional">
+							<option value="0" selected:disabled style="diaplay:none">选择专业</option>
+							<option value="网络工程">网络工程</option>
+							<option value="软件工程">软件工程</option>
+							<option value="通信工程">通信工程</option>
+							<option value="计算机科学与技术">计算机科学与技术</option>
+							<option value="人工智能">人工智能</option>
+						</select>
+						<select name="gradle">
+							<option value="0" selected:disabled style="diaplay:none">选择年级</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+						</select>
+						<select name="classNum">
+							<option value="0" selected:disabled style="diaplay:none">选择班级</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+						</select>
+					</div>
+					<input id="register-form-submit" type="submit" type="button"/>
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript">
+			setTimeout(function() {
+			$('.form')[0].classList.add("new-form");
+			}, 3500);
+		</script>
+	</body>
+	<script type="text/javascript">
+		new response("user",500,1000,"register").start();
+		$("#register-form").submit(function(){
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+	</script>
+</html>

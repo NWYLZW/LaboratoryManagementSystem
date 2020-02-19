@@ -16,8 +16,8 @@ class RegisterForm(FlaskForm):
     )
     male = SelectField(
         'male',
-        choices=[(1, 'man'),
-                 (2, 'woman')],
+        choices=[(1, 'male'),
+                 (2, 'female')],
         coerce=int,
         validators=[DataRequired('male is null')]
     )

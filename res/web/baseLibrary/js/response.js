@@ -51,6 +51,9 @@ class response {
 		this.link(linkArr[this.statux]);
 	}
 	link(name){
-		this.linke_response.href = "../"+this.proName+"/css/"+this.htmlName+name+"px.css";
+		if(this.htmlName==="main")
+			this.linke_response.href = "../"+this.proName+"/css/"+this.htmlName+name+"px.css";
+		else
+			this.linke_response.href = "../"+this.proName+"/css/"+this.htmlName+"/main"+name+"px.css";
 	}
 }
