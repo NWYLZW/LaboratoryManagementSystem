@@ -30,6 +30,12 @@
 	border-bottom: 2px solid white;
 	transition: 1s;
 }
+.mid-side input:first-child{
+	border-left: 2px solid white;
+}
+.mid-side input:last-child{
+	border-right: 2px solid white;
+}
 .mid-side input:hover{
 	background-color: rgba(20,20,20,.5);
 	text-shadow: 0 0 5px white;

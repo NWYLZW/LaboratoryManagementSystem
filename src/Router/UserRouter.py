@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask import Blueprint, render_template, request, redirect, url_for, abort
+from flask_login import login_user, logout_user, login_required, current_user
 
 from src import templatePath, login_manager, MainLog
 from src.Controler.UserControler import UserControler
@@ -23,13 +23,15 @@ def index():
 
 @userBluePrint.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('panel.index'))
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(userName=form.userName.data).first()
         if user is not None:
             if user.verify_password(form.password.data):
                 login_user(user)
-                return redirect(url_for('panel.index'))
+                return successUtil.getData('loginSuccess')
             return errorUtil.getData('PasswordWrong')
         return errorUtil.getData('UserNameNone')
     return render_template('login.html', form=form)
@@ -42,13 +44,17 @@ def logout():
 
 @userBluePrint.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('panel.index'))
     form = RegisterForm()
     if request.method == 'POST':
         if form.validate_on_submit():
             if form.validate_userName(form.userName):
                 if form.validata_Num():
-                    userControler.addUser(form)
-                    return successUtil.getData('registerSuccess')
+                    if userControler.addUser(form):
+                        return successUtil.getData('registerSuccess')
+                    else:
+                        return errorUtil.getData('backEndWrong2')
                 return errorUtil.getData('FormDataWrong')
             return errorUtil.getData('UserNameExist')
         errorDict = {}

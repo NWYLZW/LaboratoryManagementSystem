@@ -180,18 +180,16 @@ function checkValue(filed,checkNull,check,failedx){
 }
 function jsonResponse(data){
 	var JSONObject = JSON.parse(data);
-	console.log(JSONObject.type);
-	console.log(JSONObject.message);
 	switch (JSONObject.type){
 	case 0:
 		// "表单数据错误"
-		alertError($('.form')[0],"shake","表单数据错误");
+		alertError($('.form')[0],"shake",JSONObject.message);
 		break;
 	case -1001:
 		// "注册成功"
 		dialog({
 			title: '信息',
-			content: '注册成功',
+			content: JSONObject.content,
 			padding: '40px',
 			drag: true,
 		}).show();
@@ -201,7 +199,7 @@ function jsonResponse(data){
 		break;
 	case 1003:
 		// "用户名已存在"
-		alertError($('.form .user-name input')[0],"shake","用户名已存在");
+		alertError($('.form .user-name input')[0],"shake",JSONObject.content);
 		break;
 	default:
 		alert("发生未知错误");

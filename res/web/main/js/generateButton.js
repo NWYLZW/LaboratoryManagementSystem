@@ -4,8 +4,8 @@ function generateButton(list) {
 	for (var i = 0; i < list.length; i++) {
 		button = document.createElement('input');
 		button.type = 'button';
-		button.value = list[i]["title"];
-		button.urlStr = list[i]["url"];
+		button.value = list[i].title;
+		button.urlStr = list[i].url;
 		button.onclick = function() {
 			gotoUrl(this.urlStr);
 		}
