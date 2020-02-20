@@ -38,8 +38,13 @@ from flask_script import Manager
 manager = Manager(app)
 initManager(manager,app)
 
+# 权限管理初始化
 from src.Model.RoleModel import Role
 Role().insert_roles()
+# @app.context_processor
+# def inject_permissions():
+#     '''使用上下文处理器，是变量在模板全局中可访问'''
+#     return dict(Permission=Permission)
 
 @app.route("/")
 def index():
