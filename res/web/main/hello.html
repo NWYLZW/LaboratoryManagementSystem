@@ -2,51 +2,85 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>hello</title>
+		<title>Hi</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
+		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
 		<link rel="stylesheet" type="text/css" href="../main/css/main.css"/>
 		<link rel="stylesheet" type="text/css" href="../main/css/left.css"/>
 		<link rel="stylesheet" type="text/css" href="../main/css/mid.css"/>
 		<link rel="stylesheet" type="text/css" href="../main/css/right.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../main/js/generateButton.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
+		<div class="mainBackGroundImage">
+			
+		</div>
 		<div class="main">
 			<div class="left">
-				
 			</div>
 			<div class="mid">
 				<div class="mid-top">
-					<div class="mid-side" >
-						
+					<div class="mid-side top" >
+						<span class="fa-stack fa-lg fa-3x">
+							<i class="fa fa-circle fa-stack-2x MainBlueColor"></i>
+							<i class="fa fa-flask fa-stack-1x fa-inverse fa-spin-half-half"></i>
+						</span>
 					</div>
 					<div class="verticalLine"></div>
 					<div class="line"></div>
 					<div class="mid-mid-in">
-						
+						<h1>LMS</h1>
+						<h2>(Laboratory Management System)</h2>
+						<h2>Welcome to you</h2>
 					</div>
 					<div class="line"></div>
 					<div class="verticalLine"></div>
-					<div class="mid-side">
+					<div class="mid-side bottom">
 					</div>
 				</div>
 				<div class="mid-bottom">
-					
 				</div>
+				<script type="text/javascript">
+					$(".mid-bottom").load("../baseLibrary/bottom.html .Wed-bottom");
+				</script>
 			</div>
 			<div class="right">
 				
 			</div>
 		</div>
 	</body>
-	<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../main/js/generateButton.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		new response("main",640,1400).start();
-	</script>
-	<script type="text/javascript">
-		window.onload = function(){
+		setTimeout(function() {
 			$(".mid-top")[0].classList.add("mid-top-open");
-		}
+		}, 800);
+		new myAjax({
+			url:"./buttonList",
+			data:"",
+			method:"GET",
+			success:function(result){
+				generateButton(JSON.parse(result));
+			}
+		}).ajax();
+		new myAjax({
+			url:"./info/welcome",
+			data:"",
+			method:"GET",
+			success:function(result){
+				$(".mid-mid-in")[0].innerHTML = result;
+			}
+		}).ajax();
+		$(window).bind('hashchange', function() {
+			var sourceHref = location.href.split('#')[0];
+			var changeHref = location.href.split('#')[1];
+			console.log(sourceHref);
+			console.log(changeHref);
+			location.href = sourceHref+'#';
+		});
 	</script>
 </html>

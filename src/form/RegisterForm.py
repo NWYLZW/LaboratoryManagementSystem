@@ -16,18 +16,20 @@ class RegisterForm(FlaskForm):
     )
     male = SelectField(
         'male',
-        choices=[(1, 'man'),
-                 (2, 'woman')],
-        coerce=int,
+        choices=[
+            ('1', 'male'),
+            ('2', 'female')],
+        coerce=str,
         validators=[DataRequired('male is null')]
     )
     directionName = SelectField(
         'directionName',
-        choices=[('Java', 'Java'),
-                 ('Web前端', 'Web前端'),
-                 ('Web后端', 'Web后端'),
-                 ('人工智能', '人工智能'),
-                 ('Php', 'Php'),],
+        choices=[
+            ('Java', 'Java'),
+            ('Web前端', 'Web前端'),
+            ('Web后端', 'Web后端'),
+            ('人工智能', '人工智能'),
+            ('Php', 'Php'),],
         coerce=str,
         validators=[DataRequired('directionName is null')]
     )
@@ -41,35 +43,39 @@ class RegisterForm(FlaskForm):
     )
     laboratoryName = SelectField(
         'laboratoryName',
-        choices=[('E314', 'E314'),
-                 ('E601', 'E601'),
-                 ('F608', 'F608'),],
+        choices=[
+            ('E314', 'E314'),
+            ('E601', 'E601'),
+            ('F608', 'F608'),],
         coerce=str,
         validators=[DataRequired('laboratoryName is null')]
     )
     professional = SelectField(
         'professional',
-        choices=[('网络工程', '网络工程'),
-                 ('软件工程', '软件工程'),
-                 ('通信工程', '通信工程'),
-                 ('计算机科学与技术', '计算机科学与技术'),
-                 ('人工智能', '人工智能'),],
+        choices=[
+            ('网络工程', '网络工程'),
+            ('软件工程', '软件工程'),
+            ('通信工程', '通信工程'),
+            ('计算机科学与技术', '计算机科学与技术'),
+            ('人工智能', '人工智能'),],
         coerce=str,
         validators=[DataRequired('professional is null')]
     )
     gradle = SelectField(
         'gradle',
-        choices=[('16', '16'),
-                 ('17', '17'),
-                 ('18', '18'),
-                 ('19', '19'),],
+        choices=[
+            ('16', '16'),
+            ('17', '17'),
+            ('18', '18'),
+            ('19', '19'),],
         coerce=str,
         validators=[DataRequired('gradle is null')]
     )
     classNum = SelectField(
         'classNum',
-        choices=[('01', '01'),
-                 ('02', '02'),],
+        choices=[
+            ('01', '01'),
+            ('02', '02'),],
         coerce=str,
         validators=[DataRequired('classNum is null')]
     )

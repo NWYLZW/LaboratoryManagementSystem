@@ -18,17 +18,17 @@ function generateMenu(dictm,ElementIdName){
 	for(let i = 0;i < dictm.length;i++){
 		var ulx_li = createEleAddClass("li","centerx_menu_item");
 		var item_childs = createEleAddClass("div","item-childs");
-		var item_title = generateItemTitle(dictm[i]['name'],dictm[i]['ico-class']);
+		var item_title = generateItemTitle(dictm[i].name,dictm[i].icoClass);
 		
-		var childs = dictm[i]['child'];
+		var childs = dictm[i].child;
 		if(childs.length>0){
 			ulx_li.onclick = show_child;
 			
 			var ulxtemp = document.createElement('ul');
 			for(let i = 0;i < childs.length;i++){
 				var ulx_litemp = createEleAddClass("li","centerx_menu_item");
-				var item_titletemp = generateItemTitle(childs[i]['name'],childs[i]['ico-class']);
-				item_titletemp.url = childs[i]['url'];
+				var item_titletemp = generateItemTitle(childs[i].name,childs[i].icoClass);
+				item_titletemp.url = childs[i].url;
 				item_titletemp.onclick = function(){
 					if(!myScroll.c.click) return;
 					gotoUrl(this.url);
@@ -41,7 +41,7 @@ function generateMenu(dictm,ElementIdName){
 		else{
 			item_title.onclick = function(){
 				if(!myScroll.c.click) return;
-				gotoUrl(dictm[i]['url']);
+				gotoUrl(dictm[i].url);
 			}
 		}
 		ulx_li.append(item_title);

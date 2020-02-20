@@ -27,7 +27,7 @@ class log:
                 print(
                     "["+self.__logLevelName.get(TAG.value)+"]"+"\t"
                     +time.strftime("%Y-%m-%d %H:%M:%S  ", time.localtime())+"\t"
-                    +message)
+                    +str(message))
     def setIgnoreMinLevel(self, ignoreLevel:logLevel):
         self.__ignoreLevel = ignoreLevel
     def setIgnoreLevel(self, ignoreLevelDict:dict):

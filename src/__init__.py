@@ -13,7 +13,7 @@ MainLog.setIgnoreLevel({
 })
 
 # 应用初始化
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 from flask_cors import *
 from flask_login import LoginManager
 app = Flask(__name__,
@@ -38,6 +38,21 @@ from flask_script import Manager
 manager = Manager(app)
 initManager(manager,app)
 
+# 权限管理初始化
+from src.Model.RoleModel import Role
+Role().insert_roles()
+# @app.context_processor
+# def inject_permissions():
+#     '''使用上下文处理器，是变量在模板全局中可访问'''
+#     return dict(Permission=Permission)
+
 @app.route("/")
 def index():
     return redirect(url_for('main.index'))
+# TODO 写几个错误响应页面
+# @app.errorhandler(404)
+# def pageNotFound():
+#     return 'This page does not exist', 404
+# @app.errorhandler(403)
+# def cantDoIt():
+#     return 'Your permission can\'t do it', 403
