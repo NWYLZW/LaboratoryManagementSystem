@@ -19,10 +19,7 @@ userControler = UserControler()
 
 @userBluePrint.route('/')
 def index():
-    # TODO wsq 重定向到/main/下面
-    # 效果就是访问localhost:16000/user 会跳转到localhost:16000/main页面
-    # 类似下面的logout函数
-    return ""
+    return redirect(url_for("main.index"))
 
 @userBluePrint.route('/login', methods=['GET', 'POST'])
 def login():
