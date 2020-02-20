@@ -1,0 +1,50 @@
+.mid-left{
+	float: left;
+	width: 40%;
+	height: 100%;
+	transition: .5s;
+}
+.mid-mid{
+	float: left;
+	margin-right: 1%;
+	margin-left: 1%;
+	width: 33%;
+	height: 100%;
+	transition: .5s;
+}
+.mid-right{
+	float: left;
+	width: 25%;
+	height: 100%;
+	transition: .5s;
+}
+.title{
+	width: 100%;
+	height: 100px;
+	background: royalblue;
+	transition: .5s;
+}
+.content1{
+	width: 100%;
+	height: calc(100% - 100px);
+	background-color: blueviolet;
+	transition: .5s;
+}
+.content2{
+	width: 100%;
+	height: calc(100% - 100px);
+	background-color: blueviolet;
+	transition: .5s;
+}
+.content3{
+	width: 100%;
+	height: calc(100% - 156px);
+	background-color: blueviolet;
+	transition: .5s;
+}
+.foot{
+	width: 100%;
+	height: 56px;
+	background-color: blue;
+	transition: .5s;
+}
