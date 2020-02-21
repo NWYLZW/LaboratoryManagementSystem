@@ -41,6 +41,17 @@ html,body{
 	-webkit-animation-iteration-count: 1; /*动画次数*/
 	-webkit-animation-delay: 0s; /*延迟时间*/
 }
+.mainBackGroundImage0{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	min-height: 910px;
+	background-color: rgba(0,0,0,.4);
+	-webkit-animation-name: mask; /*动画名称*/
+	-webkit-animation-duration: 3s; /*动画持续时间*/
+	-webkit-animation-iteration-count: 1; /*动画次数*/
+	-webkit-animation-delay: 0s; /*延迟时间*/
+}
 @-webkit-keyframes blur {
     0% {
 		-webkit-filter: blur(16px);
@@ -59,5 +70,16 @@ html,body{
 		   -moz-filter: blur(0px);
 			-ms-filter: blur(0px);
 				filter: blur(0px);
+    }
+}
+@-webkit-keyframes mask {
+    0% {
+		background-color: rgba(0,0,0,1);
+    }
+    50% {
+		background-color: rgba(0,0,0,.8);
+    }
+    100% {
+		background-color: rgba(0,0,0,.4);
     }
 }
