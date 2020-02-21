@@ -64,7 +64,7 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-		function ajaxSuccess(){
+		function ajaxSuccess(end){
 			setTimeout(function() {
 				$('.circle-circle .left .dish')[0].style.transform = "rotateZ(0deg)";
 				setTimeout(function() {
@@ -74,6 +74,7 @@
 						$('.baffle-bottom')[0].style.transform = "rotateX(90deg)";
 						setTimeout(function() {
 							$('.baffle')[0].style.display = "none";
+							if(end) end();
 						}, 2000);
 					}, 1000);
 				}, 1000);
@@ -89,8 +90,9 @@
 			success:function(result){
 				generateMenu(JSON.parse(result),'.iscroll');
 				new navigationResponse("panel",640,1000,myScroll);
-				ajaxSuccess();
-				new InterfaceContro().include("../../my/space/mySpace.html");
+				ajaxSuccess(function(){$('.interface')[0].style.display = "block";});
+				$('.interface')[0].style.display = "none";
+				new InterfaceContro().include("../my/space/mySpace.html");
 			},
 			failure:function(error){
 				// console.log(error);
