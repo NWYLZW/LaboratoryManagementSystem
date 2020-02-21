@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
 		<link rel="stylesheet" type="text/css" href="../panel/css/centerx_menu.css"/>
 		<link rel="stylesheet" type="text/css" href="../panel/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="../panel/css/interface.css"/>
 		<link rel="stylesheet" type="text/css" href="../panel/css/baffle.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../iscroll/build/iscroll-probe.js" type="text/javascript" charset="utf-8"></script>
@@ -16,9 +17,13 @@
 		<script src="js/generateMenu.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/navigation.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/panelInterfaceContro.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-		<div class="main">
+		<div class="interface">
+			
+		</div>
+		<div class="mainx">
 			<div class="top">
 			</div>
 			<div id="left_nav" class="left_nav">
@@ -59,6 +64,21 @@
 		</div>
 	</body>
 	<script type="text/javascript">
+		function ajaxSuccess(){
+			setTimeout(function() {
+				$('.circle-circle .left .dish')[0].style.transform = "rotateZ(0deg)";
+				setTimeout(function() {
+					$('.circle-circle .right .dish')[0].style.transform = "rotateZ(0deg)";
+					setTimeout(function() {
+						$('.baffle-top')[0].style.transform = "rotateX(90deg)";
+						$('.baffle-bottom')[0].style.transform = "rotateX(90deg)";
+						setTimeout(function() {
+							$('.baffle')[0].style.display = "none";
+						}, 2000);
+					}, 1000);
+				}, 1000);
+			}, 100);
+		}
 		setTimeout(function() {
 			$('.circle-circle .left .dish')[0].style.transform = "rotateZ(90deg)";
 		}, 100);
@@ -69,26 +89,15 @@
 			success:function(result){
 				generateMenu(JSON.parse(result),'.iscroll');
 				new navigationResponse("panel",640,1000,myScroll);
-				setTimeout(function() {
-					$('.circle-circle .left .dish')[0].style.transform = "rotateZ(0deg)";
-					setTimeout(function() {
-						$('.circle-circle .right .dish')[0].style.transform = "rotateZ(0deg)";
-						setTimeout(function() {
-							$('.baffle-top')[0].style.transform = "rotateX(90deg)";
-							$('.baffle-bottom')[0].style.transform = "rotateX(90deg)";
-							setTimeout(function() {
-								$('.baffle')[0].style.display = "none";
-							}, 2000);
-						}, 1000);
-					}, 1000);
-				}, 100);
+				ajaxSuccess();
+				new InterfaceContro().include("../../my/space/mySpace.html");
 			},
 			failure:function(error){
-				console.log(error);
+				// console.log(error);
 			},
 			always:function(jqXHR){
-				console.log(jqXHR.state);
+				// console.log(jqXHR);
 			}
 		}).ajax();
-		</script>
+	</script>
 </html>

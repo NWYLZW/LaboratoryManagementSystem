@@ -11,6 +11,8 @@ panelBluePrint = Blueprint(
     template_folder=templatePath+"/panel",)
 @panelBluePrint.before_request
 def panelBeforeRequest():
+    if not current_user:
+        return redirect(url_for('user.login'))
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
 

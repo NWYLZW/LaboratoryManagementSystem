@@ -16,5 +16,6 @@ class myAjax {
 			data:JSON.stringify(this.data),
 			contentType: "application/json;charset=UTF-8",
 		}).always(this.always);
+		return this;
 	}
 }

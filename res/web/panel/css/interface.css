@@ -1,0 +1,8 @@
+.interface{
+	position: absolute;
+	left: 250px;top: 100px;
+	padding: 20px;
+	width: calc(100% - 290px);
+	background-color: rgba(255,255,255,.5);
+	transition: .5s;
+}

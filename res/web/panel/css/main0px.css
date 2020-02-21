@@ -1,13 +1,17 @@
-.main .top{
+.mainx .top{
 	left: 0;
 	width: 100%;
 }
-.main .left_nav{
+.mainx .left_nav{
 	width: 0;
 	box-shadow: -5px 0 15px gray;
 }
-.left_nav .topx .topx_icon i{
+.mainx .left_nav .topx .topx_icon i{
 	top: 30px;left: 16px;
 	font-size: 3rem;
 	color: #FFFFFF;
+}
+.interface{
+	left: 0;
+	width: calc(100% - 40px);
 }
