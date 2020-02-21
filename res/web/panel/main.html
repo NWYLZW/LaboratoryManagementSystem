@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
 		<link rel="stylesheet" type="text/css" href="../panel/css/centerx_menu.css"/>
 		<link rel="stylesheet" type="text/css" href="../panel/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="../panel/css/baffle.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../iscroll/build/iscroll-probe.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
@@ -33,8 +34,34 @@
 				</div>
 			</div>
 		</div>
+		<div class="baffle">
+			<div class="baffle-top">
+				<div class="baffle-center">
+					<div class="circle-circle">
+						<div class="left">
+							<div class="dish">
+								
+							</div>
+						</div>
+						<div class="right">
+							<div class="dish">
+								
+							</div>
+						</div>
+					</div>
+					<div class="circle">
+					</div>
+				</div>
+			</div>
+			<div class="baffle-bottom">
+				
+			</div>
+		</div>
 	</body>
 	<script type="text/javascript">
+		setTimeout(function() {
+			$('.circle-circle .left .dish')[0].style.transform = "rotateZ(90deg)";
+		}, 100);
 		new myAjax({
 			url:"./menu",
 			data:"",
@@ -42,6 +69,25 @@
 			success:function(result){
 				generateMenu(JSON.parse(result),'.iscroll');
 				new navigationResponse("panel",640,1000,myScroll);
+				setTimeout(function() {
+					$('.circle-circle .left .dish')[0].style.transform = "rotateZ(0deg)";
+					setTimeout(function() {
+						$('.circle-circle .right .dish')[0].style.transform = "rotateZ(0deg)";
+						setTimeout(function() {
+							$('.baffle-top')[0].style.transform = "rotateX(90deg)";
+							$('.baffle-bottom')[0].style.transform = "rotateX(90deg)";
+							setTimeout(function() {
+								$('.baffle')[0].style.display = "none";
+							}, 2000);
+						}, 1000);
+					}, 1000);
+				}, 100);
+			},
+			failure:function(error){
+				console.log(error);
+			},
+			always:function(jqXHR){
+				console.log(jqXHR.state);
 			}
 		}).ajax();
 		</script>
