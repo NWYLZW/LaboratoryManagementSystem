@@ -25,6 +25,7 @@
 		</div>
 		<div class="mainx">
 			<div class="top">
+				<i class="fa fa-sign-out fa-2_5x" onclick="window.location.href = '../user/logout'"></i>
 			</div>
 			<div id="left_nav" class="left_nav">
 				<div class="topx">
@@ -83,6 +84,13 @@
 		setTimeout(function() {
 			$('.circle-circle .left .dish')[0].style.transform = "rotateZ(90deg)";
 		}, 100);
+		$('.interface')[0].style.display = "none";
+		var interfaceControMain = new InterfaceContro();
+		
+		$(window).bind('hashchange', function() {
+			interfaceControMain.include(window.location.href.split('#')[1]);
+		});
+		if(window.location.href.split('#')[1]) interfaceControMain.include(window.location.href.split('#')[1]);
 		new myAjax({
 			url:"./menu",
 			data:"",
@@ -91,8 +99,7 @@
 				generateMenu(JSON.parse(result),'.iscroll');
 				new navigationResponse("panel",640,1000,myScroll);
 				ajaxSuccess(function(){$('.interface')[0].style.display = "block";});
-				$('.interface')[0].style.display = "none";
-				new InterfaceContro().include("../my/space/mySpace.html");
+				window.location.href = "#my-space";
 			},
 			failure:function(error){
 				// console.log(error);

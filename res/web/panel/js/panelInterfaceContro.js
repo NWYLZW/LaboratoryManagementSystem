@@ -37,10 +37,15 @@ class InterfaceContro {
 		}
 	}
 	include(url){
-		// TODO 让url简练起来
+		url = url.split('-');
+		var href = "../";
+		for (var i = 0; i < url.length; i++){
+			href += url[i];
+			if(i < url.length) href += '/';
+		}
 		var interfaceContro = this;
 		new myAjax({
-			url:url,
+			url:href,
 			success:function(result){interfaceContro.initData($(result));},
 			failure:function(error){},
 			always:function (jqXHR){}

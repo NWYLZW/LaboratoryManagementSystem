@@ -1,7 +1,7 @@
 class myAjax {
 	constructor(options) {
 		this.url = options.url || "/";
-		this.data = options.data || {};
+		this.data = options.data || null;
 		this.method = options.method || "GET";
 		this.success = options.success || function(result) {console.log(result);};
 		this.failure = options.failure || function(e){console.log(e.status);};

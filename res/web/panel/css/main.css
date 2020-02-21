@@ -16,6 +16,14 @@
 	box-shadow: 0 5px 15px gray;
 	transition: .5s;
 }
+.mainx .top i{
+	position: absolute;
+	right: 20px;top: 30px;
+	transition: .5s;
+}
+.mainx .top i:hover{
+	color: aliceblue;
+}
 .mainx .left_nav{
 	z-index: 100;
 	position: absolute;
