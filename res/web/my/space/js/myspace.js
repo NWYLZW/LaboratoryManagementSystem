@@ -15,6 +15,7 @@ function loadEnd(){
 						drag: true,
 						time:2,
 					}).show();
+					$('.mark img')[0].src = "../../my/space/img/markSuccess.png";
 					break;
 				default:
 					dialog({
