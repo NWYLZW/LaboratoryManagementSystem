@@ -1,12 +1,18 @@
+.bottom-left,.bottom-rigth{
+	border-radius: 16px;
+	box-shadow: 0 0 10px gray;
+	overflow: hidden;
+}
 .bottom-left{
-	position: absolute;
+	position: relative;
+	float: left;
 	width: 70%;
 	height: 100%;
 	transition: .5s;
 }
 .bottom-rigth{
 	position: relative;
-	left: 70%;
+	float: left;
 	margin-left: 1%;
 	width: 29%;
 	height: 100%;

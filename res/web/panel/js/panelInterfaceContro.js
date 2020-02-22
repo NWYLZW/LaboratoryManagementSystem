@@ -35,14 +35,19 @@ class InterfaceContro {
 		for (var i = 0; i < this.scriptList.length; i++) {
 			$('.interface')[0].appendChild(this.scriptList[i]);
 		}
+		this.endFunction();
 	}
 	include(url){
 		url = url.split('-');
 		var href = "../";
+		var jsName = "";
 		for (var i = 0; i < url.length; i++){
 			href += url[i];
+			jsName += url[i];
 			if(i < url.length) href += '/';
 		}
+		console.log(href+jsName+".js");
+		this.endFunction = function(){$.getScript(href+"js/"+jsName+".js");};
 		var interfaceContro = this;
 		new myAjax({
 			url:href,
