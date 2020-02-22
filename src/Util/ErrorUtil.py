@@ -10,6 +10,7 @@ class ErrorUtil(Information):
             'UserNameNone':1001,
             'PasswordWrong':1002,
             'UserNameExist':1003,
+            'MarkIpError':2001,
         }, {
             0:"表单数据错误",
             1:"后端Error对象未配置参数，请附上url通知后端检查该接口",
@@ -18,5 +19,6 @@ class ErrorUtil(Information):
             1001:"用户名不存在",
             1002:"密码错误",
             1003:"用户名已存在",
+            2001:"未在实验室内签到",
         })
 errorUtil = ErrorUtil()

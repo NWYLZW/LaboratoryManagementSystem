@@ -18,6 +18,6 @@ def panelBeforeRequest():
 @markBluePrint.route("/")
 def index():
     return markControler.mark()
-@markBluePrint.route("/markList")
-def markList():
-    return markControler.getMarkList()
+@markBluePrint.route("/myList")
+def myList():
+    return markControler.getMarkList(current_user.id)
