@@ -15,12 +15,12 @@ class response {
 		}
 	}
 	start(){
-		window.response = this;
-		window.onresize = function(){
-			if(this.response.changeStatu()){
-				this.response.refresh();
+		var responsex = this;
+		window.addEventListener('resize',function(){
+			if(responsex.changeStatu()){
+				responsex.refresh();
 			}
-		}
+		})
 		this.changeStatu();
 		this.refresh();
 	}
