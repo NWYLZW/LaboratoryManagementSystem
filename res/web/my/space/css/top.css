@@ -1,15 +1,23 @@
 .top-left{
-	position: absolute;
+	position: relative;float: left;
 	width: calc(100% - 200px);
 	height: 100%;
 	background-color: #00BFFF;
 	transition: .5s;
 }
 .top-right{
-	position: relative;
-	left: calc(100% - 200px);
+	position: relative;float: left;
 	width: 200px;
 	height: 100%;
-	background-color: #BF00FF;
 	transition: .5s;
+}
+.top-right .mark{
+	padding-top: 20px;
+	width: 100%;height: 100%;
+	text-align: center;
+	color: dimgray;
+	transition: .5;
+}
+.top-right .mark:hover{
+	color: #1E90FF;
 }

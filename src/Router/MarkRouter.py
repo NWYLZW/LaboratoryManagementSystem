@@ -15,9 +15,9 @@ def panelBeforeRequest():
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
 
-@markBluePrint.route("/")
-def index():
+@markBluePrint.route("/",methods=['POST'])
+def mark():
     return markControler.mark()
-@markBluePrint.route("/myList")
+@markBluePrint.route("/myList",methods=['POST'])
 def myList():
     return markControler.getMarkList(current_user.id)

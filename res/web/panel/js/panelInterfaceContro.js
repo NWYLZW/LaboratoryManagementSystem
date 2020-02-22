@@ -33,21 +33,17 @@ class InterfaceContro {
 			$('head')[0].appendChild(this.linkList[i]);
 		}
 		for (var i = 0; i < this.scriptList.length; i++) {
-			$('.interface')[0].appendChild(this.scriptList[i]);
+			loadJs(this.scriptList[i].src);
+			// TODO 以后检测路径文件是否加载过
 		}
-		this.endFunction();
 	}
 	include(url){
 		url = url.split('-');
 		var href = "../";
-		var jsName = "";
 		for (var i = 0; i < url.length; i++){
 			href += url[i];
-			jsName += url[i];
 			if(i < url.length) href += '/';
 		}
-		console.log(href+jsName+".js");
-		this.endFunction = function(){$.getScript(href+"js/"+jsName+".js");};
 		var interfaceContro = this;
 		new myAjax({
 			url:href,
