@@ -27,7 +27,7 @@ class day{
 		if(this.userMark.markNum<this.colorArr.length)
 			this.ele.style.backgroundColor = this.colorArr[this.userMark.markNum];
 		else
-			this.ele.style.backgroundColor = this.colorArr[this.colorArr.length];
+			this.ele.style.backgroundColor = this.colorArr[this.colorArr.length-1];
 	}
 }
 class weekCalendar{
