@@ -49,6 +49,12 @@ class response {
 		this.statux = statux || this.statux;
 		var linkArr = ["","0",(""+this.left),(""+this.right)];
 		this.link(linkArr[this.statux]);
+		if(this.endFunction)
+			this.endFunction();
+	}
+	setEndFunction(endFunction){
+		this.endFunction = endFunction;
+		return this;
 	}
 	link(name){
 		if(this.htmlName==="main")

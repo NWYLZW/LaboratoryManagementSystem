@@ -32,10 +32,13 @@ class InterfaceContro {
 		for (var i = 0; i < this.linkList.length; i++) {
 			$('head')[0].appendChild(this.linkList[i]);
 		}
-		for (var i = 0; i < this.scriptList.length; i++) {
-			loadJs(this.scriptList[i].src);
-			// TODO 以后检测路径文件是否加载过
+		var count = 0,scriptList = this.scriptList;
+		function recursion(){
+			if(count==scriptList.length)
+				return;
+			loadJs(scriptList[count++].src,recursion);
 		}
+		recursion();
 	}
 	include(url){
 		url = url.split('-');

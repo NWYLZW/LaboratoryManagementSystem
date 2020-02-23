@@ -2,13 +2,14 @@
 	position: relative;float: left;
 	width: calc(100% - 200px);
 	height: 100%;
-	background-color: #00BFFF;
+	display: inline-block;
 	transition: .5s;
 }
 .top-right{
 	position: relative;float: left;
 	width: 200px;
 	height: 100%;
+	background-color: white;
 	transition: .5s;
 }
 .top-right .mark{
