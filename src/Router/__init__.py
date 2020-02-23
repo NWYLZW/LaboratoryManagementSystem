@@ -3,6 +3,7 @@ from src.Router.MarkRouter import markBluePrint
 from src.Router.MenberRouter import menberBluePrint
 from src.Router.MoneyRouter import moneyBluePrint
 from src.Router.MyRouter import myBluePrint
+from src.Router.NoticeRouter import noticeBluePrint
 from src.Router.PanelRouter import panelBluePrint
 from src.Router.ResourcesRouter import resourcesBluePrint
 from src.Router.UserRouter import userBluePrint
@@ -18,4 +19,5 @@ bluePrints = [
     mainBluePrint,
     myBluePrint,
     markBluePrint,
+    noticeBluePrint,
 ]

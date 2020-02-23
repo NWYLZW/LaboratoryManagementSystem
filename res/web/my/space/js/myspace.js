@@ -9,7 +9,6 @@ function getYearCalendar(){
 		method:"POST",
 		success:function(result){
 			var JSONObject = JSON.parse(result);
-			console.log(JSONObject);
 			yearCalendarX = new yearCalendar(JSONObject,
 					16,2,
 					[
@@ -58,7 +57,7 @@ function getYearCalendar(){
 						},
 					})
 				.setCss({
-					marginLeft:"20px",
+					paddingLeft:"40px",
 				}).ele;
 			$('.main .top .top-left')[0].appendChild(yearCalendarX);
 			initScroll();

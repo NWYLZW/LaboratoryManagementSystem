@@ -132,7 +132,7 @@ class yearCalendar{
 		for (var i = this.monthCalendarList.length-1; i >= 0; i--) {
 			weekSum += this.monthCalendarList[i].weekList.length;
 		}
-		var eleWidth = (this.daySize+this.dayMargin*2)*weekSum + this.monthCalendarList.length*5;
+		var eleWidth = (this.daySize+this.dayMargin*2)*weekSum + this.monthCalendarList.length*5 + 80;
 		this.jqEle = $('<div class="year"></div>').css({
 			position: "relative",
 			top:"calc(50% - "+(this.daySize+this.dayMargin*2)*7/2+"px"+")",

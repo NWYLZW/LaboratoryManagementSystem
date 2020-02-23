@@ -39,6 +39,7 @@ class InterfaceContro {
 			loadJs(scriptList[count++].src,recursion);
 		}
 		recursion();
+		$('#top-title')[0].innerText = this.title;
 	}
 	include(url){
 		url = url.split('-');

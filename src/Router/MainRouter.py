@@ -15,7 +15,10 @@ def index():
 
 @mainBluePrint.route("/info/<infoName>")
 def info(infoName):
+    # TODO 获取用户的签到信息
+    #  名字，签到次数
     return mainControler.getInfoByName(infoName,current_user)
 @mainBluePrint.route("/buttonList")
 def buttonList():
+    # TODO 登陆显示签到按钮
     return mainControler.getButtonList(current_user.is_authenticated)

@@ -16,6 +16,16 @@
 	box-shadow: 0 5px 15px gray;
 	transition: .5s;
 }
+.mainx .top .top-title{
+	position: relative;
+	left: 0;top: 0;
+	padding-left: 30px;
+	width: 270px;height: 100px;
+	line-height: 100px;
+	font-size: 22px;
+	color: #D3D3D3;
+	transition: .5s;
+}
 .mainx .top i{
 	position: absolute;
 	right: 20px;top: 30px;
