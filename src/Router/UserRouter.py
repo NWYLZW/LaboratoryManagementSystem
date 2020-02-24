@@ -57,15 +57,7 @@ def register():
                         return errorUtil.getData('backEndWrong2')
                 return errorUtil.getData('FormDataWrong')
             return errorUtil.getData('UserNameExist')
-        errorDict = {}
-        allFiled = form.getAllFiled()
-        for key in allFiled:
-            if len(allFiled[key].errors)>0:
-                errorDict[key] = allFiled[key].errors.__str__()
-                # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+str(len(allFiled[key].errors)))
-                # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+allFiled[key].errors.__str__())
-        MainLog.record(MainLog.level.DEBUG,"下"+JsonUtil().dictToJson(errorDict))
-        return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(errorDict))
+        return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
     return render_template('register.html', form=form)
 
 @login_manager.user_loader

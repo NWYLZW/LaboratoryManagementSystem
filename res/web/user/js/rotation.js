@@ -13,8 +13,8 @@ class rotationImage {
 	}
 }
 function changeTitleAndContent(title,content,href){
-	$('.rigth-bottom-top')[0].innerHTML = '<a href="'+href+'"><h1>'+title+'</h1></a>';
-	$('.rigth-bottom-bottom')[0].innerHTML = '<a href="'+href+'"><h3>'+content+'</h3></a>';
+	$('.rigth-bottom-top')[0].innerHTML = '<h1>'+title+'</h1>';
+	$('.rigth-bottom-bottom')[0].innerHTML = '<h3>'+content+'</h3>';
 }
 function createPointEleList(len){
 	var rotationListBtn = $('#rotationListBtn');
@@ -62,10 +62,10 @@ class loginRotation{
 		for (let i = 0; i < imageDict.length; i++) {
 			this.rotationImageList.push(
 				new rotationImage(
-				imageDict[i]['title'],
-				imageDict[i]['content'],
-				imageDict[i]['backgroundImageSrc'],
-				imageDict[i]['href'],
+				imageDict[i].title,
+				imageDict[i].content,
+				imageDict[i].backgroundImageSrc,
+				imageDict[i].href,
 				itemWidth)
 			);
 		this.refresh();
@@ -87,9 +87,9 @@ class loginRotation{
 	refresh(){
 		this.rotationWrraper.style.left = "-"+this.positionLeft+"00%";
 		changeTitleAndContent(
-			this.rotationImageList[this.positionLeft]['title'],
-			this.rotationImageList[this.positionLeft]['content'],
-			this.rotationImageList[this.positionLeft]['href'],)
+			this.rotationImageList[this.positionLeft].title,
+			this.rotationImageList[this.positionLeft].content,
+			this.rotationImageList[this.positionLeft].href,)
 		var rotationListBtn = $('#rotationListBtn .fa');
 		if(rotationListBtn.length>0){
 			for (var i = 0; i < rotationListBtn.length; i++) {

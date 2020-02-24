@@ -36,6 +36,7 @@
 				</div>
 				
 				<form id="login-form" class="login-left-mid" method="POST" action="/user/login">
+					<!--TODO 参考loginnotic删除这个-->
 					 {{form.hidden_tag()}}
 					<div class="input">
 						<div class="title">
@@ -106,16 +107,14 @@
 		new response("user",640,1400).start();
 		var imageDict = [
 			{
-				"title":"Hello World",
-				"content":"Hello World!!!,Welcome to there.",
-				"backgroundImageSrc":"img/rotation/01Hello.jpg",
-				"href":"../../",
+				title:"Hello World",
+				content:"Hello World!!!,Welcome to there.",
+				backgroundImageSrc:"img/rotation/01Hello.jpg",
 			},
 			{
-				"title":"坠空",
-				"content":"Down WoW WoW",
-				"backgroundImageSrc":"img/rotation/02FallingShort.jpg",
-				"href":"../../",
+				title:"坠空",
+				content:"Down WoW WoW",
+				backgroundImageSrc:"img/rotation/02FallingShort.jpg",
 			},
 		]
 		var loginRotationX = new loginRotation(imageDict,3000);

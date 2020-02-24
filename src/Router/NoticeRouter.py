@@ -9,6 +9,6 @@ noticeBluePrint = Blueprint(
 #  专业公告
 #  实验室公告
 #  登陆界面新闻信息
-@noticeBluePrint.route("/",methods=['POST'])
-def mark():
+@noticeBluePrint.route("/loginNotice",methods=['POST'])
+def loginNotice():
     return ""

@@ -17,5 +17,5 @@ def panelBeforeRequest():
         return redirect(url_for('user.login'))
 
 @myBluePrint.route("/space/")
-def index():
+def space():
     return render_template("space/mySpace.html")

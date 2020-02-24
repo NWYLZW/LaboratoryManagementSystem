@@ -1,3 +1,4 @@
+from src.Router.AdminRouter import adminBluePrint
 from src.Router.MainRouter import mainBluePrint
 from src.Router.MarkRouter import markBluePrint
 from src.Router.MenberRouter import menberBluePrint
@@ -20,4 +21,5 @@ bluePrints = [
     myBluePrint,
     markBluePrint,
     noticeBluePrint,
+    adminBluePrint,
 ]
