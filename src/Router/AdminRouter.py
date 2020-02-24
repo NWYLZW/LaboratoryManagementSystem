@@ -12,6 +12,8 @@ adminBluePrint = Blueprint(
     __name__,
     url_prefix='/admin',
     template_folder=templatePath+"/admin",)
+
+# TODO 开发结束后，添加管理权限
 @adminBluePrint.before_request
 def panelBeforeRequest():
     if not current_user or not current_user.is_authenticated:
@@ -25,7 +27,7 @@ def addLoginNotice():
         filename = adminControler.addLoginNotice(title=form.title,content=form.content,isShow=form.isShow)
         if form.validate_on_submit():
             if not  filename == "None":
-                if fileUtil.saveToWeb(path="user/img/rotationx",uploadFile=request.files.get('backImage'),fileName=filename):
+                if fileUtil.saveToWeb(path="user/img/rotation",uploadFile=request.files.get('backImage'),fileName=filename):
                     return "LoginNotice 添加成功"
                 else:
                     return "文件图片添加失败"

@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="../user/css/right.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../artDialog/dist/dialog.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
@@ -105,23 +106,25 @@
 	</body>
 	<script type="text/javascript">
 		new response("user",640,1400).start();
-		var imageDict = [
-			{
-				title:"Hello World",
-				content:"Hello World!!!,Welcome to there.",
-				backgroundImageSrc:"img/rotation/01Hello.jpg",
+		var loginRotationX = null;
+		new myAjax({
+			url:"../notice/loginNoticeShow",
+			method:"POST",
+			success:function(result){
+				dictObj = JSON.parse(result);
+				loginRotationX = new loginRotation(dictObj,3000);
+				loginRotationX.init();
+				$("#login-form").submit(function(){
+					$(this).ajaxSubmit(options);
+					return false;
+				});
 			},
-			{
-				title:"坠空",
-				content:"Down WoW WoW",
-				backgroundImageSrc:"img/rotation/02FallingShort.jpg",
+			failure:function(error){
+				// console.log(error);
 			},
-		]
-		var loginRotationX = new loginRotation(imageDict,3000);
-		loginRotationX.init();
-		$("#login-form").submit(function(){
-			$(this).ajaxSubmit(options);
-			return false;
-		});
+			always:function(jqXHR){
+				// console.log(jqXHR);
+			}
+		}).ajax();
 	</script>
 </html>

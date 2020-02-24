@@ -9,9 +9,13 @@ from src.Util.JsonUtil import JsonUtil
 class NoticeControler:
     def __init__(self):
         pass
-    def getLoginNotice(self):
+    def getLoginNotice(self,show:bool=False):
         loginNoticeList = []
-        for loginNotice in LoginNotice.query.filter_by(authorId=current_user.id).all():
+        if show:
+            LoginNoticeQueryList = LoginNotice.query.filter_by(isShow=True).all()
+        else:
+            LoginNoticeQueryList = LoginNotice.query.filter_by(authorId=current_user.id).all()
+        for loginNotice in LoginNoticeQueryList:
             loginNoticeList.append({
                 'authorId':loginNotice.authorId,
                 'date':loginNotice.date.strftime("%Y-%m-%d %H:%M:%S"),

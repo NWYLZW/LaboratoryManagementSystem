@@ -8,12 +8,14 @@ class myAjax {
 		this.always = options.always || function (jqXHR){console.log(jqXHR.status);};
 	}
 	ajax(){
+		if(this.data!=null)
+			this.data = JSON.stringify(this.data);
 		$.ajax({
 			url:this.url,
 			type:this.method,
 			error:this.failure,
 			success:this.success,
-			data:JSON.stringify(this.data),
+			data:this.data,
 			contentType: "application/json;charset=UTF-8",
 		}).always(this.always);
 		return this;

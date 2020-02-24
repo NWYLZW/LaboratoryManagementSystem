@@ -2,13 +2,13 @@ class rotationImage {
 	constructor(title,content,backgroundImageSrc,href,Width) {
 		this.title = title || 'None';
 		this.content = content || 'None';
-		this.backgroundImageSrc = backgroundImageSrc || 'img/rotation/01Hello.jpg';
+		this.backgroundImageSrc = backgroundImageSrc || 'img/rotation/';
 		this.href = href || '#';
 		this.Width = Width || '100';
 	}
 	createElement(){
 		this.element = $('<div class="backImage" style="'+
-		'background-image: url('+this.backgroundImageSrc+');'+
+		'background-image: url(img/rotation/'+this.backgroundImageSrc+');'+
 		'width:'+this.Width+'%"></div>')[0];
 	}
 }
@@ -43,13 +43,14 @@ function createPointEleList(len){
 }
 class loginRotation{
 	constructor(imageDict,time) {
+		this.imageDict = imageDict;
 		this.rotationWrraper = document.getElementById('rotation-wrraper');
 		this.time = time || 1000;
 		this.positionLeft = 0;
-		this.itemCount = imageDict.length;
+		this.itemCount = this.imageDict.length;
 		this.rotationWrraper.style.left = "-"+this.positionLeft+"00%";
 		this.rotationImageList = [];
-		this.rotationWrraper.style.width = imageDict.length+"00%";
+		this.rotationWrraper.style.width = this.imageDict.length+"00%";
 	}
 	init(){
 		this.initView();
@@ -58,14 +59,14 @@ class loginRotation{
 		}, this.time);
 	}
 	initView(){
-		var itemWidth = 100/imageDict.length;
-		for (let i = 0; i < imageDict.length; i++) {
+		var itemWidth = 100/this.imageDict.length;
+		for (let i = 0; i < this.imageDict.length; i++) {
 			this.rotationImageList.push(
 				new rotationImage(
-				imageDict[i].title,
-				imageDict[i].content,
-				imageDict[i].backgroundImageSrc,
-				imageDict[i].href,
+				this.imageDict[i].title,
+				this.imageDict[i].content,
+				this.imageDict[i].backgroundImageSrc,
+				this.imageDict[i].href,
 				itemWidth)
 			);
 		this.refresh();
@@ -74,7 +75,7 @@ class loginRotation{
 			this.rotationImageList[i].createElement();
 			this.rotationWrraper.appendChild(this.rotationImageList[i].element);
 		}
-		createPointEleList(imageDict.length);
+		createPointEleList(this.imageDict.length);
 		document.getElementById('left').controler = this;
 		document.getElementById('right').controler = this;
 		document.getElementById('left').onclick = function(){
