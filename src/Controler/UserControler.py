@@ -1,5 +1,3 @@
-import traceback
-
 from src import db, MainLog
 from src.Model.UserModel import User
 
@@ -29,8 +27,8 @@ class UserControler:
             db.session.add(user)
             db.session.commit()
             return True
-        except Exception:
+        except Exception as e:
             MainLog.record(MainLog.level.ERROR,form.userName.data+"用户添加失败 错误信息:")
-            traceback.print_exc()
+            MainLog.record(MainLog.level.ERROR,e)
             return False
     pass
