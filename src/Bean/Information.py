@@ -1,7 +1,7 @@
 from src.Util.JsonUtil import JsonUtil
 
 class Information:
-    def __init__(self, typeDict:dict={}, dictx:dict={}):
+    def __init__(self, typeDict:dict=None, dictx:dict=None):
         self.InformationTypeDict = typeDict
         self.InformationDict = dictx
     def getData(self,typeName:str="backEndWrong0",message:str=""):
