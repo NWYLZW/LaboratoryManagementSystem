@@ -25,10 +25,10 @@ class UserControler:
                 classNum=form.classNum.data,
             )
             db.session.add(user)
-            db.session.commit()
-            return True
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,form.userName.data+"用户添加失败 错误信息:")
             MainLog.record(MainLog.level.ERROR,e)
             return False
+        db.session.commit()
+        return True
     pass

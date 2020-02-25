@@ -5,7 +5,22 @@
 		<title></title>
 	</head>
 	<body>
+		<h1>addLoginNotice</h1>
 		<form action="../admin/addLoginNotice" method="post" enctype="multipart/form-data">
+			<input type="file" name="backImage" id="backImage" />
+			<input type="text" name="title" id="title" value="" />
+			<input type="text" name="content" id="content" value="" />
+			<input type="text" name="isShow" id="isShow" value="False" />
+			<input type="submit" value=""/>
+		</form>
+		<h1>delLoginNotice</h1>
+		<form action="../admin/delLoginNotice" method="post" enctype="multipart/form-data">
+			<input type="file" name="id" id="id" />
+			<input type="submit" value=""/>
+		</form>
+		<h1>editLoginNotice</h1>
+		<form action="../admin/editLoginNotice" method="post" enctype="multipart/form-data">
+			<input type="file" name="id" id="id" />
 			<input type="file" name="backImage" id="backImage" />
 			<input type="text" name="title" id="title" value="" />
 			<input type="text" name="content" id="content" value="" />

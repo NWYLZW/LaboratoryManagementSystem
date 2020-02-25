@@ -43,9 +43,9 @@ class MarkControler():
         if flag == 0:
             try:
                 db.session.add(Mark(dateTime=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),userId=current_user.id))
-                db.session.commit()
             except:
                 return errorUtil.getData("backEndWrong2")
+            db.session.commit()
             return successUtil.getData(messageDict[flag])
         else:
             return errorUtil.getData(messageDict[flag])

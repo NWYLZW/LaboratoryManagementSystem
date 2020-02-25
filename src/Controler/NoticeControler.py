@@ -2,6 +2,7 @@ import time
 
 from flask_login import current_user
 
+from src import db, MainLog
 from src.Model.LoginNoticeModel import LoginNotice
 from src.Util.JsonUtil import JsonUtil
 
@@ -14,9 +15,10 @@ class NoticeControler:
         if show:
             LoginNoticeQueryList = LoginNotice.query.filter_by(isShow=True).all()
         else:
-            LoginNoticeQueryList = LoginNotice.query.filter_by(authorId=current_user.id).all()
+            LoginNoticeQueryList = LoginNotice.query.filter_by().all()
         for loginNotice in LoginNoticeQueryList:
             loginNoticeList.append({
+                'id':loginNotice.id,
                 'authorId':loginNotice.authorId,
                 'date':loginNotice.date.strftime("%Y-%m-%d %H:%M:%S"),
                 'title':loginNotice.title,

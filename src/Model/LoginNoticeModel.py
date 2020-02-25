@@ -20,3 +20,12 @@ class LoginNotice(db.Model):
     @property
     def backgroundImageSrc(self):
         return str(self.id)+self.title+".png"
+    def setVlue(self,authorId:int,date,title:str="",content:str="",isShow:str="False"):
+        self.authorId = authorId
+        self.date = date
+        self.title = title
+        self.content = content
+        if isShow == "False":
+            self.isShow = False
+        else:
+            self.isShow = True
