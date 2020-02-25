@@ -1,0 +1,23 @@
+.loginNoticeContro{
+	margin: 0 auto;
+	width: 800px;
+	height: auto;
+}
+#loginNoticeContro-title{
+	width: 100%;
+	height: 60px;
+	background-color: aqua;
+}
+#addBottonWrraper{
+	width: 100%;
+	height: 90px;
+	background-color: cadetblue;
+}
+.addBotton{
+	position: relative;
+	top: 15%;
+	left: calc(50% - 70px);
+	width: 140px;
+	height: 70%;
+	background-color: darkgray;
+}

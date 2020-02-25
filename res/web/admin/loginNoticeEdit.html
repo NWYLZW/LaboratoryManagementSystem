@@ -3,29 +3,53 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
+		<link rel="stylesheet" type="text/css" href="../admin/css/loginNoticeEdit.css"/>
+		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
+		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+	<style type="text/css">
+		div{
+		}
+	</style>
 	<body>
-		<h1>addLoginNotice</h1>
-		<form action="../admin/addLoginNotice" method="post" enctype="multipart/form-data">
-			<input type="file" name="backImage" id="backImage" />
-			<input type="text" name="title" id="title" value="" />
-			<input type="text" name="content" id="content" value="" />
-			<input type="text" name="isShow" id="isShow" value="False" />
-			<input type="submit" value=""/>
-		</form>
-		<h1>delLoginNotice</h1>
-		<form action="../admin/delLoginNotice" method="post" enctype="multipart/form-data">
-			<input type="file" name="id" id="id" />
-			<input type="submit" value=""/>
-		</form>
-		<h1>editLoginNotice</h1>
-		<form action="../admin/editLoginNotice" method="post" enctype="multipart/form-data">
-			<input type="file" name="id" id="id" />
-			<input type="file" name="backImage" id="backImage" />
-			<input type="text" name="title" id="title" value="" />
-			<input type="text" name="content" id="content" value="" />
-			<input type="text" name="isShow" id="isShow" value="False" />
-			<input type="submit" value=""/>
-		</form>
+		<div style="display: none;">
+			<h1>addLoginNotice</h1>
+			<form action="../admin/addLoginNotice" method="post" enctype="multipart/form-data">
+				<input type="file" name="backImage" id="backImage" />
+				<input type="text" name="title" id="title" value="" />
+				<input type="text" name="content" id="content" value="" />
+				<input type="text" name="isShow" id="isShow" value="False" />
+				<input type="submit" value=""/>
+			</form>
+			<h1>delLoginNotice</h1>
+			<form action="../admin/delLoginNotice" method="post" enctype="multipart/form-data">
+				<input type="text" name="id" id="id" />
+				<input type="submit" value=""/>
+			</form>
+			<h1>editLoginNotice</h1>
+			<form action="../admin/editLoginNotice" method="post" enctype="multipart/form-data">
+				<input type="text" name="id" id="id" />
+				<input type="file" name="backImage" id="backImage" />
+				<input type="text" name="title" id="title" value="" />
+				<input type="text" name="content" id="content" value="" />
+				<input type="text" name="isShow" id="isShow" value="False" />
+				<input type="submit" value=""/>
+			</form>
+		</div>
+		
+		<div class="loginNoticeContro">
+			<div id="loginNoticeContro-title">
+				
+			</div>
+			<div id="addBottonWrraper">
+				<div class="addBotton">
+					
+				</div>
+			</div>
+		</div>
 	</body>
+	<script src="../admin/js/loginNoticeContro.js" type="text/javascript" charset="utf-8"></script>
 </html>
