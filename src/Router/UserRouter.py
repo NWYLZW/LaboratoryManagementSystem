@@ -9,6 +9,7 @@ from src.Util.SuccessUtil import successUtil
 from src.form.LoginForm import LoginForm
 from src.Model.UserModel import User
 from src.form.RegisterForm import RegisterForm
+from src.form.SearchBriefUserForm import SearchBriefUserForm
 
 userBluePrint = Blueprint(
     'user',
@@ -59,6 +60,17 @@ def register():
             return errorUtil.getData('UserNameExist')
         return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
     return render_template('register.html', form=form)
+
+@userBluePrint.route('/searchUser/', methods=['GET', 'POST'])
+@login_required
+def searchBriefUser():
+    if request.method == "POST":
+        # TODO 不同用户权限不同搜索表单验证
+        form = SearchBriefUserForm(request.form)
+        return userControler.getBriefUserListData(form)
+    elif request.method == "GET":
+        # TODO 不同用户权限不同搜索界面
+        return render_template('searchBriefUser.html')
 
 @login_manager.user_loader
 def load_user(user_id):

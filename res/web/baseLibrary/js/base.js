@@ -27,4 +27,5 @@ function loadJs(url, callback) {
 	}
 	script.src = url;
 	document.body.appendChild(script);
+	return script;
 }

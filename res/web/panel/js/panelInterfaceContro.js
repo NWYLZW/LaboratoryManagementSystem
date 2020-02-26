@@ -7,6 +7,7 @@ class InterfaceContro {
 	}
 	initData(htmlNode){
 		this.clear();
+		var tempScriptSrcList = [];
 		for (var i = 0; i < htmlNode.length; i++) {
 			if(htmlNode[i].tagName){
 				switch (htmlNode[i].tagName){
@@ -17,7 +18,7 @@ class InterfaceContro {
 						this.linkList.push(htmlNode[i]);
 						break;
 					case "SCRIPT":
-						this.scriptList.push(htmlNode[i]);
+						tempScriptSrcList.push(htmlNode[i].src);
 						break;
 					case "DIV":
 						this.interface = htmlNode[i];
@@ -34,9 +35,9 @@ class InterfaceContro {
 		}
 		var count = 0,scriptList = this.scriptList;
 		function recursion(){
-			if(count==scriptList.length)
+			if(count==tempScriptSrcList.length)
 				return;
-			loadJs(scriptList[count++].src,recursion);
+			scriptList.push(loadJs(tempScriptSrcList[count++],recursion));
 		}
 		recursion();
 		$('#top-title')[0].innerText = this.title;

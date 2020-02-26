@@ -47,7 +47,7 @@ peopleContro = {
             Permission.ALL_FULL_DATA_S,
         ],
         'name': "人员列表",
-        'url': '#people-list',
+        'url': '#user-searchUser',
         'icoClass': 'fa fa-address-book fa-1_5x',
     }, {
         'permission': [

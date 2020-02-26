@@ -1,0 +1,40 @@
+.main{
+	position: relative;
+	width: 100%;
+}
+.main .searchLabel{
+	position: relative;
+	left: 30%;
+	width: 40%;height: 40px;
+	min-width: 500px;
+	line-height: 40px;
+	color: gray;
+	font-size: 20px;
+	background-color: #00BFFF;
+	box-shadow: 0 0 10px gray;
+}
+.main .searchLabel .labelx{
+	position: relative;float: left;
+	text-align: center;
+	width: 20%;height: 100%;
+}
+.main .searchInput{
+	position: relative;
+	left: 30%;
+	min-width: 500px;
+	width: 40%;height: 80px;
+}
+.main .searchInput input{
+	position: relative;float: left;
+	margin-top: 4px;margin-bottom: 4px;
+	margin-left: 2px;margin-right: 2px;
+	padding-left: 5px;padding-right: 5px;
+	width: calc(20% - 14px);height: 32px;
+	box-shadow: 0 0 5px gray;
+	border-radius: 8px;
+	background-color: #EEEEEE;
+}
+.main .searchInput input:last-child{
+	margin-left: calc(50% - 100px);
+	width: 200px;height: 32px;
+}
