@@ -77,3 +77,34 @@ def editLoginNotice():
                 return errorUtil.getData(messageDict[result])
         return form.errors
     return render_template("loginNoticeEdit.html", form=form)
+
+# TODO 完成权限修改模块
+@adminBluePrint.route("/editPermission",methods=['GET','POST'])
+def editPermission():
+    if request.method == 'POST':
+        messageDict = [
+        ]
+        result = adminControler.permissionList()
+        if result == 0:
+            return successUtil.getData(messageDict[result])
+        else:
+            return errorUtil.getData(messageDict[result])
+    return render_template('permissionEdit.html')
+@adminBluePrint.route("/permissionList",methods=['POST'])
+def permissionList():
+    messageDict = [
+    ]
+    result = adminControler.permissionList()
+    if result == 0:
+        return successUtil.getData(messageDict[result])
+    else:
+        return errorUtil.getData(messageDict[result])
+@adminBluePrint.route("/givePermission",methods=['POST'])
+def givePermission():
+    messageDict = [
+    ]
+    result = adminControler.givePermission(request.form['id'],request.form['permissionId'])
+    if result == 0:
+        return successUtil.getData(messageDict[result])
+    else:
+        return errorUtil.getData(messageDict[result])
