@@ -58,12 +58,15 @@ function getYearCalendar(){
 					})
 				.setCss({
 					paddingLeft:"40px",
-				}).ele;
-			$('.main .top .top-left')[0].appendChild(yearCalendarX);
+				});
+			$('.main .top .top-left')[0].appendChild(yearCalendarX.ele);
 			initScroll();
 		},
 		failure:function(e){
 			console.log(e);	
+		},
+		always:function(jqXHR){
+			// console.log(jqXHR);
 		}
 	}).ajax();
 }
@@ -84,8 +87,7 @@ function initMark(){
 						time:2,
 					}).show();
 					$('.mark img')[0].src = "../../my/space/img/markSuccess.png";
-					yearCalendarX.remove();
-					getYearCalendar();
+					yearCalendarX.mark();
 					break;
 				default:
 					dialog({
@@ -100,6 +102,9 @@ function initMark(){
 			},
 			failure:function(e){
 				console.log(e);	
+			},
+			always:function(jqXHR){
+				// console.log(jqXHR);
 			}
 		}).ajax();
 	});

@@ -148,6 +148,17 @@ class yearCalendar{
 		this.jqEle.css(cssDict);
 		return this;
 	}
+	mark(){
+		var today = this.monthCalendarList[0].weekList[0].dayList[0];
+		today.userMark.markNum+=1;
+		today.ele.style.backgroundColor = "rgba(255,255,255,1)";
+		setTimeout(function() {
+			if(today.userMark.markNum<today.colorArr.length)
+				today.ele.style.backgroundColor = today.colorArr[today.userMark.markNum];
+			else
+				today.ele.style.backgroundColor = today.colorArr[today.colorArr.length-1];
+		}, 500);
+	}
 }
 
 // var userMarkDict = {
