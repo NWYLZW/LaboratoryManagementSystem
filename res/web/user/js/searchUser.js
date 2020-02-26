@@ -22,9 +22,9 @@ class resultItem {
 		this.userNameRight.appendChild($('<div class="nickName"></div>')
 			.html(this.dictx.nickName)[0]);
 		if(this.dictx.maleBool)
-			this.userNameRight.appendChild($('<div class="sex"><i class="fa fa-male fa-1_5x"></i></div>')[0]);
+			this.userNameRight.appendChild($('<div class="sex"><i class="fa fa-mars fa-1_5x"></i></div>')[0]);
 		else
-			this.userNameRight.appendChild($('<div class="sex"><i class="fa fa-female fa-1_5x"></i></div>')[0]);
+			this.userNameRight.appendChild($('<div class="sex"><i class="fa fa-venus fa-1_5x"></i></div>')[0]);
 		this.userName.appendChild(this.userNameRight);
 		
 		this.userData = $('<div class="userData"></div>')[0];
@@ -75,8 +75,13 @@ function jsonResponse(data){
 	var JSONObject = JSON.parse(data);
 	searchUserResultList0.initData(JSONObject);
 }
-new response("../user",500,1000,"searchBriefUser").start();
-$("#searchUser").submit(function(){
-	$(this).ajaxSubmit(briefOptions);
-	return false;
-});
+var IntervalX = setInterval(function(){
+	if($("#searchUser")[0]){
+		clearInterval(IntervalX);
+		new response("../user",500,1000,"searchBriefUser").start();
+		$("#searchUser").submit(function(){
+			$(this).ajaxSubmit(briefOptions);
+			return false;
+		});
+	}
+},1000);
