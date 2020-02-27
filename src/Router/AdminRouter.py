@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for
 from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
-from src import templatePath
+from src import templatePath, MainLog
 from src.Controler.AdminControler import adminControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.FileUtil import fileUtil
@@ -21,21 +21,19 @@ def panelBeforeRequest():
     if not current_user or not current_user.is_authenticated:
         return redirect(url_for('user.login'))
 
-@adminBluePrint.route("/delLoginNotice",methods=['GET','POST'])
+@adminBluePrint.route("/delLoginNotice",methods=['POST'])
 def delLoginNotice():
-    if request.method == "POST":
-        messageDict = [
-            'delLoginNoticeSuccess',
-            'LoginNoticeIdNone',
-            'LoginNoticeNone',
-            'dataBaseError',
-        ]
-        result = adminControler.delLoginNotice(request.form['id'])
-        if result == 0:
-            return successUtil.getData(messageDict[result])
-        else:
-            return errorUtil.getData(messageDict[result])
-    return render_template("loginNoticeEdit.html")
+    messageDict = [
+        'delLoginNoticeSuccess',
+        'LoginNoticeIdNone',
+        'LoginNoticeNone',
+        'dataBaseError',
+    ]
+    result = adminControler.delLoginNotice(request.form['id'])
+    if result == 0:
+        return successUtil.getData(messageDict[result])
+    else:
+        return errorUtil.getData(messageDict[result])
 @adminBluePrint.route("/addLoginNotice",methods=['GET','POST'])
 def addLoginNotice():
     # 文件是从request,files里面获取，这里使用CombinedMultiDict把form和file的数据组合起来，一起验证

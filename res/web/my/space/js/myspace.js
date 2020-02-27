@@ -128,7 +128,7 @@ function initScroll(){
 	window.addEventListener('resize',function(){
 		yearCalendarScroll.refresh();
 	});
-	new response("../my/space",640,1000,"main").setEndFunction(function(){
+	new response("../my/space",640,1200,"main").setEndFunction(function(){
 		setTimeout(function() {
 			yearCalendarScroll.refresh();
 		}, 500);

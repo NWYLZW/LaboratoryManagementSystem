@@ -389,7 +389,6 @@ class loginNoticeContro {
 			$(this).ajaxSubmit(contex.delLoginNoticeOption);
 			return false;
 		});
-		console.log(this.delLoginNotice);
 		
 		this.appendAddButtonClickListener();
 		for (var i = 0; i < this.dictx.length; i++) {
@@ -400,16 +399,15 @@ class loginNoticeContro {
 		}
 	}
 	initAjax(loginNoticeInfoX){
-		console.log(this.delLoginNotice);
 		var delLoginNoticeTemp = this.delLoginNotice[0];
 		loginNoticeInfoX.deleteBtn.ele.onclick = function(){
-			delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.id;
-			delLoginNoticeTemp.submit();
+			delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
+			delLoginNoticeTemp.getElementsByClassName('submit')[0].click();
 		}
 	}
 	initFormOption(){
 		this.delLoginNoticeOption = { 
-			beforeSubmit: function(formData, jqForm, options){return false;},
+			beforeSubmit: function(formData, jqForm, options){return true;},
 			success: this.delResponse,
 			timeout: 3000,
 		};
