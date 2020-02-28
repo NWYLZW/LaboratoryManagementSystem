@@ -1,0 +1,46 @@
+.bottom-left,.bottom-rigth{
+	border-radius: 16px;
+	box-shadow: 0 0 10px gray;
+	overflow: hidden;
+}
+.bottom-left{
+	position: relative;
+	float: left;
+	width: 70%;
+	height: 100%;
+	transition: .5s;
+}
+.bottom-rigth{
+	position: relative;
+	float: left;
+	margin-left: 1%;
+	width: 29%;
+	height: 100%;
+	transition: .5s;
+}
+.bottom-left-left{
+	float: left;
+	width: 160px;
+	height: 100%;
+	background-color: #4169E1;
+	transition: .5s;
+}
+.bottom-left-right{
+	float: left;
+	width: calc(100% - 160px);
+	height: 100%;
+	background-color: #69E411;
+	transition: .5s;
+}
+.bottom-right-top{
+	width: 100%;
+	height: 100px;
+	background-color: #41E169;
+	transition: .5s;
+}
+.bottom-right-bottom{
+	width: 100%;
+	height: calc(100% - 100px);
+	background-color: #E14169;
+	transition: .5s;
+}

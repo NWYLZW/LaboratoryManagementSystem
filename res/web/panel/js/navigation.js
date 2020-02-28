@@ -10,6 +10,18 @@ class navigationResponse extends response {
 		setTimeout(function() {
 			myScroll.refresh();
 		}, 500);
+		if(this.statux == 2){
+			$('.interface')[0].style.left = "100px";
+			$('.interface')[0].style.width = "calc(100% - 140px)";
+		}
+		else if(this.statux == 3){
+			$('.interface')[0].style.left = "250px";
+			$('.interface')[0].style.width = "calc(100% - 290px)";
+		}
+		if(document.documentElement.clientWidth <= 640){
+			$('.interface')[0].style.left = "0";
+			$('.interface')[0].style.width = "calc(100% - 40px)";
+		}
 	}
 	start() {
 		super.start();

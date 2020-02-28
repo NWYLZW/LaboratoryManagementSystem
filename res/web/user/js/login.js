@@ -72,7 +72,6 @@ function checkValue(filed,checkNull,check,failedx){
 }
 function jsonResponse(data){
 	var JSONObject = JSON.parse(data);
-	console.log(JSONObject);
 	switch (JSONObject.type){
 	case 0:
 		// "表单数据错误"

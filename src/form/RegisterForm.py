@@ -94,16 +94,3 @@ class RegisterForm(FlaskForm):
             return True
         else:
             return False
-    def getAllFiled(self)->dict:
-        allFiled = {}
-        allFiled['classNum'] = self.classNum
-        allFiled['gradle'] = self.gradle
-        allFiled['professional'] = self.professional
-        allFiled['male'] = self.male
-        allFiled['userName'] = self.userName
-        allFiled['qqNum'] = self.qqNum
-        allFiled['directionName'] = self.directionName
-        allFiled['laboratoryName'] = self.laboratoryName
-        allFiled['password'] = self.password
-        allFiled['telNum'] = self.telNum
-        return allFiled

@@ -23,11 +23,13 @@ class log:
         pass
     def record(self,TAG:logLevel,message:str):
         if not TAG in self.__ignoreLevelDict:
+            # TODO 按照等级，时间分类记录到不同的文件夹中的log文件
             if TAG.value >= self.__ignoreLevel.value:
                 print(
                     "["+self.__logLevelName.get(TAG.value)+"]"+"\t"
                     +time.strftime("%Y-%m-%d %H:%M:%S  ", time.localtime())+"\t"
-                    +str(message))
+                    ,end='')
+                print(message)
     def setIgnoreMinLevel(self, ignoreLevel:logLevel):
         self.__ignoreLevel = ignoreLevel
     def setIgnoreLevel(self, ignoreLevelDict:dict):

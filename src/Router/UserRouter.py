@@ -9,6 +9,7 @@ from src.Util.SuccessUtil import successUtil
 from src.form.LoginForm import LoginForm
 from src.Model.UserModel import User
 from src.form.RegisterForm import RegisterForm
+from src.form.SearchBriefUserForm import SearchBriefUserForm
 
 userBluePrint = Blueprint(
     'user',
@@ -19,10 +20,7 @@ userControler = UserControler()
 
 @userBluePrint.route('/')
 def index():
-    # TODO wsq 重定向到/main/下面
-    # 效果就是访问localhost:16000/user 会跳转到localhost:16000/main页面
-    # 类似下面的logout函数
-    return ""
+    return redirect(url_for("main.index"))
 
 @userBluePrint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -60,16 +58,19 @@ def register():
                         return errorUtil.getData('backEndWrong2')
                 return errorUtil.getData('FormDataWrong')
             return errorUtil.getData('UserNameExist')
-        errorDict = {}
-        allFiled = form.getAllFiled()
-        for key in allFiled:
-            if len(allFiled[key].errors)>0:
-                errorDict[key] = allFiled[key].errors.__str__()
-                # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+str(len(allFiled[key].errors)))
-                # MainLog.record(MainLog.level.DEBUG,"form"+key+".errors"+allFiled[key].errors.__str__())
-        MainLog.record(MainLog.level.DEBUG,"下"+JsonUtil().dictToJson(errorDict))
-        return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(errorDict))
+        return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
     return render_template('register.html', form=form)
+
+@userBluePrint.route('/searchUser/', methods=['GET', 'POST'])
+@login_required
+def searchBriefUser():
+    if request.method == "POST":
+        # TODO 不同用户权限不同搜索表单验证
+        form = SearchBriefUserForm(request.form)
+        return userControler.getBriefUserListData(form)
+    elif request.method == "GET":
+        # TODO 不同用户权限不同搜索界面
+        return render_template('searchBriefUser.html')
 
 @login_manager.user_loader
 def load_user(user_id):

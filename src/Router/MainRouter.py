@@ -13,9 +13,12 @@ mainBluePrint = Blueprint(
 def index():
     return render_template("hello.html")
 
-@mainBluePrint.route("/info/<infoName>")
+@mainBluePrint.route("/info/<infoName>",methods=['POST'])
 def info(infoName):
+    # TODO 获取用户的签到信息
+    #  名字，签到次数
     return mainControler.getInfoByName(infoName,current_user)
-@mainBluePrint.route("/buttonList")
+@mainBluePrint.route("/buttonList",methods=['POST'])
 def buttonList():
+    # TODO 登陆显示签到按钮
     return mainControler.getButtonList(current_user.is_authenticated)

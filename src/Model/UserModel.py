@@ -91,3 +91,13 @@ class User(UserMixin, db.Model):
         self.passwordHash = generate_password_hash(password)
     def verify_password(self, password):
         return check_password_hash(self.passwordHash, password)
+
+    def toBriefDict(self):
+        return {
+            "userName":self.userName,
+            "nickName":self.nickName,
+            "maleBool":self.maleBool,
+            "directionName":self.directionName,
+            "laboratoryName":self.laboratoryName,
+            "professionalClass":self.professionalClass,
+        }

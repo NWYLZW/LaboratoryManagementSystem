@@ -1,46 +1,64 @@
-.main{
-	z-index: -1;
+.mainx {
 	position: fixed;
 	left: 0;top: 0;
 	width: 100%;height: 100%;
+	pointer-events: none;
 	-ms-user-select: none;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 }
-.main .top{
-	z-index: 100;
+.mainx .top{
 	position: absolute;
+	pointer-events: auto;
 	left: 0;top: 0;
 	height: 100px;
 	background-color: dodgerblue;
 	box-shadow: 0 5px 15px gray;
 	transition: .5s;
 }
-.main .left_nav{
-	z-index: 100;
+.mainx .top .top-title{
+	position: relative;
+	left: 0;top: 0;
+	padding-left: 30px;
+	width: 270px;height: 100px;
+	line-height: 100px;
+	font-size: 22px;
+	color: #D3D3D3;
+	transition: .5s;
+}
+.mainx .top i{
 	position: absolute;
+	right: 20px;top: 30px;
+	transition: .5s;
+}
+.mainx .top i:hover{
+	color: aliceblue;
+}
+.mainx .left_nav{
+	position: absolute;
+	pointer-events: auto;
 	left: 0;top: 0;
 	height: 100%;
 	background-color: rgba(220,220,220,.5);
 	transition: .5s;
 }
-.left_nav .topx,.centerx{
+.mainx .left_nav .topx,.centerx{
 	position: relative;
 	width: 100%;
 	transition: .5s;
 }
-.left_nav .topx{
+.mainx .left_nav .topx{
 	z-index: 10;
 	height: 80px;
 	background-color: #FFFFFF;
 	box-shadow: 0 0 10px gray;
 }
-.left_nav .centerx{
+.mainx .left_nav .centerx{
 	z-index: 9;
 	height: calc(100% - 80px);
 	background-color: #EEEEEE;
 }
-.left_nav .topx .topx_title{
+.mainx .left_nav .topx .topx_title{
 	line-height: 80px;
 	width: 100%;height: 100%;
 	text-align: center;
@@ -48,16 +66,16 @@
 	color: rgba(255,255,255,0);
 	transition: .5s;
 }
-.left_nav .topx .topx_icon{
+.mainx .left_nav .topx .topx_icon{
 	position: absolute;
 	top: 0;left: 0;
 	transition: .5s;
 }
-.left_nav .topx .topx_icon i{
+.mainx .left_nav .topx .topx_icon i{
 	position: relative;
 	transition: .5s;
 	color: #1E90FF;
 }
-.left_nav .topx .topx_icon i:hover{
+.mainx .left_nav .topx .topx_icon i:hover{
 	transform: rotateZ(30deg);
 }

@@ -15,12 +15,12 @@ class response {
 		}
 	}
 	start(){
-		window.response = this;
-		window.onresize = function(){
-			if(this.response.changeStatu()){
-				this.response.refresh();
+		var responsex = this;
+		window.addEventListener('resize',function(){
+			if(responsex.changeStatu()){
+				responsex.refresh();
 			}
-		}
+		})
 		this.changeStatu();
 		this.refresh();
 	}
@@ -49,6 +49,12 @@ class response {
 		this.statux = statux || this.statux;
 		var linkArr = ["","0",(""+this.left),(""+this.right)];
 		this.link(linkArr[this.statux]);
+		if(this.endFunction)
+			this.endFunction();
+	}
+	setEndFunction(endFunction){
+		this.endFunction = endFunction;
+		return this;
 	}
 	link(name){
 		if(this.htmlName==="main")

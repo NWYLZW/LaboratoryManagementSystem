@@ -1,6 +1,5 @@
 from flask_login import current_user
 
-from src import MainLog
 from src.Model.RoleModel import Permission
 from src.Util.JsonUtil import JsonUtil
 
@@ -13,7 +12,7 @@ commonUse = {
             Permission.PERSON_DATA_ADSC,
         ],
         'name': "常用0",
-        'url': '../userx/',
+        'url': '#None',
         'icoClass': 'fa fa-tag fa-1_5x',
     }, ]}
 my = {
@@ -25,14 +24,14 @@ my = {
             Permission.PERSON_DATA_ADSC,
         ],
         'name': "我的主页",
-        'url': '../my/space',
+        'url': '#my-space',
         'icoClass': 'fa fa-building fa-1_5x',
     }, {
         'permission': [
             Permission.PERSON_DATA_ADSC,
         ],
         'name': "个人信息",
-        'url': '../my/info',
+        'url': '#my-info',
         'icoClass': 'fa fa-vcard fa-1_5x',
     }, ]
 }
@@ -48,7 +47,7 @@ peopleContro = {
             Permission.ALL_FULL_DATA_S,
         ],
         'name': "人员列表",
-        'url': '../people/list',
+        'url': '#user-searchUser',
         'icoClass': 'fa fa-address-book fa-1_5x',
     }, {
         'permission': [
@@ -57,7 +56,7 @@ peopleContro = {
             Permission.ALL_DATA_ADC,
         ],
         'name': "人员异动",
-        'url': '../peopple/change',
+        'url': '#peopple-change',
         'icoClass': 'fa fa-user-plus fa-1_5x',
     }, ]
 }

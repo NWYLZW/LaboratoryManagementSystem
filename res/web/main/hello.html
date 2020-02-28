@@ -19,6 +19,9 @@
 		<div class="mainBackGroundImage">
 			
 		</div>
+		<div class="mainBackGroundImage0">
+			
+		</div>
 		<div class="main">
 			<div class="left">
 			</div>
@@ -61,16 +64,14 @@
 		}, 800);
 		new myAjax({
 			url:"./buttonList",
-			data:"",
-			method:"GET",
+			method:"POST",
 			success:function(result){
 				generateButton(JSON.parse(result));
 			}
 		}).ajax();
 		new myAjax({
 			url:"./info/welcome",
-			data:"",
-			method:"GET",
+			method:"POST",
 			success:function(result){
 				$(".mid-mid-in")[0].innerHTML = result;
 			}

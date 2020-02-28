@@ -22,7 +22,8 @@ function generateMenu(dictm,ElementIdName){
 		
 		var childs = dictm[i].child;
 		if(childs.length>0){
-			ulx_li.onclick = show_child;
+			item_title.parents = ulx_li;
+			item_title.onclick = show_child;
 			
 			var ulxtemp = document.createElement('ul');
 			for(let i = 0;i < childs.length;i++){
@@ -48,17 +49,16 @@ function generateMenu(dictm,ElementIdName){
 		ulx_li.append(item_childs);
 		ulx.append(ulx_li);
 	}
-	console.log()
 	$(ElementIdName)[0].getElementsByClassName('centerx_menu')[0].appendChild(ulx[0]);
 	myScroll.c.refresh();
 }
 function show_child(){
 	if(!myScroll.c.click) return;
 	var regex = /show_child/;
-	if(regex.test(this.className))
-		this.classList.remove('show_child');
+	if(regex.test(this.parents.className))
+		this.parents.classList.remove('show_child');
 	else
-		this.classList.add('show_child');
+		this.parents.classList.add('show_child');
 	setTimeout(function(){
 		myScroll.c.refresh();
 	},500)

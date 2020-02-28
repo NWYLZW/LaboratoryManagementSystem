@@ -1,0 +1,37 @@
+.interface{
+	position: absolute;
+	left: 250px;top: 100px;
+	padding: 20px;
+	width: calc(100% - 290px);
+	background-color: rgba(255,255,255,.5);
+	transition: .5s;
+	-webkit-filter: blur(0px);
+	   -moz-filter: blur(0px);
+		-ms-filter: blur(0px);
+			filter: blur(0px);
+	-webkit-animation-name: blur; /*动画名称*/
+	-webkit-animation-duration: 2s; /*动画持续时间*/
+	-webkit-animation-iteration-count: 1; /*动画次数*/
+	-webkit-animation-delay: 0s; /*延迟时间*/
+}
+@-webkit-keyframes blur {
+    0% {
+		left: 1000px;
+		-webkit-filter: blur(16px);
+		   -moz-filter: blur(16px);
+			-ms-filter: blur(16px);
+				filter: blur(16px);
+    }
+    50% {
+		-webkit-filter: blur(8px);
+		   -moz-filter: blur(8px);
+			-ms-filter: blur(8px);
+				filter: blur(8px);
+    }
+    100% {
+		-webkit-filter: blur(0px);
+		   -moz-filter: blur(0px);
+			-ms-filter: blur(0px);
+				filter: blur(0px);
+    }
+}

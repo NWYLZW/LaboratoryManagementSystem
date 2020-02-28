@@ -29,12 +29,15 @@ class MainControler:
             'url': '/user/register'
         }, ])
     def getInfoByName(self,infoName,current_user):
-        if not current_user.is_authenticated :
+        if current_user.is_authenticated :
+            infoDict = {
+                "welcome":"<h1>Hi,"+current_user.userName+"</h1><h2>(Laboratory Management System)</h2><h2>Welcome to you</h2>",
+            }
+            return infoDict[infoName]
+        else:
             infoDict = {
                 "welcome":"<h1>LMS</h1><h2>(Laboratory Management System)</h2><h2>Welcome to you</h2>",
             }
             return infoDict[infoName]
-        else:
-            pass
 
 mainControler = MainControler()

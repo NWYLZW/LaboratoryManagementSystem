@@ -30,7 +30,7 @@
 	transition: .5s;
 }
 .rotation .btn i{
-	top: calc(50% -24px);
+	top: calc(50% - 24px);
 	transition: .5s;
 }
 .rotation .btn i:hover{
@@ -66,10 +66,14 @@
 	padding-left: 10px;
 	transition: .5s;
 }
-.rigth-bottom-top a{
+.rigth-bottom-top h1{
 	color: lightgray;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	transition: .5s;
 }
-.rigth-bottom-top a:hover{
+.rigth-bottom-top h1:hover{
 	color: black;
 }
 .rigth-bottom-bottom{
@@ -78,9 +82,13 @@
 	padding: 20px;
 	transition: .5s;
 }
-.rigth-bottom-bottom a{
+.rigth-bottom-bottom h3{
 	color: lightgray;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	transition: .5s;
 }
-.rigth-bottom-bottom a:hover{
+.rigth-bottom-bottom h3:hover{
 	color: white;
 }

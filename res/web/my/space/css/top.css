@@ -1,0 +1,24 @@
+.top-left{
+	position: relative;float: left;
+	width: calc(100% - 200px);
+	height: 100%;
+	display: inline-block;
+	transition: .5s;
+}
+.top-right{
+	position: relative;float: left;
+	width: 200px;
+	height: 100%;
+	background-color: white;
+	transition: .5s;
+}
+.top-right .mark{
+	padding-top: 20px;
+	width: 100%;height: 100%;
+	text-align: center;
+	color: dimgray;
+	transition: .5;
+}
+.top-right .mark:hover{
+	color: #1E90FF;
+}

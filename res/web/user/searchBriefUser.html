@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>搜索人员信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../baseLibrary/css/label.css"/>
+		<link rel="stylesheet" type="text/css" href="../../user/css/searchUserResult.css"/>
+		<link rel="stylesheet" type="text/css" href="../../user/css/searchBriefUser.css"/>
+		<link rel="stylesheet" type="text/css" href="../../font-awesome-4.7.0/css/font-awesome.css"/>
+		<script src="../../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../user/js/searchUserResultList.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div class="searchLabel">
+				<div class="labelx">
+					学号
+				</div>
+				<div class="labelx">
+					姓名
+				</div>
+				<div class="labelx">
+					方向
+				</div>
+				<div class="labelx">
+					实验室名
+				</div>
+				<div class="labelx">
+					专业名
+				</div>
+			</div>
+			<div class="searchInput">
+			<form id="searchUser" action="../../user/searchUser/" method="post">
+				<input type="text" name="userName" id="userName" placeholder="">
+				<input type="text" name="nickName" id="nickName" placeholder="">
+				<input type="text" name="directionName" id="directionName" placeholder="">
+				<input type="text" name="laboratoryName" id="laboratoryName" placeholder="">
+				<input type="text" name="professional" id="professional" placeholder="">
+				<input type="submit" value="搜索"/>
+			</form>
+			</div>
+			<div class="searchUser-result"></div>
+		</div>
+		<script src="../../user/js/searchUser.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
