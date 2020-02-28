@@ -310,12 +310,12 @@ class deleteBtn {
 			cursor: "pointer",
 		});
 		this.ele = this.jqEle[0];
-		if(this.father){
-			var eleFather = this.father.ele;
-			this.ele.onclick = function(){
-				eleFather.remove();
-			}
-		}
+		// if(this.father){
+		// 	var eleFather = this.father.ele;
+		// 	this.ele.onclick = function(){
+		// 		eleFather.remove();
+		// 	}
+		// }
 	}
 }
 class loginNoticeInfo{
@@ -384,30 +384,50 @@ class loginNoticeContro {
 		this.addBtnEle = $('.loginNoticeContro #addBottonWrraper .addBotton')[0];
 		
 		this.initFormOption();
+		// 获取了delLoginNotice
 		this.delLoginNotice = $("#delLoginNotice");
+		// 阻止本来的submit点击事件
 		this.delLoginNotice.submit(function(){
+			// 传入delLoginNoticeOption配置
 			$(this).ajaxSubmit(contex.delLoginNoticeOption);
+			// 阻止本来的submit点击事件的页面跳转
 			return false;
 		});
 		
 		this.appendAddButtonClickListener();
 		for (var i = 0; i < this.dictx.length; i++) {
 			var loginNoticeInfoX = new loginNoticeInfo(this.dictx[i]);
+			// 初始化每个loginNoticeInfoX的提交事件
+			// 删除编辑
 			this.initAjax(loginNoticeInfoX);
 			this.loginNoticeInfoList.push(loginNoticeInfoX);
 			this.ele.appendChild(loginNoticeInfoX.ele);
 		}
 	}
 	initAjax(loginNoticeInfoX){
+		// var contex = this;
 		var delLoginNoticeTemp = this.delLoginNotice[0];
 		loginNoticeInfoX.deleteBtn.ele.onclick = function(){
-			delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
+			// contex.delResponse.delLoginNoticeInfoX = loginNoticeInfoX;
+			// delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
 			delLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+			
+			Interval = setInterval(function(){
+				if(this.isSuccess){
+					clearInterval(Interval);
+					Interval = null;
+					loginNoticeInfoX.remove();
+				}
+			},100);
+			Interval.isSuccess = false;
 		}
 	}
+	// 初始化提交表单参数
 	initFormOption(){
 		this.delLoginNoticeOption = { 
+			// 提交前函数 false则不提交
 			beforeSubmit: function(formData, jqForm, options){return true;},
+			// 提交成功的
 			success: this.delResponse,
 			timeout: 3000,
 		};
@@ -415,6 +435,13 @@ class loginNoticeContro {
 	delResponse(data){
 		var JSONObject = JSON.parse(data);
 		console.log(JSONObject);
+		if(JSONObject.type == -3001){
+			// this.delLoginNoticeInfoX.remove();
+			Interval.isSuccess = true;
+		}
+		else{
+			alert("删除失败");
+		}
 	}
 	appendAddButtonClickListener(){
 		var father = this;
@@ -425,6 +452,9 @@ class loginNoticeContro {
 		}
 	}
 }
+
+var Interval = null;
+
 new myAjax({
 	url:"../notice/loginNotice",
 	method:"POST",
