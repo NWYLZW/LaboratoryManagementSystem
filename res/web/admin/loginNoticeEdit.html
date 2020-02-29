@@ -14,12 +14,12 @@
 	<body>
 		<div style="display: block;">
 			<h1>addLoginNotice</h1>
-			<form action="../admin/addLoginNotice" method="post" enctype="multipart/form-data">
-				<input type="file" name="backImage" />
-				<input type="text" name="title" value="" />
-				<input type="text" name="content" value="" />
-				<input type="text" name="isShow" value="False" />
-				<input type="submit" value="提交"/>
+			<form id="addLoginNotice" action="../admin/addLoginNotice" method="post" enctype="multipart/form-data">
+				<!-- <input type="file" name="backImage" /> -->
+				<input type="text" class = "title" name="title" value="" />
+				<input type="text" class = "content" name="content" value="" />
+				<input type="text" class = "isShow" name="isShow" value="False" />
+				<input type="submit" class = "submit" value="提交"/>
 			</form>
 			<h1>delLoginNotice</h1>
 			<form id="delLoginNotice" action="../admin/delLoginNotice" method="post">
@@ -27,13 +27,13 @@
 				<input type="submit" class="submit" value="提交"/>
 			</form>
 			<h1>editLoginNotice</h1>
-			<form action="../admin/editLoginNotice" method="post" enctype="multipart/form-data">
-				<input type="text" name="id" />
-				<input type="file" name="backImage" />
-				<input type="text" name="title" value="" />
-				<input type="text" name="content" value="" />
-				<input type="text" name="isShow" value="False" />
-				<input type="submit" value="提交"/>
+			<form id="editLoginNotice" action="../admin/editLoginNotice" method="post" enctype="multipart/form-data">
+				<input type="text" class = "id"  name="id" />
+				<input type="file" class = "backImage" name="backImage" />
+				<input type="text" class = "title" name="title" value="" />
+				<input type="text" class = "content" name="content" value="" />
+				<input type="text" class = "isShow" name="isShow" value="False" />
+				<input type="submit" class ="submit" value="提交"/>
 			</form>
 		</div>
 		

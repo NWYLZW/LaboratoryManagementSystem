@@ -24,16 +24,41 @@ class backImage {
 			backgroundImage: "url(../user/img/rotation/"+this.dictx.backgroundImageSrc+")",
 		})[0];
 		this.ele.appendChild(this.backImage);
-		this.pencilIco = $("<div class='fa fa-inverse fa-pencil fa-1_5x'></div>").
+		var backImage = this.backImage;
+		this.pencilIco = $('<div class="fa fa-inverse fa-pencil fa-1_5x">\
+		<input class="selectImage" type="file" name="backImage" style="display:none"/>\
+		</div>').
 		css({
 			float: "right",
 			display: "none",
 			cursor: "pointer",
-		})[0];
+		})
+		.click(
+		function(){
+			this.getElementsByClassName('selectImage')[0].click();
+			this.getElementsByClassName('selectImage')[0].addEventListener('change',function(){
+				var file = this.files[0];
+				var type = file.type.split("/");
+				if(type[0] != "image"){
+					alert("请选择图片");
+					return false;
+				}
+				var reader = new FileReader();
+				reader.readAsDataURL(file);  
+				reader.onloadend = function(){
+					var dataUrl = reader.result;
+					backImage.style.backgroundImage = "url("+dataUrl+")";
+				}
+			});
+		}
+		)[0];
 		this.backImage.appendChild(this.pencilIco);
 	}
 	getPencilIco(){
 		return this.pencilIco;
+	}
+	getInputImage(){
+		return this.pencilIco.getElementsByClassName('selectImage')[0];
 	}
 }
 
@@ -91,7 +116,7 @@ class midTop {
 		css({
 			position: "relative",
 			top: "calc(50% - 18px)",
-			paddingLeft: "20px",
+			paddingLeft: "10px",
 			height: "36px",
 			lineHeight: "36px",
 			color: "grey",
@@ -100,6 +125,9 @@ class midTop {
 		})[0];
 		this.ele.appendChild(this.title).textContent = this.dictx.title;
 		this.ele.appendChild(this.inputTitle).value = this.dictx.title;
+	}
+	getTitle(){
+		return this.inputTitle.value;
 	}
 }
 class midButtom {
@@ -140,7 +168,7 @@ class midButtom {
 			display: "none",
 		})[0];
 		this.ele.appendChild(this.content).textContent = this.dictx.content;
-		this.ele.appendChild(this.textereaContent).placeholder = this.dictx.content;
+		this.ele.appendChild(this.textereaContent).value = this.dictx.content;
 		
 		this.ele.appendChild($('<div></div>').
 		css({
@@ -161,7 +189,9 @@ class midButtom {
 			color: "gray",
 		})[0]).textContent = this.dictx.date;
 	}
-}
+	getContent(){
+		return this.textereaContent.value;
+	}}
 
 class right {
 	constructor(dictx) {
@@ -182,14 +212,14 @@ class right {
 		this.rightRight = new rightRight(this.dictx);
 		this.ele.appendChild(this.rightRight.ele);
 	}
-	getEditIco(){
-		return this.rightRight.editIco;
+	getEdit(){
+		return [this.rightRight.editIco,this.rightRight.editor];
 	}
-	getEditor(){
-		return this.rightRight.editor;
+	getSubmit(){
+		return [this.rightRight.submitIco,this.rightRight.submit];
 	}
-	getRightRight(){
-		return this.rightRight.ele;
+	changeStatu(statu){
+		this.rightRight.changeStatu(statu);
 	}
 }
 class rightLeft {
@@ -255,6 +285,10 @@ class rightLeft {
 			this.circleImg[0].onclick = function() {};
 		}
 	}
+	getIsShow(){
+		if(this.showDiv[0].textContent=="展示") return "True";
+		else return "False";
+	}
 }
 class rightRight {
 	constructor(dictx) {
@@ -269,15 +303,13 @@ class rightRight {
 			height: "100%",
 			userSelect:"none",
 		});
-		this.ele = this.jqEle[0];
 		this.editIco = ($('<div class="fa fa-edit fa-4x"></div>').
 		css({
 			height: "70%",
 			marginLeft: "38px",
 			lineHeight: "126px",
 		})
-		)[0];
-		this.ele.appendChild(this.editIco);
+		);
 		this.editor = ($('<div></div>').
 		css({
 			width: "100%",
@@ -286,8 +318,46 @@ class rightRight {
 			textAlign: "center",
 			cursor: "pointer",
 		})
-		)[0];
-		this.ele.appendChild(this.editor).textContent = "编辑";
+		.text("编辑")
+		);
+		
+		this.submitIco = ($('<div class="fa fa-save fa-4x"></div>').
+		css({
+			display:"none",
+			height: "70%",
+			marginLeft: "38px",
+			lineHeight: "126px",
+		})
+		);
+		this.submit = ($('<div></div>').
+		css({
+			display:"none",
+			width: "100%",
+			height: "30%",
+			fontSize: "20px",
+			textAlign: "center",
+			cursor: "pointer",
+		})
+		.text("提交")
+		);
+		this.ele = this.jqEle[0];
+		this.ele.appendChild(this.editIco[0]);
+		this.ele.appendChild(this.editor[0]);
+		this.ele.appendChild(this.submitIco[0]);
+		this.ele.appendChild(this.submit[0]);
+	}
+	changeStatu(statu){
+		if(statu === "submit"){
+			this.editIco.css({display:"none"});
+			this.editor.css({display:"none"});
+			this.submitIco.css({display:"block"});
+			this.submit.css({display:"block"});
+		}else if(statu === "edite"){
+			this.editIco.css({display:"block"});
+			this.editor.css({display:"block"});
+			this.submitIco.css({display:"none"});
+			this.submit.css({display:"none"});
+		}
 	}
 }
 
@@ -349,7 +419,10 @@ class loginNoticeInfo{
 		this.ele.appendChild(this.deleteBtn.ele);
 		
 		var ThisloginNoticeInfo = this;
-		this.right.getRightRight().onclick = function(){
+		this.right.getEdit()[0][0].onclick = function(){
+			ThisloginNoticeInfo.statu = "edite";
+		}
+		this.right.getEdit()[1][0].onclick = function(){
 			ThisloginNoticeInfo.statu = "edite";
 		}
 	}
@@ -359,10 +432,10 @@ class loginNoticeInfo{
 				var thisBackImage = this.backImage;
 				var thisRight = this.right;
 				var thisMid = this.mid;
-				thisBackImage.getPencilIco().style.display = "block";
-				thisRight.getEditIco().className = "fa fa-save fa-4x";
-				thisRight.getEditor().textContent = "提交";
+				thisRight.changeStatu('submit');
 				thisRight.rightLeft.canClick(true);
+				
+				thisBackImage.getPencilIco().style.display = "block";
 				thisMid.getTitle().style.display = "none";
 				thisMid.getInputTitle().style.display = "block";
 				thisMid.getContent().style.display = "none";
@@ -389,6 +462,16 @@ class loginNoticeContro {
 			$(this).ajaxSubmit(contex.delLoginNoticeOption);
 			return false;
 		});
+		this.editLoginNotice = $("#editLoginNotice");
+		this.editLoginNotice.submit(function(){
+			$(this).ajaxSubmit(contex.editLoginNoticeOption);
+			return false;
+		});
+		this.addLoginNotice = $("#addLoginNotice");
+		this.addLoginNotice.submit(function(){
+			$(this).ajaxSubmit(contex.addLoginNoticeOption);
+			return false;
+		});
 		
 		this.appendAddButtonClickListener();
 		for (var i = 0; i < this.dictx.length; i++) {
@@ -400,6 +483,8 @@ class loginNoticeContro {
 	}
 	initAjax(loginNoticeInfoX){
 		var delLoginNoticeTemp = this.delLoginNotice[0];
+		var editLoginNoticeTemp = this.editLoginNotice[0];
+		
 		loginNoticeInfoX.deleteBtn.ele.onclick = function(){
 			delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
 			delLoginNoticeTemp.getElementsByClassName('submit')[0].click();
@@ -410,6 +495,23 @@ class loginNoticeContro {
 				loginNoticeInfoX.ele.remove();
 			},function(){});
 		}
+		
+		loginNoticeInfoX.right.getSubmit()[0][0].onclick = function(){
+			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
+			// editLoginNoticeTemp.getElementsByClassName('backImage')[0] = loginNoticeInfoX;
+			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.dictx.title;
+			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.dictx.content;
+			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.dictx.isShow;
+			editLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+		}
+		loginNoticeInfoX.right.getSubmit()[1][0].onclick = function(){
+			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
+			// editLoginNoticeTemp.getElementsByClassName('backImage')[0] = loginNoticeInfoX;
+			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.dictx.title;
+			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.dictx.content;
+			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.dictx.isShow;
+			editLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+		}
 	}
 	initFormOption(){
 		this.delLoginNoticeOption = { 
@@ -417,6 +519,16 @@ class loginNoticeContro {
 			success: this.delResponse,
 			timeout: 3000,
 		};
+		this.editLoginNoticeOption = {
+			beforeSubmit: function(formData, jqForm, options){return true;},
+			success: this.editResponse,
+			timeout: 3000,
+		}
+		this.addLoginNoticeOption = {
+			beforeSubmit: function(formData, jqForm, options){return true;},
+			success: this.addResponse,
+			timeout: 3000,
+		}
 	}
 	delResponse(data){
 		var JSONObject = JSON.parse(data);
@@ -428,12 +540,44 @@ class loginNoticeContro {
 			alert("删除失败");
 		}
 	}
+	editResponse(data){
+		var JSONObject = JSON.parse(data);
+		console.log(JSONObject);
+	}
+	addResponse(data){
+		var JSONObject = JSON.parse(data);
+		console.log(JSONObject);
+	}
+	initAddAjax(loginNoticeInfoX){
+		var addLoginNoticeTemp = this.addLoginNotice[0];
+		loginNoticeInfoX.right.getSubmit()[0][0].onclick = function(){
+			addLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
+			addLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			addLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			addLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
+			addLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+		}
+		loginNoticeInfoX.right.getSubmit()[1][0].onclick = function(){
+			addLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
+			addLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			addLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			addLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
+			addLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+		}
+	}
+	
 	appendAddButtonClickListener(){
 		var father = this;
 		this.addBtnEle.onclick = function(){
-			var loginNoticeInfoX = new loginNoticeInfo();
+			var loginNoticeInfoX = new loginNoticeInfo({
+				title:"待添加标题",
+				content:"待添加内容",
+				backgroundImageSrc:"",
+			});
+			loginNoticeInfoX.statu = "edite";
+			father.initAddAjax(loginNoticeInfoX);
 			father.loginNoticeInfoList.push(loginNoticeInfoX);
-			father.appendChild(loginNoticeInfoX.ele);
+			father.ele.insertBefore(loginNoticeInfoX.ele,father.ele.childNodes[4]);
 		}
 	}
 }
@@ -443,7 +587,6 @@ function IntervalWrapper(successCallback,timeOutCallback){
 	this.isSuccess = false;
 	var context = this;
 	this.fun = setInterval(function(){
-		console.log(this);
 		context.count += 1;
 		if(context.isSuccess){
 			clearInterval(context.fun);
