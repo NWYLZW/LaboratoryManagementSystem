@@ -191,7 +191,11 @@ class midButtom {
 	}
 	getContent(){
 		return this.textereaContent.value;
-	}}
+	}
+	getId(){
+		return this.dictx.id;
+	}
+}
 
 class right {
 	constructor(dictx) {
@@ -483,8 +487,6 @@ class loginNoticeContro {
 	}
 	initAjax(loginNoticeInfoX){
 		var delLoginNoticeTemp = this.delLoginNotice[0];
-		var editLoginNoticeTemp = this.editLoginNotice[0];
-		
 		loginNoticeInfoX.deleteBtn.ele.onclick = function(){
 			delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
 			delLoginNoticeTemp.getElementsByClassName('submit')[0].click();
@@ -496,20 +498,21 @@ class loginNoticeContro {
 			},function(){});
 		}
 		
+		var editLoginNoticeTemp = this.editLoginNotice[0];
 		loginNoticeInfoX.right.getSubmit()[0][0].onclick = function(){
+			editLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
 			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
-			// editLoginNoticeTemp.getElementsByClassName('backImage')[0] = loginNoticeInfoX;
-			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.dictx.title;
-			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.dictx.content;
-			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.dictx.isShow;
+			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
 			editLoginNoticeTemp.getElementsByClassName('submit')[0].click();
 		}
 		loginNoticeInfoX.right.getSubmit()[1][0].onclick = function(){
+			editLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
 			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
-			// editLoginNoticeTemp.getElementsByClassName('backImage')[0] = loginNoticeInfoX;
-			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.dictx.title;
-			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.dictx.content;
-			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.dictx.isShow;
+			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
 			editLoginNoticeTemp.getElementsByClassName('submit')[0].click();
 		}
 	}
@@ -565,7 +568,6 @@ class loginNoticeContro {
 			addLoginNoticeTemp.getElementsByClassName('submit')[0].click();
 		}
 	}
-	
 	appendAddButtonClickListener(){
 		var father = this;
 		this.addBtnEle.onclick = function(){
