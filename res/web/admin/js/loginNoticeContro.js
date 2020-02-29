@@ -500,6 +500,7 @@ class loginNoticeContro {
 		
 		var editLoginNoticeTemp = this.editLoginNotice[0];
 		loginNoticeInfoX.right.getSubmit()[0][0].onclick = function(){
+			if(loginNoticeInfoX.backImage.getInputImage().files.length==1)
 			editLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
 			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
 			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
@@ -508,6 +509,7 @@ class loginNoticeContro {
 			editLoginNoticeTemp.getElementsByClassName('submit')[0].click();
 		}
 		loginNoticeInfoX.right.getSubmit()[1][0].onclick = function(){
+			if(loginNoticeInfoX.backImage.getInputImage().files.length==1)
 			editLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
 			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
 			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
@@ -535,9 +537,10 @@ class loginNoticeContro {
 	}
 	delResponse(data){
 		var JSONObject = JSON.parse(data);
-		console.log(JSONObject);
 		if(JSONObject.type == -3001){
 			Interval.isSuccess = true;
+			alert("删除成功");
+			location.reload(true);
 		}
 		else{
 			alert("删除失败");
@@ -545,11 +548,23 @@ class loginNoticeContro {
 	}
 	editResponse(data){
 		var JSONObject = JSON.parse(data);
-		console.log(JSONObject);
+		if(JSONObject.type == -3003){
+			alert("修改成功");
+			location.reload(true);
+		}
+		else{
+			alert("修改失败"+JSONObject.content);
+		}
 	}
 	addResponse(data){
 		var JSONObject = JSON.parse(data);
-		console.log(JSONObject);
+		if(JSONObject.type == -3002){
+			alert("添加成功");
+			location.reload(true);
+		}
+		else{
+			alert("添加失败"+JSONObject.content);
+		}
 	}
 	initAddAjax(loginNoticeInfoX){
 		var addLoginNoticeTemp = this.addLoginNotice[0];
@@ -606,7 +621,6 @@ new myAjax({
 	method:"POST",
 	success:function(result){
 		dictObj = JSON.parse(result);
-		console.log(dictObj);
 		new loginNoticeContro(dictObj);
 	},
 	failure:function(error){

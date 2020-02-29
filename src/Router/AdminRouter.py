@@ -7,7 +7,7 @@ from src.Controler.AdminControler import adminControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.FileUtil import fileUtil
 from src.Util.SuccessUtil import successUtil
-from src.form.LoginNoticeForm import LoginNoticeForm
+from src.form.LoginNoticeForm import LoginNoticeForm, editLoginNoticeForm
 
 adminBluePrint = Blueprint(
     'admin',
@@ -28,6 +28,7 @@ def delLoginNotice():
         'LoginNoticeIdNone',
         'LoginNoticeNone',
         'dataBaseError',
+        'editLoginNoticeImageError',
     ]
     result = adminControler.delLoginNotice(request.form['id'])
     if result == 0:
@@ -56,7 +57,7 @@ def addLoginNotice():
 @adminBluePrint.route("/editLoginNotice",methods=['GET','POST'])
 def editLoginNotice():
     # 文件是从request,files里面获取，这里使用CombinedMultiDict把form和file的数据组合起来，一起验证
-    form = LoginNoticeForm(CombinedMultiDict([request.files, request.form]))
+    form = editLoginNoticeForm(CombinedMultiDict([request.files, request.form]))
     if request.method == "POST":
         if form.validate_on_submit():
             messageDict = [
@@ -82,7 +83,7 @@ def editPermission():
     if request.method == 'POST':
         messageDict = [
         ]
-        result = adminControler.permissionList()
+        result = adminControler.givePermission(request.form['id'],request.form['permissionId'])
         if result == 0:
             return successUtil.getData(messageDict[result])
         else:
@@ -93,15 +94,6 @@ def permissionList():
     messageDict = [
     ]
     result = adminControler.permissionList()
-    if result == 0:
-        return successUtil.getData(messageDict[result])
-    else:
-        return errorUtil.getData(messageDict[result])
-@adminBluePrint.route("/givePermission",methods=['POST'])
-def givePermission():
-    messageDict = [
-    ]
-    result = adminControler.givePermission(request.form['id'],request.form['permissionId'])
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:

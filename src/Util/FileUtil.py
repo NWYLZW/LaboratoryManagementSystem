@@ -12,15 +12,23 @@ class FileUtil:
             uploadFile.save( os.path.join( self.webPath, path, fileName) )
             return True
         except Exception as e:
-            MainLog.record(MainLog.level.DEBUG,e)
+            MainLog.record(MainLog.level.WARN,e)
             return False
     def changeToWeb(self,uploadFile=None,path="",oldFileName="",newFileName="")->bool:
         try:
-            os.remove( os.path.join( self.webPath, path, oldFileName) )
-            uploadFile.save( os.path.join( self.webPath, path, newFileName) )
+            if uploadFile != None and newFileName != "":
+                os.remove( os.path.join( self.webPath, path, oldFileName) )
+                uploadFile.save( os.path.join( self.webPath, path, newFileName) )
             return True
         except Exception as e:
-            MainLog.record(MainLog.level.DEBUG,e)
+            MainLog.record(MainLog.level.WARN,e)
+            return False
+    def removeToWeb(self,path="",fileName="")->bool:
+        try:
+            os.remove( os.path.join( self.webPath, path, fileName) )
+            return True
+        except Exception as e:
+            MainLog.record(MainLog.level.WARN,e)
             return False
 
 fileUtil = FileUtil()

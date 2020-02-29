@@ -15,4 +15,13 @@ class LoginNoticeForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         kwargs['csrf_enabled'] = False
         FlaskForm.__init__(self, *args, **kwargs)
+class editLoginNoticeForm(FlaskForm):
+    backImage = FileField('backImage',validators=[FileAllowed(['jpg','png'],'文件格式错误')])
+    title = StringField('title')
+    content = StringField('content')
+    isShow = StringField('isShow',validators=[InputRequired()])
+    submit = SubmitField()
 
+    def __init__(self, *args, **kwargs):
+        kwargs['csrf_enabled'] = False
+        FlaskForm.__init__(self, *args, **kwargs)

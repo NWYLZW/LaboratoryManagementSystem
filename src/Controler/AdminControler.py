@@ -14,7 +14,7 @@ class AdminControler:
         '''
         根据Id删除登陆界面的notice
         :param id: 待删除的Id
-        :return: 1 id为空 2 该idNotice不存在 3 数据库错误 0 删除成功
+        :return: 1 id为空 2 该idNotice不存在 3 数据库错误 4 文件删除错误 0 删除成功
         '''
         if not id:
             return 1
@@ -28,7 +28,10 @@ class AdminControler:
             MainLog.record(MainLog.level.ERROR,e)
             return 3
         db.session.commit()
-        return 0
+        if fileUtil.removeToWeb(path="user/img/rotation",fileName=loginNoticeX.backgroundImageSrc):
+            return 0
+        else:
+            return 4
     def addLoginNotice(self,form):
         '''
         :param form: 待提交表单
