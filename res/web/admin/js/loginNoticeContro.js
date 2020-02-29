@@ -379,55 +379,41 @@ class loginNoticeContro {
 		var contex = this;
 		this.loginNoticeInfoList = [];
 		this.dictx = dictx;
-		this.jqEle = $('.loginNoticeContro');
+		this.jqEle = $('.loginNoticeContro'); 
 		this.ele = this.jqEle[0];
 		this.addBtnEle = $('.loginNoticeContro #addBottonWrraper .addBotton')[0];
 		
 		this.initFormOption();
-		// 获取了delLoginNotice
 		this.delLoginNotice = $("#delLoginNotice");
-		// 阻止本来的submit点击事件
 		this.delLoginNotice.submit(function(){
-			// 传入delLoginNoticeOption配置
 			$(this).ajaxSubmit(contex.delLoginNoticeOption);
-			// 阻止本来的submit点击事件的页面跳转
 			return false;
 		});
 		
 		this.appendAddButtonClickListener();
 		for (var i = 0; i < this.dictx.length; i++) {
 			var loginNoticeInfoX = new loginNoticeInfo(this.dictx[i]);
-			// 初始化每个loginNoticeInfoX的提交事件
-			// 删除编辑
 			this.initAjax(loginNoticeInfoX);
 			this.loginNoticeInfoList.push(loginNoticeInfoX);
 			this.ele.appendChild(loginNoticeInfoX.ele);
 		}
 	}
 	initAjax(loginNoticeInfoX){
-		// var contex = this;
 		var delLoginNoticeTemp = this.delLoginNotice[0];
 		loginNoticeInfoX.deleteBtn.ele.onclick = function(){
-			// contex.delResponse.delLoginNoticeInfoX = loginNoticeInfoX;
-			// delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
+			delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
 			delLoginNoticeTemp.getElementsByClassName('submit')[0].click();
-			
-			Interval = setInterval(function(){
-				if(this.isSuccess){
-					clearInterval(Interval);
-					Interval = null;
-					loginNoticeInfoX.remove();
-				}
-			},100);
-			Interval.isSuccess = false;
+			Interval = new IntervalWrapper(
+			function(){
+				console.log(2);
+				Interval = null;
+				loginNoticeInfoX.ele.remove();
+			},function(){});
 		}
 	}
-	// 初始化提交表单参数
 	initFormOption(){
 		this.delLoginNoticeOption = { 
-			// 提交前函数 false则不提交
 			beforeSubmit: function(formData, jqForm, options){return true;},
-			// 提交成功的
 			success: this.delResponse,
 			timeout: 3000,
 		};
@@ -436,7 +422,6 @@ class loginNoticeContro {
 		var JSONObject = JSON.parse(data);
 		console.log(JSONObject);
 		if(JSONObject.type == -3001){
-			// this.delLoginNoticeInfoX.remove();
 			Interval.isSuccess = true;
 		}
 		else{
@@ -453,8 +438,24 @@ class loginNoticeContro {
 	}
 }
 
+function IntervalWrapper(successCallback,timeOutCallback){
+	this.count = 0;
+	this.isSuccess = false;
+	var context = this;
+	this.fun = setInterval(function(){
+		console.log(this);
+		context.count += 1;
+		if(context.isSuccess){
+			clearInterval(context.fun);
+			successCallback();
+		}
+		if(context.count === 100){
+			clearInterval(context.fun);
+			timeOutCallback();
+		}
+	},100);
+}
 var Interval = null;
-
 new myAjax({
 	url:"../notice/loginNotice",
 	method:"POST",
