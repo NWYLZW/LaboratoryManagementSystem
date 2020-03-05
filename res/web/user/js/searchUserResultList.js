@@ -37,3 +37,8 @@ class resultItem {
 			.html(this.dictx.professionalClass)[0]);
 	}
 }
+class userItemModelX01 extends itemModel {
+	generateEle(dictx,index,root){
+		return new resultItem(dictx).ele;
+	}
+}

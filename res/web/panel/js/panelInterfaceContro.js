@@ -1,3 +1,20 @@
+function judgeHaveLink(linkNode){
+	var linkList = $('link');
+	for (var i = 0; i < linkList.length; i++) {
+		if(linkNode.href == linkList[i].href)
+			return true;
+	}
+	return false;
+}
+function judgeHaveScript(scriptSrc){
+	var scriptList = $('script');
+	for (var i = 0; i < scriptList.length; i++) {
+		if(scriptSrc == scriptList[i].src)
+			return true;
+	}
+	return false;
+}
+
 class InterfaceContro {
 	constructor(parmars) {
 		this.linkList = [];
@@ -18,7 +35,7 @@ class InterfaceContro {
 						this.linkList.push(htmlNode[i]);
 						break;
 					case "SCRIPT":
-						tempScriptSrcList.push(htmlNode[i].src);
+						tempScriptSrcList.push(htmlNode[i]);
 						break;
 					case "DIV":
 						this.interface = htmlNode[i];
@@ -30,17 +47,22 @@ class InterfaceContro {
 		}
 		
 		$('.interface')[0].appendChild(this.interface);
+		$('#top-title')[0].innerText = this.title;
 		for (var i = 0; i < this.linkList.length; i++) {
-			$('head')[0].appendChild(this.linkList[i]);
+			if(!judgeHaveLink(this.linkList[i]))
+				$('head')[0].appendChild(this.linkList[i]);
 		}
 		var count = 0,scriptList = this.scriptList;
 		function recursion(){
 			if(count==tempScriptSrcList.length)
 				return;
-			scriptList.push(loadJs(tempScriptSrcList[count++],recursion));
+			for (var i = count; i < tempScriptSrcList.length; count++) {
+				if(!judgeHaveScript(tempScriptSrcList[count].src))
+					break;
+			}
+			scriptList.push(loadJs(tempScriptSrcList[count++].src,recursion));
 		}
 		recursion();
-		$('#top-title')[0].innerText = this.title;
 	}
 	include(url){
 		url = url.split('-');

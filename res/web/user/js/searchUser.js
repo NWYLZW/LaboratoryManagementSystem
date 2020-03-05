@@ -1,8 +1,3 @@
-class userItemModelX01 extends itemModel {
-	generateEle(dictx,index,root){
-		return new resultItem(dictx).ele;
-	}
-}
 function search(){
 	clearInterval(IntervalX);
 	$('.search').append(new searchControler({
