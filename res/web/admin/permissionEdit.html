@@ -3,38 +3,66 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
 		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="../admin/css/permissionEdit.css"/>
+		<link rel="stylesheet" type="text/css" href="../admin/css/permissionUserItem.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../artDialog/dist/dialog.js" type="text/javascript" charset="utf-8"></script>
         <script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
         <script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/search.js" type="text/javascript" charset="utf-8"></script>
         <script src="../baseLibrary/js/pageList.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../admin/js/permissionUserItem.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-        <form id="editPermission" action="../admin/editPermission" method="post">
-            <input type="text" class = "id" name="id" value="" />
-            <input type="text" class = "permissionId" name="permissionId" value="" />
-            <input type="submit" class = "submit" value="提交"/>
-        </form>
-        <div class="main">
-            
-        </div>
-    </body>
+		<div class="main">
+			<div class="search">
+				
+			</div>
+			<div class="search-result">
+				
+			</div>
+		</div>
+	</body>
     <script type="text/javascript" charset="utf-8">
-        class userItem extends itemModel{
-            constructor(){super();}
-            generate(dictx,index,root){
-                super.generate(dictx,index,root);
-                return;
+		var permissionList = {
+			"1":"CommonUser",
+			"2":"LaboratiryModerator",
+			"6":"Administrator",
+		};
+		class userItem extends itemModel{
+			constructor(){super();}
+			generateEle(dictx,index,root){
+				return new permissionUserItem(dictx,permissionList).jqEle[0];
             }
         }
-    	contro = new pageListControler({
-    		title:"用户列表",
-    		width:800,
-    		pageCountList:[2,4,6,8,10],
-    		itemModel:new userItem(),
-    		dictList:[],
-    	});
-    	$('.main')[0].appendChild(contro.ele);
+		contro = new pageListControler({
+			title:"修改用户权限",
+			pageCountList:[6,12,24,48],
+			itemModel:new userItem(),
+			dictList:[],
+		});
+    	$('.search-result')[0].appendChild(contro.ele);
+		$('.search').append(new searchControler({
+				height: 50,
+				backColor: 'rgba(50,150,250)',
+				icoColor:"rgba(230,230,230)",
+				inputColor:"rgba(240,240,240)",
+				submit:function(){
+					new myAjax({
+						url:'../user/searchAllUser',
+						data: this.keyWords,
+						method:"POST",
+						success:function(result){
+							contro.updataDictList(JSON.parse(result));
+						},
+						failure:function(error){},
+						always:function(jqXHR){}
+					}).ajax();
+				},
+			}).jqEle
+		);
     </script>
 </html>

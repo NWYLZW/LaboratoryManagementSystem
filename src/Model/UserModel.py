@@ -106,6 +106,7 @@ class User(UserMixin, db.Model):
         }
     def toDict(self):
         return {
+            "id":self.id,
             "userName":self.userName,
             "nickName":self.nickName,
             "maleBool":self.maleBool,

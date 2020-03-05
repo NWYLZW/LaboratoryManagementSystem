@@ -72,8 +72,7 @@ def searchUserTest():
 @userBluePrint.route('/searchAllUser', methods=['POST'])
 @login_required
 def searchAllUser():
-    form = SearchBriefUserForm(request.form)
-    return userControler.getUserListData(form)
+    return userControler.getUserListData(request.json)
 
 @login_manager.user_loader
 def load_user(user_id):

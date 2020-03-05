@@ -4,6 +4,7 @@ from flask_login import current_user
 
 from src import db, MainLog
 from src.Model.LoginNoticeModel import LoginNotice
+from src.Model.UserModel import User
 from src.Util.FileUtil import fileUtil
 
 
@@ -101,7 +102,24 @@ class AdminControler:
             else:
                 return 5
 
-    def givePermission(self,userId:int,permissionId:int):
-        pass
+    def givePermission(self,json):
+        '''
+        给予用户权限
+        :return: 1 用户不存在 2 数据库连接失败 0 修改成功
+        '''
+        # 权限等级低的不能赋予别人高等级权限
+        try:
+            user = User.query.filter_by(id=json['userId']).first()
+            if user:
+                MainLog.record(MainLog.level.INFO,current_user.nickName+"将id为"+str(json['userId'])+"权限修改为"+str(json['permissionId']))
+                user.roleId = json['permissionId']
+                db.session.flush()
+            else:
+                return 1
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,e)
+            return 2
+        db.session.commit()
+        return 0
 
 adminControler = AdminControler()

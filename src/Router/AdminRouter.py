@@ -81,8 +81,11 @@ def editLoginNotice():
 def editPermission():
     if request.method == 'POST':
         messageDict = [
+            'editPermissionSuccess',
+            'UserNameNone',
+            'dataBaseError',
         ]
-        result = adminControler.givePermission(request.form['id'],request.form['permissionId'])
+        result = adminControler.givePermission(request.json)
         if result == 0:
             return successUtil.getData(messageDict[result])
         else:

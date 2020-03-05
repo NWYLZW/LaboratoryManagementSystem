@@ -14,7 +14,7 @@ class UserControler:
             User().fuzzySearchRule(file, listWords)):
             if not userItem.id in userIdList:
                 userIdList.append(userItem.id)
-                userList.append(userItem.toBriefDict())
+                userList.append(userItem)
 
     def addUser(self,form):
         '''
@@ -54,9 +54,22 @@ class UserControler:
         userIdList = []
         for file in searchFile:
             self.__searchByFuzzyRule(responUserList,userIdList,file,listWords)
+        for index in range(responUserList.__len__()):
+            responUserList[index] = responUserList[index].toBriefDict()
         return JsonUtil().dictToJson(responUserList)
 
-    def getUserListData(self):
+    def getUserListData(self,listWords):
+        searchFile = [
+            User.userName,
+            User.nickName,
+            User.directionName,
+            User.laboratoryName,
+        ]
         responUserList = []
+        userIdList = []
+        for file in searchFile:
+            self.__searchByFuzzyRule(responUserList,userIdList,file,listWords)
+        for index in range(responUserList.__len__()):
+            responUserList[index] = responUserList[index].toDict()
         return JsonUtil().dictToJson(responUserList)
 userControler = UserControler()
