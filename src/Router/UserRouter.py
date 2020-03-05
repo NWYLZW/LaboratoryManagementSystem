@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, abort
 from flask_login import login_user, logout_user, login_required, current_user
 
 from src import templatePath, login_manager, MainLog
-from src.Controler.UserControler import UserControler
+from src.Controler.UserControler import userControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
@@ -16,7 +16,6 @@ userBluePrint = Blueprint(
     __name__,
     url_prefix='/user',
     template_folder=templatePath+"/user",)
-userControler = UserControler()
 
 @userBluePrint.route('/')
 def index():
@@ -61,16 +60,20 @@ def register():
         return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
     return render_template('register.html', form=form)
 
-@userBluePrint.route('/searchUser/', methods=['GET', 'POST'])
+@userBluePrint.route('/searchUser', methods=['GET','POST'])
 @login_required
-def searchBriefUser():
+def searchUserTest():
     if request.method == "POST":
-        # TODO 不同用户权限不同搜索表单验证
-        form = SearchBriefUserForm(request.form)
-        return userControler.getBriefUserListData(form)
+        return userControler.getBriefUserListData(request.json)
     elif request.method == "GET":
-        # TODO 不同用户权限不同搜索界面
         return render_template('searchBriefUser.html')
+
+# TODO 添加管理权限检测
+@userBluePrint.route('/searchAllUser', methods=['POST'])
+@login_required
+def searchAllUser():
+    form = SearchBriefUserForm(request.form)
+    return userControler.getUserListData(form)
 
 @login_manager.user_loader
 def load_user(user_id):

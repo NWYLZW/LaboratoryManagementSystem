@@ -37,25 +37,3 @@ class resultItem {
 			.html(this.dictx.professionalClass)[0]);
 	}
 }
-class searchUserResultList {
-	constructor() {
-		this.resultItemList = [];
-	}
-	initData(dictxList){
-		for (let i = 0; i < this.resultItemList.length; i++) {
-			this.resultItemList[i].ele.remove();
-		}
-		this.resultItemList.splice(0, this.resultItemList.length);
-		for (let i = 0; i < dictxList.length; i++) {
-			this.resultItemList.push(new resultItem(dictxList[i]));
-		}
-		this.generateEle();
-	}
-	generateEle(){
-		this.jqEle = $('.searchUser-result');
-		this.ele = this.jqEle[0];
-		for (var i = 0; i < this.resultItemList.length; i++) {
-			this.ele.appendChild(this.resultItemList[i].ele);
-		}
-	}
-}

@@ -47,7 +47,7 @@ class InterfaceContro {
 		var href = "../";
 		for (var i = 0; i < url.length; i++){
 			href += url[i];
-			if(i < url.length) href += '/';
+			if(i < url.length-1) href += '/';
 		}
 		var interfaceContro = this;
 		new myAjax({

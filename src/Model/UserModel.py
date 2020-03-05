@@ -1,5 +1,6 @@
 # config=utf-8
 import pymysql
+from sqlalchemy import and_
 
 from src.Model.RoleModel import Role, Permission
 
@@ -92,11 +93,25 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.passwordHash, password)
 
+    def fuzzySearchRule(self,file,listWords):
+        return and_(*[file.like('%'+w+'%') for w in listWords])
     def toBriefDict(self):
         return {
             "userName":self.userName,
             "nickName":self.nickName,
             "maleBool":self.maleBool,
+            "directionName":self.directionName,
+            "laboratoryName":self.laboratoryName,
+            "professionalClass":self.professionalClass,
+        }
+    def toDict(self):
+        return {
+            "userName":self.userName,
+            "nickName":self.nickName,
+            "maleBool":self.maleBool,
+            "qqNum":self.qqNum,
+            "telNum":self.telNum,
+            "roleId":self.roleId,
             "directionName":self.directionName,
             "laboratoryName":self.laboratoryName,
             "professionalClass":self.professionalClass,

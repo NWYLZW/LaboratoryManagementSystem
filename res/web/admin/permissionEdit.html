@@ -11,10 +11,30 @@
         <script src="../baseLibrary/js/pageList.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-        <form id="addLoginNotice" action="../admin/editPermission" method="post">
+        <form id="editPermission" action="../admin/editPermission" method="post">
             <input type="text" class = "id" name="id" value="" />
             <input type="text" class = "permissionId" name="permissionId" value="" />
             <input type="submit" class = "submit" value="提交"/>
         </form>
-	</body>
+        <div class="main">
+            
+        </div>
+    </body>
+    <script type="text/javascript" charset="utf-8">
+        class userItem extends itemModel{
+            constructor(){super();}
+            generate(dictx,index,root){
+                super.generate(dictx,index,root);
+                return;
+            }
+        }
+    	contro = new pageListControler({
+    		title:"用户列表",
+    		width:800,
+    		pageCountList:[2,4,6,8,10],
+    		itemModel:new userItem(),
+    		dictList:[],
+    	});
+    	$('.main')[0].appendChild(contro.ele);
+    </script>
 </html>

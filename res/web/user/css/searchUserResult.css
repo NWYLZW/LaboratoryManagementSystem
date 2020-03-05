@@ -1,8 +1,4 @@
-.searchUser-result{
-	width: 100%;
-	transition: .5s;
-}
-.searchUser-result .resultItem{
+.resultItem{
 	position: relative;
 	left: calc(50% - 400px);
 	margin-top: 15px;
@@ -11,71 +7,71 @@
 	background-color: rgba(230,230,230,.8);
 	transition: .5s;
 }
-.searchUser-result .resultItem .userHeadPortrait{
+.resultItem .userHeadPortrait{
 	position: relative;float: left;
 	margin-left: 10px;margin-right: 5px;margin-top: 10px;
 	width: 150px;height: 150px;
 	background-size: 100%;
 	transition: .5s;
 }
-.searchUser-result .resultItem .userContent{
+.resultItem .userContent{
 	position: relative;float: left;
 	margin-right: 10px;margin-top: 10px;
 	width: calc(100% - 175px);height: 150px;
 	transition: .5s;
 }
-.searchUser-result .resultItem .userContent .userName{
+.resultItem .userContent .userName{
 	position: relative;float: left;
 	width: 100%;height: 36px;
 	transition: .5s;
 }
-.searchUser-result .resultItem .userContent .userName .userName-left{
+.resultItem .userContent .userName .userName-left{
 	position: relative;float: left;
 	padding-left: 20px;
 	width: calc(50% - 20px);height: 100%;
 	transition: .5s;
 }
-.searchUser-result .resultItem .userContent .userName .userName-right{
+.resultItem .userContent .userName .userName-right{
 	position: relative;float: left;
 	width: 50%;height: 100%;
 	transition: .5s;
 }
-.searchUser-result .resultItem .userContent .userName .userName-right .nickName{
+.resultItem .userContent .userName .userName-right .nickName{
 	position: relative;float: left;
 	padding-left: 20px;
 	width: calc(100% - 56px);height: 100%;
 	transition: .5s;
 }
-.searchUser-result .resultItem .userContent .userName .userName-right .sex{
+.resultItem .userContent .userName .userName-right .sex{
 	position: relative;float: left;
 	width: 36px;height: 100%;
 	transition: .5s;
 }
-.searchUser-result .resultItem .userContent .userName .userName-right .sex i{
+.resultItem .userContent .userName .userName-right .sex i{
 	position: absolute;
 	left: 11.14px;
 }
-.searchUser-result .resultItem .userContent .userData{
+.resultItem .userContent .userData{
 	position: relative;float: left;
 	width: 100%;height: calc(100% - 36px);
 	transition: .5s;
 }
 
-.searchUser-result .resultItem .userContent .userData .directionName{
+.resultItem .userContent .userData .directionName{
 	position:relative;float:left;
 	padding-left: 20px;
 	width: calc(50% - 20px);height:36px;
 	transition: .5s;
 }
 
-.searchUser-result .resultItem .userContent .userData .laboratoryName{
+.resultItem .userContent .userData .laboratoryName{
 	position:relative;float:left;
 	padding-left: 20px;
 	width: calc(50% - 20px);height:36px;
 	transition: .5s;
 }
 
-.searchUser-result .resultItem .userContent .userData .professionalClass{
+.resultItem .userContent .userData .professionalClass{
 	position:relative;float:left;
 	padding-left: 20px;
 	width: calc(100% - 20px);height:calc(100% - 36px);

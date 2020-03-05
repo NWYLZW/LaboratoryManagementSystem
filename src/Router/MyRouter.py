@@ -16,6 +16,6 @@ def panelBeforeRequest():
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
 
-@myBluePrint.route("/space/")
+@myBluePrint.route("/space")
 def space():
     return render_template("space/mySpace.html")

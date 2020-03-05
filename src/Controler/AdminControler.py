@@ -101,8 +101,6 @@ class AdminControler:
             else:
                 return 5
 
-    def permissionList(self):
-        pass
     def givePermission(self,userId:int,permissionId:int):
         pass
 

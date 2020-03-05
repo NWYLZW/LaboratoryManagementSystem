@@ -2,10 +2,9 @@ from flask import Blueprint, request, render_template, redirect, url_for
 from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
-from src import templatePath, MainLog
+from src import templatePath
 from src.Controler.AdminControler import adminControler
 from src.Util.ErrorUtil import errorUtil
-from src.Util.FileUtil import fileUtil
 from src.Util.SuccessUtil import successUtil
 from src.form.LoginNoticeForm import LoginNoticeForm, editLoginNoticeForm
 
@@ -17,7 +16,7 @@ adminBluePrint = Blueprint(
 
 # TODO 开发结束后，添加管理权限检测
 @adminBluePrint.before_request
-def panelBeforeRequest():
+def adminBeforeRequest():
     if not current_user or not current_user.is_authenticated:
         return redirect(url_for('user.login'))
 
@@ -89,12 +88,3 @@ def editPermission():
         else:
             return errorUtil.getData(messageDict[result])
     return render_template('permissionEdit.html')
-@adminBluePrint.route("/permissionList",methods=['POST'])
-def permissionList():
-    messageDict = [
-    ]
-    result = adminControler.permissionList()
-    if result == 0:
-        return successUtil.getData(messageDict[result])
-    else:
-        return errorUtil.getData(messageDict[result])
