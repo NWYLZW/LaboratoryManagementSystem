@@ -1,3 +1,4 @@
+from flask_login import current_user
 from sqlalchemy import and_
 
 from src import db, MainLog
@@ -12,7 +13,7 @@ class UserControler:
     def __searchByFuzzyRule(self,userList,userIdList,file,listWords):
         for userItem in User.query.filter(
             User().fuzzySearchRule(file, listWords)):
-            if not userItem.id in userIdList:
+            if not userItem.id in userIdList and current_user.id != userItem.id:
                 userIdList.append(userItem.id)
                 userList.append(userItem)
 

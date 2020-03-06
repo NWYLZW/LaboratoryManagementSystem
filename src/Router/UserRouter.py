@@ -9,7 +9,6 @@ from src.Util.SuccessUtil import successUtil
 from src.form.LoginForm import LoginForm
 from src.Model.UserModel import User
 from src.form.RegisterForm import RegisterForm
-from src.form.SearchBriefUserForm import SearchBriefUserForm
 
 userBluePrint = Blueprint(
     'user',

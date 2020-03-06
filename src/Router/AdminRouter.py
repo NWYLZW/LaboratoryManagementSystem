@@ -76,7 +76,6 @@ def editLoginNotice():
         return form.errors
     return render_template("loginNoticeEdit.html", form=form)
 
-# TODO 完成权限修改模块
 @adminBluePrint.route("/editPermission",methods=['GET','POST'])
 def editPermission():
     if request.method == 'POST':
@@ -91,3 +90,7 @@ def editPermission():
         else:
             return errorUtil.getData(messageDict[result])
     return render_template('permissionEdit.html')
+@adminBluePrint.route("/getPermissionList",methods=['POST'])
+def getPermissionList():
+    if request.method == 'POST':
+        return adminControler.getPermissionList()

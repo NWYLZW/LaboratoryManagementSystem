@@ -5,7 +5,9 @@ from flask_login import current_user
 from src import db, MainLog
 from src.Model.LoginNoticeModel import LoginNotice
 from src.Model.UserModel import User
+from src.Model.RoleModel import Role
 from src.Util.FileUtil import fileUtil
+from src.Util.JsonUtil import JsonUtil
 
 
 class AdminControler:
@@ -107,7 +109,7 @@ class AdminControler:
         给予用户权限
         :return: 1 用户不存在 2 数据库连接失败 0 修改成功
         '''
-        # 权限等级低的不能赋予别人高等级权限
+        # TODO 权限等级低的不能赋予别人高等级权限
         try:
             user = User.query.filter_by(id=json['userId']).first()
             if user:
@@ -121,5 +123,23 @@ class AdminControler:
             return 2
         db.session.commit()
         return 0
+    def getPermissionList(self):
+        roleList = Role.query.filter_by().all()
+        select = {
+            'CommonUser':[
+                'CommonUser',],
+            'LaboratiryModerator':[
+                'CommonUser',
+                'LaboratiryModerator',],
+            'Administrator':[
+                'CommonUser',
+                'LaboratiryModerator',
+                'Administrator',],
+        }
+        responseList = {}
+        for role in roleList:
+            if role.name in select.get(current_user.role.name):
+                responseList[role.id] = role.name
+        return JsonUtil().dictToJson(responseList)
 
 adminControler = AdminControler()

@@ -27,42 +27,49 @@
 		</div>
 	</body>
     <script type="text/javascript" charset="utf-8">
-		var permissionList = {
-			"1":"CommonUser",
-			"2":"LaboratiryModerator",
-			"6":"Administrator",
-		};
 		class userItem extends itemModel{
 			constructor(){super();}
 			generateEle(dictx,index,root){
 				return new permissionUserItem(dictx,permissionList).jqEle[0];
-            }
-        }
-		contro = new pageListControler({
-			title:"修改用户权限",
-			pageCountList:[6,12,24,48],
-			itemModel:new userItem(),
-			dictList:[],
-		});
-    	$('.search-result')[0].appendChild(contro.ele);
-		$('.search').append(new searchControler({
-				height: 50,
-				backColor: 'rgba(50,150,250)',
-				icoColor:"rgba(230,230,230)",
-				inputColor:"rgba(240,240,240)",
-				submit:function(){
-					new myAjax({
-						url:'../user/searchAllUser',
-						data: this.keyWords,
-						method:"POST",
-						success:function(result){
-							contro.updataDictList(JSON.parse(result));
+			}
+		}
+		var permissionList = {
+			"1":"CommonUser",
+		};
+		new myAjax({
+			url:'../admin/getPermissionList',
+			method:"POST",
+			success:function(result){
+				permissionList = JSON.parse(result);
+				$('.search').append(new searchControler({
+						height: 50,
+						backColor: 'rgba(50,150,250)',
+						icoColor:"rgba(230,230,230)",
+						inputColor:"rgba(240,240,240)",
+						submit:function(){
+							new myAjax({
+								url:'../user/searchAllUser',
+								data: this.keyWords,
+								method:"POST",
+								success:function(result){
+									contro.updataDictList(JSON.parse(result));
+								},
+								failure:function(error){},
+								always:function(jqXHR){}
+							}).ajax();
 						},
-						failure:function(error){},
-						always:function(jqXHR){}
-					}).ajax();
-				},
-			}).jqEle
-		);
+					}).jqEle
+				);
+				contro = new pageListControler({
+					title:"修改用户权限",
+					pageCountList:[6,12,24,48],
+					itemModel:new userItem(),
+					dictList:[],
+				});
+				$('.search-result')[0].appendChild(contro.ele);
+			},
+			failure:function(error){},
+			always:function(jqXHR){}
+		}).ajax();
     </script>
 </html>
