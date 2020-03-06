@@ -14,6 +14,7 @@
         <script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/search.js" type="text/javascript" charset="utf-8"></script>
         <script src="../baseLibrary/js/pageList.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/load.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../admin/js/permissionUserItem.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
@@ -47,12 +48,14 @@
 						icoColor:"rgba(230,230,230)",
 						inputColor:"rgba(240,240,240)",
 						submit:function(){
+							contro.loading();
 							new myAjax({
 								url:'../user/searchAllUser',
 								data: this.keyWords,
 								method:"POST",
 								success:function(result){
-									contro.updataDictList(JSON.parse(result));
+									contro.loaded();
+									setTimeout(function() {contro.updataDictList(JSON.parse(result));}, 1000);
 								},
 								failure:function(error){},
 								always:function(jqXHR){}

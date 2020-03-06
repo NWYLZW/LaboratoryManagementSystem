@@ -6,12 +6,14 @@ function search(){
 			icoColor:"rgba(230,230,230)",
 			inputColor:"rgba(240,240,240)",
 			submit:function(){
+				contro.loading();
 				new myAjax({
 					url:'../user/searchUser',
 					data: this.keyWords,
 					method:"POST",
 					success:function(result){
-						contro.updataDictList(JSON.parse(result));
+						contro.loaded();
+						setTimeout(function() {contro.updataDictList(JSON.parse(result));}, 1000);
 					},
 					failure:function(error){},
 					always:function(jqXHR){}

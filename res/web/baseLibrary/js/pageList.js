@@ -34,6 +34,19 @@ class pageListContent {
 	constructor(pre) {
 		this.pre = pre;
 		this.generateEle();
+		try{
+			this.loadContro = new loadControler({
+				circleWidth:100,
+				backColor:'rgba(245,245,245,1)',
+				colorList:[
+					"rgb(76,150,255)",
+					"rgb(76,220,255)",
+					"rgb(155,225,255)",
+				],
+			});
+		}catch(e){
+			alert("请手动导入load.js包");
+		}
 	}
 	generateEle(){
 		this.jqEle = $('<div></div>').css({
@@ -58,6 +71,15 @@ class pageListContent {
 			root.itemEleList[index+''] = root.itemModel.generateEle(element,index,root);
 			this.ele.appendChild(root.itemEleList[index+'']);
 		}
+	}
+	loading(){
+		this.jqEle.css('height','400px');
+		this.jqEle.append(this.loadContro.start().jqEle);
+	}
+	loaded(){
+		var content = this;
+		this.loadContro.stop();
+		setTimeout(function() {content.jqEle.css('height','auto');}, 1000);
 	}
 }
 
@@ -322,6 +344,12 @@ class pageListControler{
 		this.dictList = dictList;
 		this.curPageNum = 0;
 		this.refresh();
+	}
+	loading(){
+		this.content.loading();
+	}
+	loaded(){
+		this.content.loaded();
 	}
 }
 
