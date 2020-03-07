@@ -22,7 +22,9 @@ app = Flask(__name__,
 CORS(app, supports_credentials=True)
 app.config.from_pyfile("./config.py")
 
+# 初始化数据库
 db = SQLAlchemy(app)
+# 初始化登陆管理插件
 login_manager = LoginManager(app)
 login_manager.login_view = "user.login"
 templatePath="../../res/web"

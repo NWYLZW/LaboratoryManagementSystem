@@ -1,4 +1,3 @@
-# config=utf-8
 import pymysql
 from sqlalchemy import and_
 
@@ -14,14 +13,15 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userName = db.Column(db.String(32), unique=True)
     nickName = db.Column(db.String(32), unique=False)
+    maleBool = db.Column(db.Boolean, unique=False)
     passwordHash = db.Column(db.String(128), unique=False)
 
     roleId = db.Column(db.Integer, db.ForeignKey('Role.id'))
 
-    maleBool = db.Column(db.Boolean, unique=False)
-    directionName = db.Column(db.String(64), unique=False)
     qqNum = db.Column(db.String(64), unique=False)
     telNum = db.Column(db.String(64), unique=False)
+
+    directionName = db.Column(db.String(64), unique=False)
     laboratoryName = db.Column(db.String(64), unique=False)
     professionalClass = db.Column(db.String(64), unique=False)
     def __init__(self,
@@ -31,7 +31,7 @@ class User(UserMixin, db.Model):
         self.userName = userName
         self.nickName = nickName
         self.password = password
-        self.male = male
+        self.sex = male
         self.directionName = directionName
         self.qqNum = qqNum
         self.telNum = telNum
@@ -49,38 +49,21 @@ class User(UserMixin, db.Model):
         return False
     def __repr__(self):
         return "<User '{:s}>".format(self.userName)
+
     def can(self, permissions):
         return self.role is not None and (self.role.permissions & permissions) == permissions
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
     @property
-    def role(self):
-        if self.roleId is None:
-            self.roleId = Role.query.filter_by(default=True).first().id
-        return Role.query.filter_by(id=self.roleId).first()
-    @role.setter
-    def role(self,roleId):
-        self.roleId = roleId
-    @property
-    def professionalClassX(self):
-        return self.professionalClass
-    @professionalClassX.setter
-    def professionalClassX(self, professionalClassX):
-        '''
-        :param professionalClass: professional+'-'+gradle+'-'+classNum
-        :return:
-        '''
-        self.professionalClass = professionalClassX
-    @property
-    def male(self):
+    def sex(self):
         if self.maleBool:
             return "male"
         else:
             return "female"
-    @male.setter
-    def male(self,male):
-        if male==1 or male=="1":
+    @sex.setter
+    def sex(self, sex):
+        if sex==1 or sex== "1":
             self.maleBool = True
         else:
             self.maleBool = False
@@ -95,6 +78,7 @@ class User(UserMixin, db.Model):
 
     def fuzzySearchRule(self,file,listWords):
         return and_(*[file.like('%'+w+'%') for w in listWords])
+
     def toBriefDict(self):
         return {
             "userName":self.userName,

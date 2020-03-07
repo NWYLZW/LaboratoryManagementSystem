@@ -8,7 +8,7 @@ class LoginNotice(db.Model):
     authorId = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     title = db.Column(db.String, nullable=False)
-    content = db.Column(db.String, nullable=False)
+    content = db.Column(db.Text, nullable=False)
     isShow = db.Column(db.Boolean, nullable=False)
     def __init__(self,authorId:int,date,title:str="",content:str="",isShow:str="False"):
         self.authorId = authorId

@@ -1,9 +1,8 @@
-import time
-
 from flask_login import current_user
 
 from src import db, MainLog
 from src.Model.LoginNoticeModel import LoginNotice
+from src.Model.NoticeModel import Notice
 from src.Util.JsonUtil import JsonUtil
 
 
@@ -27,4 +26,18 @@ class NoticeControler:
                 'backgroundImageSrc':loginNotice.backgroundImageSrc,
             })
         return JsonUtil().dictToJson(loginNoticeList)
+    def addNotice(self,json):
+        if json.kindNum == 1:
+            message = current_user.directionName
+        Notice.addNotice(
+            title=json.title,
+            content=json.content,
+            kindNum=json.kindNum,
+            message=json.message,
+            authorId=current_user.id,
+        )
+        return "0"
+    def viewNotice(self,noticeId):
+        Notice.query.filter_by(id=noticeId).first().viewThis(current_user.id)
+        return "0"
 noticeControler = NoticeControler()

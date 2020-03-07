@@ -27,7 +27,7 @@ class UserControler:
                 userName=form.userName.data,
                 nickName=form.userName.data,
                 password=form.password.data,
-                male=form.male.data,
+                male=form.sex.data,
                 directionName=form.directionName.data,
                 qqNum=form.qqNum.data,
                 telNum=form.telNum.data,
