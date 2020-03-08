@@ -7,3 +7,5 @@ class ProfessionalClass(db.Model):
     name = db.Column(db.String, nullable=False)
 
     users = db.relationship('User', backref='professionalClass', lazy='dynamic')
+    def getCont(self):
+        return self.users.count()

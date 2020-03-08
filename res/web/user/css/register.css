@@ -25,7 +25,7 @@ html,body{
 	color: rgba(0,0,0,0);
 	transition: 1s;
 }
-.form form .male i{
+.form form .sex i{
 	color: rgba(0,0,0,0);
 	transition: 1s;
 }
@@ -54,7 +54,7 @@ html,body{
 	color: rgba(0,0,0,1);
 }
 
-.new-form form .register-form-line,.male,.professional-class{
+.new-form form .register-form-line,.sex,.professional-class{
 	position: relative;
 	margin-left: 100px; margin-top: 20px;
 	width: 800px;height: 100px;
@@ -91,22 +91,22 @@ html,body{
 	box-shadow: 0 0 10px gray;
 	background-color: rgba(53, 160, 226,.6);
 }
-.new-form form .male i{
+.new-form form .sex i{
 	position: relative;
 	top: 34px;
 	margin-left: 254.466666666667px;
 	transition: .5s;
 }
-.new-form form .male i:hover{
+.new-form form .sex i:hover{
 	color: gray;
 }
-.new-form form .male .fa-male{
+.new-form form .sex .fa-male{
 	color: #00BFFF;
 }
-.new-form form .male .fa-female{
+.new-form form .sex .fa-female{
 	color: pink;
 }
-.new-form form .male select{
+.new-form form .sex select{
 	display: none;
 }
 .new-form form .register-form-line .laboratory-name,.direction-name{

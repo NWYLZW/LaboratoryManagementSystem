@@ -28,7 +28,7 @@ class UserControler:
                 nickName=form.userName.data,
                 password=form.password.data,
                 male=form.sex.data,
-                directionName=form.directionName.data,
+                directionId=form.directionId.data,
                 qqNum=form.qqNum.data,
                 telNum=form.telNum.data,
                 laboratoryName=form.laboratoryName.data,
@@ -48,8 +48,6 @@ class UserControler:
         searchFile = [
             User.userName,
             User.nickName,
-            User.directionName,
-            User.laboratoryName,
         ]
         responUserList = []
         userIdList = []
@@ -63,8 +61,6 @@ class UserControler:
         searchFile = [
             User.userName,
             User.nickName,
-            User.directionName,
-            User.laboratoryName,
         ]
         responUserList = []
         userIdList = []

@@ -7,3 +7,5 @@ class Laboratory(db.Model):
     name = db.Column(db.String, nullable=False)
 
     users = db.relationship('User', backref='laboratory', lazy='dynamic')
+    def getCont(self):
+        return self.users.count()

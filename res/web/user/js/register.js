@@ -114,8 +114,8 @@ function validate(formData, jqForm, options){
 					break;
 			}
 		})) return false;
-		// 检测male的值
-		if(!checkValue(form.male,true,function(){
+		// 检测sex的值
+		if(!checkValue(form.sex,true,function(){
 			if (this.checkValueX == 0){
 				this.failed('1',"请选择你的性别");
 				return false;
@@ -132,7 +132,7 @@ function validate(formData, jqForm, options){
 			}
 		})) return false;
 		var selectList = [
-			form.laboratoryName,form.directionName,form.professional,
+			form.laboratoryName,form.directionId,form.professional,
 			form.gradle,form.classNum,
 		];
 		var errorMessageList = [

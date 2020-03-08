@@ -3,9 +3,11 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length
 
+from src.Model.DirectionModel import Direction
 from src.Model.UserModel import User
 
 class RegisterForm(FlaskForm):
+    directionChoices = [(str(key),value['name']) for key,value in Direction.getDict().items()]
     userName = StringField(
         'userName',
         validators=[DataRequired('userName is null')]
@@ -14,22 +16,17 @@ class RegisterForm(FlaskForm):
         'password',
         validators=[Length(min=8,max=20),DataRequired('password is null')]
     )
-    male = SelectField(
-        'male',
+    sex = SelectField(
+        'sex',
         choices=[
             ('1', 'male'),
             ('2', 'female')],
         coerce=str,
-        validators=[DataRequired('male is null')]
+        validators=[DataRequired('sex is null')]
     )
-    directionName = SelectField(
-        'directionName',
-        choices=[
-            ('Java', 'Java'),
-            ('Web前端', 'Web前端'),
-            ('Web后端', 'Web后端'),
-            ('人工智能', '人工智能'),
-            ('Php', 'Php'),],
+    directionId = SelectField(
+        'directionId',
+        choices=directionChoices,
         coerce=str,
         validators=[DataRequired('directionName is null')]
     )

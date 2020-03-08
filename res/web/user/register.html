@@ -41,19 +41,19 @@
 							<input value="" name="telNum" id="telNum" placeholder="" type="text">
 						</div>
 					</div>
-					<div class="male">
-						<select id="male" name="male">
+					<div class="sex">
+						<select id="sex" name="sex">
 							<option value="0">null</option>
 							<option value="1">male</option>
 							<option value="2">female</option>
 						</select>
 						<i class="fa fa-male fa-2x" onclick="
-						$('#male option:selected').val('1');
+						$('#sex option:selected').val('1');
 						this.style.color = 'lightgreen';
 						$('.fa-female')[0].style.color = 'pink';
 						"></i>
 						<i class="fa fa-female fa-2x" onclick="
-						$('#male option:selected').val('2');
+						$('#sex option:selected').val('2');
 						this.style.color = 'lightgreen';
 						$('.fa-male')[0].style.color = '#00BFFF';
 						"></i>
@@ -68,13 +68,13 @@
 							</select>
 						</div>
 						<div class="direction-name">
-							<select name="directionName">
+							<select name="directionId">
 								<option value="0" selected:disabled style="diaplay:none">选择方向</option>
-								<option value="Java">Java</option>
-								<option value="Web前端">Web前端</option>
-								<option value="Web后端">Web后端</option>
-								<option value="人工智能">人工智能</option>
-								<option value="Php">Php</option>
+								<option value="1">Java</option>
+								<option value="2">Web前端</option>
+								<option value="3">Web后端</option>
+								<option value="4">人工智能</option>
+								<option value="5">Php</option>
 							</select>
 						</div>
 					</div>

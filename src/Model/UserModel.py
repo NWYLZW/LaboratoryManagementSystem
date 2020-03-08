@@ -17,22 +17,25 @@ class User(UserMixin, db.Model):
     passwordHash = db.Column(db.String(128), unique=False)
 
     roleId = db.Column(db.Integer, db.ForeignKey('Role.id'))
+    directionId = db.Column(db.Integer, db.ForeignKey('Direction.id'))
+    # laboratoryId = db.Column(db.Integer, db.ForeignKey('Laboratory.id'))
+    # professionalClassId = db.Column(db.Integer, db.ForeignKey('ProfessionalClass.id'))
 
     qqNum = db.Column(db.String(64), unique=False)
     telNum = db.Column(db.String(64), unique=False)
 
-    directionName = db.Column(db.String(64), unique=False)
+    # directionId = db.Column(db.String(64), unique=False)
     laboratoryName = db.Column(db.String(64), unique=False)
     professionalClass = db.Column(db.String(64), unique=False)
     def __init__(self,
                  userName: str = "", nickName: str = "", password: str = "", male: int = 1,
-                 directionName: str = "", qqNum: str = "", telNum: str = "", laboratoryName: str = "",
+                 directionId: int = -1, qqNum: str = "", telNum: str = "", laboratoryName: str = "",
                  professional: str = "",gradle: str = "",classNum: str = ""):
         self.userName = userName
         self.nickName = nickName
         self.password = password
         self.sex = male
-        self.directionName = directionName
+        self.directionId = directionId
         self.qqNum = qqNum
         self.telNum = telNum
         self.laboratoryName = laboratoryName
@@ -84,7 +87,7 @@ class User(UserMixin, db.Model):
             "userName":self.userName,
             "nickName":self.nickName,
             "maleBool":self.maleBool,
-            "directionName":self.directionName,
+            "directionName":self.direction.name,
             "laboratoryName":self.laboratoryName,
             "professionalClass":self.professionalClass,
         }
@@ -97,7 +100,7 @@ class User(UserMixin, db.Model):
             "qqNum":self.qqNum,
             "telNum":self.telNum,
             "roleId":self.roleId,
-            "directionName":self.directionName,
+            "directionName":self.direction.name,
             "laboratoryName":self.laboratoryName,
             "professionalClass":self.professionalClass,
         }
