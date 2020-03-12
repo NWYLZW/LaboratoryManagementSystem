@@ -143,8 +143,6 @@
 						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
 						">
 							<select class="direction" name="direction">
-								<option data-icon="JavaIco" value="0">Java</option>
-								<option data-icon="AIIco" value="1">AI</option>
 							</select>
 						</div>
 						<div class="selectLaboratory" style="
@@ -152,13 +150,6 @@
 						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
 						">
 							<select class="laboratory" name="laboratory">
-								<optgroup label="E栋">
-									<option value="0">314</option>
-									<option value="1">601</option>
-								</optgroup>
-								<optgroup label="F栋">
-									<option value="2">608</option>
-								</optgroup>
 							</select>
 						</div>
 						<div class="selectProfessional" style="
@@ -166,8 +157,6 @@
 						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
 						">
 							<select class="professional" name="professional">
-								<option value="0">网络工程</option>
-								<option value="1">通信工程</option>
 							</select>
 						</div>
 						<div style="clear: both;"></div>
@@ -246,8 +235,9 @@
 	</body>
 	<script type="text/javascript">
 		var LISTLINEContro = new LISTLINEControler().refresh();
-		for (var i = 0; i < document.getElementsByClassName('formContent-input').length; i++) {
-			let inputLabel = document.getElementsByClassName('formContent-input')[i];
+		var inputList = document.getElementsByClassName('formContent-input');
+		for (var i = inputList.length-1; i >= 0; i--) {
+			let inputLabel = inputList[i];
 			inputLabel.input = inputLabel.getElementsByTagName('input')[0];
 			inputLabel.input.addEventListener('focus',function(){
 				inputLabel.classList.add('formContent-inputClick');
@@ -264,6 +254,7 @@
 				if(this.value==0)
 					inputLabel.classList.remove('formContent-inputClick');
 			}
+			inputLabel.focus();
 		}
 		$(".inputMailList").mailAutoComplete();
 		var selectList = [
@@ -303,32 +294,73 @@
 			appendOption($select,dictObjList){
 				for (let i = 0; i < dictObjList.length; i++) {
 					let dictObj = dictObjList[i];
-					$select.append('<option data-icon="'+dictObj.ico+'" value="'+dictObj.value+'">'+dictObj.text+'</option>');
+					if(dictObj.ico) $select.append('<option data-icon="'+dictObj.ico+'" value="'+dictObj.value+'">'+dictObj.text+'</option>');
+					else $select.append('<option value="'+dictObj.value+'">'+dictObj.text+'</option>');
 				}
 				this.refresh();
 			}
+			appendOptGroup($select,grpName){
+				$select.append('<optgroup label="'+grpName+'"></optgroup>');
+				this.refresh();
+			}
 		}
+		
 		var slectContro = new SelectControler().refresh();
-		// new myAjax({
-		// 	url:'',
-		// 	data:,
-		// 	method:"POST",
-		// 	success:function(result){
-		// 	},
-		// 	failure:function(error){},
-		// 	always:function(jqXHR){}
-		// }).ajax();
-		setTimeout(function() {
-			slectContro.appendOption($('.direction'),[{
-				ico:'AndroidIco',
-				value:3,
-				text:"安卓",
-			},{
-				ico:'ACMIco',
-				value:4,
-				text:"ACM",
-			},]);
-		}, 5000);
+		new myAjax({
+			url:'./getDirection',
+			method:"POST",
+			success:function(result){
+				let directionList = [];
+				for (let key in result) {
+					directionList.push({
+						value:key,
+						text:result[key].name,
+						ico:result[key].imgName+'Ico',
+					});
+				}
+				slectContro.appendOption($('.direction'),directionList);
+			},
+			failure:function(error){},
+			always:function(jqXHR){}
+		}).ajax();
+		new myAjax({
+			url:'./getLaboratory',
+			method:"POST",
+			success:function(result){
+				let blockList = {}
+				for (let key in result) {
+					if(!blockList.hasOwnProperty(result[key].blockNum)){
+						slectContro.appendOptGroup($('.laboratory'),result[key].blockNum+" 栋");
+						blockList[result[key].blockNum] = [];
+					}
+					blockList[result[key].blockNum].push({
+						value:key,
+						text:result[key].doorNum,
+					});
+				}
+				for (let key in blockList) {
+					slectContro.appendOption($('.laboratory optgroup[label="'+key+' 栋"]'),blockList[key]);
+				}
+			},
+			failure:function(error){},
+			always:function(jqXHR){}
+		}).ajax();
+		new myAjax({
+			url:'./getProfessionalList',
+			method:"POST",
+			success:function(result){
+				let professionalList = [];
+				for (let key in result) {
+					professionalList.push({
+						value:key,
+						text:result[key].professional,
+					});
+				}
+				slectContro.appendOption($('.professional'),professionalList);
+			},
+			failure:function(error){},
+			always:function(jqXHR){}
+		}).ajax();
 		
 		$(".form").submit(function(){
 			$(this).ajaxSubmit(options);
