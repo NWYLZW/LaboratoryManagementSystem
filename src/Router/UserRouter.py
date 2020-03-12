@@ -76,13 +76,13 @@ def searchUserTest():
 def searchAllUser():
     return userControler.getUserListData(request.json)
 
-@userBluePrint.route("/getDirection",methods=['GET'])
+@userBluePrint.route("/getDirection",methods=['POST'])
 def getDirection():
     return Direction.getDict()
-@userBluePrint.route("/getLaboratory",methods=['GET'])
+@userBluePrint.route("/getLaboratory",methods=['POST'])
 def getLaboratory():
     return Laboratory.getDict()
-@userBluePrint.route("/getProfessionalList",methods=['GET'])
+@userBluePrint.route("/getProfessionalList",methods=['POST'])
 def getProfessionalList():
     return ProfessionalClass.getDict()
 
