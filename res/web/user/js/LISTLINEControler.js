@@ -93,10 +93,27 @@ class LISTLINEControler{
 	}
 	viloateFirst(){
 		var form = this.form;
-		// 检测name的值
+		//检测schoolNum
+		if(!checkValue("学号",form.schoolNum,true,function(){
+			if (!(/^201\d0\d\d\d0\d\d\d$/.test(this.checkValueX))){
+				this.failed('1',"输入学号格式不正确");
+				return false;
+			}
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': case '1':
+					alertError(form.schoolNum,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		this.changeTdData('schoolId',form.schoolNum.value);
+		//检测name
 		if(!checkValue("姓名",form.name,true,function(){
-			if (this.checkValueX.length<2){
-				this.failed('1',"有一个字的名字？？？");
+			if (!(/^[\u4E00-\u9FA5]+$/.test(this.checkValueX))){
+				this.failed('1',"输入名字为中文");
 				return false;
 			}
 			return true;
@@ -110,9 +127,160 @@ class LISTLINEControler{
 			}
 		})) return false;
 		this.changeTdData('name',form.name.value);
+		//检测email
+		if(!checkValue("你的电子邮箱",form.email,true,function(){
+			if (!(/^[0-9a-z][0-9a-z\-\_\.]+@([0-9a-z][0-9a-z\-]*\.)+[a-z]{2,}$/i.test(this.checkValueX))){
+				this.failed('1',"输入邮箱格式不正确");
+				return false;
+			}
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': case '1':
+					alertError(form.email,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		this.changeTdData('email',form.email.value);
+		//检测password
+		if(!checkValue("密码",form.password,true,function(){
+			if (this.checkValueX.length < 6){
+				this.failed('1',"密码位数小于六位强度太弱");
+				return false;
+			}
+			if(/^[0-9]+$/.test(this.checkValueX)){//小于六位数或全为数字
+				this.failed('2',"密码全为数字强度太弱");
+				return false;
+			}
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': case '1': case '2':
+					alertError(form.password,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		//检测comfirmPassword
+		if(!checkValue("确认密码",$('#pwd1')[0],true,function(){
+			if(this.checkValueX != $('#pwd0')[0].value){
+				this.failed('1','与原密码不符');
+			}
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': case '1':
+					alertError($('#pwd1')[0],"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		
 		return true;
 	}
 	viloateSecond(){
+		var form = this.form;
+		//检测telNum
+		if(!checkValue("电话号码",form.telNum,true,function(){
+			if (!(/^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))[0-9]{8}$/.test(this.checkValueX))){
+				this.failed('1',"输入电话号码不存在");
+				return false;
+			}
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': case '1':
+					alertError(form.telNum,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		this.changeTdData('telNum',form.telNum.value);
+		//检测QQ
+		if(!checkValue("QQ",form.QQ,true,function(){
+			if (this.checkValueX[0] === '0'){
+				this.failed('1',"QQ开头不为零");
+				return false;
+			}
+			if(this.checkValueX.length < 5 || this.checkValueX.length > 11){
+				this.failed('2',"QQ长度不得小于5大于11");
+				return false;
+			}
+			if(!(/^[0-9]+$/.test(this.checkValueX))){
+				this.failed('3',"QQ要全为数字");
+				return false;
+			}
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': case '1': case '2': case '3':
+					alertError(form.QQ,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		this.changeTdData('QQ',form.QQ.value);
+		//检测direction
+		if(!checkValue("选择方向",form.direction,true,function(){
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': 
+					alertError(form.direction,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		this.changeTdData('direction',form.direction.options[form.direction.selectedIndex].text);
+		//检测laboratory
+		if(!checkValue("选择实验室",form.laboratory,true,function(){
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': 
+					alertError(form.laboratory,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		this.changeTdData('laboratory',form.laboratory.options[form.laboratory.selectedIndex].text);
+		//检测professional
+		if(!checkValue("选择班级",form.professional,true,function(){
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': 
+					alertError(form.professional,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		var schoolNum = this.form.schoolNum.value;
+		var classNum = schoolNum.substring(2,4)+schoolNum.substring(schoolNum.length-4,schoolNum.length-2);
+		this.changeTdData('professional',form.professional.options[form.professional.selectedIndex].text +'-' + classNum);
+		//检测Sex
+		if(!checkValue("选择实验室",form.Sex,true,function(){
+			return true;
+		},function(errorType){
+			switch (errorType){
+				case '0': 
+					alertError(form.Sex,"shake",errorTypeDict[errorType]);
+					break;
+				default:
+					break;
+			}
+		})) return false;
+		this.changeTdData('sex',form.Sex.options[form.Sex.selectedIndex].text);
+
 		return true;
 	}
 	confirm(){
