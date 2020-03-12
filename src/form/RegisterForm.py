@@ -40,8 +40,8 @@ class RegisterForm(FlaskForm):
     sex = SelectField(
         'Sex',
         choices=[
-            ('0', 'male'),
-            ('1', 'female')],
+            ('0', '男'),
+            ('1', '女')],
         coerce=str,
         validators=[DataRequired('Sex is null')]
     )
@@ -63,7 +63,6 @@ class RegisterForm(FlaskForm):
         coerce=str,
         validators=[DataRequired('professional is null')]
     )
-    submit = SubmitField()
     def validate_userName(self,field):
         '''
         检验用户名是否存在

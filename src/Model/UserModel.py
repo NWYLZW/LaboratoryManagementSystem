@@ -13,7 +13,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     schoolID = db.Column(db.String(32), unique=True)
     nickName = db.Column(db.String(32), nullable=False)
-    maleBool = db.Column(db.Boolean, nullable=False)
+    sexBool = db.Column(db.Boolean, nullable=False)
     passwordHash = db.Column(db.String(128), nullable=False)
 
     roleId = db.Column(db.Integer, db.ForeignKey('Role.id'))
@@ -25,18 +25,19 @@ class User(UserMixin, db.Model):
     qqNum = db.Column(db.String(64))
     telNum = db.Column(db.String(64))
     def __init__(self,
-                 schoolID: str = "", nickName: str = "", password: str = "", male: int = 1,
-                 directionId: int = -1, qqNum: str = "", telNum: str = "", laboratoryName: str = "",
-                 professional: str = "", gradle: str = "", classNum: str = ""):
+                 schoolID: str = "", nickName: str = "", password: str = "", sex: int = 1,
+                 directionId: int = -1, qqNum: str = "", telNum: str = "", laboratoryId: str = "",
+                 professionalClassId: str = "", email:str = ""):
         self.schoolID = schoolID
         self.nickName = nickName
         self.password = password
-        self.sex = male
-        self.directionId = directionId
+        self.sex = sex
+        self.email = email
         self.qqNum = qqNum
         self.telNum = telNum
-        self.laboratoryName = laboratoryName
-        self.professionalClass = professional + '-' + gradle + '-' + classNum
+        self.directionId = directionId
+        self.laboratoryId = laboratoryId
+        self.professionalClassId = professionalClassId
         if self.roleId is None:
             self.roleId = Role.query.filter_by(default=True).first().id
         pass
@@ -57,16 +58,16 @@ class User(UserMixin, db.Model):
 
     @property
     def sex(self):
-        if self.maleBool:
+        if self.sexBool:
             return "male"
         else:
             return "female"
     @sex.setter
     def sex(self, sex):
-        if sex==1 or sex== "1":
-            self.maleBool = True
+        if sex== "0":
+            self.sexBool = True
         else:
-            self.maleBool = False
+            self.sexBool = False
     @property
     def password(self):
         raise AttributeError('不能直接获取明文密码！')
@@ -83,7 +84,7 @@ class User(UserMixin, db.Model):
         return {
             "userName":self.schoolID,
             "nickName":self.nickName,
-            "maleBool":self.maleBool,
+            "maleBool":self.sexBool,
             "directionName":self.direction.name,
             "laboratoryName":self.laboratoryName,
             "professionalClass":self.professionalClass,
@@ -93,7 +94,7 @@ class User(UserMixin, db.Model):
             "id":self.id,
             "userName":self.schoolID,
             "nickName":self.nickName,
-            "maleBool":self.maleBool,
+            "maleBool":self.sexBool,
             "qqNum":self.qqNum,
             "telNum":self.telNum,
             "roleId":self.roleId,

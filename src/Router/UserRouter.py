@@ -61,11 +61,12 @@ def register():
             return errorUtil.getData('UserNameExist')
         return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
     return render_template('newRegister.html', form=form)
-@userBluePrint.route('/haveUser/<str:userName>', methods=['POST'])
-def haveUser(userName):
+
+@userBluePrint.route('/existUser/<userName>', methods=['POST'])
+def existUser(userName):
     if User.query.filter_by(userName=userName).count() == 0:
-        return 'exist'
-    return 'absence'
+        return "exist"
+    return "absence"
 
 @userBluePrint.route('/searchUser', methods=['GET','POST'])
 @login_required
