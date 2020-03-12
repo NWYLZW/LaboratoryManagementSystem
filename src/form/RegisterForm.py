@@ -1,7 +1,7 @@
 # config=utf-8
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, Email
 
 from src.Model.DirectionModel import Direction
 from src.Model.LaboratoryModel import Laboratory
@@ -11,7 +11,7 @@ from src.Model.UserModel import User
 class RegisterForm(FlaskForm):
     directionChoices = [(str(key),value['name']) for key,value in Direction.getDict().items()]
     laboratoryChoices = [(str(key),value['blockNum']+value['doorNum']) for key,value in Laboratory.getDict().items()]
-    professionalChoices = [ProfessionalClass.getProfessionalList()]
+    professionalChoices = ProfessionalClass.getProfessionalList()
 
     schoolNum = StringField(
         'schoolNum',
@@ -23,7 +23,7 @@ class RegisterForm(FlaskForm):
     )
     email = StringField(
         'email',
-        validators=[DataRequired('email is null')]
+        validators=[DataRequired('email is null'),Email('email格式错误')]
     )
     password = PasswordField(
         'password',
@@ -33,11 +33,11 @@ class RegisterForm(FlaskForm):
         'telNum',
         validators=[Length(min=11,max=11),DataRequired('telNum is null')]
     )
-    qqNum = StringField(
-        'qqNum',
-        validators=[Length(min=6,max=15),DataRequired('qqNum is null')]
+    QQ = StringField(
+        'QQ',
+        validators=[Length(min=6,max=15),DataRequired('QQ is null')]
     )
-    sex = SelectField(
+    Sex = SelectField(
         'Sex',
         choices=[
             ('0', '男'),
@@ -45,17 +45,17 @@ class RegisterForm(FlaskForm):
         coerce=str,
         validators=[DataRequired('Sex is null')]
     )
-    laboratoryId = SelectField(
-        'laboratoryId',
+    laboratory = SelectField(
+        'laboratory',
         choices=laboratoryChoices,
         coerce=str,
-        validators=[DataRequired('laboratoryId is null')]
+        validators=[DataRequired('laboratory is null')]
     )
-    directionId = SelectField(
-        'directionId',
+    direction = SelectField(
+        'direction',
         choices=directionChoices,
         coerce=str,
-        validators=[DataRequired('directionId is null')]
+        validators=[DataRequired('direction is null')]
     )
     professional = SelectField(
         'professional',
@@ -69,11 +69,11 @@ class RegisterForm(FlaskForm):
         :param field: 用户名
         :return: 用户名是否存在
         '''
-        if User.query.filter_by(userName=field.data).count() == 0:
+        if User.query.filter_by(schoolID=field.data).count() == 0:
             return True
         return False
     def validata_Num(self):
-        if self.telNum.data.isdigit() and self.qqNum.data.isdigit():
+        if self.telNum.data.isdigit() and self.QQ.data.isdigit():
             return True
         else:
             return False

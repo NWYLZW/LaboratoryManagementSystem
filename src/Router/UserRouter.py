@@ -29,7 +29,7 @@ def login():
         return redirect(url_for('panel.index'))
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User.query.filter_by(userName=form.userName.data).first()
+        user = User.query.filter_by(schoolID=form.userName.data).first()
         if user is not None:
             if user.verify_password(form.password.data):
                 login_user(user)
@@ -51,7 +51,7 @@ def register():
     form = RegisterForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            if form.validate_userName(form.userName):
+            if form.validate_userName(form.schoolNum):
                 if form.validata_Num():
                     if userControler.addUser(form):
                         return successUtil.getData('registerSuccess')

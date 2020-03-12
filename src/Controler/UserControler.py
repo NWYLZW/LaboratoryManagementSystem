@@ -23,18 +23,16 @@ class UserControler:
         :return: 返回是否成功
         '''
         try:
-            gradle = form.schoolNum.data[2:3]
-            classNum = form.schoolNum.data[-2:-3]
-            MainLog.record(MainLog.level.DEBUG,gradle)
-            MainLog.record(MainLog.level.DEBUG,classNum)
-            return True
+            gradle = form.schoolNum.data[2:4]
+            classNum = form.schoolNum.data[-4:-2]
+            professional = dict(form.professional.choices).get(form.professional.data)
             professionalClass = ProfessionalClass.query.filter_by(
-                professional=form.professional.data,
+                professional=professional,
                 gradle=gradle,
                 classNum=classNum).first()
             if professionalClass is None:
                 professionalClass = ProfessionalClass(
-                    professional=form.professional.data,
+                    professional=professional,
                     gradle=gradle,
                     classNum=classNum)
                 db.session.add(professionalClass)
@@ -43,18 +41,18 @@ class UserControler:
                 schoolID = form.schoolNum.data,
                 nickName = form.name.data,
                 password = form.password.data,
-                sex= form.sex.data,
+                sex= form.Sex.data,
                 email = form.email.data,
-                qqNum = form.qqNum.data,
+                qqNum = form.QQ.data,
                 telNum = form.telNum.data,
-                directionId = form.directionId.data,
-                laboratoryId = form.laboratoryId.data,
+                directionId = form.direction.data,
+                laboratoryId = form.laboratory.data,
                 professionalClassId = professionalClass.id,
             )
             db.session.add(user)
             db.session.flush()
         except Exception as e:
-            MainLog.record(MainLog.level.ERROR,form.userName.data+"用户添加失败 错误信息:")
+            MainLog.record(MainLog.level.ERROR,form.schoolNum.data+"用户添加失败 错误信息:")
             MainLog.record(MainLog.level.ERROR,e)
             return False
         db.session.commit()

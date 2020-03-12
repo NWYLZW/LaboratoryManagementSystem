@@ -42,15 +42,15 @@ function checkValue(fieldName,filed,checkNull,check,failedx){
 }
 function jsonResponse(data){
 	var JSONObject = JSON.parse(data);
+	Notiflix.Loading.Remove();
 	switch (JSONObject.type){
 	case 0:
 		alertError($('.main')[0],"shake",JSONObject.message);
 		break;
 	case -1001:
-		Notiflix.Loading.Remove();
 		Notiflix.Report.Success(
 		'注册成功',
-		message,
+		JSONObject.message,
 		'Login',
 		function(){
 			gotoUrl('./login');

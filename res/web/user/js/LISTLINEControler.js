@@ -227,7 +227,7 @@ class LISTLINEControler{
 		})) return false;
 		this.changeTdData('QQ',form.QQ.value);
 		//检测direction
-		if(!checkValue("选择方向",form.direction,true,function(){
+		if(!checkValue("方向",form.direction,true,function(){
 			return true;
 		},function(errorType){
 			switch (errorType){
@@ -240,7 +240,7 @@ class LISTLINEControler{
 		})) return false;
 		this.changeTdData('direction',form.direction.options[form.direction.selectedIndex].text);
 		//检测laboratory
-		if(!checkValue("选择实验室",form.laboratory,true,function(){
+		if(!checkValue("实验室",form.laboratory,true,function(){
 			return true;
 		},function(errorType){
 			switch (errorType){
@@ -251,9 +251,11 @@ class LISTLINEControler{
 					break;
 			}
 		})) return false;
-		this.changeTdData('laboratory',form.laboratory.options[form.laboratory.selectedIndex].text);
+		this.changeTdData('laboratory',
+			$(form.laboratory.options[form.laboratory.selectedIndex]).parent()[0].label+'-'+
+			form.laboratory.options[form.laboratory.selectedIndex].text);
 		//检测professional
-		if(!checkValue("选择班级",form.professional,true,function(){
+		if(!checkValue("专业",form.professional,true,function(){
 			return true;
 		},function(errorType){
 			switch (errorType){
@@ -268,7 +270,7 @@ class LISTLINEControler{
 		var classNum = schoolNum.substring(2,4)+schoolNum.substring(schoolNum.length-4,schoolNum.length-2);
 		this.changeTdData('professional',form.professional.options[form.professional.selectedIndex].text +'-' + classNum);
 		//检测Sex
-		if(!checkValue("选择实验室",form.Sex,true,function(){
+		if(!checkValue("性别",form.Sex,true,function(){
 			return true;
 		},function(errorType){
 			switch (errorType){

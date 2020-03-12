@@ -41,11 +41,12 @@
 		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../Notiflix-2.1.2/AIO/notiflix-aio-2.1.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/newRegister.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/LISTLINEControler.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-		<form class="form" action="/user/register" method="post">
+		<form class="form" action="/user/register" method="post" onkeydown="if (event.keyCode == 13) return false;">
 			<input type="submit" id="formSubmit" style="display: none;"/>
 		{{form.hidden_tag()}}
 		<div class="main">
@@ -330,16 +331,16 @@
 				let blockList = {}
 				for (let key in result) {
 					if(!blockList.hasOwnProperty(result[key].blockNum)){
-						slectContro.appendOptGroup($('.laboratory'),result[key].blockNum+" 栋");
+						slectContro.appendOptGroup($('.laboratory'),result[key].blockNum);
 						blockList[result[key].blockNum] = [];
 					}
 					blockList[result[key].blockNum].push({
 						value:key,
-						text:result[key].doorNum,
+						text:result[key].blockNum+result[key].doorNum,
 					});
 				}
 				for (let key in blockList) {
-					slectContro.appendOption($('.laboratory optgroup[label="'+key+' 栋"]'),blockList[key]);
+					slectContro.appendOption($('.laboratory optgroup[label="'+key+'"]'),blockList[key]);
 				}
 			},
 			failure:function(error){},
@@ -350,11 +351,15 @@
 			method:"POST",
 			success:function(result){
 				let professionalList = [];
+				let professionalExistList = [];
 				for (let key in result) {
-					professionalList.push({
-						value:key,
-						text:result[key].professional,
-					});
+					if(professionalExistList.indexOf(result[key].professional)==-1){
+						professionalExistList.push(result[key].professional);
+						professionalList.push({
+							value:key,
+							text:result[key].professional,
+						});
+					}
 				}
 				slectContro.appendOption($('.professional'),professionalList);
 			},
