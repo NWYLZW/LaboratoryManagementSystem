@@ -168,6 +168,7 @@ class LISTLINEControler{
 		if(!checkValue("确认密码",$('#pwd1')[0],true,function(){
 			if(this.checkValueX != $('#pwd0')[0].value){
 				this.failed('1','与原密码不符');
+				return false;
 			}
 			return true;
 		},function(errorType){
@@ -179,7 +180,6 @@ class LISTLINEControler{
 					break;
 			}
 		})) return false;
-		
 		return true;
 	}
 	viloateSecond(){

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>加入我们</title>
 		<meta charset="utf-8" />
-		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=0.8,minimum-scale=0.8,maximum-scale=0.8,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
 		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
 		<link rel="stylesheet" type="text/css" href="../select-mania/css/select-mania.css"/>
 		<link rel="stylesheet" type="text/css" href="../select-mania/css/themes/select-mania-theme-blue.css">
 		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/csshake.min.css"/>
-		<link rel="stylesheet" type="text/css" href="css/newRegister.css"/>
 		<link rel="stylesheet" type="text/css" href="../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css"/>
+		<link rel="stylesheet" type="text/css" href="css/newRegister.css"/>
 		<style type="text/css">
 			body,html{width: 100%;height: 100%;background: url(img/25.png) 0 / cover fixed;}
 			.emailist{
-				padding: 0;margin: 0; 
+				padding: 0;margin: 0;
 				border: 1px solid #bdbdbd; 
 				border-radius: 0px 0px 16px 16px; 
 				background-color:#fff;
@@ -43,6 +44,7 @@
 		<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/newRegister.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/LISTLINEControler.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
@@ -53,26 +55,22 @@
 			<div class="formContent">
 				<div class="formContentWrraper">
 					<div class="formContentWrraper-item">
-						<img src="img/7.png" height="60%" style="position: absolute;right: 0;bottom: 0;">
-						<h2 style="margin-top: 60px;">填写你的基本信息</h2>
+						<img class="firstItemImage" src="img/7.png" height="60%" style="position: absolute;right: 0;bottom: 0;">
+						<h2 class="item-title">填写你的基本信息</h2>
 						<div class="schoolNumAndName" style="height: 76px;">
-							<div class="formContent-input" tabindex="1" hidefocus="true" style="
-							width: 250px;height: 36px;float: left;
-							">
+							<div class="formContent-input schoolNum" tabindex="1" hidefocus="true">
 								<input type="text" name="schoolNum" value=""/>
 								<div class="formContent-input-label">学号</div>
 							</div>
-							<div class="formContent-input" tabindex="1" hidefocus="true" style="
-							width: 150px;height: 36px;float: left;
-							">
+							<div class="formContent-input name" tabindex="1" hidefocus="true">
 								<input type="text" name="name" value=""/>
 								<div class="formContent-input-label">姓名</div>
 							</div>
 						</div>
 						<div style="clear: both;"></div>
 						<div class="email" style="height: 76px;">
-							<div class="formContent-input" tabindex="1" hidefocus="true" style="
-							width: 400px;height: 36px;float: left;
+							<div class="formContent-input emailWrraper" tabindex="1" hidefocus="true" style="
+							width: 300px;height: 36px;
 							">
 								<input class="inputMailList" type="text" name="email" value=""/>
 								<div class="formContent-input-label">你的电子邮箱</div>
@@ -80,15 +78,11 @@
 						</div>
 						<div style="clear: both;"></div>
 						<div class="password" style="height: 76px;">
-							<div class="formContent-input" tabindex="1" hidefocus="true" style="
-							width: 156px;height: 36px;float: left;
-							">
+							<div class="formContent-input pwd0" tabindex="1" hidefocus="true">
 								<input id="pwd0" type="password" name="password" value=""/>
 								<div class="formContent-input-label">密码</div>
 							</div>
-							<div class="formContent-input" tabindex="1" hidefocus="true" style="
-							width: 156px;height: 36px;float: left;
-							">
+							<div class="formContent-input pwd1" tabindex="1" hidefocus="true">
 								<input id="pwd1" type="password" value=""/>
 								<div class="formContent-input-label">确认密码</div>
 							</div>
@@ -115,15 +109,16 @@
 								<path d="M12,6c3.79,0,7.17,2.13,8.82,5.5c-0.64,1.32-1.56,2.44-2.66,3.33l1.42,1.42c1.51-1.26,2.7-2.89,3.43-4.74 C21.27,7.11,17,4,12,4c-1.4,0-2.73,0.25-3.98,0.7L9.63,6.3C10.4,6.12,11.19,6,12,6z"></path><path d="M16.43,15.93l-1.25-1.25l-1.27-1.27l-3.82-3.82L8.82,8.32L7.57,7.07L6.09,5.59L3.31,2.81L1.89,4.22l2.53,2.53 C2.92,8.02,1.73,9.64,1,11.5C2.73,15.89,7,19,12,19c1.4,0,2.73-0.25,3.98-0.7l4.3,4.3l1.41-1.41l-3.78-3.78L16.43,15.93z M11.86,14.19c-1.38-0.07-2.47-1.17-2.54-2.54L11.86,14.19z M12,17c-3.79,0-7.17-2.13-8.82-5.5c0.64-1.32,1.56-2.44,2.66-3.33 l1.91,1.91C7.6,10.53,7.5,11,7.5,11.5c0,2.48,2.02,4.5,4.5,4.5c0.5,0,0.97-0.1,1.42-0.25l0.95,0.95C13.6,16.88,12.81,17,12,17z"></path>
 							</svg>
 						</div>
+						<div style="clear: both;"></div>
 						<h5 style="margin-top: 20px;margin-left: 20px;color: gray;">
 							使用 <span style="color: orangered;">6</span> 个或更多字符(字母、数字或符号的组合)
 						</h5>
 					</div>
 					<div class="formContentWrraper-item">
-						<h2 style="margin-top: 60px;">填写你的扩充信息</h2>
+						<h2 class="item-title">填写你的扩充信息</h2>
 						<div class="telNum" style="height: 76px;">
 							<div class="formContent-input" tabindex="1" hidefocus="true" style="
-							width: 350px;height: 36px;float: left;
+							
 							">
 								<input type="text" name="telNum" value=""/>
 								<div class="formContent-input-label">电话号码</div>
@@ -131,40 +126,26 @@
 						</div>
 						<div style="clear: both;"></div>
 						<div class="QQ" style="height: 76px;">
-							<div class="formContent-input" tabindex="1" hidefocus="true" style="
-							width: 350px;height: 36px;float: left;
-							">
+							<div class="formContent-input" tabindex="1" hidefocus="true">
 								<input type="text" name="QQ" value=""/>
 								<div class="formContent-input-label">QQ</div>
 							</div>
 						</div>
 						<div style="clear: both;"></div>
-						<div class="selectDirection" style="
-						position: relative;float: left;
-						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
-						">
+						<div class="selectDirection">
 							<select class="direction" name="direction">
 							</select>
 						</div>
-						<div class="selectLaboratory" style="
-						position: relative;float: left;
-						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
-						">
+						<div class="selectLaboratory">
 							<select class="laboratory" name="laboratory">
 							</select>
 						</div>
-						<div class="selectProfessional" style="
-						position: relative;float: left;
-						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
-						">
+						<div style="clear: both;"></div>
+						<div class="selectProfessional">
 							<select class="professional" name="professional">
 							</select>
 						</div>
-						<div style="clear: both;"></div>
-						<div class="selectSex" style="
-						position: relative;float: left;
-						width: 150px;margin: 20px;margin-top: 20px;margin-bottom: 0;
-						">
+						<div class="selectSex">
 							<select class="Sex" name="Sex">
 								<option data-icon="fa fa-mars" value="0">男</option>
 								<option data-icon="fa fa-venus" value="1">女</option>
@@ -172,7 +153,7 @@
 						</div>
 					</div>
 					<div class="formContentWrraper-item">
-						<h2 style="margin-top: 20px;">确认信息是否有误</h2>
+						<h2 style="margin-top: 60px;">确认信息是否有误</h2>
 						<table>
 							<tr>
 								<th>学号</th>
@@ -235,6 +216,7 @@
 		</form>
 	</body>
 	<script type="text/javascript">
+		new response("user",500,1000,"newRegister").start();
 		var LISTLINEContro = new LISTLINEControler().refresh();
 		var inputList = document.getElementsByClassName('formContent-input');
 		for (var i = inputList.length-1; i >= 0; i--) {

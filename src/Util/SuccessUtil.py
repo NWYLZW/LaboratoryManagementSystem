@@ -14,7 +14,7 @@ class SuccessUtil(Information):
             'updateLaboratorySuccess':-6001,
             'updateProfessionalClassSuccess':-7001,
         },{
-            -1001:"用户注册成功",
+            -1001:"欢迎成为我们的一员",
             -1002:"用户登陆成功",
             -2001:"用户签到成功",
             -3001:"删除login轮播成功",

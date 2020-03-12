@@ -50,14 +50,13 @@ function jsonResponse(data){
 	case -1001:
 		Notiflix.Report.Success(
 		'注册成功',
-		JSONObject.message,
+		JSONObject.content,
 		'Login',
 		function(){
 			gotoUrl('./login');
 		});
 		break;
 	case 1003:
-	// TODO 用户名已存在问题
 		alertError($('.main')[0],"shake",JSONObject.content);
 		break;
 	default:
