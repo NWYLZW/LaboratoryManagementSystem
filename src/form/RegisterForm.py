@@ -12,29 +12,38 @@ class RegisterForm(FlaskForm):
     directionChoices = [(str(key),value['name']) for key,value in Direction.getDict().items()]
     laboratoryChoices = [(str(key),value['blockNum']+value['doorNum']) for key,value in Laboratory.getDict().items()]
     professionalChoices = [ProfessionalClass.getProfessionalList()]
-    userName = StringField(
-        'userName',
-        validators=[DataRequired('userName is null')]
+
+    schoolNum = StringField(
+        'schoolNum',
+        validators=[DataRequired('schoolNum is null')]
+    )
+    name = StringField(
+        'name',
+        validators=[DataRequired('name is null')]
+    )
+    email = StringField(
+        'email',
+        validators=[DataRequired('email is null')]
     )
     password = PasswordField(
         'password',
-        validators=[Length(min=8,max=20),DataRequired('password is null')]
+        validators=[Length(min=6,max=20),DataRequired('password is null')]
     )
-    sex = SelectField(
-        'sex',
-        choices=[
-            ('1', 'male'),
-            ('2', 'female')],
-        coerce=str,
-        validators=[DataRequired('sex is null')]
+    telNum = StringField(
+        'telNum',
+        validators=[Length(min=11,max=11),DataRequired('telNum is null')]
     )
     qqNum = StringField(
         'qqNum',
         validators=[Length(min=6,max=15),DataRequired('qqNum is null')]
     )
-    telNum = StringField(
-        'telNum',
-        validators=[Length(min=11,max=11),DataRequired('telNum is null')]
+    sex = SelectField(
+        'Sex',
+        choices=[
+            ('0', 'male'),
+            ('1', 'female')],
+        coerce=str,
+        validators=[DataRequired('Sex is null')]
     )
     laboratoryId = SelectField(
         'laboratoryId',
@@ -65,7 +74,7 @@ class RegisterForm(FlaskForm):
             return True
         return False
     def validata_Num(self):
-        if self.userName.data.isdigit() and self.telNum.data.isdigit() and self.qqNum.data.isdigit():
+        if self.telNum.data.isdigit() and self.qqNum.data.isdigit():
             return True
         else:
             return False
