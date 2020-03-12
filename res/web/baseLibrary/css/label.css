@@ -39,3 +39,44 @@ a:hover{
 	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,.8);
 	background-color: #1E90FF;
 }
+
+.ACMIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/ACM.png);
+}
+.AIIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/AI.png);
+}
+.AndroidIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/Android.png);
+}
+.JavaIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/Java.png);
+}
+.HtmlIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/Html.png);
+}
+.IOTIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/IOT.png);
+}
+.PhpIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/Php.png);
+}
+.ProductIco{
+	width: 16px;height: 16px;
+	background-size: 100%;
+	background-image: url(../img/direction/Product.png);
+}

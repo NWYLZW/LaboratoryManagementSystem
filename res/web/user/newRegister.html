@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
+		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="../select-mania/css/select-mania.css"/>
+		<link rel="stylesheet" type="text/css" href="../select-mania/css/themes/select-mania-theme-blue.css">
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/csshake.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/newRegister.css"/>
+		<link rel="stylesheet" type="text/css" href="../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css"/>
+		<style type="text/css">
+			body,html{width: 100%;height: 100%;background: url(img/25.png) 0 / cover fixed;}
+			.emailist{
+				padding: 0;margin: 0; 
+				border: 1px solid #bdbdbd; 
+				border-radius: 0px 0px 16px 16px; 
+				background-color:#fff;
+				color: gray;
+				font-size: 18px;
+				list-style-type: 0; 
+				overflow: hidden;
+			}
+			.emailist li{
+				padding:2px 11px;
+				cursor:pointer;
+			}
+			.emailist .on, .emailist li:hover{
+				color: white;
+				background-color: skyblue;
+				transition: .1s;
+			}
+			.form{
+				width: 100%;height: 100%;
+			}
+		</style>
+		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.mailAutoComplete-4.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../select-mania/js/select-mania.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Notiflix-2.1.2/AIO/notiflix-aio-2.1.2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/newRegister.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/LISTLINEControler.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<form class="form" action="/user/register" method="post">
+			<input type="submit" id="formSubmit" style="display: none;"/>
+		{{form.hidden_tag()}}
+		<div class="main">
+			<div class="formContent">
+				<div class="formContentWrraper">
+					<div class="formContentWrraper-item">
+						<img src="img/7.png" height="60%" style="position: absolute;right: 0;bottom: 0;">
+						<h2 style="margin-top: 60px;">填写你的基本信息</h2>
+						<div class="schoolNumAndName" style="height: 76px;">
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							width: 250px;height: 36px;float: left;
+							">
+								<input type="text" name="schoolNum" value=""/>
+								<div class="formContent-input-label">学号</div>
+							</div>
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							width: 150px;height: 36px;float: left;
+							">
+								<input type="text" name="name" value=""/>
+								<div class="formContent-input-label">姓名</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="email" style="height: 76px;">
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							width: 400px;height: 36px;float: left;
+							">
+								<input class="inputMailList" type="text" name="email" value=""/>
+								<div class="formContent-input-label">你的电子邮箱</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="password" style="height: 76px;">
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							width: 156px;height: 36px;float: left;
+							">
+								<input id="pwd0" type="password" name="password" value=""/>
+								<div class="formContent-input-label">密码</div>
+							</div>
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							width: 156px;height: 36px;float: left;
+							">
+								<input id="pwd1" type="password" value=""/>
+								<div class="formContent-input-label">确认密码</div>
+							</div>
+							<svg onclick="
+							if(document.getElementById('hidenPWD')){
+								document.getElementById('hidenPWD').style.display = 'block';
+								this.style.display = 'none';
+								document.getElementById('pwd0').type = 'password';
+								document.getElementById('pwd1').type = 'password';
+							}
+							" style="display: none;" id="showPWD" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+								<path d="M12,7c-2.48,0-4.5,2.02-4.5,4.5S9.52,16,12,16s4.5-2.02,4.5-4.5S14.48,7,12,7z M12,14.2c-1.49,0-2.7-1.21-2.7-2.7 c0-1.49,1.21-2.7,2.7-2.7s2.7,1.21,2.7,2.7C14.7,12.99,13.49,14.2,12,14.2z"></path><path d="M12,4C7,4,2.73,7.11,1,11.5C2.73,15.89,7,19,12,19s9.27-3.11,11-7.5C21.27,7.11,17,4,12,4z M12,17 c-3.79,0-7.17-2.13-8.82-5.5C4.83,8.13,8.21,6,12,6s7.17,2.13,8.82,5.5C19.17,14.87,15.79,17,12,17z"></path>
+								<path fill="none" d="M0,0h24v24H0V0z"></path>
+							</svg>
+							<svg onclick="
+							if(document.getElementById('showPWD')){
+								document.getElementById('showPWD').style.display = 'block';
+								this.style.display = 'none';
+								document.getElementById('pwd0').type = 'text';
+								document.getElementById('pwd1').type = 'text';
+							}
+							" style="display: block;" id="hidenPWD" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+								<path d="M10.58,7.25l1.56,1.56c1.38,0.07,2.47,1.17,2.54,2.54l1.56,1.56C16.4,12.47,16.5,12,16.5,11.5C16.5,9.02,14.48,7,12,7 C11.5,7,11.03,7.1,10.58,7.25z"></path>
+								<path d="M12,6c3.79,0,7.17,2.13,8.82,5.5c-0.64,1.32-1.56,2.44-2.66,3.33l1.42,1.42c1.51-1.26,2.7-2.89,3.43-4.74 C21.27,7.11,17,4,12,4c-1.4,0-2.73,0.25-3.98,0.7L9.63,6.3C10.4,6.12,11.19,6,12,6z"></path><path d="M16.43,15.93l-1.25-1.25l-1.27-1.27l-3.82-3.82L8.82,8.32L7.57,7.07L6.09,5.59L3.31,2.81L1.89,4.22l2.53,2.53 C2.92,8.02,1.73,9.64,1,11.5C2.73,15.89,7,19,12,19c1.4,0,2.73-0.25,3.98-0.7l4.3,4.3l1.41-1.41l-3.78-3.78L16.43,15.93z M11.86,14.19c-1.38-0.07-2.47-1.17-2.54-2.54L11.86,14.19z M12,17c-3.79,0-7.17-2.13-8.82-5.5c0.64-1.32,1.56-2.44,2.66-3.33 l1.91,1.91C7.6,10.53,7.5,11,7.5,11.5c0,2.48,2.02,4.5,4.5,4.5c0.5,0,0.97-0.1,1.42-0.25l0.95,0.95C13.6,16.88,12.81,17,12,17z"></path>
+							</svg>
+						</div>
+						<h5 style="margin-top: 20px;margin-left: 20px;color: gray;">
+							使用 <span style="color: orangered;">6</span> 个或更多字符(字母、数字或符号的组合)
+						</h5>
+					</div>
+					<div class="formContentWrraper-item">
+						<h2 style="margin-top: 60px;">填写你的扩充信息</h2>
+						<div class="telNum" style="height: 76px;">
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							width: 350px;height: 36px;float: left;
+							">
+								<input type="text" name="telNum" value=""/>
+								<div class="formContent-input-label">电话号码</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="QQ" style="height: 76px;">
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							width: 350px;height: 36px;float: left;
+							">
+								<input type="text" name="QQ" value=""/>
+								<div class="formContent-input-label">QQ</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="selectDirection" style="
+						position: relative;float: left;
+						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
+						">
+							<select class="direction" name="direction">
+								<option data-icon="JavaIco" value="0">Java</option>
+								<option data-icon="AIIco" value="1">AI</option>
+							</select>
+						</div>
+						<div class="selectLaboratory" style="
+						position: relative;float: left;
+						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
+						">
+							<select class="laboratory" name="laboratory">
+								<optgroup label="E栋">
+									<option value="0">314</option>
+									<option value="1">601</option>
+								</optgroup>
+								<optgroup label="F栋">
+									<option value="2">608</option>
+								</optgroup>
+							</select>
+						</div>
+						<div class="selectProfessional" style="
+						position: relative;float: left;
+						width: 150px;margin: 20px;margin-top: 40px;margin-bottom: 0;
+						">
+							<select class="professional" name="professional">
+								<option value="0">网络工程</option>
+								<option value="1">通信工程</option>
+							</select>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="selectSex" style="
+						position: relative;float: left;
+						width: 150px;margin: 20px;margin-top: 20px;margin-bottom: 0;
+						">
+							<select class="Sex" name="Sex">
+								<option data-icon="fa fa-mars" value="0">男</option>
+								<option data-icon="fa fa-venus" value="1">女</option>
+							</select>
+						</div>
+					</div>
+					<div class="formContentWrraper-item">
+						<h2 style="margin-top: 20px;">确认信息是否有误</h2>
+						<table>
+							<tr>
+								<th>学号</th>
+								<td>201803120130</td>
+							</tr>
+							<tr>
+								<th>姓名</th>
+								<td>奉自利</td>
+							</tr>
+							<tr>
+								<th>方向</th>
+								<td>Java</td>
+							</tr>
+							<tr>
+								<th>电子邮箱</th>
+								<td>2284672637@gmail.com</td>
+							</tr>
+							<tr>
+								<th>实验室</th>
+								<td>F608</td>
+							</tr>
+							<tr>
+								<th>专业班级</th>
+								<td>网络工程-1801</td>
+							</tr>
+							<tr>
+								<th>电话号码</th>
+								<td>18774225404</td>
+							</tr>
+							<tr>
+								<th>性别</th>
+								<td>男</td>
+							</tr>
+							<tr>
+								<th>QQ</th>
+								<td>2284672637</td>
+							</tr>
+						</table>
+						<button type="button" class="confirmBTN" onclick="
+						if(LISTLINEContro){
+							this.style.backgroundColor = '#00FFAA';
+							LISTLINEContro.confirm();
+						}
+						">确认无误</button>
+					</div>
+				</div>
+			</div>
+			<div class="bottomLine">
+				<div class="LISTLINE">
+					<div class="LISTLINE-circle INTHIS">1</div>
+					<div class="LISTLINE-line"></div>
+					<div class="LISTLINE-circle">2</div>
+					<div class="LISTLINE-line"></div>
+					<div class="LISTLINE-circle">3</div>
+				</div>
+				<div id="preStep" class="BlueBtn" style="left: 20px;">上一步</div>
+				<div id="nextStep" class="BlueBtn" style="right: 20px;">下一步</div>
+			</div>
+		</div>
+		</form>
+	</body>
+	<script type="text/javascript">
+		var LISTLINEContro = new LISTLINEControler().refresh();
+		for (var i = 0; i < document.getElementsByClassName('formContent-input').length; i++) {
+			let inputLabel = document.getElementsByClassName('formContent-input')[i];
+			inputLabel.input = inputLabel.getElementsByTagName('input')[0];
+			inputLabel.input.addEventListener('focus',function(){
+				inputLabel.classList.add('formContent-inputClick');
+			})
+			inputLabel.input.addEventListener('blur',function(){
+				if(this.value==0)
+					inputLabel.classList.remove('formContent-inputClick');
+			})
+			inputLabel.onfocus = function(){
+				this.classList.add('formContent-inputClick');
+				this.input.focus();
+			}
+			inputLabel.onblur = function(){
+				if(this.value==0)
+					inputLabel.classList.remove('formContent-inputClick');
+			}
+		}
+		$(".inputMailList").mailAutoComplete();
+		var selectList = [
+			['.direction','请选择方向'],
+			['.laboratory','请选择实验室'],
+			['.professional','请选择专业'],
+			['.Sex','请选择性别'],
+		];
+		for (let i = 0; i < selectList.length; i++) {
+			$(selectList[i][0]).selectMania({
+				size: 'small',
+				themes: ['blue'], 
+				placeholder: selectList[i][1],
+				empty: true,
+				removable: true,
+				search: selectList[i][0]!='.Sex',
+			});
+			if(selectList[i][0]==='.direction'){
+				let icon = $(selectList[i][0]).prev().find('.select-mania-item-icon i');
+				for (let i = 0; i < icon.length; i++) {
+					let html = icon[i].outerHTML;
+					html = html.replace(/^<i/,"<div");
+					html = html.replace(/\/i>$/,"/div>");
+					$(icon[i]).replaceWith(html);
+				}
+			}
+		}
+		
+		$(".form").submit(function(){
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+	</script>
+</html>

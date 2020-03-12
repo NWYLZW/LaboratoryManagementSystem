@@ -1,0 +1,170 @@
+.main{
+	position: relative;
+	left: calc(50% - 400px);top: calc(50% - 300px);
+	width: 800px;height: 600px;
+	border-radius: 16px;
+	border: 2px solid rgba(235,235,235);
+	transition: .5s;
+	overflow: hidden;
+}
+.main::before{ 
+	content: ''; 
+	position: absolute; 
+	top: 0; right: 0; bottom: 0; left: 0; 
+	background: url(../img/25.png) 0 / cover fixed;
+	filter: blur(10px);
+	margin: -30px;
+}
+
+.main:hover{
+	box-shadow: 0 0 15px gray;
+}
+.formContent{
+	position: relative;
+	width: 100%;height: calc(100% - 95px);
+	overflow-x: hidden;
+}
+
+.formContent-input{
+	position: relative;
+	margin: 20px;
+	margin-top: 40px;margin-bottom: 0;
+	transition: .2s;
+}
+.formContent-input input{
+	position: relative;
+	width: calc(100% - 10px);height: 100%;
+	padding-left: 10px;
+	font-size: 18px;
+	border-radius: 8px;
+	border: 1px solid rgb(218, 220, 224);
+	transition: .2s;
+}
+.formContent-inputClick input{
+	border: 2px solid #00AAFF;
+}
+.formContent-input-label{
+	position: absolute;
+	top: calc(50% - 12px);left: 12px;
+	color: #808080;
+	font-size: 18px;
+	transition: .2s;
+}
+.formContent-inputClick .formContent-input-label{
+	top: -19px;
+	color: #00aaff;
+	border-bottom: 2px solid #aaffff;
+	font-size: 14px;
+}
+
+.formContentWrraper{
+	position: absolute;
+	top: 0;left: 0%;
+	width: 300%;height: 100%;
+	transition: .5s;
+}
+.formContentWrraper .formContentWrraper-item{
+	position: relative;float: left;
+	padding: 1.66665%;
+	width: 30%;height: 80%;
+}
+
+#showPWD,#hidenPWD{
+	position: relative;float: left;
+	top: 46px;
+	border-radius: 20%;
+	transition: .3s;
+}
+#showPWD:hover{
+	background-color: rgba(245,245,245,.8);
+}
+#hidenPWD:hover{
+	background-color: rgba(245,245,245,.8);
+}
+
+.bottomLine{
+	position: relative;
+	width: 100%;height: 95px;
+}
+.BlueBtn{
+	position: absolute;
+	width: 120px;height: 45px;
+	top: 25px;
+	color: white;
+	user-select: none;
+	text-align: center;
+	line-height: 45px;
+	font-size: 20px;
+	border-radius: 8px;
+	background-color: rgba(100,150,250);
+	transition: .5s linear;
+}
+.BlueBtn:hover{
+	box-shadow: 0 0 10px gray;
+	background-color: rgba(50,100,250);
+}
+.LISTLINE{
+	position: absolute;
+	left: calc(50% - 84px);top: calc(50% - 12px);
+	width: 168px;height: 24px;
+}
+.LISTLINE-circle{
+	position: relative;float: left;
+	width: 24px;height: 24px;
+	text-align: center;
+	user-select: none;
+	line-height: 24px;
+	border-radius: 50%;
+	background-color: #dcdcdc;
+	transition: .5s linear;
+}
+.LISTLINE-line{
+	position: relative;float: left;
+	top: 10px;
+	width: 48px;height: 4px;
+	background-color: #dcdcdc;
+	transition: .5s linear;
+}
+.INTHIS{
+	color: #FFFFFF;
+	background-color: royalblue;
+}
+.SUCCESS{
+	background-color: palegreen;
+}
+
+table{
+	position: relative;
+	left: 20px;top: 20px;
+	border-collapse: collapse;
+	text-align: center;
+}
+table td, table th{
+	border: 1px solid #cad9ea;
+	padding: 5px;
+	color: #666;
+	height: 30px;
+}
+table thead th{
+	background-color: #CCE8EB;
+	width: 100px;
+}
+table tr:nth-child(odd){
+	background: #fff;
+}
+table tr:nth-child(even){
+	background: #F5FAFA;
+}
+.confirmBTN{
+	position: absolute;
+	right: 80px;bottom: 0;
+	width: 100px;height: 40px;
+	background-color: #00AAFF;
+	color: white;
+	font-size: 18px;
+	transition: .5s;
+}
+.confirmBTN:hover{
+	border-radius: 12px;
+	box-shadow: 0 0 10px gray;
+}

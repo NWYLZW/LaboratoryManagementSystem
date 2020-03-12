@@ -11,27 +11,24 @@ from src import db
 class User(UserMixin, db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
-    userName = db.Column(db.String(32), unique=True)
-    nickName = db.Column(db.String(32), unique=False)
-    maleBool = db.Column(db.Boolean, unique=False)
-    passwordHash = db.Column(db.String(128), unique=False)
+    schoolID = db.Column(db.String(32), unique=True)
+    nickName = db.Column(db.String(32), nullable=False)
+    maleBool = db.Column(db.Boolean, nullable=False)
+    passwordHash = db.Column(db.String(128), nullable=False)
 
     roleId = db.Column(db.Integer, db.ForeignKey('Role.id'))
     directionId = db.Column(db.Integer, db.ForeignKey('Direction.id'))
-    # laboratoryId = db.Column(db.Integer, db.ForeignKey('Laboratory.id'))
-    # professionalClassId = db.Column(db.Integer, db.ForeignKey('ProfessionalClass.id'))
+    laboratoryId = db.Column(db.Integer, db.ForeignKey('Laboratory.id'))
+    professionalClassId = db.Column(db.Integer, db.ForeignKey('ProfessionalClass.id'))
 
-    qqNum = db.Column(db.String(64), unique=False)
-    telNum = db.Column(db.String(64), unique=False)
-
-    # directionId = db.Column(db.String(64), unique=False)
-    laboratoryName = db.Column(db.String(64), unique=False)
-    professionalClass = db.Column(db.String(64), unique=False)
+    email = db.Column(db.String(64))
+    qqNum = db.Column(db.String(64))
+    telNum = db.Column(db.String(64))
     def __init__(self,
-                 userName: str = "", nickName: str = "", password: str = "", male: int = 1,
+                 schoolID: str = "", nickName: str = "", password: str = "", male: int = 1,
                  directionId: int = -1, qqNum: str = "", telNum: str = "", laboratoryName: str = "",
-                 professional: str = "",gradle: str = "",classNum: str = ""):
-        self.userName = userName
+                 professional: str = "", gradle: str = "", classNum: str = ""):
+        self.schoolID = schoolID
         self.nickName = nickName
         self.password = password
         self.sex = male
@@ -51,7 +48,7 @@ class User(UserMixin, db.Model):
     def is_anonymous(self):
         return False
     def __repr__(self):
-        return "<User '{:s}>".format(self.userName)
+        return "<User '{:s}>".format(self.schoolID)
 
     def can(self, permissions):
         return self.role is not None and (self.role.permissions & permissions) == permissions
@@ -84,7 +81,7 @@ class User(UserMixin, db.Model):
 
     def toBriefDict(self):
         return {
-            "userName":self.userName,
+            "userName":self.schoolID,
             "nickName":self.nickName,
             "maleBool":self.maleBool,
             "directionName":self.direction.name,
@@ -94,7 +91,7 @@ class User(UserMixin, db.Model):
     def toDict(self):
         return {
             "id":self.id,
-            "userName":self.userName,
+            "userName":self.schoolID,
             "nickName":self.nickName,
             "maleBool":self.maleBool,
             "qqNum":self.qqNum,

@@ -4,6 +4,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 from src import templatePath, login_manager, MainLog
 from src.Controler.UserControler import userControler
 from src.Model.DirectionModel import Direction
+from src.Model.LaboratoryModel import Laboratory
+from src.Model.ProfessionalClassModel import ProfessionalClass
 from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
@@ -74,10 +76,15 @@ def searchUserTest():
 def searchAllUser():
     return userControler.getUserListData(request.json)
 
-
 @userBluePrint.route("/getDirection",methods=['GET'])
 def getDirection():
     return Direction.getDict()
+@userBluePrint.route("/getLaboratory",methods=['GET'])
+def getLaboratory():
+    return Laboratory.getDict()
+@userBluePrint.route("/getProfessionalList",methods=['GET'])
+def getProfessionalList():
+    return ProfessionalClass.getDict()
 
 @login_manager.user_loader
 def load_user(user_id):

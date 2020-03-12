@@ -5,6 +5,8 @@ from werkzeug.datastructures import CombinedMultiDict
 from src import templatePath
 from src.Controler.AdminControler import adminControler
 from src.Model.DirectionModel import Direction
+from src.Model.LaboratoryModel import Laboratory
+from src.Model.ProfessionalClassModel import ProfessionalClass
 from src.Util.ErrorUtil import errorUtil
 from src.Util.SuccessUtil import successUtil
 from src.form.LoginNoticeForm import LoginNoticeForm, editLoginNoticeForm
@@ -105,6 +107,28 @@ def updateDirection():
         'dataBaseError',
     ]
     result = Direction.updateDirection("Java", "Java", "Java世界最牛逼")
+    if result == 0:
+        return successUtil.getData(messageDict[result])
+    else:
+        return errorUtil.getData(messageDict[result])
+@adminBluePrint.route("/updateLaboratory",methods=['GET'])
+def updateLaboratory():
+    messageDict = [
+        'updateLaboratorySuccess',
+        'dataBaseError',
+    ]
+    result = Laboratory.updateLaboratory("E", "601", "特别难爬的一实验室")
+    if result == 0:
+        return successUtil.getData(messageDict[result])
+    else:
+        return errorUtil.getData(messageDict[result])
+@adminBluePrint.route("/addProfessionalClass",methods=['GET'])
+def addProfessionalClass():
+    messageDict = [
+        'updateProfessionalClassSuccess',
+        'dataBaseError',
+    ]
+    result = ProfessionalClass.addProfessionalClass("网络工程", 16, 1)
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:

@@ -1,5 +1,4 @@
 from flask_login import current_user
-from sqlalchemy import and_
 
 from src import db, MainLog
 from src.Model.UserModel import User
@@ -24,7 +23,7 @@ class UserControler:
         '''
         try:
             user = User(
-                userName=form.userName.data,
+                schoolID=form.userName.data,
                 nickName=form.userName.data,
                 password=form.password.data,
                 male=form.sex.data,
@@ -33,8 +32,6 @@ class UserControler:
                 telNum=form.telNum.data,
                 laboratoryName=form.laboratoryName.data,
                 professional=form.professional.data,
-                gradle=form.gradle.data,
-                classNum=form.classNum.data,
             )
             db.session.add(user)
         except Exception as e:
@@ -46,7 +43,7 @@ class UserControler:
 
     def getBriefUserListData(self, listWords):
         searchFile = [
-            User.userName,
+            User.schoolID,
             User.nickName,
         ]
         responUserList = []
@@ -59,7 +56,7 @@ class UserControler:
 
     def getUserListData(self,listWords):
         searchFile = [
-            User.userName,
+            User.schoolID,
             User.nickName,
         ]
         responUserList = []
