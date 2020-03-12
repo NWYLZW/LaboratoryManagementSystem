@@ -22,6 +22,17 @@ class LISTLINEControler{
 				"LISTLINE-circle SUCCESS","LISTLINE-line SUCCESS",
 				"LISTLINE-circle INTHIS"],
 		];
+		this.tdDict = {
+			'schoolId':$('.tdValue_schoolId')[0],
+			'name':$('.tdValue_name')[0],
+			'sex':$('.tdValue_sex')[0],
+			'email':$('.tdValue_email')[0],
+			'QQ':$('.tdValue_QQ')[0],
+			'telNum':$('.tdValue_telNum')[0],
+			'direction':$('.tdValue_direction')[0],
+			'laboratory':$('.tdValue_laboratory')[0],
+			'professional':$('.tdValue_professional')[0],
+		}
 		this.init();
 	}
 	init(){
@@ -84,6 +95,9 @@ class LISTLINEControler{
 		}
 		return this;
 	}
+	changeTdData(name,text){
+		this.tdDict[name].innerText = text;
+	}
 	viloateFirst(){
 		var form = this.form;
 		// 检测name的值
@@ -102,6 +116,7 @@ class LISTLINEControler{
 					break;
 			}
 		})) return false;
+		this.changeTdData('name',form.name.value);
 		return true;
 	}
 	viloateSecond(){
