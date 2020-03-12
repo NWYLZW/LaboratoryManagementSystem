@@ -45,13 +45,6 @@ class LISTLINEControler{
 			LISTLINEContro.statu += 1;
 			LISTLINEContro.refresh();
 		}
-		var circleList = document.getElementsByClassName('LISTLINE-circle');
-		for(let i = 0;i < circleList.length;i++){
-			circleList[i].onclick = function(){
-				LISTLINEContro.statu = i;
-				LISTLINEContro.refresh();
-			}
-		}
 	}
 	refresh(){
 		var LISTLINEContro = this;

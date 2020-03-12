@@ -60,7 +60,7 @@ def register():
                 return errorUtil.getData('FormDataWrong')
             return errorUtil.getData('UserNameExist')
         return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
-    return render_template('register.html', form=form)
+    return render_template('newRegister.html', form=form)
 
 @userBluePrint.route('/searchUser', methods=['GET','POST'])
 @login_required

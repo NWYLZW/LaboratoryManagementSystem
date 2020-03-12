@@ -7,14 +7,15 @@ function alertError(node,shakeName,message){
 	node.classList.add("shake-constant");
 	node.classList.add(shakeName);
 	node.style.backgroundColor = "orangered";
-	setTimeout(function() {
-		node.classList.remove(shakeName);
-		node.style.backgroundColor = "";
-	}, 1000);
 	Notiflix.Report.Failure(
 	'信息错误',
 	message,
-	'去修改');
+	'去修改',function(){
+		setTimeout(function() {
+			node.classList.remove(shakeName);
+			node.style.backgroundColor = "";
+		}, 1000);
+	});
 }
 
 function validate(formData, jqForm, options){
