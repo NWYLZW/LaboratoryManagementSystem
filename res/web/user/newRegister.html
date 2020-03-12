@@ -309,15 +309,15 @@
 			}
 		}
 		var slectContro = new SelectControler().refresh();
-		new myAjax({
-			url:'',
-			data:,
-			method:"POST",
-			success:function(result){
-			},
-			failure:function(error){},
-			always:function(jqXHR){}
-		}).ajax();
+		// new myAjax({
+		// 	url:'',
+		// 	data:,
+		// 	method:"POST",
+		// 	success:function(result){
+		// 	},
+		// 	failure:function(error){},
+		// 	always:function(jqXHR){}
+		// }).ajax();
 		setTimeout(function() {
 			slectContro.appendOption($('.direction'),[{
 				ico:'AndroidIco',
