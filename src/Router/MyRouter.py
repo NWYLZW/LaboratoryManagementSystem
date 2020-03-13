@@ -19,3 +19,7 @@ def panelBeforeRequest():
 @myBluePrint.route("/space")
 def space():
     return render_template("space/mySpace.html")
+
+@myBluePrint.route("/data", methods=['GET'])
+def data():
+    return current_user.toDict()

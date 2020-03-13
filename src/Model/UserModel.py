@@ -82,23 +82,24 @@ class User(UserMixin, db.Model):
 
     def toBriefDict(self):
         return {
-            "userName":self.schoolID,
+            "schoolID":self.schoolID,
             "nickName":self.nickName,
             "maleBool":self.sexBool,
             "directionName":self.direction.name,
-            "laboratoryName":self.laboratoryName,
-            "professionalClass":self.professionalClass,
+            "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
+            "professionalClass":self.professionalClass.getProfessionalClass(),
         }
     def toDict(self):
         return {
             "id":self.id,
-            "userName":self.schoolID,
+            "schoolID":self.schoolID,
             "nickName":self.nickName,
             "maleBool":self.sexBool,
             "qqNum":self.qqNum,
             "telNum":self.telNum,
             "roleId":self.roleId,
+            "roleName":self.role.name,
             "directionName":self.direction.name,
-            "laboratoryName":self.laboratoryName,
-            "professionalClass":self.professionalClass,
+            "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
+            "professionalClass":self.professionalClass.getProfessionalClass(),
         }

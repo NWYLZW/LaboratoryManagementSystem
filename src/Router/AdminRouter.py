@@ -18,12 +18,12 @@ adminBluePrint = Blueprint(
     template_folder=templatePath+"/admin",)
 
 # TODO 开发结束后，添加管理权限检测
-# @adminBluePrint.before_request
-# def adminBeforeRequest():
-#     if not current_user:
-#         return redirect(url_for('user.login'))
-#     if not current_user.is_authenticated:
-#         return redirect(url_for('user.login'))
+@adminBluePrint.before_request
+def adminBeforeRequest():
+    if not current_user:
+        return redirect(url_for('user.login'))
+    if not current_user.is_authenticated:
+        return redirect(url_for('user.login'))
 
 @adminBluePrint.route("/delLoginNotice",methods=['POST'])
 def delLoginNotice():

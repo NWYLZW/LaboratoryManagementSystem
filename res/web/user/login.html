@@ -10,10 +10,11 @@
 		<link rel="stylesheet" type="text/css" href="../user/css/left.css"/>
 		<link rel="stylesheet" type="text/css" href="../user/css/right.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Notiflix-2.1.2/AIO/notiflix-aio-2.1.2.js" type="text/javascript" charset="utf-8"></script>
+		
 		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../artDialog/dist/dialog.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../user/js/rotation.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../user/js/login.js" type="text/javascript" charset="utf-8"></script>
@@ -115,6 +116,7 @@
 				loginRotationX = new loginRotation(dictObj,3000);
 				loginRotationX.init();
 				$("#login-form").submit(function(){
+					Notiflix.Loading.Dots('正在登陆...');
 					$(this).ajaxSubmit(options);
 					return false;
 				});

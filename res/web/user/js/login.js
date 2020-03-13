@@ -12,16 +12,15 @@ function alertError(node,shakeName,message){
 	node.classList.add("shake-constant");
 	node.classList.add(shakeName);
 	node.style.backgroundColor = "orangered";
-	setTimeout(function() {
-		node.classList.remove(shakeName);
-		node.style.backgroundColor = "";
-	}, 1000);
-	dialog({
-		title: '信息错误',
-		content: message,
-		padding: '40px',
-		drag: true,
-	}).show();
+	Notiflix.Report.Failure(
+	'信息错误',
+	message,
+	'去修改',function(){
+		setTimeout(function() {
+			node.classList.remove(shakeName);
+			node.style.backgroundColor = "";
+		}, 1000);
+	});
 }
 function validate(formData, jqForm, options){
 	//jqForm:   jQuery对象，封装了表单的元素
@@ -72,6 +71,7 @@ function checkValue(filed,checkNull,check,failedx){
 }
 function jsonResponse(data){
 	var JSONObject = JSON.parse(data);
+	Notiflix.Loading.Remove();
 	switch (JSONObject.type){
 	case 0:
 		// "表单数据错误"
@@ -79,15 +79,13 @@ function jsonResponse(data){
 		break;
 	case -1002:
 		// "登陆成功"
-		dialog({
-			title: '信息',
-			content: JSONObject.content,
-			padding: '40px',
-			drag: true,
-		}).show();
-		setTimeout(function() {
+		Notiflix.Report.Success(
+		'登陆成功',
+		JSONObject.content,
+		'前往仪表盘',
+		function(){
 			gotoUrl('../panel');
-		}, 1000);
+		});
 	case 1001:
 		// "用户不存在"
 		alertError($('.login-left-mid .user-name input')[0],"shake",JSONObject.content);

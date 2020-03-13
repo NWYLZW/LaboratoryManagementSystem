@@ -15,6 +15,9 @@ class ProfessionalClass(db.Model):
         self.professional = professional
         self.gradle = gradle
         self.classNum = classNum
+    def getProfessionalClass(self):
+        return self.professional+'-'+str(self.gradle)+str(self.classNum)
+
     @staticmethod
     def getDict()->dict:
         professionalClassDict = {}
