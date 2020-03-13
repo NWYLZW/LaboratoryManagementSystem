@@ -1,0 +1,24 @@
+.formContent-input{
+	height: 36px;float: left;
+	transition: .5s;
+}
+.schoolNum{
+	width: 250px;
+}
+.name{
+	width: 150px;
+}
+.pwd0,.pwd1{
+	width: 156px;
+}
+.telNum .formContent-input{
+	width: 500px;
+}
+.QQ .formContent-input{
+	width: 500px;
+}
+.selectLaboratory,.selectProfessional,.selectDirection,.selectSex{
+	position: relative;float: left;
+	margin-left: 20px;margin-top: 20px;margin-bottom: 0;
+	width: 200px;
+}

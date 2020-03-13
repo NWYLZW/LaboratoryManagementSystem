@@ -1,0 +1,40 @@
+.main{
+	left: 0;top: 0;
+	width: 100%;height: 100%;
+	border-radius: 0;
+	border: none;
+}
+.formContent-input{
+	height: 36px;float: left;
+	transition: .5s;
+}
+.firstItemImage{
+	display: none;
+}
+.schoolNum,.name,.pwd0{
+	width: 300px;
+}
+.pwd1{
+	width: 256px;
+}
+.item-title{
+	margin-top: 30px;
+}
+.telNum .formContent-input{
+	width: 80%;
+}
+.QQ .formContent-input{
+	width: 80%;
+}
+.selectLaboratory,.selectProfessional,.selectDirection,.selectSex{
+	position: relative;float: left;
+	margin-left: 20px;margin-top: 40px;margin-bottom: 0;
+	width: 80%;
+}
+.LISTLINE{
+	left: calc(50% - 48px);top: -20px;
+	width: 168px;height: 24px;
+}
+.LISTLINE-line{
+	width: 18px;height: 4px;
+}
