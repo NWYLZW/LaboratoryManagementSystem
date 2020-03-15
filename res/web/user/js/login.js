@@ -86,6 +86,7 @@ function jsonResponse(data){
 		function(){
 			gotoUrl('../panel');
 		});
+		break;
 	case 1001:
 		// "用户不存在"
 		alertError($('.login-left-mid .user-name input')[0],"shake",JSONObject.content);
