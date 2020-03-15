@@ -3,6 +3,7 @@ from flask_login import current_user
 from src import db, MainLog
 from src.Model.ProfessionalClassModel import ProfessionalClass
 from src.Model.UserModel import User
+from src.Util.FileUtil import fileUtil
 from src.Util.JsonUtil import JsonUtil
 
 
@@ -51,6 +52,10 @@ class UserControler:
             )
             db.session.add(user)
             db.session.flush()
+            # TODO 删除用户时删除头像
+            fileUtil.copyWebToImageRes(
+                'baseLibrary/img/headPortrait/'+str(user.id%10)+'.jpg',
+                'userHeadPortrait/'+str(user.id)+'.png')
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,form.schoolNum.data+"用户添加失败 错误信息:")
             MainLog.record(MainLog.level.ERROR,e)

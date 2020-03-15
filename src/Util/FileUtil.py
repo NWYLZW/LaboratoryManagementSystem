@@ -1,5 +1,6 @@
 # TODO 文件收发存储帮助类
 import os
+import shutil
 
 from flask import make_response, send_file
 
@@ -23,6 +24,14 @@ class FileUtil:
                 as_attachment=True))
         response.headers["Content-Disposition"] = "attachment; filename={}".format(fileName.encode().decode('latin-1'))
         return response
+    def copyWebToImageRes(self,webPath,resPath):
+        try:
+            shutil.copy(
+                os.path.join(self.webPath,webPath),
+                os.path.join(self.resImagePath,resPath))
+        except Exception as e:
+            MainLog.record(MainLog.level.WARN,"FileUtil.removeWebToRes")
+            MainLog.record(MainLog.level.WARN,e)
     def saveToWeb(self,uploadFile=None,path="",fileName="")->bool:
         try:
             uploadFile.save( os.path.join( self.webPath, path, fileName) )
