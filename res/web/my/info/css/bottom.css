@@ -1,0 +1,126 @@
+.bottom-wrapper{
+	position: relative;
+	left: 15%;
+	width: 70%;
+	height: 100%;
+}
+.circle{
+	position: absolute;
+	top: -100px;
+	left: calc(50% - 100px);
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-color: lightgray;
+	overflow: hidden;
+}
+.editMyHeadPortrait{
+	position: absolute;
+	top: 65%;
+	width: 100%;
+	height: 35%;
+	background-color: darkgray;
+	text-align: center;
+	line-height: 70px;
+	font-size: 20px;
+	display: none;
+}
+.circle:hover .editMyHeadPortrait{
+	display: block;
+}
+#iframe-wrapper{
+	position: fixed;
+	left:calc(50% - 400px);
+	top: calc(50% - 400px);
+	z-index: 1000;
+	display: none;
+}
+.deleterBtn{
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: center;
+	color: red;
+	background-color: darkgray;
+}
+.bottom-top{
+	width: 100%;
+	height: 30%;
+}
+.bottom-mid{
+	width: 100%;
+	height: 22%;
+	background-color: lightseagreen;
+}
+.bottom-bottom{
+	width: 100%;
+	height: 30%;
+	background-color: lightcyan;
+}
+.side{
+	margin-top: 2%;
+	width: 100%;
+	height: 5%;
+	background-color: lightsalmon;
+}
+.side p{
+	margin-left: 40px;
+	line-height: 37px;
+}
+.bottom-top-side{
+	float: left;
+	width: calc(50% - 100px);
+	height: 100%;
+	background-color: palevioletred;
+}
+.bottom-top-mid{
+	position: relative;
+	float: left;
+	top: 100px;
+	width: 200px;
+	height: calc(100% - 100px);
+}
+.bottom-top-mid-in{
+	width: 100%;
+	height: 50%;
+	text-align: center;
+	line-height: 52px;
+	background-color: lightcoral;
+}
+.bottom-mid-content{
+	width: 100%;
+	height: 80%;
+	background-color: lightgrey;
+}
+.bottom-mid-foot{
+	position: relative;
+	left: calc(100% - 200px);
+	width: 200px;
+	height: 20%;
+	background-color: lightgreen;
+}
+.user-information{
+	margin: 0 auto;
+	width: 70%;
+	height: 100%;
+}
+.user-information-content{
+	border: gray solid 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+	height: 25%;
+	line-height: 51px;
+}
+.user-information-content p{
+	float: left;
+	height: 100%;
+	width: 58px;
+	border-right: gray solid 2px;
+	text-align: center;
+}
+.user-information-content div{
+	float: left;
+	height: 100%;
+	width: calc(100% - 60px);
+}

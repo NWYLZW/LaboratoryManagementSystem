@@ -25,6 +25,9 @@ def panelBeforeRequest():
 @myBluePrint.route("/space")
 def space():
     return render_template("space/mySpace.html")
+@myBluePrint.route("/info")
+def info():
+    return render_template("info/myInfo.html")
 
 @myBluePrint.route("/data", methods=['POST'])
 def data():
