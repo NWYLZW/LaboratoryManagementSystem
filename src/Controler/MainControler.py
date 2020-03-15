@@ -1,3 +1,5 @@
+from flask_login import current_user
+
 from src.Util.JsonUtil import JsonUtil
 
 class MainControler:
@@ -28,10 +30,10 @@ class MainControler:
             'title': '加入我们',
             'url': '/user/register'
         }, ])
-    def getInfoByName(self,infoName,current_user):
+    def getInfoByName(self,infoName):
         if current_user.is_authenticated :
             infoDict = {
-                "welcome":"<h1>Hi,"+current_user.userName+"</h1><h2>(Laboratory Management System)</h2><h2>Welcome to you</h2>",
+                "welcome":"<h1>Hi,"+current_user.nickName+"</h1><h2>(Laboratory Management System)</h2><h2>Welcome to you</h2>",
             }
             return infoDict[infoName]
         else:

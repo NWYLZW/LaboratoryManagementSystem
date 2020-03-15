@@ -21,6 +21,29 @@ class myAjax {
 		return this;
 	}
 }
+class ajaxGetFile{
+	constructor(options) {
+		this.url = options.url || "/";
+		this.data = options.data || null;
+		this.method = options.method || "GET";
+		this.success = options.success || function(result) {console.log(result);};
+		this.failure = options.failure || function(e){console.log(e.status);};
+	}
+	ajax(){
+		var content = this;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open(this.method,this.url,true);
+		xmlhttp.responseType = "blob";
+		xmlhttp.onload = function(){
+			if(this.status >= 300){
+				content.failure(this);
+				return;
+			}
+			content.success(this.response);
+		}
+		xmlhttp.send(this.data);
+	}
+}
 var typeSpecialDeal = null;
 var responseCorrect = null;
 var responseError = null;

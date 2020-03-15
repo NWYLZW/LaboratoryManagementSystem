@@ -18,15 +18,29 @@
 		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/navigation.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/panelInterfaceContro.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../baseLibrary/js/user.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="interface">
 			
 		</div>
 		<div class="mainx">
-			<div class="top">
+			<div class="panelTop">
 				<div id="top-title" class="top-title"></div>
-				<i class="fa fa-sign-out fa-2_5x" onclick="window.location.href = '../user/logout'"></i>
+				<div class="top-headNav">
+					<img class="myHeadPortrait" style="
+					width: 64px;height: 64px;
+					">
+					<div class="navigationList">
+						<div class="navigationList-item" onclick="window.location.href = '../user/logout'">
+							<h5>退出登录</h5><i class="fa fa-sign-out fa-1_5x"></i>
+						</div>
+					</div>
+					<script type="text/javascript">
+						getMyHeadPortrait($('.myHeadPortrait')[0]);
+					</script>
+				</div>
 			</div>
 			<div id="left_nav" class="left_nav">
 				<div class="topx">

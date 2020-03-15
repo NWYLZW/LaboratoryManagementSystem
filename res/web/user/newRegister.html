@@ -153,7 +153,7 @@
 						</div>
 					</div>
 					<div class="formContentWrraper-item">
-						<h2 style="margin-top: 60px;">确认信息是否有误</h2>
+						<h2 style="margin-top: 20px;">确认信息是否有误</h2>
 						<table>
 							<tr>
 								<th>学号</th>
@@ -293,6 +293,7 @@
 			url:'./getDirection',
 			method:"POST",
 			success:function(result){
+				result = JSON.parse(result);
 				let directionList = [];
 				for (let key in result) {
 					directionList.push({
@@ -310,6 +311,7 @@
 			url:'./getLaboratory',
 			method:"POST",
 			success:function(result){
+				result = JSON.parse(result);
 				let blockList = {}
 				for (let key in result) {
 					if(!blockList.hasOwnProperty(result[key].blockNum)){
@@ -332,6 +334,7 @@
 			url:'./getProfessionalList',
 			method:"POST",
 			success:function(result){
+				result = JSON.parse(result);
 				let professionalList = [];
 				let professionalExistList = [];
 				for (let key in result) {

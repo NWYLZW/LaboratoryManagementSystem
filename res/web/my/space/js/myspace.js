@@ -79,24 +79,24 @@ function initMark(){
 				var JSONObject = JSON.parse(result);
 				switch (JSONObject.type){
 				case -2001:
-					dialog({
-						title: '信息',
-						content: JSONObject.content,
-						padding: '40px',
-						drag: true,
-						time:2,
-					}).show();
+					Notiflix.Report.Success(
+					'信息',
+					JSONObject.content,
+					'确认',
+					function(){
+						$('.mark img')[0].src = "../../my/space/img/mark.png";
+					});
 					$('.mark img')[0].src = "../../my/space/img/markSuccess.png";
 					yearCalendarX.mark();
 					break;
 				default:
-					dialog({
-						title: '错误',
-						content: JSONObject.content,
-						padding: '40px',
-						drag: true,
-						time:2,
-					}).show();
+					Notiflix.Report.Success(
+					'错误',
+					JSONObject.content,
+					'确认',
+					function(){
+						$('.mark img')[0].src = "../../my/space/img/mark.png";
+					});
 					break;
 				}
 			},

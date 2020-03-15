@@ -78,13 +78,13 @@ def searchAllUser():
 
 @userBluePrint.route("/getDirection",methods=['POST'])
 def getDirection():
-    return Direction.getDict()
+    return JsonUtil().dictToJson(Direction.getDict())
 @userBluePrint.route("/getLaboratory",methods=['POST'])
 def getLaboratory():
-    return Laboratory.getDict()
+    return JsonUtil().dictToJson(Laboratory.getDict())
 @userBluePrint.route("/getProfessionalList",methods=['POST'])
 def getProfessionalList():
-    return ProfessionalClass.getDict()
+    return JsonUtil().dictToJson(ProfessionalClass.getDict())
 
 @login_manager.user_loader
 def load_user(user_id):

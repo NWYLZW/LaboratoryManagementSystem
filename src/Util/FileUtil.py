@@ -1,12 +1,28 @@
 # TODO 文件收发存储帮助类
 import os
 
+from flask import make_response, send_file
+
 from src import MainLog
 
 class FileUtil:
     def __init__(self):
         self.webPath = "./res/web"
         self.resImagePath = "./res/image"
+    def saveToRes(self,uploadFile=None,path="",fileName="")->bool:
+        try:
+            uploadFile.save( os.path.join( self.resImagePath, path, fileName) )
+            return True
+        except Exception as e:
+            MainLog.record(MainLog.level.WARN,e)
+            return False
+    def getFromRes(self,path="",fileName=""):
+        response = make_response(
+            send_file(
+                os.path.join( '.'+self.resImagePath, path, fileName),
+                as_attachment=True))
+        response.headers["Content-Disposition"] = "attachment; filename={}".format(fileName.encode().decode('latin-1'))
+        return response
     def saveToWeb(self,uploadFile=None,path="",fileName="")->bool:
         try:
             uploadFile.save( os.path.join( self.webPath, path, fileName) )
