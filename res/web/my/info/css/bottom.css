@@ -2,9 +2,8 @@
 	position: relative;
 	left: 15%;
 	width: 70%;
-	height: 100%;
 }
-.circle{
+.HeadPortraitCircle{
 	position: absolute;
 	top: -100px;
 	left: calc(50% - 100px);
@@ -12,6 +11,7 @@
 	height: 200px;
 	border-radius: 50%;
 	background-color: lightgray;
+	box-shadow: 0 0 10px gray;
 	overflow: hidden;
 }
 .editMyHeadPortrait{
@@ -19,59 +19,28 @@
 	top: 65%;
 	width: 100%;
 	height: 35%;
-	background-color: darkgray;
 	text-align: center;
+	user-select: none;
 	line-height: 70px;
 	font-size: 20px;
-	display: none;
+	opacity: 0;
+	transition: .2s;
+	background-color: rgba(245,245,245,.6);
 }
-.circle:hover .editMyHeadPortrait{
-	display: block;
-}
-#iframe-wrapper{
-	position: fixed;
-	left:calc(50% - 400px);
-	top: calc(50% - 400px);
-	z-index: 1000;
-	display: none;
-}
-.deleterBtn{
-	position: absolute;
-	top: 0;
-	right: 0;
-	text-align: center;
-	color: red;
-	background-color: darkgray;
+.HeadPortraitCircle:hover .editMyHeadPortrait{
+	opacity: 1;
 }
 .bottom-top{
 	width: 100%;
-	height: 30%;
-}
-.bottom-mid{
-	width: 100%;
-	height: 22%;
-	background-color: lightseagreen;
-}
-.bottom-bottom{
-	width: 100%;
-	height: 30%;
-	background-color: lightcyan;
-}
-.side{
-	margin-top: 2%;
-	width: 100%;
-	height: 5%;
-	background-color: lightsalmon;
-}
-.side p{
-	margin-left: 40px;
-	line-height: 37px;
+	height: 200px;
+	box-shadow: 0 0 10px gray;
+	background-color: rgba(245,245,245);
+	border-radius: 0 0 16px 16px;
 }
 .bottom-top-side{
 	float: left;
 	width: calc(50% - 100px);
 	height: 100%;
-	background-color: palevioletred;
 }
 .bottom-top-mid{
 	position: relative;
@@ -85,42 +54,89 @@
 	height: 50%;
 	text-align: center;
 	line-height: 52px;
-	background-color: lightcoral;
 }
-.bottom-mid-content{
+
+.bottom-item{
+	margin-top: 10px;
+	margin-bottom: 20px;
 	width: 100%;
-	height: 80%;
-	background-color: lightgrey;
+	overflow: hidden;
+	border-radius: 16px;
+	box-shadow: 0 0 10px gray;
+	background-color: rgba(245,245,245);
 }
-.bottom-mid-foot{
-	position: relative;
-	left: calc(100% - 200px);
-	width: 200px;
-	height: 20%;
+.side{
+	width: 100%;
+	height: 48px;
+	border-bottom: 1px solid darkgray;
+}
+.side p{
+	margin-left: 40px;
+	line-height: 48px;
+	user-select: none;
+	font-size: 18px;
+	font-weight: 600;
+	color: gray;
+}
+.bottom-item-content{
+	width: 100%;
+	height: 300px;
+	background-color: rgba(235,235,235);
+}
+.bottom-item-foot{
+	width: 100%;
+	height: 48px;
 	background-color: lightgreen;
 }
+
 .user-information{
-	margin: 0 auto;
+	position: relative;
+	left: 15%;
 	width: 70%;
 	height: 100%;
 }
 .user-information-content{
-	border: gray solid 2px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 12.5px;
 	width: 100%;
-	height: 25%;
-	line-height: 51px;
+	height: 50px;
+	line-height: 50px;
+	transition: .2s;
+}
+.user-information-content:hover{
+	border-radius: 16px;
+	background-color: rgba(215,215,215);
+	box-shadow: 0 0 -5px gray;
 }
 .user-information-content p{
 	float: left;
 	height: 100%;
 	width: 58px;
-	border-right: gray solid 2px;
+	user-select: none;
 	text-align: center;
 }
 .user-information-content div{
 	float: left;
 	height: 100%;
 	width: calc(100% - 60px);
+}
+
+#iframe-wrapper{
+	position: fixed;
+	left:calc(50% - 400px);
+	top: calc(50% - 400px);
+	z-index: 100000;
+	border-radius: 12px;
+	box-shadow: 0 0 10px gray;
+	overflow: hidden;
+	display: none;
+}
+#iframe-wrapper iframe{
+	border: none;
+}
+.deleterBtn{
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: center;
+	color: red;
 }
