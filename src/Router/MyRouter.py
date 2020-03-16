@@ -31,7 +31,7 @@ def info():
 
 @myBluePrint.route("/data", methods=['POST'])
 def data():
-    return current_user.toDict()
+    return JsonUtil().dictToJson(current_user.toDict())
 
 @myBluePrint.route("/changeHeadPortrait", methods=['GET','POST'])
 def changeHeadPortrait():

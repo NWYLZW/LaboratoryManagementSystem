@@ -7,9 +7,11 @@
 		<link rel="stylesheet" type="text/css" href="../../my/info/css/top.css"/>
 		<link rel="stylesheet" type="text/css" href="../../my/info/css/bottom.css"/>
 		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css">
 		<script src="../../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/user.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="main">
@@ -124,10 +126,14 @@
 		var iframe = $('#iframe-wrapper');
 		this.pop = function(src){
 			iframe.find('iframe')[0].src = src;
-			iframe[0].style.display = 'block';
+			Notiflix.Block.Circle('#iframe-wrapper', '加载中...');
+			iframe.find('iframe')[0].onload = function(){
+				Notiflix.Block.Remove('#iframe-wrapper',500);
+			};
+			iframe[0].style.top = 'calc(50% - 400px)';
 		}
 		this.close = function(){
-			iframe[0].style.display = 'none';
+			iframe[0].style.top = '5000px';
 		}
 		return this;
 	})();
@@ -138,4 +144,8 @@
 		IFC.close();
 		location.reload();
 	}
+	
+	getMyData(function(result){
+		console.log(result);
+	})
 </script>

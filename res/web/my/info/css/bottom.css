@@ -123,12 +123,12 @@
 #iframe-wrapper{
 	position: fixed;
 	left:calc(50% - 400px);
-	top: calc(50% - 400px);
+	top: 5000px;
 	z-index: 100000;
+	overflow: hidden;
 	border-radius: 12px;
 	box-shadow: 0 0 10px gray;
-	overflow: hidden;
-	display: none;
+	transition: .5s;
 }
 #iframe-wrapper iframe{
 	border: none;
