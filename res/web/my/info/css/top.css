@@ -1,5 +1,5 @@
 .change-background{
-	position: relative;
+	position: absolute;
 	left: calc(100% - 180px);
 	top: calc(100% - 50px);
 	width: 180px;
@@ -12,6 +12,10 @@
 	opacity: 0;
 	user-select: none;
 	transition: .2s;
+}
+.changeBackgroundImage{
+	display: inline-block;
+	vertical-align: middle;
 }
 .top:hover .change-background{
 	opacity: 1;

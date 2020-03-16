@@ -16,6 +16,10 @@
 	<body>
 		<div class="main">
 			<div class="top">
+				<img class="changeBackgroundImage">
+				<script type="text/javascript">
+					getBackground($('.changeBackgroundImage')[0]);
+				</script>
 				<div class="change-background">
 					更换背景
 				</div>
@@ -58,10 +62,10 @@
 						</div>
 						<div class="bottom-top-mid">
 							<div class="bottom-top-mid-in">
-								2018031203130
+								
 							</div>
 							<div class="bottom-top-mid-in">
-								fzl
+								
 							</div>
 						</div>
 						<div class="bottom-top-side">
@@ -140,6 +144,9 @@
 	$('.editMyHeadPortrait')[0].onclick = function(){
 		IFC.pop('../my/changeHeadPortrait');
 	}
+	$('.change-background')[0].onclick = function(){
+		IFC.pop('../my/changeBackground');
+	}
 	$('.deleterBtn')[0].onclick = function(){
 		IFC.close();
 		location.reload();
@@ -147,5 +154,15 @@
 	
 	getMyData(function(result){
 		console.log(result);
+		$('.permission-kind')[0].textContent = result.roleName;
+		$('.qq-num')[0].textContent = result.qqNum;
+		$('.tel-num')[0].textContent = result.telNum;
+		var professionalClass = result.professionalClass.split('-');
+		$('.major')[0].textContent = professionalClass[0];
+		$('.class-num')[0].textContent = professionalClass[1];
+		$('.tag')[0].textContent = result.roleId;
+		$('.bottom-top-mid-in')[0].textContent = result.schoolID;
+		$('.bottom-top-mid-in')[1].textContent = result.nickName;
+		
 	})
 </script>
