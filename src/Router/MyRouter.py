@@ -38,7 +38,7 @@ def changeHeadPortrait():
     if request.method == "POST":
         form = JPGAndPNGForm(CombinedMultiDict([request.files, request.form]))
         if form.validate_on_submit():
-            if fileUtil.saveToRes(path="userHeadPortrait", uploadFile=form.image.data,
+            if fileUtil.saveToRes(path="user/headPortrait", uploadFile=form.image.data,
                                   fileName=str(current_user.id)+".png"):
                 return render_template("changeHeadPortrait.html")
             else:
@@ -48,4 +48,21 @@ def changeHeadPortrait():
 
 @myBluePrint.route("/getHeadPortrait",methods=['GET'])
 def getHeadPortrait():
-    return fileUtil.getFromRes(path="userHeadPortrait", fileName=str(current_user.id) + ".png")
+    return fileUtil.getFromRes(path="user/headPortrait", fileName=str(current_user.id) + ".png")
+
+@myBluePrint.route("/changeBackground", methods=['GET','POST'])
+def changeBackground():
+    if request.method == "POST":
+        form = JPGAndPNGForm(CombinedMultiDict([request.files, request.form]))
+        if form.validate_on_submit():
+            if fileUtil.saveToRes(path="user/mySpaceBackground", uploadFile=form.image.data,
+                                  fileName=str(current_user.id)+".png"):
+                return render_template("changeBackgroundImage.html")
+            else:
+                return errorUtil.getData("changeBackgroundError")
+        return errorUtil.getData("FormDataWrong",form.errors)
+    return render_template("changeBackgroundImage.html")
+
+@myBluePrint.route("/getBackground",methods=['GET'])
+def getBackground():
+    return fileUtil.getFromRes(path="user/mySpaceBackground", fileName=str(current_user.id) + ".png")

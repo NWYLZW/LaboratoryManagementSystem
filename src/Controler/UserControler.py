@@ -52,10 +52,13 @@ class UserControler:
             )
             db.session.add(user)
             db.session.flush()
-            # TODO 删除用户时删除头像
+            # TODO 删除用户时删除头像与壁纸
             fileUtil.copyWebToImageRes(
                 'baseLibrary/img/headPortrait/'+str(user.id%10)+'.jpg',
-                'userHeadPortrait/'+str(user.id)+'.png')
+                'user/headPortrait/'+str(user.id)+'.png')
+            fileUtil.copyWebToImageRes(
+                'baseLibrary/img/defaultBackgroundImage.png',
+                'user/mySpaceBackground/'+str(user.id)+'.png')
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,form.schoolNum.data+"用户添加失败 错误信息:")
             MainLog.record(MainLog.level.ERROR,e)
