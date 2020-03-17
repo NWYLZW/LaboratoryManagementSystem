@@ -10,13 +10,15 @@
 		<link rel="stylesheet" type="text/css" href="../panel/css/main.css"/>
 		<link rel="stylesheet" type="text/css" href="../panel/css/interface.css"/>
 		<link rel="stylesheet" type="text/css" href="../panel/css/baffle.css"/>
+		<link rel="stylesheet" type="text/css" href="../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../iscroll/build/iscroll-probe.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Notiflix-2.1.2/Unminified/notiflix-2.1.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/generateMenu.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/navigation.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/generateMenu.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/panelInterfaceContro.js" type="text/javascript" charset="utf-8"></script>
 		
 		<script src="../baseLibrary/js/user.js" type="text/javascript" charset="utf-8"></script>
@@ -112,7 +114,8 @@
 			method:"POST",
 			success:function(result){
 				generateMenu(JSON.parse(result),'.iscroll');
-				new navigationResponse("panel",640,1000,myScroll);
+				new navigationResponse("panel",640,1000,myScroll)
+				.setEndFunction(setMaxHeight).refresh();
 				ajaxSuccess(function(){$('.interface')[0].style.display = "block";});
 				window.location.href = "#my-space";
 			},

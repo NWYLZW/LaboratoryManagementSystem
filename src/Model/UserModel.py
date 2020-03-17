@@ -100,6 +100,7 @@ class User(UserMixin, db.Model):
             "roleId":self.roleId,
             "roleName":self.role.name,
             "directionName":self.direction.name,
+            "directionImgName":self.direction.imgName,
             "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
             "professionalClass":self.professionalClass.getProfessionalClass(),
         }

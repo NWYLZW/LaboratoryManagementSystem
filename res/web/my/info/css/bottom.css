@@ -13,6 +13,10 @@
 	background-color: lightgray;
 	box-shadow: 0 0 10px gray;
 	overflow: hidden;
+	transition: .5s;
+}
+.HeadPortraitCircle:hover{
+	box-shadow: 0 0 10px black;
 }
 .editMyHeadPortrait{
 	position: absolute;
@@ -33,8 +37,9 @@
 .bottom-top{
 	width: 100%;
 	height: 200px;
-	box-shadow: 0 0 10px gray;
-	background-color: rgba(245,245,245);
+	border: 1px solid skyblue;
+	border-top: none;
+	box-shadow: 0 2px 5px gray;
 	border-radius: 0 0 16px 16px;
 }
 .bottom-top-side{
@@ -55,15 +60,28 @@
 	text-align: center;
 	line-height: 52px;
 }
+.bottom-top-mid .bottom-top-mid-in:first-child{
+	font-weight: 600;
+	font-size: 18px;
+	text-shadow: 0 0 3px gray;
+}
+.bottom-top-mid .bottom-top-mid-in:last-child{
+	font-size: 14px;
+	color: gray;
+}
 
 .bottom-item{
-	margin-top: 10px;
+	margin-top: 20px;
 	margin-bottom: 20px;
 	width: 100%;
 	overflow: hidden;
+	border: 1px solid lightgray;
 	border-radius: 16px;
+	box-shadow: 0 0 0px gray;
+	transition: .5s;
+}
+.bottom-item:hover{
 	box-shadow: 0 0 10px gray;
-	background-color: rgba(245,245,245);
 }
 .side{
 	width: 100%;
@@ -81,7 +99,7 @@
 .bottom-item-content{
 	width: 100%;
 	height: 300px;
-	background-color: rgba(235,235,235);
+	background-color: rgba(250,250,250);
 }
 .bottom-item-foot{
 	width: 100%;
@@ -112,6 +130,8 @@
 	height: 100%;
 	width: 58px;
 	user-select: none;
+	font-weight: 600;
+	color: gray;
 	text-align: center;
 }
 .user-information-content div{
@@ -120,23 +140,58 @@
 	width: calc(100% - 60px);
 }
 
+.tagList .tag-ico{
+	margin: 7px;
+	width: 36px;height: 36px;
+	border-radius: 20%;
+	line-height: 36px;text-align: center;
+	transition: .5s;
+}
+.tagList .tag-ico:hover{
+	background-color: white;
+	box-shadow: 0 0 5px white;
+}
+.tagList .tag-ico .fa-female{color: pink;}
+.tagList .tag-ico .fa-male{color: royalblue;}
+.tagList .tag-ico img{
+	margin: 6px;
+	width: 24px;height: 24px;
+}
+.tagList .tag-text{
+	margin: 7px;
+	padding-left: 4px;padding-right: 4px;
+	height: 36px;max-width: 64px;
+	border-radius: 6px;
+	line-height: 36px;text-align: center;
+	user-select: none;
+	font-size: 14px;
+	font-weight: 600;
+	transition: .5s;
+}
+.tagList .tag-text:hover{
+	background-color: white;
+	box-shadow: 0 0 5px white;
+}
+
 #iframe-wrapper{
-	position: fixed;
-	left:calc(50% - 400px);
-	top: 5000px;
 	z-index: 100000;
-	overflow: hidden;
+	position: fixed;
+	left:calc(50% - 400px);top:calc(50% - 400px);
 	border-radius: 12px;
 	box-shadow: 0 0 10px gray;
+	
+	display: none;
+	opacity: 0;
 	transition: .5s;
 }
 #iframe-wrapper iframe{
 	border: none;
+	border-radius: 12px;
 }
 .deleterBtn{
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: -24px;right: -24px;
+	width: 48px;height: 48px;
 	text-align: center;
 	color: red;
 }

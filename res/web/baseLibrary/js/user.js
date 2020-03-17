@@ -35,7 +35,7 @@ function getMyHeadPortrait(imgNode){
 				window.URL.revokeObjectURL(imgNode.src);
 			};
 			imgNode.src = window.URL.createObjectURL(blob);
-			Notiflix.Block.Remove('.'+imgNode.parentNode.className);
+			Notiflix.Block.Remove('.'+imgNode.parentNode.className,200);
 		},
 		failure:function(error){
 			imgNode.onload = function(e) {
@@ -68,7 +68,7 @@ function getBackground(imgNode){
 		failure:function(error){
 			imgNode.onload = function(e) {
 				window.URL.revokeObjectURL(imgNode.src);
-			Notiflix.Block.Remove('.'+imgNode.parentNode.className);
+			Notiflix.Block.Remove('.'+imgNode.parentNode.className,200);
 			};
 			imgNode.src = "../../baseLibrary/defaultBackgroundImage.png";
 		},

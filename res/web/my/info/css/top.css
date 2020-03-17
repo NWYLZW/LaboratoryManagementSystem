@@ -13,10 +13,11 @@
 	user-select: none;
 	transition: .2s;
 }
-.changeBackgroundImage{
-	display: inline-block;
-	vertical-align: middle;
+.backgroundImageWrraper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.top:hover .change-background{
+.backgroundImageWrraper:hover .change-background{
 	opacity: 1;
 }

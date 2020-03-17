@@ -45,7 +45,6 @@ def changeHeadPortrait():
                 return errorUtil.getData("changeHeadPortraitError")
         return errorUtil.getData("FormDataWrong",form.errors)
     return render_template("changeHeadPortrait.html")
-
 @myBluePrint.route("/getHeadPortrait",methods=['GET'])
 def getHeadPortrait():
     return fileUtil.getFromRes(path="user/headPortrait", fileName=str(current_user.id) + ".png")
@@ -62,7 +61,6 @@ def changeBackground():
                 return errorUtil.getData("changeBackgroundError")
         return errorUtil.getData("FormDataWrong",form.errors)
     return render_template("changeBackgroundImage.html")
-
 @myBluePrint.route("/getBackground",methods=['GET'])
 def getBackground():
     return fileUtil.getFromRes(path="user/mySpaceBackground", fileName=str(current_user.id) + ".png")

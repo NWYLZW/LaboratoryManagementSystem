@@ -7,13 +7,12 @@
 	width: 100%;
 	height: auto;
 }
-.top{
+.backgroundImageWrraper{
 	position: relative;
 	width: 100%;
-	height: 240px;
-	background-color: lightcoral;
+	max-height: 450px;min-height: 250px;
+	background-color: rgba(50,50,50,.8);
 	text-align: center;
-	line-height: 240px;
 	overflow: hidden;
 }
 .bottom{

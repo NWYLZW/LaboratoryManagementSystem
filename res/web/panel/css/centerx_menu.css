@@ -30,12 +30,8 @@
 }
 
 .centerx_menu_item{
-	max-height: 400px;
-	transition: linear .5s;
+	transition: linear .2s;
 	overflow: hidden;
-}
-.show_child{
-	max-height: 64px;
 }
 .item-childs .item-title-ico{
 	margin-left: 5%;

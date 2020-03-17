@@ -51,6 +51,7 @@ class response {
 		this.link(linkArr[this.statux]);
 		if(this.endFunction)
 			this.endFunction();
+		return this;
 	}
 	setEndFunction(endFunction){
 		this.endFunction = endFunction;
