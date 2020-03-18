@@ -15,27 +15,27 @@ class RegisterForm(FlaskForm):
 
     schoolNum = StringField(
         'schoolNum',
-        validators=[DataRequired('schoolNum is null')]
+        validators=[DataRequired('schoolNum 不得为空')]
     )
     name = StringField(
         'name',
-        validators=[DataRequired('name is null')]
+        validators=[DataRequired('name 不得为空')]
     )
     email = StringField(
         'email',
-        validators=[DataRequired('email is null'),Email('email格式错误')]
+        validators=[DataRequired('email 不得为空'),Email('email格式错误')]
     )
     password = PasswordField(
         'password',
-        validators=[Length(min=6,max=20),DataRequired('password is null')]
+        validators=[Length(min=6,max=20),DataRequired('password 不得为空')]
     )
     telNum = StringField(
         'telNum',
-        validators=[Length(min=11,max=11),DataRequired('telNum is null')]
+        validators=[Length(min=11,max=11),DataRequired('telNum 不得为空')]
     )
     QQ = StringField(
         'QQ',
-        validators=[Length(min=6,max=15),DataRequired('QQ is null')]
+        validators=[Length(min=6,max=15),DataRequired('QQ 不得为空')]
     )
     Sex = SelectField(
         'Sex',
@@ -43,25 +43,25 @@ class RegisterForm(FlaskForm):
             ('0', '男'),
             ('1', '女')],
         coerce=str,
-        validators=[DataRequired('Sex is null')]
+        validators=[DataRequired('Sex 不得为空')]
     )
     laboratory = SelectField(
         'laboratory',
         choices=laboratoryChoices,
         coerce=str,
-        validators=[DataRequired('laboratory is null')]
+        validators=[DataRequired('laboratory 不得为空')]
     )
     direction = SelectField(
         'direction',
         choices=directionChoices,
         coerce=str,
-        validators=[DataRequired('direction is null')]
+        validators=[DataRequired('direction 不得为空')]
     )
     professional = SelectField(
         'professional',
         choices=professionalChoices,
         coerce=str,
-        validators=[DataRequired('professional is null')]
+        validators=[DataRequired('professional 不得为空')]
     )
     def validate_userName(self,field):
         '''

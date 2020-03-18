@@ -3,10 +3,12 @@ from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
 from src import templatePath
+from src.Controler.UserControler import userControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.FileUtil import fileUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
+from src.form.EditUserDataForm import EditMyBaseData, EditLaboratory, EditMyPrivacyData, EditMyPWD, EditDirection
 from src.form.ImageForm import JPGAndPNGForm
 
 myBluePrint = Blueprint(
@@ -32,6 +34,39 @@ def info():
 @myBluePrint.route("/data", methods=['POST'])
 def data():
     return JsonUtil().dictToJson(current_user.toDict())
+
+@myBluePrint.route("/editMyBaseData", methods=['POST'])
+def editMyBaseData():
+    form = EditMyBaseData(request.form)
+    if form.validate_on_submit():
+        if userControler.editUser(current_user.id,form): return successUtil.getData('editMyBaseDataSuccess')
+        else: return errorUtil.getData('dataBaseError')
+    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+
+@myBluePrint.route("/editMyPrivacyData", methods=['POST'])
+def editMyPrivacyData():
+    form = EditMyPrivacyData(request.form)
+    if form.validate_on_submit():
+        return "0"
+    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+@myBluePrint.route("/editMyPWD", methods=['POST'])
+def editMyPWD():
+    form = EditMyPWD(request.form)
+    if form.validate_on_submit():
+        return "0"
+    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+@myBluePrint.route("/editDirection", methods=['POST'])
+def editDirection():
+    form = EditDirection(request.form)
+    if form.validate_on_submit():
+        return "0"
+    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+@myBluePrint.route("/editLaboratory", methods=['POST'])
+def editLaboratory():
+    form = EditLaboratory(request.form)
+    if form.validate_on_submit():
+        return "0"
+    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
 
 @myBluePrint.route("/changeHeadPortrait", methods=['GET','POST'])
 def changeHeadPortrait():

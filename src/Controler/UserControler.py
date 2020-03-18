@@ -17,16 +17,8 @@ class UserControler:
             if not userItem.id in userIdList and current_user.id != userItem.id:
                 userIdList.append(userItem.id)
                 userList.append(userItem)
-
-    def addUser(self,form):
-        '''
-        :param form:提交的表单
-        :return: 返回是否成功
-        '''
+    def __getProfessionalClass(self,professional,gradle,classNum):
         try:
-            gradle = form.schoolNum.data[2:4]
-            classNum = form.schoolNum.data[-4:-2]
-            professional = dict(form.professional.choices).get(form.professional.data)
             professionalClass = ProfessionalClass.query.filter_by(
                 professional=professional,
                 gradle=gradle,
@@ -38,6 +30,25 @@ class UserControler:
                     classNum=classNum)
                 db.session.add(professionalClass)
                 db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"获取专业班级失败 错误信息:")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return professionalClass
+
+    def addUser(self,form):
+        '''
+        :param form:提交的表单
+        :return: 返回是否成功
+        '''
+        try:
+            professionalClass = self.__getProfessionalClass(
+                dict(form.professional.choices).get(form.professional.data),
+                form.schoolNum.data[2:4],
+                form.schoolNum.data[-4:-2])
+            if professionalClass is None:
+                return False
             user = User(
                 schoolID = form.schoolNum.data,
                 nickName = form.name.data,
@@ -65,7 +76,29 @@ class UserControler:
             return False
         db.session.commit()
         return True
-
+    def editUser(self,userId,form):
+        try:
+            user = User.query.filter_by(id=userId)
+            if form.name.data is not '': user.name = form.name.data
+            if form.telNum.data is not '': user.telNum = form.telNum.data
+            if form.QQ.data is not '': user.qqNum = form.QQ.data
+            if form.Sex.data is not '': user.Sex = form.Sex.data
+            if form.professional.data is not '':
+                professionalClass = self.__getProfessionalClass(
+                    dict(form.professional.choices).get(form.professional.data),
+                    user.professionalClass.gradle,
+                    user.professionalClass.classNum)
+                if professionalClass is None:
+                    return False
+                user.professionalClassId = professionalClass.id
+            db.session.add(user)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,form.schoolNum.data+"用户数据修改失败 错误信息:")
+            MainLog.record(MainLog.level.ERROR,e)
+            return False
+        db.session.commit()
+        return True
     def getBriefUserListData(self, listWords):
         searchFile = [
             User.schoolID,
@@ -78,7 +111,6 @@ class UserControler:
         for index in range(responUserList.__len__()):
             responUserList[index] = responUserList[index].toBriefDict()
         return JsonUtil().dictToJson(responUserList)
-
     def getUserListData(self,listWords):
         searchFile = [
             User.schoolID,
