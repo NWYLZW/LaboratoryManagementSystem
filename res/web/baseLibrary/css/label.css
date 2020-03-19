@@ -80,3 +80,23 @@ a:hover{
 	background-size: 100%;
 	background-image: url(../img/direction/Product.png);
 }
+
+.emailist{
+	padding: 0;margin: 0;
+	border: 1px solid #bdbdbd; 
+	border-radius: 0px 0px 16px 16px; 
+	background-color:#fff;
+	color: gray;
+	font-size: 18px;
+	list-style-type: 0; 
+	overflow: hidden;
+}
+.emailist li{
+	padding:2px 11px;
+	cursor:pointer;
+}
+.emailist .on, .emailist li:hover{
+	color: white;
+	background-color: skyblue;
+	transition: .1s;
+}

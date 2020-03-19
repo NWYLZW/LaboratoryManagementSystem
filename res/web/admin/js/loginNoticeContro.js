@@ -458,7 +458,7 @@ class loginNoticeContro {
 		this.dictx = dictx;
 		this.jqEle = $('.loginNoticeContro'); 
 		this.ele = this.jqEle[0];
-		this.addBtnEle = $('.loginNoticeContro #addBottonWrraper .addBotton')[0];
+		this.addBtnEle = $('.loginNoticeContro #addBottonWrraper .addBottonLoginNotice')[0];
 		
 		this.initFormOption();
 		this.delLoginNotice = $("#delLoginNotice");
@@ -616,17 +616,3 @@ function IntervalWrapper(successCallback,timeOutCallback){
 	},100);
 }
 var Interval = null;
-new myAjax({
-	url:"../notice/loginNotice",
-	method:"POST",
-	success:function(result){
-		dictObj = JSON.parse(result);
-		new loginNoticeContro(dictObj);
-	},
-	failure:function(error){
-		// console.log(error);
-	},
-	always:function(jqXHR){
-		// console.log(jqXHR);
-	}
-}).ajax();

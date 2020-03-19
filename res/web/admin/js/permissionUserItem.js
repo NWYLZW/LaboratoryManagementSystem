@@ -115,7 +115,7 @@ class permissionUserItem{
 			.append($('<div class="userContent"></div>')
 				.append($('<div class="userContentName"></div>')
 					.append($('<div class="userID"></div>')
-						.html(this.dictx.userName+" ")
+						.html(this.dictx.schoolID+" ")
 					)
 					.append($('<div class="userNickName"></div>')
 						.text(this.dictx.nickName)
@@ -149,3 +149,11 @@ class permissionUserItem{
 		return this.jqEle.find('.selectPermission');
 	}
 }
+class permissionEditUserItem extends itemModel{
+	constructor(){super();}
+	generateEle(dictx,index,root){
+		console.log(dictx);
+		return new permissionUserItem(dictx,permissionList).jqEle[0];
+	}
+}
+

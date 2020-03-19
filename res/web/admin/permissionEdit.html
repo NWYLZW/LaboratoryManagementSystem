@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>权限修改</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
 		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
@@ -27,52 +27,5 @@
 			</div>
 		</div>
 	</body>
-    <script type="text/javascript" charset="utf-8">
-		class userItem extends itemModel{
-			constructor(){super();}
-			generateEle(dictx,index,root){
-				return new permissionUserItem(dictx,permissionList).jqEle[0];
-			}
-		}
-		var permissionList = {
-			"1":"CommonUser",
-		};
-		new myAjax({
-			url:'../admin/getPermissionList',
-			method:"POST",
-			success:function(result){
-				permissionList = JSON.parse(result);
-				$('.search').append(new searchControler({
-						height: 50,
-						backColor: 'rgba(50,150,250)',
-						icoColor:"rgba(230,230,230)",
-						inputColor:"rgba(240,240,240)",
-						submit:function(){
-							contro.loading();
-							new myAjax({
-								url:'../user/searchAllUser',
-								data: this.keyWords,
-								method:"POST",
-								success:function(result){
-									contro.loaded();
-									setTimeout(function() {contro.updataDictList(JSON.parse(result));}, 1000);
-								},
-								failure:function(error){},
-								always:function(jqXHR){}
-							}).ajax();
-						},
-					}).jqEle
-				);
-				contro = new pageListControler({
-					title:"修改用户权限",
-					pageCountList:[6,12,24,48],
-					itemModel:new userItem(),
-					dictList:[],
-				});
-				$('.search-result')[0].appendChild(contro.ele);
-			},
-			failure:function(error){},
-			always:function(jqXHR){}
-		}).ajax();
-    </script>
+	<script src="../admin/js/permissionEdit.js" type="text/javascript" charset="utf-8"></script>
 </html>

@@ -54,8 +54,10 @@ class InterfaceContro {
 		}
 		var count = 0,scriptList = this.scriptList;
 		function recursion(){
-			if(count==tempScriptSrcList.length)
+			if(count==tempScriptSrcList.length){
+				console.clear();
 				return;
+			}
 			for (var i = count; i < tempScriptSrcList.length; count++) {
 				if(!judgeHaveScript(tempScriptSrcList[count].src))
 					break;

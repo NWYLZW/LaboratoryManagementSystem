@@ -60,6 +60,26 @@ peopleContro = {
         'icoClass': 'fa fa-user-plus fa-1_5x',
     }, ]
 }
+adminContro = {
+    'name': "超级管理",
+    'url': '#4',
+    'icoClass': 'fa fa-cubes fa-1_5x',
+    'child': [{
+        'permission': [
+            Permission.ADMINISTER,
+        ],
+        'name': "权限修改",
+        'url': '#admin-editPermission',
+        'icoClass': 'fa fa-cube fa-1_5x',
+    },{
+        'permission': [
+            Permission.ADMINISTER,
+        ],
+        'name': "修改轮播图",
+        'url': '#admin-editLoginNotice',
+        'icoClass': 'fa fa-cube fa-1_5x',
+    },]
+}
 # moneyContro = {
 #     'name': "资金管理",
 #     'url': '#5',
@@ -83,7 +103,7 @@ class PanelControler:
     def __init__(self):
         pass
     def getMenuDict(self):
-        useList = [commonUse,my,peopleContro]
+        useList = [commonUse,my,peopleContro,adminContro]
         for useMenu in useList:
             for i in range(useMenu['child'].__len__()):
                 child = useMenu['child'][i]
