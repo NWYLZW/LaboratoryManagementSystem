@@ -47,6 +47,34 @@ function getMyHeadPortrait(imgNode){
 		always:function(jqXHR){}
 	}).ajax();
 }
+function getHeadPortrait(imgNode,userId){
+	try{
+		Notiflix.Block.Dots('.'+imgNode.parentNode.className);
+	}catch(e){
+		console.log(e);
+		console.log('未加载Notiflix模块');
+	}
+	new ajaxGetFile({
+		url:"../user/getHeadPortrait"+userId+"?"+new Date().getTime(),
+		method:"GET",
+		success:function(result){
+			var blob = result;
+			imgNode.onload = function(e) {
+				window.URL.revokeObjectURL(imgNode.src);
+			};
+			imgNode.src = window.URL.createObjectURL(blob);
+			Notiflix.Block.Remove('.'+imgNode.parentNode.className,200);
+		},
+		failure:function(error){
+			imgNode.onload = function(e) {
+				window.URL.revokeObjectURL(imgNode.src);
+			};
+			imgNode.src = "../../baseLibrary/img/imgLoadError.png";
+			Notiflix.Block.Remove('.'+imgNode.parentNode.className);
+		},
+		always:function(jqXHR){}
+	}).ajax();
+}
 function getBackground(imgNode){
 	try{
 		Notiflix.Block.Dots('.'+imgNode.parentNode.className);
