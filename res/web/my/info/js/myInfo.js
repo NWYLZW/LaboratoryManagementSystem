@@ -3,6 +3,8 @@ function loadEnd(){
 	initIFC();
 	setMyData();
 	initBackAndHP();
+	getMyMarkList($('.MyCalendar')[0]);
+	new editMyDataControler($('.editBTN')[0]).start();
 }
 function initBackAndHP(){
 	getBackground($('.backgroundImage')[0]);

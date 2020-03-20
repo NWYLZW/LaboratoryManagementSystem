@@ -9,10 +9,16 @@
 		<link rel="stylesheet" type="text/css" href="../../my/info/css/bottom.css"/>
 		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
 		<link rel="stylesheet" type="text/css" href="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css">
+		<link rel="stylesheet" type="text/css" href="../select-mania/css/select-mania.css"/>
+		<link rel="stylesheet" type="text/css" href="../select-mania/css/themes/select-mania-theme-blue.css">
 		<script src="../../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../baseLibrary/js/date.format.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/user.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../baseLibrary/js/calendar.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../select-mania/js/select-mania.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/SelectControler.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="main">
@@ -37,19 +43,19 @@
 							<div class="user-information">
 								<div class="user-information-content">
 									<p>权限</p>
-									<div class="permission-kind">
+									<div class="permission-kind user-information-content-text">
 										
 									</div>
 								</div>
 								<div class="user-information-content">
 									<p>QQ</p>
-									<div class="qq-num">
+									<div class="qq-num user-information-content-text">
 										
 									</div>
 								</div>
 								<div class="user-information-content">
 									<p>电话</p>
-									<div class="tel-num">
+									<div class="tel-num user-information-content-text">
 										
 									</div>
 								</div>
@@ -59,7 +65,7 @@
 							<div class="bottom-top-mid-in">
 								
 							</div>
-							<div class="bottom-top-mid-in">
+							<div class="bottom-top-mid-in" id="userName">
 								
 							</div>
 						</div>
@@ -67,23 +73,26 @@
 							<div class="user-information">
 								<div class="user-information-content">
 									<p>专业</p>
-									<div class="major">
+									<div class="major user-information-content-text">
 										
 									</div>
 								</div>
 								<div class="user-information-content">
 									<p>班级</p>
-									<div class="class-num">
+									<div class="class-num user-information-content-text">
 										
 									</div>
 								</div>
 								<div class="user-information-content">
 									<p>标签</p>
-									<div class="tagList">
+									<div class="tagList user-information-content-text">
 										
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="editBTN">
+							
 						</div>
 					</div>
 					
@@ -92,7 +101,9 @@
 							<p>签到信息</p>
 						</div>
 						<div class="bottom-item-content">
-							
+							<div class="MyCalendar">
+								
+							</div>
 						</div>
 						<div class="bottom-item-foot">
 							
@@ -119,5 +130,6 @@
 			</div>
 		</div>
 	</body>
+	<script src="../../my/info/js/editMyData.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../my/info/js/myInfo.js" type="text/javascript" charset="utf-8"></script>
 </html>
