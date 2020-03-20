@@ -29,7 +29,7 @@ class editMyDataControler {
 				thisBTN.appendChild(this.save[0]);
 				thisEdit.css({display: 'none'});
 				thisBTN.style.width = '100px';
-				thisBTN.style.borderRadius = '30%';
+				thisBTN.style.borderRadius = '16px';
 				this.cancel = $('<div class="fa fa-close fa-2x"></div>').css({
 					float: 'left',
 					width:'50px',
@@ -81,6 +81,17 @@ class editMyDataControler {
 			
 			var thisCancel = this.cancel;
 			var thisSave = this.save;
+			this.cancel.hover(function(){
+				thisCancel.css({color:'red'});
+			},function(){
+				thisCancel.css({color:'white'});
+			});
+			this.save.hover(function(){
+				thisSave.css({color:'green'});
+			},function(){
+				thisSave.css({color:'white'});
+			});
+			
 			this.cancel[0].onclick = function(){
 				state = 'edit';
 				thisCancel.css({display: 'none'});
