@@ -11,12 +11,12 @@
 	box-shadow: 0 0 16px gray;
 	overflow: hidden;
 }
-.mid{
+.mySpaceMid{
 	position: relative;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 100%;
-	height: 560px;
+	height: 640px;
 }
 .bottom{
 	position: relative;

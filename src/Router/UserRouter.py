@@ -7,6 +7,7 @@ from src.Model.DirectionModel import Direction
 from src.Model.LaboratoryModel import Laboratory
 from src.Model.ProfessionalClassModel import ProfessionalClass
 from src.Util.ErrorUtil import errorUtil
+from src.Util.FileUtil import fileUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
 from src.form.LoginForm import LoginForm
@@ -75,6 +76,15 @@ def searchUserTest():
 @login_required
 def searchAllUser():
     return userControler.getUserListData(request.json)
+
+@userBluePrint.route("/getHeadPortrait<int:ID>",methods=['GET'])
+def getHeadPortrait(ID):
+    try:
+        return fileUtil.getFromRes(path="user/headPortrait", fileName=str(ID) + ".png")
+    except Exception as e:
+        MainLog.record(MainLog.level.WARN,"可能发生了盗取用户信息")
+        MainLog.record(MainLog.level.WARN,e)
+        return errorUtil.getData('backEndWrong2')
 
 @userBluePrint.route("/getDirection",methods=['POST'])
 def getDirection():

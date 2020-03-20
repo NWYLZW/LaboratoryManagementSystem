@@ -8,6 +8,8 @@
 		<link rel="stylesheet" type="text/css" href="../../my/space/css/top.css"/>
 		<link rel="stylesheet" type="text/css" href="../../my/space/css/mid.css"/>
 		<link rel="stylesheet" type="text/css" href="../../my/space/css/bottom.css"/>
+		<link rel="stylesheet" type="text/css" href="../../my/space/css/mySpaceNotice.css"/>
+		<link rel="stylesheet" type="text/css" href="../../font-awesome-4.7.0/css/font-awesome.css"/>
 		<link rel="stylesheet" type="text/css" href="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css"/>
 		<script src="../../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.js" type="text/javascript" charset="utf-8"></script>
@@ -16,6 +18,7 @@
 		<script src="../../baseLibrary/js/date.format.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/calendar.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../baseLibrary/js/user.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="main">
@@ -29,39 +32,91 @@
 					</div>
 				</div>
 			</div>
-			<div class="mid">
-				<div class="mid-left">
-					<div class="title">
+			<div class="mySpaceMid">
+				<div class="mySpaceNotice">
+					<div class="mid-title"><i class="fa fa-bell fa-1x"></i> &nbsp;公告栏</div>
+					<div class="mid-content">
+						<div class="mySpaceNotice-item">
+							<div class="mySpaceNotice-item-top">
+								<div class="mySpaceNotice-item-title">第一条公告</div>
+								<div class="mySpaceNotice-item-tag">全体</div>
+							</div>
+							<div class="mySpaceNotice-item-content">
+								这是实验室管理系统的第一条公告这是实验室管理系统的第一条公告这是实验室管理系统的第一条公告
+								这是实验室管理系统的第一条公告这是实验室管理系统的第一条公告这是实验室管理系统的第一条公告
+							</div>
+							<script type="text/javascript">
+								$('.mySpaceNotice-item').click(function(){
+									 Notiflix.Confirm.Init({rtl:true,messageFontSize:"16px",titleFontSize:"20px", });
+									 Notiflix.Confirm.Show( 
+									'第一条公告',
+									'这是实验室管理系统的<a href="../info">第一条公告</a>这是实验室管理系统的第一条公告这是实验室管理系统的第一条公告\
+									这是实验室管理系统的第一条公告这是实验室管理系统的第一条公告这是实验室管理系统的第一条公告',
+									'查阅', '点错了',
+									function(){
+										Notiflix.Notify.Success('已查阅');
+									}, function(){
+									});
+								});
+							</script>
+							<div class="mySpaceNotice-item-bottom">
+								<div class="mySpaceNotice-item-author"><img></div>
+								<script type="text/javascript">
+									getHeadPortrait($('.mySpaceNotice-item-author img')[0],49);
+								</script>
+								<div class="mySpaceNotice-item-viewNum"><i class="fa fa-eye fa-1x"></i>1人已阅</div>
+								<div class="mySpaceNotice-item-releaseTime">发布时间: 2020-03-04 16:40</div>
+							</div>
+						</div>
+						<div class="mySpaceNotice-item">
+							<div class="mySpaceNotice-item-top">
+								<div class="mySpaceNotice-item-title">第二条公告</div>
+								<div class="mySpaceNotice-item-tag">全体</div>
+							</div>
+							<div class="mySpaceNotice-item-content">
+								这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告
+								这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告
+							</div>
+							<script type="text/javascript">
+								$('.mySpaceNotice-item')[1].onclick = function(){
+									 Notiflix.Report.Info(
+									'第二条公告',
+									'这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告\
+									这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告这是实验室管理系统的第二条公告',
+									'已查阅');
+								};
+							</script>
+							<div class="mySpaceNotice-item-bottom">
+								<div class="mySpaceNotice-item-author"><img></div>
+								<script type="text/javascript">
+									getHeadPortrait($('.mySpaceNotice-item-author img')[1],49);
+								</script>
+								<div class="mySpaceNotice-item-viewNum"><i class="fa fa-eye fa-1x" style="color: #00AAFF;"></i>1人已阅</div>
+								<div class="mySpaceNotice-item-releaseTime">发布时间: 2020-03-04 16:40</div>
+							</div>
+						</div>
+						<div style="height: 20px;width: 100%;position: relative;float: left;"></div>
 					</div>
-					<div class="content1">
+				</div>
+				<div class="myInformation">
+					<div class="mid-title"><i class="fa fa-comments-o fa-1x"></i> &nbsp;我的信息</div>
+					<div class="mid-content">
 						
 					</div>
 				</div>
-				<div class="mid-mid">
-					<div class="title">
+				<div class="messageBoard">
+					<div class="mid-title"><i class="fa fa-envelope fa-1x"></i> &nbsp;留言板</div>
+					<div class="messageBoard-content">
 						
 					</div>
-					<div class="content2">
-						
-					</div>
-				</div>
-				<div class="mid-right">
-					<div class="title">
-						
-					</div>
-					<div class="content3">
-						
-					</div>
-					<div class="foot">
+					<div class="messageBoard-foot">
 						
 					</div>
 				</div>
 			</div>
 			<div class="bottom">
 				<div class="bottom-left">
-					<div class="bottom-left-left">
-						
-					</div>
+					<div class="bottom-left-left"></div>
 					<div class="bottom-left-right">
 						
 					</div>

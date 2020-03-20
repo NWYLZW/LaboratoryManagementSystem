@@ -1,0 +1,13 @@
+[
+	{
+		id:0,
+		title:"",
+		kindNum:0,
+		content:"",
+		authorId:0,
+		dateTime:"",
+		message:"",
+		viewCount:0,
+		isView:false,
+	},
+]
