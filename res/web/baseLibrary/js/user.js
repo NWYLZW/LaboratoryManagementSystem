@@ -4,18 +4,19 @@ function getMyMarkList(calendarNode,endFun){
 		method:"POST",
 		success:function(result){
 			var JSONObject = JSON.parse(result);
-			yearCalendarX = new yearCalendar(JSONObject,
-					16,2,
-					[
-						"rgb( 215, 215, 215)",
-						"rgb( 172, 213, 242)",
-						"rgb( 172, 213, 242)",
-						"rgb( 127, 168, 209)",
-						"rgb( 73 , 114, 155)",
-						"rgb( 73 , 114, 155)",
-						"rgb( 37 , 78 , 119)",
-					],
-					{
+			yearCalendarX = 
+			new yearCalendar(JSONObject,
+				16,2,
+				[
+					"rgb( 215, 215, 215)",
+					"rgb( 172, 213, 242)",
+					"rgb( 172, 213, 242)",
+					"rgb( 127, 168, 209)",
+					"rgb( 73 , 114, 155)",
+					"rgb( 73 , 114, 155)",
+					"rgb( 37 , 78 , 119)",
+				],
+				{
 						'mouseover':function() {
 							this.message = $('<div></div>').css({
 								zIndex:"100000",
@@ -51,9 +52,10 @@ function getMyMarkList(calendarNode,endFun){
 							this.style.boxShadow = "0 0 0 gray";
 						},
 					})
-				.setCss({
-					paddingLeft:"40px",
-				});
+			.setCss({
+				paddingLeft:"65px",
+				paddingRight:"65px",
+			});
 			calendarNode.appendChild(yearCalendarX.ele);
 			if(endFun) endFun();
 		},

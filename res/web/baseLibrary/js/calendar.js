@@ -129,18 +129,18 @@ class yearCalendar{
 	}
 	createYearEle(){
 		var weekSum = 0;
-		for (var i = this.monthCalendarList.length-1; i >= 0; i--) {
+		for (let i = this.monthCalendarList.length-1; i >= 0; i--) {
 			weekSum += this.monthCalendarList[i].weekList.length;
 		}
-		var eleWidth = (this.daySize+this.dayMargin*2)*weekSum + this.monthCalendarList.length*5 + 80;
+		var eleWidth = (this.daySize+this.dayMargin*2)*weekSum + this.monthCalendarList.length*5;
 		this.jqEle = $('<div class="year"></div>').css({
-			position: "relative",
+			position: "relative",float: "left",
 			top:"calc(50% - "+(this.daySize+this.dayMargin*2)*7/2+"px"+")",
 			width: eleWidth+"px",
 			height: (this.daySize+this.dayMargin*2)*7+"px",
 		});
 		this.ele = this.jqEle[0];
-		for (var i = this.monthCalendarList.length-1; i >= 0; i--) {
+		for (let i = this.monthCalendarList.length-1; i >= 0; i--) {
 			this.ele.appendChild(this.monthCalendarList[i].ele);
 		}
 	}

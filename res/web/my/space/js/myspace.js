@@ -1,74 +1,7 @@
 var yearCalendarX = null;
 function loadEnd(){
 	initMark();
-	getYearCalendar();
-}
-function getYearCalendar(){
-	new myAjax({
-		url:"../../mark/myList",
-		method:"POST",
-		success:function(result){
-			var JSONObject = JSON.parse(result);
-			yearCalendarX = new yearCalendar(JSONObject,
-					16,2,
-					[
-						"rgb( 215, 215, 215)",
-						"rgb( 172, 213, 242)",
-						"rgb( 172, 213, 242)",
-						"rgb( 127, 168, 209)",
-						"rgb( 73 , 114, 155)",
-						"rgb( 73 , 114, 155)",
-						"rgb( 37 , 78 , 119)",
-					],
-					{
-						'mouseover':function() {
-							this.message = $('<div></div>').css({
-								zIndex:"100000",
-								position:"relative",
-								left:"calc(50% - 70px)",top:"-38px",
-								width:"140px",height:"36px",
-								borderRadius:"6px",
-								boxShadow:"0 0 2px gray",
-								fontSize:"12px",textAlign:"center",
-								color:"rgba(255,255,255,0)",
-								backgroundColor:"rgba(50,50,50,0)",
-								transition:".5s",
-							});
-							var message = this.message;
-							setTimeout(function() {
-								message.css({
-									boxShadow:"0 0 10px gray",
-									color:"rgba(240,240,240,1)",
-									backgroundColor:"rgba(50,50,50,1)",
-								});
-							}, 100);
-							this.message.html(
-								this.userMark.markNum+"  marks on"+'<br/>'+
-								this.userMark.date.format("D M d,Y")
-								);
-							this.appendChild(this.message[0]);
-							this.style.borderRadius = "8px";
-							this.style.boxShadow = "0 0 5px gray";
-						},
-						'mouseout':function() {
-							this.message.remove();
-							this.style.borderRadius = "0";
-							this.style.boxShadow = "0 0 0 gray";
-						},
-					})
-				.setCss({
-					paddingLeft:"40px",
-				});
-			$('.main .top .top-left')[0].appendChild(yearCalendarX.ele);
-			initScroll();
-		},
-		failure:function(e){
-			console.log(e);	
-		},
-		always:function(jqXHR){
-			// console.log(jqXHR);
-		}
-	}).ajax();
+	getMyMarkList($('.main .top .top-left')[0],initScroll);
 }
 function initMark(){
 	$('.mark').click(function(){
