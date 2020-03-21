@@ -1,4 +1,4 @@
-function getMyMarkList(calendarNode){
+function getMyMarkList(calendarNode,endFun){
 	new myAjax({
 		url:"../../mark/myList",
 		method:"POST",
@@ -55,6 +55,7 @@ function getMyMarkList(calendarNode){
 					paddingLeft:"40px",
 				});
 			calendarNode.appendChild(yearCalendarX.ele);
+			if(endFun) endFun();
 		},
 		failure:function(e){
 			console.log(e);	

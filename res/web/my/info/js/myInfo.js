@@ -3,7 +3,18 @@ function loadEnd(){
 	initIFC();
 	setMyData();
 	initBackAndHP();
-	getMyMarkList($('.MyCalendar')[0]);
+	getMyMarkList($('.MyCalendarP')[0],function(){
+		var yearCalendarScroll = new IScroll('.MyCalendarP', {
+			scrollX: true,
+			scrollY: false,
+			mouseWheel: true,
+			scrollbars: true,
+		});
+		yearCalendarScroll.refresh();
+		window.addEventListener('resize',function(){
+			yearCalendarScroll.refresh();
+		});
+	});
 	new editMyDataControler($('.editBTN')[0]).start();
 }
 function initBackAndHP(){

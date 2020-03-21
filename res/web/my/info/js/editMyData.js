@@ -106,7 +106,7 @@ class editMyDataControler {
 				thisSave.css({color:'white'});
 			});
 			
-			this.cancel[0].onclick = function(){
+			this.cancel.click(function(){
 				state = 'edit';
 				thisCancel.css({display: 'none'});
 				thisSave.css({display: 'none'});
@@ -114,6 +114,9 @@ class editMyDataControler {
 				thisBTN.style.width = '50px';
 				thisBTN.style.borderRadius = '50%';
 				$('.user-information-content').find('input').css({display:'none'});
+				
+				
+				
 				$('.qq-num').text(qqNum);
 				$('.tel-num').text(telNum);
 				$('#userName').text(userName);
@@ -122,7 +125,7 @@ class editMyDataControler {
 				.css({
 					backgroundColor:"",
 				});
-			}
+			});
 		}
 	}
 }
