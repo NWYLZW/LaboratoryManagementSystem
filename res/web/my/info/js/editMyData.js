@@ -23,8 +23,8 @@ class editMyDataControler {
 					width:'50px',
 					height:'50px',
 					lineHeight: '50px',
-					textAlign: 'center'
-
+					textAlign: 'center',
+					transition: '.5s',
 				});
 				thisBTN.appendChild(this.save[0]);
 				thisEdit.css({display: 'none'});
@@ -35,7 +35,8 @@ class editMyDataControler {
 					width:'50px',
 					height:'50px',
 					lineHeight: '50px',
-					textAlign: 'center'
+					textAlign: 'center',
+					transition: '.5s',
 				});
 				thisBTN.appendChild(this.cancel[0]);
 				
@@ -45,10 +46,11 @@ class editMyDataControler {
 				$('.qq-num').text('');
 				$('.tel-num').text('');
 				$('#userName').text('');
-				$('.qq-num')[0].appendChild($('<input type="text" name="qqNum"/>').val(qqNum)[0]);
-				$('.tel-num')[0].appendChild($('<input type="text" name="telNum"/>').val(telNum)[0]);
-				$('#userName')[0].appendChild($('<input type="text" name="schoolNum"/>').val(userName)[0]);
+				$('.qq-num')[0].appendChild($('<input class="data-input" type="text" name="qqNum"/>').val(qqNum)[0]);
+				$('.tel-num')[0].appendChild($('<input class="data-input" type="text" name="telNum"/>').val(telNum)[0]);
+				$('#userName')[0].appendChild($('<input class="data-input" type="text" name="schoolNum"/>').val(userName)[0]);
 				
+				var major = $('.major')[0].textContent;
 				$('.major').text('');
 				$('.major').append($('<div class="major-select"></div>'));
 				$('.major-select').append($('<select class="professional" name="professional"></select>'));
@@ -77,6 +79,18 @@ class editMyDataControler {
 					failure:function(error){},
 					always:function(jqXHR){}
 				}).ajax();
+				
+				var sex = $('.sex').html();
+				$('.sex')
+				.append($('\
+				<select class="Sex" name="Sex">\
+					<option data-icon="fa fa-mars" value="0">男</option>\
+					<option data-icon="fa fa-venus" value="1">女</option>\
+				</select>\
+				'))
+				.css({
+					backgroundColor:"rgba(230,230,230)",
+				});
 			}
 			
 			var thisCancel = this.cancel;
@@ -103,6 +117,11 @@ class editMyDataControler {
 				$('.qq-num').text(qqNum);
 				$('.tel-num').text(telNum);
 				$('#userName').text(userName);
+				$('.major').text(major);
+				$('.sex').html(sex)
+				.css({
+					backgroundColor:"",
+				});
 			}
 		}
 	}

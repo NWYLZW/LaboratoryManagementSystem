@@ -55,7 +55,7 @@ function setMyData(){
 		.append($('<div title="'+
 		(function (sex) {
 			if(sex) return '女';else return '男';
-		})(result.sex)+'" class="tag-ico"><i class="fa fa-'+
+		})(result.sex)+'" class="tag-ico sex"><i class="fa fa-'+
 		(function (sex) {
 			if(sex) return 'fe';else return '';
 		})(result.sex)+
