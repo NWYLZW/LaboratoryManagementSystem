@@ -1,6 +1,7 @@
 class editMyDataControler {
 	constructor(BTN) {
 		this.BTN = BTN;
+		this.submitForm();
 	}
 	start(){
 		var content = this;
@@ -44,6 +45,10 @@ class editMyDataControler {
 		this.BTN.appendChild(this.save[0]);
 		this.BTN.appendChild(this.cancel[0]);
 		
+		this.save.click(function(){
+			content.submitForm();
+		});
+		
 		this.cancel.click(function(){
 			content.cancel.css({display: 'none'});
 			content.save.css({display: 'none'});
@@ -60,7 +65,7 @@ class editMyDataControler {
 			.css({
 				borderRadius:"",
 				backgroundColor:"",
-			});
+			})[0].onclick = function(){};
 		});
 		
 		this.edit.click(function(){
@@ -110,6 +115,14 @@ class editMyDataControler {
 			}).ajax();
 			
 			content.sex = $('.sex').html();
+			$('.sex')[0].onclick = function(){
+				var sexI = $(this).find('.fa')
+				if(sexI.hasClass('fa-male')){
+					sexI.removeClass('fa-male').addClass('fa-female');
+				}else{
+					sexI.removeClass('fa-female').addClass('fa-male');
+				}
+			};
 			$('.sex')
 			.append($('\
 			<select class="Sex" name="Sex">\
@@ -122,5 +135,35 @@ class editMyDataControler {
 				backgroundColor:"rgba(230,230,230)",
 			});
 		});
+	}
+	submitForm(){
+		var formData = new FormData();
+		formData.set('name',this.qqNum);
+		formData.set('telNum',this.telNum);
+		formData.set('QQ',this.userName);
+		formData.set('Sex',this.sex);
+		formData.set('professional',this.major);
+		new myAjax({
+			url:'../../my/editMyBaseData',
+			data:formData,
+			method:"POST",
+			success:function(result){
+				Notiflix.Report.Success(
+				'成功'
+				,'修改信息成功'
+				,'确认'
+				,function(){
+					location.reload();
+				});
+			},
+			failure:function(error){
+				Notiflix.Report.Error(
+				'错误'
+				,"发生了网络错误"
+				,'确认');
+				return;
+			},
+			always:function(jqXHR){}
+		}).ajax();
 	}
 }
