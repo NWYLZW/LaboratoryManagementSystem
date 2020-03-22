@@ -39,10 +39,11 @@ class editMyDataControler {
 			$(this).css({color:'red'});
 		},function(){
 			$(this).css({color:'white'});
-		});;
-		this.BTN.appendChild(this.edit[0]);
-		this.BTN.appendChild(this.save[0]);
-		this.BTN.appendChild(this.cancel[0]);
+		});
+		$(this.BTN)
+		.append(this.edit)
+		.append(this.save)
+		.append(this.cancel);
 		
 		this.cancel.click(function(){
 			content.cancel.css({display: 'none'});
@@ -62,7 +63,6 @@ class editMyDataControler {
 				backgroundColor:"",
 			});
 		});
-		
 		this.edit.click(function(){
 			content.cancel.css({display: 'block'});
 			content.save.css({display: 'block'});
