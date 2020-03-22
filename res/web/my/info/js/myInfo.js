@@ -66,10 +66,10 @@ function setMyData(){
 		.append($('<div title="'+
 		(function (sex) {
 			if(sex) return '女';else return '男';
-		})(result.sex)+'" class="tag-ico sex"><i class="fa fa-'+
+		})(result.maleBool)+'" class="tag-ico sex"><i class="fa fa-'+
 		(function (sex) {
 			if(sex) return 'fe';else return '';
-		})(result.sex)+
+		})(result.maleBool)+
 		'male fa-1x"></i></div>'))
 		.append($('<div title="'+result.directionName+'" class="tag-ico"><img class="'+result.directionImgName+'Ico"></img></div>'))
 		.append($('<div class="tag-text">'+result.laboratoryName+'</div>'));
