@@ -1,7 +1,6 @@
 class editMyDataControler {
 	constructor(BTN) {
 		this.BTN = BTN;
-		this.submitForm();
 	}
 	start(){
 		var content = this;
