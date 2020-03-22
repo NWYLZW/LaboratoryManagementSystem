@@ -3,129 +3,124 @@ class editMyDataControler {
 		this.BTN = BTN;
 	}
 	start(){
-		var state = 'edit';
-		this.edit = $('<div class="fa fa-pencil fa-2x"></div>').css({
+		var content = this;
+		this.edit = $('<div class="fa fa-pencil fa-2x"></div>')
+		.css({
 			float: 'left',
 			width:'50px',
 			height:'50px',
 			lineHeight: '50px',
 			textAlign: 'center'
 		});
+		this.save = $('<div class="fa fa-check fa-2x"></div>')
+		.css({
+			float: 'left',
+			width:'50px',
+			height:'50px',
+			lineHeight: '50px',
+			textAlign: 'center',
+			transition: '.5s',
+		})
+		.hover(function(){
+			$(this).css({color:'green'});
+		},function(){
+			$(this).css({color:'white'});
+		});
+		this.cancel = $('<div class="fa fa-close fa-2x"></div>')
+		.css({
+			float: 'left',
+			width:'50px',
+			height:'50px',
+			lineHeight: '50px',
+			textAlign: 'center',
+			transition: '.5s',
+		})
+		.hover(function(){
+			$(this).css({color:'red'});
+		},function(){
+			$(this).css({color:'white'});
+		});;
 		this.BTN.appendChild(this.edit[0]);
+		this.BTN.appendChild(this.save[0]);
+		this.BTN.appendChild(this.cancel[0]);
 		
-		var thisEdit = this.edit;
-		var thisBTN = this.BTN;
-		this.edit[0].onclick = function(){
-			if(state === 'edit'){
-				state = 'save';
-				this.save = $('<div class="fa fa-check fa-2x"></div>').css({
-					float: 'left',
-					width:'50px',
-					height:'50px',
-					lineHeight: '50px',
-					textAlign: 'center',
-					transition: '.5s',
-				});
-				thisBTN.appendChild(this.save[0]);
-				thisEdit.css({display: 'none'});
-				thisBTN.style.width = '100px';
-				thisBTN.style.borderRadius = '16px';
-				this.cancel = $('<div class="fa fa-close fa-2x"></div>').css({
-					float: 'left',
-					width:'50px',
-					height:'50px',
-					lineHeight: '50px',
-					textAlign: 'center',
-					transition: '.5s',
-				});
-				thisBTN.appendChild(this.cancel[0]);
-				
-				var qqNum = $('.qq-num')[0].textContent;
-				var telNum = $('.tel-num')[0].textContent;
-				var userName = $('#userName')[0].textContent;
-				$('.qq-num').text('');
-				$('.tel-num').text('');
-				$('#userName').text('');
-				$('.qq-num')[0].appendChild($('<input class="data-input" type="text" name="qqNum"/>').val(qqNum)[0]);
-				$('.tel-num')[0].appendChild($('<input class="data-input" type="text" name="telNum"/>').val(telNum)[0]);
-				$('#userName')[0].appendChild($('<input class="data-input" type="text" name="schoolNum"/>').val(userName)[0]);
-				
-				var major = $('.major')[0].textContent;
-				$('.major').text('');
-				$('.major').append($('<div class="major-select"></div>'));
-				$('.major-select').append($('<select class="professional" name="professional"></select>'));
-				var selectList = [
-					['.professional','请选择专业'],
-				];
-				var slectContro = new SelectControler(selectList).refresh();
-				new myAjax({
-					url:'../user/getProfessionalList',
-					method:"POST",
-					success:function(result){
-						result = JSON.parse(result);
-						let professionalList = [];
-						let professionalExistList = [];
-						for (let key in result) {
-							if(professionalExistList.indexOf(result[key].professional)==-1){
-								professionalExistList.push(result[key].professional);
-								professionalList.push({
-									value:key,
-									text:result[key].professional,
-								});
-							}
+		this.cancel.click(function(){
+			content.cancel.css({display: 'none'});
+			content.save.css({display: 'none'});
+			content.edit.css({display: 'block'});
+			content.BTN.style.width = '50px';
+			content.BTN.style.borderRadius = '50%';
+			$('.user-information-content').find('input').css({display:'none'});
+			
+			$('.qq-num').text(content.qqNum);
+			$('.tel-num').text(content.telNum);
+			$('#userName').text(content.userName);
+			$('.major').text(content.major);
+			$('.sex').html(content.sex)
+			.css({
+				borderRadius:"",
+				backgroundColor:"",
+			});
+		});
+		
+		this.edit.click(function(){
+			content.cancel.css({display: 'block'});
+			content.save.css({display: 'block'});
+			content.edit.css({display: 'none'});
+			content.BTN.style.width = '100px';
+			content.BTN.style.borderRadius = '16px';
+			
+			content.qqNum = $('.qq-num')[0].textContent;
+			content.telNum = $('.tel-num')[0].textContent;
+			content.userName = $('#userName')[0].textContent;
+			$('.qq-num').text('');
+			$('.tel-num').text('');
+			$('#userName').text('');
+			$('.qq-num').append($('<input class="data-input" type="text" name="qqNum"/>').val(content.qqNum));
+			$('.tel-num').append($('<input class="data-input" type="text" name="telNum"/>').val(content.telNum));
+			$('#userName').append($('<input class="data-input" type="text" name="schoolNum"/>').val(content.userName));
+			
+			content.major = $('.major')[0].textContent;
+			$('.major').text('');
+			$('.major').append($('<div class="major-select"><select class="professional" name="professional"></select></div>'));
+			var selectList = [
+				['.professional','请选择专业'],
+			];
+			var slectContro = new SelectControler(selectList).refresh();
+			new myAjax({
+				url:'../user/getProfessionalList',
+				method:"POST",
+				success:function(result){
+					result = JSON.parse(result);
+					let professionalList = [];
+					let professionalExistList = [];
+					for (let key in result) {
+						if(professionalExistList.indexOf(result[key].professional)==-1){
+							professionalExistList.push(result[key].professional);
+							professionalList.push({
+								value:key,
+								text:result[key].professional,
+							});
 						}
-						slectContro.appendOption($('.professional'),professionalList);
-					},
-					failure:function(error){},
-					always:function(jqXHR){}
-				}).ajax();
-				
-				var sex = $('.sex').html();
-				$('.sex')
-				.append($('\
-				<select class="Sex" name="Sex">\
-					<option data-icon="fa fa-mars" value="0">男</option>\
-					<option data-icon="fa fa-venus" value="1">女</option>\
-				</select>\
-				'))
-				.css({
-					backgroundColor:"rgba(230,230,230)",
-				});
-			}
+					}
+					slectContro.appendOption($('.professional'),professionalList);
+				},
+				failure:function(error){},
+				always:function(jqXHR){}
+			}).ajax();
 			
-			var thisCancel = this.cancel;
-			var thisSave = this.save;
-			this.cancel.hover(function(){
-				thisCancel.css({color:'red'});
-			},function(){
-				thisCancel.css({color:'white'});
+			content.sex = $('.sex').html();
+			$('.sex')
+			.append($('\
+			<select class="Sex" name="Sex">\
+				<option data-icon="fa fa-mars" value="0">男</option>\
+				<option data-icon="fa fa-venus" value="1">女</option>\
+			</select>\
+			'))
+			.css({
+				borderRadius:"50%",
+				backgroundColor:"rgba(230,230,230)",
 			});
-			this.save.hover(function(){
-				thisSave.css({color:'green'});
-			},function(){
-				thisSave.css({color:'white'});
-			});
-			
-			this.cancel.click(function(){
-				state = 'edit';
-				thisCancel.css({display: 'none'});
-				thisSave.css({display: 'none'});
-				thisEdit.css({display: 'block'});
-				thisBTN.style.width = '50px';
-				thisBTN.style.borderRadius = '50%';
-				$('.user-information-content').find('input').css({display:'none'});
-				
-				
-				
-				$('.qq-num').text(qqNum);
-				$('.tel-num').text(telNum);
-				$('#userName').text(userName);
-				$('.major').text(major);
-				$('.sex').html(sex)
-				.css({
-					backgroundColor:"",
-				});
-			});
-		}
+		});
 	}
 }
