@@ -65,10 +65,10 @@ function setMyData(){
 		$('.tagList')
 		.append($('<div title="'+
 		(function (sex) {
-			if(sex) return '女';else return '男';
+			if(!sex) return '女';else return '男';
 		})(result.maleBool)+'" class="tag-ico sex"><i class="fa fa-'+
 		(function (sex) {
-			if(sex) return 'fe';else return '';
+			if(!sex) return 'fe';else return '';
 		})(result.maleBool)+
 		'male fa-1x"></i></div>'))
 		.append($('<div title="'+result.directionName+'" class="tag-ico"><img class="'+result.directionImgName+'Ico"></img></div>'))

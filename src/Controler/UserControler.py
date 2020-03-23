@@ -78,12 +78,12 @@ class UserControler:
         return True
     def editUser(self,userId,form):
         try:
-            user = User.query.filter_by(id=userId)
-            if form.name.data is not '': user.name = form.name.data
-            if form.telNum.data is not '': user.telNum = form.telNum.data
-            if form.QQ.data is not '': user.qqNum = form.QQ.data
-            if form.Sex.data is not '': user.Sex = form.Sex.data
-            if form.professional.data is not '':
+            user = User.query.filter_by(id=userId).first()
+            if form.name.data != '': user.nickName = form.name.data
+            if form.telNum.data != '': user.telNum = form.telNum.data
+            if form.QQ.data != '': user.qqNum = form.QQ.data
+            if form.Sex.data != '-1': user.sex = form.Sex.data
+            if form.professional.data != '-1':
                 professionalClass = self.__getProfessionalClass(
                     dict(form.professional.choices).get(form.professional.data),
                     user.professionalClass.gradle,
@@ -94,7 +94,7 @@ class UserControler:
             db.session.add(user)
             db.session.flush()
         except Exception as e:
-            MainLog.record(MainLog.level.ERROR,form.schoolNum.data+"用户数据修改失败 错误信息:")
+            MainLog.record(MainLog.level.ERROR,'id为'+str(current_user.id)+'用户名为'+current_user.nickName+"用户数据修改失败 错误信息:")
             MainLog.record(MainLog.level.ERROR,e)
             return False
         db.session.commit()

@@ -64,7 +64,7 @@ class User(UserMixin, db.Model):
             return "female"
     @sex.setter
     def sex(self, sex):
-        if sex== "0":
+        if sex == "0":
             self.sexBool = True
         else:
             self.sexBool = False

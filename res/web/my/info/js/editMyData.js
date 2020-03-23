@@ -48,7 +48,6 @@ class editMyDataControler {
 		this.save.click(function(){
 			content.submitForm();
 		});
-		
 		this.cancel.click(function(){
 			content.cancel.css({display: 'none'});
 			content.save.css({display: 'none'});
@@ -86,7 +85,11 @@ class editMyDataControler {
 			
 			content.major = $('.major')[0].textContent;
 			$('.major').text('');
-			$('.major').append($('<div class="major-select"><select class="professional" name="professional"></select></div>'));
+			$('.major').append($('\
+			<div class="major-select">\
+				<select class="professional" name="professional">\
+				</select>\
+			</div>'));
 			var selectList = [
 				['.professional','请选择专业'],
 			];
@@ -114,55 +117,87 @@ class editMyDataControler {
 			}).ajax();
 			
 			content.sex = $('.sex').html();
-			$('.sex')[0].onclick = function(){
-				var sexI = $(this).find('.fa')
-				if(sexI.hasClass('fa-male')){
-					sexI.removeClass('fa-male').addClass('fa-female');
-				}else{
-					sexI.removeClass('fa-female').addClass('fa-male');
-				}
-			};
 			$('.sex')
 			.append($('\
-			<select class="Sex" name="Sex">\
-				<option data-icon="fa fa-mars" value="0">男</option>\
-				<option data-icon="fa fa-venus" value="1">女</option>\
+			<select name="Sex">\
+				<option value="-1" selected="selected">未选择</option>\
+				<option value="0">男</option>\
+				<option value="1">女</option>\
 			</select>\
 			'))
 			.css({
 				borderRadius:"50%",
 				backgroundColor:"rgba(230,230,230)",
 			});
+			$('.sex')[0].onclick = function(){
+				var sexI = $(this).find('.fa');
+				var sexSelect = $(this).find('select');
+				if(sexI.hasClass('fa-male')){
+					sexI.removeClass('fa-male').addClass('fa-female');
+					sexSelect.val('1');
+				}else{
+					sexI.removeClass('fa-female').addClass('fa-male');
+					sexSelect.val('0');
+				}
+			};
 		});
 	}
 	submitForm(){
-		var formData = new FormData();
-		formData.set('name',this.qqNum);
-		formData.set('telNum',this.telNum);
-		formData.set('QQ',this.userName);
-		formData.set('Sex',this.sex);
-		formData.set('professional',this.major);
-		new myAjax({
+		var content = this;
+		var formData = new FormData(
+			$('<form></form>')
+				.append($('.sex select').clone().val($('.sex select').val()))
+				.append($('.major select').clone())[0]
+		);
+		formData.set('name',$('#userName input').val());
+		formData.set('telNum',$('.tel-num input').val());
+		formData.set('QQ',$('.qq-num input').val());
+		if($('.major select').val()==null){
+			formData.set('professional',-1);
+		}
+		// for (let keys of formData.entries()) {
+		// 	console.log(keys);
+		// }
+		new myAjaxForm({
 			url:'../../my/editMyBaseData',
 			data:formData,
 			method:"POST",
-			success:function(result){
-				Notiflix.Report.Success(
-				'成功'
-				,'修改信息成功'
-				,'确认'
-				,function(){
-					location.reload();
-				});
+			typeSpecialDeal:{
+				'0':function(dictObj){
+					console.log(JSON.parse(dictObj.message));
+					Notiflix.Report.Failure(
+					'错误'
+					,"表单数据错误"
+					,'确认');
+				}
 			},
-			failure:function(error){
-				Notiflix.Report.Error(
-				'错误'
-				,"发生了网络错误"
-				,'确认');
-				return;
+			responseCorrect:function(){
+				content.cancel.css({display: 'none'});
+				content.save.css({display: 'none'});
+				content.edit.css({display: 'block'});
+				content.BTN.style.width = '50px';
+				content.BTN.style.borderRadius = '50%';
+				$('.user-information-content').find('input').css({display:'none'});
+				
+				$('.qq-num')
+				.text(formData.get('QQ'));
+				$('.tel-num')
+				.text(formData.get('telNum'));
+				$('#userName')
+				.text(formData.get('name'));
+				if($('.major select').val()!=null){
+					$('.major')
+					.text($('.major select option:selected').text());
+				}else $('.major').text(content.major);
+				$('.sex')
+				.css({
+					borderRadius:"",
+					backgroundColor:"",
+				})[0].onclick = function(){};
+				$('.sex select').remove();
 			},
-			always:function(jqXHR){}
+			responseError:function(){},
+			failureEnd:function(){},
 		}).ajax();
 	}
 }

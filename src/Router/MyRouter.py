@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
-from src import templatePath
+from src import templatePath, MainLog
 from src.Controler.UserControler import userControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.FileUtil import fileUtil

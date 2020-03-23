@@ -8,28 +8,32 @@ from src.Model.ProfessionalClassModel import ProfessionalClass
 
 class EditMyBaseData(FlaskForm):
     professionalChoices = ProfessionalClass.getProfessionalList()
-    name = StringField(
-        'name',
-    )
-    telNum = StringField(
-        'telNum',
-        validators=[Length(min=11,max=11)]
-    )
-    QQ = StringField(
-        'QQ',
-        validators=[Length(min=6,max=15)]
-    )
+    professionalChoices.append(('-1', '未选择'))
+    name = StringField('name')
+    telNum = StringField('telNum')
+    def validate_telNum(self, field):
+        if len(field.data) != 0:
+            if len(field.data) != 11:
+                raise ValidationError('电话长度有误')
+    QQ = StringField('QQ')
+    def validate_QQ(self, field):
+        if len(field.data) != 0:
+            if len(field.data) < 6 or len(field.data) > 11:
+                raise ValidationError('QQ长度有误')
     Sex = SelectField(
         'Sex',
         choices=[
+            ('-1', '未选择'),
             ('0', '男'),
             ('1', '女')],
         coerce=str,
+        default=-1
     )
     professional = SelectField(
         'professional',
         choices=professionalChoices,
         coerce=str,
+        default=-1
     )
     def __init__(self, *args, **kwargs):
         kwargs['csrf_enabled'] = False
