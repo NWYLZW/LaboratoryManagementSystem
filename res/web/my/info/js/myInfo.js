@@ -16,6 +16,30 @@ function loadEnd(){
 		});
 	});
 	new editMyDataControler($('.editBTN')[0]).start();
+	initPrivateInput();
+}
+function initPrivateInput(){
+	var inputList = document.getElementsByClassName('formContent-input');
+	for (var i = inputList.length-1; i >= 0; i--) {
+		let inputLabel = inputList[i];
+		inputLabel.input = inputLabel.getElementsByTagName('input')[0];
+		inputLabel.input.addEventListener('focus',function(){
+			inputLabel.classList.add('formContent-inputClick');
+		})
+		inputLabel.input.addEventListener('blur',function(){
+			if(this.value==0)
+				inputLabel.classList.remove('formContent-inputClick');
+		})
+		inputLabel.onfocus = function(){
+			this.classList.add('formContent-inputClick');
+			this.input.focus();
+		}
+		inputLabel.onblur = function(){
+			if(this.value==0)
+				inputLabel.classList.remove('formContent-inputClick');
+		}
+	}
+	$(".inputMailList").mailAutoComplete();
 }
 function initBackAndHP(){
 	getBackground($('.backgroundImage')[0]);
