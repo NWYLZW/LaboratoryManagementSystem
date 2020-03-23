@@ -139,6 +139,28 @@
 	width: 100%;
 	height: 48px;
 }
+.bottom-item-foot .show-select-item{
+	position: relative;float: right;
+	margin-right: 20px;margin-top: 6px;
+	width: 100px;
+	height: 34px;
+	border: 1px solid lightgray;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 34px;
+	color: dimgray;
+	user-select: none;
+	transition: .5s;
+}
+.bottom-item-foot .show-select-item:hover{
+	background-color: coral;
+	color: white;
+	box-shadow: 0 0 5px gray;
+}
+.bottom-item-foot .show-select-item-selected{
+	background-color: dodgerblue;
+	color: white;
+}
 
 .user-information{
 	position: relative;
