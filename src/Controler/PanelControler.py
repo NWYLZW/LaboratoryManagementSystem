@@ -46,7 +46,7 @@ peopleContro = {
             Permission.DIRECTION_DATA_ADCS,
             Permission.ALL_FULL_DATA_S,
         ],
-        'name': "人员列表",
+        'name': "检索人员",
         'url': '#user-searchUser',
         'icoClass': 'fa fa-address-book fa-1_5x',
     }, {
