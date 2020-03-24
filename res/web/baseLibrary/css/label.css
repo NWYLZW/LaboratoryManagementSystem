@@ -24,6 +24,24 @@ a:hover{
 .MainBlueColor{
 	color: #1E90FF;
 }
+.ERROR{
+	color: #ff4600;
+}
+.transition1{
+	transition: .1s;
+}
+.transition2{
+	transition: .2s;
+}
+.transition3{
+	transition: .3s;
+}
+.transition4{
+	transition: .4s;
+}
+.transition5{
+	transition: .5s;
+}
 ::-webkit-scrollbar{
 	width: 8px;
 	height: 8px;

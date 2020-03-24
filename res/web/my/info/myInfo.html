@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>个人信息</title>
-		<link rel="stylesheet" type="text/css" href="../../baseLibrary/css/label.css"/>
+		<link rel="stylesheet" type="text/css" href="../../baseLibrary/css/label.css?v=2020-0324-0001"/>
 		<link rel="stylesheet" type="text/css" href="../../my/info/css/main.css"/>
 		<link rel="stylesheet" type="text/css" href="../../my/info/css/top.css"/>
 		<link rel="stylesheet" type="text/css" href="../../my/info/css/bottom.css"/>
@@ -11,9 +11,11 @@
 		<link rel="stylesheet" type="text/css" href="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css">
 		<link rel="stylesheet" type="text/css" href="../select-mania/css/select-mania.css"/>
 		<link rel="stylesheet" type="text/css" href="../select-mania/css/themes/select-mania-theme-blue.css">
+		<link rel="stylesheet" type="text/css" href="../../baseLibrary/css/csshake.min.css"/>
 		<script src="../../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/date.format.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/user.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../baseLibrary/js/calendar.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../Notiflix-2.1.2/Unminified/notiflix-2.1.2.js" type="text/javascript" charset="utf-8"></script>
@@ -121,38 +123,50 @@
 							</h3>
 							<div class="oldEmail formInput-Wrapper">
 								<div class="formContent-ico">
-									<i class="fa fa-envelope fa-1_5x"></i>
+									<span class="fa-stack fa-1x">
+										<i class="fa fa-envelope fa-stack-1x transition2 mainIco"></i>
+										<i class="fa fa-ban fa-stack-2x transition2 ERROR"></i>
+									</span>
 								</div>
 								<div class="formContent-input emailWrraper" tabindex="1" hidefocus="true" >
-									<input class="inputMailList" type="text" name="email" value=""/>
+									<input class="inputMailList" type="text" name="oldEmail" value="" readonly="readonly"/>
 									<div class="formContent-input-label">原电子邮箱</div>
 								</div>
 							</div>
 							<div class="newEmail formInput-Wrapper">
 								<div class="formContent-ico">
-									<i class="fa fa-envelope fa-1_5x"></i>
+									<span class="fa-stack fa-1x">
+										<i class="fa fa-envelope fa-stack-1x transition2 mainIco"></i>
+										<i class="fa fa-ban fa-stack-2x transition2 ERROR"></i>
+									</span>
 								</div>
 								<div class="formContent-input emailWrraper" tabindex="1" hidefocus="true">
-									<input class="inputMailList" type="text" name="email" value=""/>
+									<input class="inputMailList" type="text" name="newEmail" value="" readonly="readonly"/>
 									<div class="formContent-input-label">新电子邮箱</div>
 								</div>
 							</div>
 							<div style="clear: both;"></div>
 							<div class="newPWD formInput-Wrapper">
 								<div class="formContent-ico">
-									<i class="fa fa-key fa-1_5x"></i>
+									<span class="fa-stack fa-1x">
+										<i class="fa fa-key fa-stack-1x transition2 mainIco"></i>
+										<i class="fa fa-ban fa-stack-2x transition2 ERROR"></i>
+									</span>
 								</div>
 								<div class="formContent-input pwd0" tabindex="1" hidefocus="true">
-									<input id="pwd0" type="password" name="password" value=""/>
+									<input id="pwd0" type="password" name="password" value="" readonly="readonly"/>
 									<div class="formContent-input-label">新密码</div>
 								</div>
 							</div>
 							<div class="PWDConfirm formInput-Wrapper">
 								<div class="formContent-ico">
-									<i class="fa fa-key fa-1_5x"></i>
+									<span class="fa-stack fa-1x">
+										<i class="fa fa-key fa-stack-1x transition2 mainIco"></i>
+										<i class="fa fa-ban fa-stack-2x transition2 ERROR"></i>
+									</span>
 								</div>
 								<div class="formContent-input pwd1" tabindex="1" hidefocus="true">
-									<input id="pwd1" type="password" value=""/>
+									<input id="pwd1" type="password" value="" readonly="readonly"/>
 									<div class="formContent-input-label">确认密码</div>
 								</div>
 							</div>
@@ -199,5 +213,6 @@
 		</div>
 	</body>
 	<script src="../../my/info/js/editMyData.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../my/info/js/editPrivateData.js?v=2020-0324-0008" type="text/javascript" charset="utf-8"></script>
 	<script src="../../my/info/js/myInfo.js" type="text/javascript" charset="utf-8"></script>
 </html>

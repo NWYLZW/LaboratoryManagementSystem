@@ -1,8 +1,6 @@
 class editMyDataControler {
-	constructor(BTN) {
-		this.BTN = BTN;
-	}
-	start(){
+	constructor() {
+		this.BTN = $('.editBTN')[0];
 		var content = this;
 		this.edit = $('<div class="fa fa-pencil fa-2x"></div>')
 		.css({

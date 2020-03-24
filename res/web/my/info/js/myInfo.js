@@ -15,7 +15,8 @@ function loadEnd(){
 			yearCalendarScroll.refresh();
 		});
 	});
-	new editMyDataControler($('.editBTN')[0]).start();
+	new editMyDataControler();
+	new editPrivateDataControler();
 	initPrivateInput();
 }
 function initPrivateInput(){
