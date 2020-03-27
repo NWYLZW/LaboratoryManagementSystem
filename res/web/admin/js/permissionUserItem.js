@@ -107,10 +107,8 @@ class permissionUserItem{
 		$('<div class="permissionUserItem"></div>')
 		.append(
 			$('<div class="userContentEle"></div>')
-			.append($('<div class="userHeadPortrait"></div>')
-				.css({
-					backgroundImage: "url(../../baseLibrary/img/HeadPortrait/"+Math.round(Math.random()*9)+".jpg)",
-				})
+			.append($('<div id="HeadPortrait'+this.dictx.id+'" class="userHeadPortrait"></div>')
+				.append($('<img>'))
 			)
 			.append($('<div class="userContent"></div>')
 				.append($('<div class="userContentName"></div>')
@@ -138,6 +136,9 @@ class permissionUserItem{
 				)
 			)
 		);
+		$().loadedNode('#HeadPortrait'+this.dictx.id, function(){
+			getHeadPortrait($(this).find('img')[0],content.dictx.id);
+		});
 		this.permissionItemSelect = 
 			new permissionItemSelect(this.permissionList,this.dictx.roleId,this);
 		this.jqEle
@@ -152,7 +153,6 @@ class permissionUserItem{
 class permissionEditUserItem extends itemModel{
 	constructor(){super();}
 	generateEle(dictx,index,root){
-		console.log(dictx);
 		return new permissionUserItem(dictx,permissionList).jqEle[0];
 	}
 }
