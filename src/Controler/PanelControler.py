@@ -103,21 +103,33 @@ class PanelControler:
     def __init__(self):
         pass
     def getMenuDict(self):
-        useList = [commonUse,my,peopleContro,adminContro]
-        for useMenu in useList:
-            for i in range(useMenu['child'].__len__()):
-                child = useMenu['child'][i]
+        useList = [commonUse.copy(),
+                   my.copy(),
+                   peopleContro.copy(),
+                   adminContro.copy(),]
+        responUseList = []
+        for i in range(useList.__len__()):
+            childs = []
+            useMenu = useList[i]
+            for j in range(useMenu['child'].__len__()):
+                child = useMenu['child'][j]
                 if not child.get('permission'):
                     continue
-                flag = True
+                flag = False
                 for permission in child['permission']:
                     if current_user.can(permission):
-                        flag = False
+                        flag = True
                         break
-                del child['permission']
                 if flag:
-                    del useMenu['child'][i]
-            if useMenu['child'].__len__() == 0: del useMenu
-        return JsonUtil().dictToJson(useList)
+                    # 返回json去除permission属性，防止窃取信息
+                    childs.append({
+                        'name': child['name'],
+                        'url': child['url'],
+                        'icoClass': child['icoClass'],
+                    })
+            if childs.__len__() != 0:
+                responUseList.append(useList[i])
+                useList[i]['child'] = childs
+        return JsonUtil().dictToJson(responUseList)
 
 panelControler = PanelControler()
