@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, url_for
 from flask_login import current_user
 
-from src.Controler.MarkConreoler import markControler
+from src.Controler.MarkControler import markControler
 
 markBluePrint = Blueprint(
     'mark',

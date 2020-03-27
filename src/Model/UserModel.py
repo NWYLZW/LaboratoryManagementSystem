@@ -1,6 +1,7 @@
 import pymysql
 from sqlalchemy import and_
 
+from src.Controler.MarkControler import markControler
 from src.Model.RoleModel import Role, Permission
 
 pymysql.install_as_MySQLdb()
@@ -82,12 +83,15 @@ class User(UserMixin, db.Model):
 
     def toBriefDict(self):
         return {
+            "id":self.id,
             "schoolID":self.schoolID,
             "nickName":self.nickName,
             "maleBool":self.sexBool,
             "directionName":self.direction.name,
+            "directionImgName":self.direction.imgName,
             "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
             "professionalClass":self.professionalClass.getProfessionalClass(),
+            "markNumInYear":markControler.getMarkNum(self.id),
         }
     def toDict(self):
         return {

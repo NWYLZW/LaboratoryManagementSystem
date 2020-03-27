@@ -1,5 +1,4 @@
 import datetime
-import math
 import time
 
 from flask_login import current_user
@@ -50,6 +49,26 @@ class MarkControler():
             return successUtil.getData(messageDict[flag])
         else:
             return errorUtil.getData(messageDict[flag])
+    def getMarkNum(self, userId):
+        markNumSum = 0
+        for markItem in self.__searchMarkByTimeAndUserId(self.__lastYearTime(),userId):
+            difference = \
+                int((
+                    datetime.datetime(
+                        datetime.datetime.now().year,
+                        datetime.datetime.now().month,
+                        datetime.datetime.now().day,
+                        0,0,0) -
+                    datetime.datetime(
+                        markItem.dateTime.year,
+                        markItem.dateTime.month,
+                        markItem.dateTime.day,
+                        0,0,0)
+                ).days)
+            if difference < 365 and difference >= 0:
+                markNumSum += 1
+        return markNumSum
+
     def getMarkList(self, userId):
         userMarkDict = {
             'today':time.strftime("%Y-%m-%d", time.localtime()),

@@ -84,7 +84,7 @@ def getHeadPortrait(ID):
     except Exception as e:
         MainLog.record(MainLog.level.WARN,"可能发生了盗取用户信息")
         MainLog.record(MainLog.level.WARN,e)
-        return errorUtil.getData('backEndWrong2')
+        return JsonUtil().dictToJson(errorUtil.getData('backEndWrong2'))
 
 @userBluePrint.route("/getDirection",methods=['POST'])
 def getDirection():

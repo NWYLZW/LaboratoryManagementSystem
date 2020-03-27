@@ -118,7 +118,11 @@ function getMyHeadPortrait(imgNode){
 }
 function getHeadPortrait(imgNode,userId){
 	try{
-		Notiflix.Block.Dots('.'+imgNode.parentNode.className);
+		if(imgNode.parentNode.id==''){
+			Notiflix.Block.Dots('.'+imgNode.parentNode.className);
+		}else{
+			Notiflix.Block.Dots('#'+imgNode.parentNode.id);
+		}
 	}catch(e){
 		console.log(e);
 		console.log('未加载Notiflix模块');
@@ -127,12 +131,36 @@ function getHeadPortrait(imgNode,userId){
 		url:"../user/getHeadPortrait"+userId+"?"+new Date().getTime(),
 		method:"GET",
 		success:function(result){
-			var blob = result;
-			imgNode.onload = function(e) {
-				window.URL.revokeObjectURL(imgNode.src);
+			var reader = new FileReader();
+			reader.readAsText(result);
+			reader.onload = function(event){
+				var content = reader.result;
+				try{
+					if(JSON.parse(JSON.parse(content)).type===3){
+						imgNode.onload = function(e) {
+							window.URL.revokeObjectURL(imgNode.src);
+						};
+						imgNode.src = "../../baseLibrary/img/imgLoadError.png";
+						if(imgNode.parentNode.id==''){
+							Notiflix.Block.Remove('.'+imgNode.parentNode.className,200);
+						}else{
+							Notiflix.Block.Remove('#'+imgNode.parentNode.id,200);
+						}
+						return;
+					}
+				}catch(e){
+					var blob = result;
+					imgNode.onload = function(e) {
+						window.URL.revokeObjectURL(imgNode.src);
+					};
+					imgNode.src = window.URL.createObjectURL(blob);
+					if(imgNode.parentNode.id==''){
+						Notiflix.Block.Remove('.'+imgNode.parentNode.className,200);
+					}else{
+						Notiflix.Block.Remove('#'+imgNode.parentNode.id,200);
+					}
+				}
 			};
-			imgNode.src = window.URL.createObjectURL(blob);
-			Notiflix.Block.Remove('.'+imgNode.parentNode.className,200);
 		},
 		failure:function(error){
 			imgNode.onload = function(e) {
