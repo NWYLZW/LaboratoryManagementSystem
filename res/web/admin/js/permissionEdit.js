@@ -19,8 +19,8 @@ function loadEnd(){
 							data: this.keyWords,
 							method:"POST",
 							success:function(result){
+								contro.updataDictList(JSON.parse(result));
 								contro.loaded();
-								setTimeout(function() {contro.updataDictList(JSON.parse(result));}, 1000);
 							},
 							failure:function(error){},
 							always:function(jqXHR){}
