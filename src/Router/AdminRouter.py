@@ -100,6 +100,10 @@ def getPermissionList():
     if request.method == 'POST':
         return adminControler.getPermissionList()
 
+@adminBluePrint.route("/adminMainControler",methods=['GET'])
+def adminMainControler():
+    return render_template('adminMainControler.html')
+
 @adminBluePrint.route("/updateDirection",methods=['POST'])
 def updateDirection():
     messageDict = [
