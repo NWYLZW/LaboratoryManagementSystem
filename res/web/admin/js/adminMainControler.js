@@ -28,6 +28,20 @@ var list1 = [
 	},
 ];
 
+var list2 = [
+	{
+		id:0,
+		name:"网络工程1801",
+		content:"",
+		users:[
+			{
+				id:0,
+				name:"奉自利",
+			},
+		],
+	},
+];
+
 new PanelControler({
 	data:list0,
 	panelName:'.direction-panelContent',
@@ -40,7 +54,7 @@ new PanelControler({
 				<div class="direction-ICODIV AIIco">\
 					<i class="fa fa-angle-left fa-2x"></i>\
 					<i class="fa fa-angle-right fa-2x"></i>\
-					<input type="text" name="directionImageName" style="display: none;" my-submit/>\
+					<input class="direction-ICODIV-input" type="text" name="directionImageName" style="display: none;" my-submit/>\
 				</div>\
 				<div class="direction-content">\
 					<div class="direction-name"><input type="text" name="name" my-submit/></div>\
@@ -59,23 +73,34 @@ new PanelControler({
 				item$.find('.direction-name input').val(dict.name);
 				item$.find('.direction-introduce textarea').val(dict.content);
 			}
-			wraper$.css('left',-(currentIcoIndex*50-35)+'px');
-			item$.find('.fa-angle-left').click(function(){
-				currentIcoIndex -= 1;
+			var leftBtn$ = item$.find('.fa-angle-left');
+			var rightBtn$ = item$.find('.fa-angle-right');
+			function refresh(){
+				leftBtn$.css('color','white').unbind('click');
+				rightBtn$.css('color','white').unbind('click');
 				if(currentIcoIndex==0){
-					item$.find('.fa-angle-left').css('color','white').unbind('click');
+					rightBtn$.css('color','').bind('click',rightBtn$.clickFun);
 				}
-				else if(currentIcoIndex>0&&currentIcoIndex<ICOList.length){
+				else if(currentIcoIndex>0&&currentIcoIndex<ICOList.length-1){
+					leftBtn$.css('color','').bind('click',leftBtn$.clickFun);
+					rightBtn$.css('color','').bind('click',rightBtn$.clickFun);
 				}
 				else{
-					item$.find('.fa-angle-right').css('color','white').unbind('click');
+					leftBtn$.css('color','').bind('click',leftBtn$.clickFun);
 				}
 				wraper$.css('left',-(currentIcoIndex*50-35)+'px');
+				item$.find('.direction-ICODIV-input').val(ICOList[currentIcoIndex]);
+			}
+			leftBtn$.click(function(){
+				currentIcoIndex -= 1;refresh();
 			});
-			item$.find('.fa-angle-right').click(function(){
-				currentIcoIndex += 1;
-				wraper$.css('left',-(currentIcoIndex*50-35)+'px');
+			rightBtn$.click(function(){
+				currentIcoIndex += 1;refresh();
 			});
+			leftBtn$.clickFun = $._data(leftBtn$[0],'events')['click'][0].handler;
+			rightBtn$.clickFun = $._data(rightBtn$[0],'events')['click'][0].handler;
+			console.log($._data(leftBtn$[0],'events'));
+			refresh();
 			return item$;
 		}
 		else{
@@ -122,7 +147,7 @@ new PanelControler({
 				item$.find('.laboratory-introduce textarea').val(dict.content);
 				var personnelList$ = item$.find('.laboratory-personnelList');
 				for (var i = 0; i < dict.users.length; i++) {
-					personnelList$.append('<div class="laboratory-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].name+'</div>')
+					personnelList$.append('<div class="laboratory-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].name+'</div>');
 				}
 			}
 			return item$;
@@ -141,6 +166,52 @@ new PanelControler({
 			var personnelList$ = item$.find('.laboratory-personnelList');
 			for (var i = 0; i < dict.users.length; i++) {
 				personnelList$.append('<div class="laboratory-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].name+'</div>')
+			}
+			return item$;
+		}
+	},
+	violation:function(form){
+		return true;
+	},
+});
+
+new PanelControler({
+	data:list2,
+	panelName:'.professional-panelContent',
+	updataURL:'../admin/updateProfessional',
+	deleteURL:'../admin/deleteProfessional',
+	generateItemFun:function(dict,isEdit){
+		if(isEdit){
+			var item$ = $('\
+				<div class="professional-panelContent-item EDIT">\
+					<div class="professional-content">\
+						<div class="professional-name"><input type="text" name="name" my-submit/></div>\
+						<div class="professional-personnelList"></div>\
+					</div>\
+				</div>\
+			');
+			if(dict != null){
+				item$.find('.professional-name input').val(dict.name);
+				var personnelList$ = item$.find('.professional-personnelList');
+				for (var i = 0; i < dict.users.length; i++) {
+					personnelList$.append('<div class="professional-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].name+'</div>');
+				}
+			return item$;
+			}
+		}
+		else{
+			var item$ = $('\
+				<div class="professional-panelContent-item">\
+					<div class="professional-content">\
+						<div class="professional-name"><i class="fa fa-flask fa-1x"></i>'+dict.name+'</div>\
+						<div class="professional-num"><i class="fa fa-users fa-1x"></i>'+dict.users.length+'</div>\
+						<div class="professional-personnelList"></div>\
+					</div>\
+				</div>\
+			');
+			var personnelList$ = item$.find('.professional-personnelList');
+			for (var i = 0; i < dict.users.length; i++) {
+				personnelList$.append('<div class="professional-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].name+'</div>')
 			}
 			return item$;
 		}
