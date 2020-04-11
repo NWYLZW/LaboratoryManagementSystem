@@ -1,8 +1,3 @@
-var yearCalendarX = null;
-function loadEnd(){
-	initMark();
-	getMyMarkList($('.main .top .top-left')[0],initScroll);
-}
 function initMark(){
 	$('.mark').click(function(){
 		new myAjax({
@@ -42,25 +37,80 @@ function initMark(){
 		}).ajax();
 	});
 }
-function initScroll(){
-	var yearCalendarScroll = new IScroll('.main .top .top-left', {
-		scrollX: true,
-		scrollY: false,
-		mouseWheel: true,
-		scrollbars: true,
+(() =>{
+	var yearCalendarX = null;
+	window.yearCalendarX = yearCalendarX;
+	function initScroll(){
+		var yearCalendarScroll = new IScroll('.main .top .top-left', {
+			scrollX: true,
+			scrollY: false,
+			mouseWheel: true,
+			scrollbars: true,
+		});
+		var interval = setInterval(function() {
+			if(!this.count){
+				this.count = 0;
+			}
+			if(this.count == 10){
+				window.clearInterval(interval);
+			}else this.count++;
+			yearCalendarScroll.refresh();
+		}, 500);
+		window.addEventListener('resize',function(){
+			yearCalendarScroll.refresh();
+		});
+		new response("../my/space",640,1200,"main").start();
+	}
+	
+	initMark();
+	getMyMarkList($('.main .top .top-left')[0],initScroll);
+	
+	var testList = [
+		{
+			id:0,
+			title:"欢迎！！！",
+			kindNum:0,
+			content:"欢迎大家来到人工智能实验室的实验室管理系统",
+			authorId:49,
+			dateTime:"2020-03-12 11:00:00",
+			viewCount:0,
+			isView:false,
+		},
+		{
+			id:1,
+			title:"实验室总消息",
+			kindNum:0,
+			content:'<a href="..\/">测试</a>',
+			authorId:49,
+			dateTime:"2020-03-12 12:00:00",
+			viewCount:2,
+			isView:false,
+		},
+		{
+			id:2,
+			title:"Java方向第一次会议",
+			kindNum:1,
+			content:"本周周二Java方向将举办开学来的第一次会议",
+			authorId:49,
+			dateTime:"2020-03-12 16:00:00",
+			message:"Java",
+			viewCount:1,
+			isView:true,
+		},
+		{
+			id:3,
+			title:"F608卫生安排",
+			kindNum:2,
+			content:"本周开始进行轮值卫生打卡",
+			authorId:49,
+			dateTime:"2020-03-12 16:00:00",
+			message:"F-608",
+			viewCount:1,
+			isView:true,
+		},
+	];
+
+	new NoticeControler({
+		dataList:testList,
 	});
-	var interval = setInterval(function() {
-		if(!this.count){
-			this.count = 0;
-		}
-		if(this.count == 10){
-			window.clearInterval(interval);
-		}else this.count++;
-		yearCalendarScroll.refresh();
-	}, 500);
-	window.addEventListener('resize',function(){
-		yearCalendarScroll.refresh();
-	});
-	new response("../my/space",640,1200,"main").start();
-}
-loadEnd();
+})();
