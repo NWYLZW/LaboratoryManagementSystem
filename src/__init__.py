@@ -13,8 +13,8 @@ MainLog.setIgnoreLevel({
 })
 
 # 应用初始化
-from flask import Flask, redirect, url_for, render_template
-from flask_cors import *
+from flask import Flask, redirect, url_for
+from flask_cors import CORS
 from flask_login import LoginManager
 app = Flask(__name__,
             static_folder="../res/web",

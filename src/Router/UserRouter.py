@@ -28,18 +28,21 @@ def index():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('panel.index'))
-    form = LoginForm(request.form)
-    if request.method == 'POST' and form.validate():
-        user = User.query.filter_by(schoolID=form.userName.data).first()
-        if user is not None:
-            if user.verify_password(form.password.data):
-                login_user(user)
-                return successUtil.getData('loginSuccess')
-            return errorUtil.getData('PasswordWrong')
-        return errorUtil.getData('UserNameNone')
+    # TAG 测试时关闭csrf保护，接口开发完毕打开
+    form = LoginForm(request.form,csrf_enabled=False)
+    if request.method == 'POST':
+        if form.validate():
+            user = User.query.filter_by(schoolID=form.userName.data).first()
+            if user is not None:
+                if user.verify_password(form.password.data):
+                    login_user(user)
+                    return successUtil.getData('loginSuccess')
+                return errorUtil.getData('PasswordWrong')
+            return errorUtil.getData('UserNameNone')
+        return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
     return render_template('login.html', form=form)
 
-@userBluePrint.route('/logout', methods=['GET', 'POST'])
+@userBluePrint.route('/logout', methods=['GET'])
 @login_required
 def logout():
     logout_user()
