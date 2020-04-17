@@ -11,6 +11,7 @@ class ErrorUtil(Information):
             **(userData['typeDict']),
             'MarkIpError':2001,
             **(loginNotice['typeDict']),
+            **leaveMessage['typeDict'],
         }, {
             0:"表单数据错误",
             1:"后端Error对象未配置参数，请附上url通知后端检查该接口",
@@ -20,6 +21,7 @@ class ErrorUtil(Information):
             **(userData['dict']),
             2001:"未在实验室内签到",
             **(loginNotice['dict']),
+            **leaveMessage['dict'],
         })
 userData = {
     'typeDict':{
@@ -55,4 +57,13 @@ loginNotice = {
         3006:"修改LoginNoticeImage出现了错误",
     }
 }
+leaveMessage = {
+    'typeDict': {
+        'replyLeaveMessageIsNone':4001,
+    },
+    'dict': {
+        4001:"回复的留言不存在",
+    }
+}
+
 errorUtil = ErrorUtil()

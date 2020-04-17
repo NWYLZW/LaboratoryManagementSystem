@@ -13,6 +13,7 @@ class SuccessUtil(Information):
             'updateDirectionSuccess':-5001,
             'updateLaboratorySuccess':-5002,
             'updateProfessionalClassSuccess':-5003,
+            **leaveMessage['typeDict'],
         },{
             -1001:"欢迎成为我们的一员",
             -1002:"用户登陆成功",
@@ -23,6 +24,7 @@ class SuccessUtil(Information):
             -5001:"更新方向信息成功",
             -5002:"更新实验室信息成功",
             -5003:"添加专业班级信息成功",
+            **leaveMessage['dict'],
         })
 editMyData = {
     'typeDict':{
@@ -52,4 +54,15 @@ loginNotice = {
         -3003:"编辑login轮播成功",
     }
 }
+leaveMessage = {
+    'typeDict': {
+        'leaveMessageSuccess':-6001,
+        'replyLeaveMessageSuccess':-6002,
+    },
+    'dict': {
+        -6001:"留言成功",
+        -6002:"回复留言成功",
+    }
+}
+
 successUtil = SuccessUtil()

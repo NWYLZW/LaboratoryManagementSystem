@@ -1,10 +1,52 @@
 # -*- coding: utf-8 -*-
 from src import db
+from src.Model.UserModel import User
+from src.Util.TimeUtil import timeUtil
 
-class LeaveMessageModel(db.Model):
+class LeaveMessage(db.Model):
     __tablename__ = "LeaveMessage"
     id = db.Column(db.Integer, primary_key=True)
-    replyId = db.Column('preId', db.Integer, db.ForeignKey('LeaveMessage.id'))
+    authorId = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=True)
+    @property
+    def author(self):
+        return User.query.filter_by(id=self.authorId).first()
+    isAnonymous = db.Column(db.Integer, nullable=True)
+    content = db.Column(db.TEXT, nullable=True)
+    dateTime = db.Column(db.DateTime, nullable=False)
+    replyId = db.Column(db.Integer, db.ForeignKey('LeaveMessage.id'))
     replyLeaveMessage = db.relationship('LeaveMessage', backref='replyMessages', remote_side=[id])
-    def __init__(self):
-        pass
+    # 喜欢过的用户列表
+    likeUsers = db.relationship('LeaveMessageLikeUsers', backref='LeaveMessage', lazy='dynamic')
+    def __init__(self, authorId:int=-1, isAnonymous:bool=False, content:str="",replyId:int=-1):
+        self.authorId = authorId
+        self.isAnonymous = isAnonymous
+        self.content = content
+        self.dateTime = timeUtil.nowDateStr()
+        if replyId != -1: self.replyId = replyId
+    def toDict(self):
+        return {
+            'id':self.id,
+            'authorId':self.authorId,
+            'authorName':self.author.nickName,
+            'isAnonymous':self.isAnonymous,
+            'content':self.content,
+            'dateTime':str(self.dateTime),
+            'isLike':False,
+            'replyMessages':[leaveMessage.toDict() for leaveMessage in self.replyMessages],
+        }
+
+class LeaveMessageLikeUsers(db.Model):
+    __tablename__ = 'LeaveMessageLikeUsers'
+    id = db.Column(db.Integer, primary_key=True)
+    dateTime = db.Column(db.DateTime, nullable=False)
+
+    userId = db.Column(db.Integer, nullable=False)
+    @property
+    def user(self):
+        return User.query.filter_by(id=self.userId).first()
+
+    leaveMessageId = db.Column(db.Integer,db.ForeignKey('LeaveMessage.id'), nullable=False)
+    def __init__(self,userId:int=-1,leaveMessageId:int=-1):
+        self.dateTime = timeUtil.nowDateStr()
+        self.userId = userId
+        self.leaveMessageId = leaveMessageId
