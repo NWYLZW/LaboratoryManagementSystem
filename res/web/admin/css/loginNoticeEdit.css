@@ -4,20 +4,41 @@
 	height: auto;
 }
 #loginNoticeContro-title{
-	width: 100%;
-	height: 60px;
-	background-color: aqua;
+	margin-bottom: 20px;
+	width: 100%;height: 60px;
+	background-color: rgba(250,250,250,.8);
+	text-align: center;
+	line-height: 60px;
+	font-size: 20px;
+	color: rgba(30,30,30);
+	border-radius: 0 0 16px 16px;
+	box-shadow: 0 0 10px gray;
+	user-select: none;
 }
 #addBottonWrraper{
 	width: 100%;
-	height: 90px;
-	background-color: cadetblue;
+	user-select: none;
 }
-.addBotton{
+.addBottonLoginNotice{
 	position: relative;
-	top: 15%;
-	left: calc(50% - 70px);
-	width: 140px;
-	height: 70%;
-	background-color: darkgray;
+	left: calc(50% - 120px);
+	width: 240px;
+	height: 60px;
+	background-color: #55aaff;
+	text-align: center;
+	line-height: 60px;
+	font-size: 20px;
+	color: white;
+	border-radius: 16px;
+	box-shadow: 0 0 10px gray;
+	transition: .5s;
+}
+.addBottonLoginNotice:hover {
+	left: 0;
+	width: 100%;
+	height: 180px;
+	line-height: 180px;
+	background-color: #55aaff;
+	color: rgba(250,250,250);
+	box-shadow: 0 0 5px gray;
 }

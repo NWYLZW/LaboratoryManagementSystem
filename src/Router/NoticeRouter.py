@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 from src.Controler.NoticeControler import noticeControler
 
@@ -18,6 +18,11 @@ def loginNotice():
 def loginNoticeShow():
     return noticeControler.getLoginNotice(True)
 
-# TODO 总公告
-#  专业公告
-#  实验室公告
+# TODO 权限检测
+# 公告信息
+@noticeBluePrint.route("/addNotice",methods=['GET'])
+def addNotice():
+    return noticeControler.addNotice(request.json)
+@noticeBluePrint.route("/viewNotice",methods=['GET'])
+def viewNotice():
+    return noticeControler.viewNotice(2)

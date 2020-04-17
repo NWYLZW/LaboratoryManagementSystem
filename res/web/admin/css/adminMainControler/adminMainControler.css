@@ -1,0 +1,272 @@
+.adminMainControler-panel{
+	position: relative;
+	top: 0;left: 0;
+	width: 100%;
+	transition: .5s;
+}
+.adminMainControler-panel-wraper{
+	position: relative;
+	top: 0;left: 10%;
+	width: 80%;
+	transition: .5s;
+}
+.adminMainControler-panel-wraper .item-panel001{
+	position: relative;float: left;
+	width: calc(100% - 4px);height: 480px;
+	border: 2px solid gray;
+	border-radius: 16px;
+	box-shadow: 0 0 10px gray;
+	transition: .5s;
+}
+
+.direction-panel,
+.professional-panel,
+.laboratory-panel{
+	position: relative;float: left;
+	margin: 10px;
+	width: calc(33.333% - 20px);height: calc(100% - 20px);
+	border-radius: 16px;
+	transition: .5s;
+}
+.direction-panel:hover{box-shadow: 0 0 10px gray;}
+.professional-panel:hover{box-shadow: 0 0 10px gray;}
+.laboratory-panel:hover{box-shadow: 0 0 10px gray;}
+
+.direction-panelTitle,
+.professional-panelTitle,
+.laboratory-panelTitle{
+	position: relative;
+	left: 10%;
+	width: 80%;height: 48px;
+	background-color: dodgerblue;
+	font-size: 20px;
+	font-weight: 600;
+	color: white;
+	text-align: center;
+	line-height: 48px;
+	user-select: none;
+	border-radius: 0 0 8px 8px;
+	box-shadow: 0 2px 5px gray;
+	transition: .5s;
+}
+
+.direction-panelContent,
+.professional-panelContent,
+.laboratory-panelContent{
+	position: relative;
+	left: 5%;
+	width: 90%;height: calc(100% - 48px);
+	overflow-x: hidden;
+	transition: .5s;
+}
+
+.direction-panelContent-wraper,
+.professional-panelContent-wraper,
+.laboratory-panelContent-wraper{
+	position: relative;
+	width: 100%;
+	transition: .1s;
+}
+
+.direction-panelContent-addButton,
+.professional-panelContent-addButton,
+.laboratory-panelContent-addButton{
+	position: relative;
+	margin: 10px calc(50% - 72px);
+	width: 144px;height: 48px;
+	background-color: royalblue;
+	color: white;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 600;
+	user-select: none;
+	border-radius: 8px;
+	line-height: 48px;
+	box-shadow: 0 0 10px gray;
+	transition: .5s;
+}
+.direction-panelContent-addButton:hover,.laboratory-panelContent-addButton:hover,.professional-panelContent-addButton:hover{
+	margin: 10px 2%;
+	width: 96%;height: 144px;
+	line-height: 144px;
+	background-color: cornflowerblue;
+}
+.professional-panelContent-addButton:hover{height: 100px;line-height: 100px;}
+
+.direction-panelContent-item,.laboratory-panelContent-item,.professional-panelContent-item{
+	position: relative;
+	margin: 10px 2%;
+	width: 96%;height: 144px;
+	border-radius: 8px;
+	overflow: hidden;
+	transition: .5s;
+}
+.direction-panelContent-item:hover,.laboratory-panelContent-item:hover,.professional-panelContent-item:hover{
+	box-shadow: 0 0 5px gray;
+}
+.professional-panelContent-item{height: 100px;}
+
+.direction-panelContent-item .direction-ICODIV{
+	position: relative;float: left;
+	margin: 12px;
+	width: 120px;height: 120px;
+	border-radius: 20px;
+	background-repeat: no-repeat;
+	background-size: 80%;
+	background-position: center;
+	background-color: rgba(240,240,240);
+	overflow: hidden;
+	box-shadow: 0 0 5px gray;
+}
+.direction-panelContent-item .direction-ICODIV .fa-angle-left,.fa-angle-right{
+	position: absolute;
+	right: 0;bottom: calc(50% - 16px);
+	width: 32px;height: 32px;
+	line-height: 32px;
+	text-align: center;
+	transition: .5s;
+}
+.direction-panelContent-item .direction-ICODIV .fa-angle-left{left: 0;}
+.direction-panelContent-item .direction-ICODIV i:hover{
+	color: skyblue;
+}
+.direction-ICODIV-wraper{
+	position: relative;
+	left: 40px;
+	width: 400px;height: 100%;
+	transition: .5s;
+}
+.direction-ICODIV-wraperItem{
+	position: relative;float: left;
+	top: calc(50% - 25px);
+	width: 50px;height: 50px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+	background-color: rgba(240,240,240);
+}
+.direction-panelContent-item .direction-content{
+	position:relative;float: left;
+	width: calc(100% - 204px);height: 100%;
+}
+.direction-panelContent-item .direction-name{
+	position:relative;float: left;
+	padding-left: 10px;
+	width: calc(50% - 10px);height: 24px;
+	font-weight: 600;
+}
+.direction-panelContent-item .direction-num{
+	position: relative;float: left;
+	padding-left: 10px;
+	width: calc(50% - 10px);height: 24px;
+}
+.direction-panelContent-item .direction-introduce{
+	position:relative;
+	width: 100%;height: 60px;
+	font-size: 12px;
+	color: gray;
+	overflow-x: hidden;
+}
+.direction-panelContent-item .direction-personnelList{
+	position: relative;
+	width: 100%;height: calc(100% - 84px);
+	overflow-x: hidden;
+}
+.direction-panelContent-item .direction-personnel{
+	position: relative;float: left;
+	width: 100px;
+}
+
+.EDIT input,textarea{
+	position: relative;
+	margin: 2px;
+	left: 2px;top: 2px;
+	resize: none;
+	border: 1px solid gray;
+	border-radius: 4px;
+	width: calc(100% - 6px);height: calc(100% - 6px);
+}
+.EDIT textarea{
+	padding: 10px;
+	width: calc(100% - 26px);height: calc(100% - 30px);
+}
+.EDIT input{
+	padding-left: 10px;
+	width: calc(100% - 16px);
+}
+
+.laboratory-panelContent-item .laboratory-content{
+	position: relative;float: left;
+	width: calc(100% - 60px);height: 100%;
+}
+.laboratory-panelContent-item .laboratory-name,.laboratory-panelContent-item .laboratory-num{
+	position: relative;float: left;
+	padding-left: 10px;
+	width: calc(50% - 10px);height: 24px;
+}
+.laboratory-panelContent-item .laboratory-introduce{
+	position: relative;
+	padding-left: 10px;
+	width: calc(100% - 10px);height: 40px;
+	font-size: 12px;
+	color: gray;
+	overflow-x: hidden;
+}
+.laboratory-panelContent-item .laboratory-personnelList{
+	position: relative;
+	margin-left: calc(50% - 155px);
+	width: 310px;height: calc(100% - 64px);
+	overflow-x: hidden;
+}
+.laboratory-panelContent-item .laboratory-personnel{
+	position: relative;float: left;
+	width: 100px;
+}
+
+.panel-item-Contro{
+	position:relative;float: left;
+	display: flex;
+	flex-direction: column-reverse;
+	width: 60px;height: 100%;
+}
+.panel-item-Contro .panel-item-Contro-edit,.panel-item-Contro-delete{
+	width: calc(100% - 8px);height: 30px;
+	margin-bottom: 5px;margin-left: 4px;
+	user-select: none;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 8px;
+	background-color: royalblue;
+	color: white;
+	transition: .5s;
+}
+.panel-item-Contro .panel-item-Contro-delete{
+	background-color: orangered;
+	color: white;
+}
+.panel-item-Contro .panel-item-Contro-edit:hover{
+	box-shadow: 0 0 8px gray;
+}
+.panel-item-Contro .panel-item-Contro-delete:hover{
+	box-shadow: 0 0 8px gray;
+}
+
+.professional-panelContent-item .professional-content{
+	position: relative;float: left;
+	width: calc(100% - 60px);height: 100%;
+}
+.professional-panelContent-item .professional-name,.professional-num{
+	position: relative;float: left;
+	padding-left: 10px;
+	width: calc(50% - 10px);height: 24px;
+}
+.professional-panelContent-item .professional-personnelList{
+	position: relative;
+	margin-left: calc(50% - 155px);
+	width: 310px;height: calc(100% - 24px);
+	overflow-x: hidden;
+}
+.professional-panelContent-item .professional-personnel{
+	position: relative;float: left;
+	width: 100px;
+}

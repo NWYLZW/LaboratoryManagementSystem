@@ -4,17 +4,18 @@
 		<title>登陆</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css"/>
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css?v=2020-0324-0001"/>
 		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
 		<link rel="stylesheet" type="text/css" href="../user/css/main.css"/>
 		<link rel="stylesheet" type="text/css" href="../user/css/left.css"/>
 		<link rel="stylesheet" type="text/css" href="../user/css/right.css"/>
 		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../baseLibrary/js/base.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../baseLibrary/js/ajax.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../artDialog/dist/dialog.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../baseLibrary/js/response.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Notiflix-2.1.2/AIO/notiflix-aio-2.1.2.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../baseLibrary/js/base.js?v=2020-0412-0001" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/ajax.js?v=2020-0412-0002" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/response.js?v=2020-0412-0002" type="text/javascript" charset="utf-8"></script>
 		<script src="../user/js/rotation.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../user/js/login.js" type="text/javascript" charset="utf-8"></script>
 	</head>
@@ -35,7 +36,6 @@
 						<h4>Welcome to there.</h4>
 					</div>
 				</div>
-				
 				<form id="login-form" class="login-left-mid" method="POST" action="/user/login">
 					<!--TODO 参考loginnotic删除这个-->
 					 {{form.hidden_tag()}}
@@ -115,6 +115,7 @@
 				loginRotationX = new loginRotation(dictObj,3000);
 				loginRotationX.init();
 				$("#login-form").submit(function(){
+					Notiflix.Loading.Dots('正在登陆...');
 					$(this).ajaxSubmit(options);
 					return false;
 				});

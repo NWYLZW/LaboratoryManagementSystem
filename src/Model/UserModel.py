@@ -1,6 +1,7 @@
-# config=utf-8
 import pymysql
+from sqlalchemy import and_
 
+from src.Controler.MarkControler import markControler
 from src.Model.RoleModel import Role, Permission
 
 pymysql.install_as_MySQLdb()
@@ -11,31 +12,33 @@ from src import db
 class User(UserMixin, db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
-    userName = db.Column(db.String(32), unique=True)
-    nickName = db.Column(db.String(32), unique=False)
-    passwordHash = db.Column(db.String(128), unique=False)
+    schoolID = db.Column(db.String(32), unique=True)
+    nickName = db.Column(db.String(32), nullable=False)
+    sexBool = db.Column(db.Boolean, nullable=False)
+    passwordHash = db.Column(db.String(128), nullable=False)
 
     roleId = db.Column(db.Integer, db.ForeignKey('Role.id'))
+    directionId = db.Column(db.Integer, db.ForeignKey('Direction.id'))
+    laboratoryId = db.Column(db.Integer, db.ForeignKey('Laboratory.id'))
+    professionalClassId = db.Column(db.Integer, db.ForeignKey('ProfessionalClass.id'))
 
-    maleBool = db.Column(db.Boolean, unique=False)
-    directionName = db.Column(db.String(64), unique=False)
-    qqNum = db.Column(db.String(64), unique=False)
-    telNum = db.Column(db.String(64), unique=False)
-    laboratoryName = db.Column(db.String(64), unique=False)
-    professionalClass = db.Column(db.String(64), unique=False)
+    email = db.Column(db.String(64))
+    qqNum = db.Column(db.String(64))
+    telNum = db.Column(db.String(64))
     def __init__(self,
-                 userName: str = "", nickName: str = "", password: str = "", male: int = 1,
-                 directionName: str = "", qqNum: str = "", telNum: str = "", laboratoryName: str = "",
-                 professional: str = "",gradle: str = "",classNum: str = ""):
-        self.userName = userName
+                 schoolID: str = "", nickName: str = "", password: str = "", sex: int = 1,
+                 directionId: int = -1, qqNum: str = "", telNum: str = "", laboratoryId: str = "",
+                 professionalClassId: str = "", email:str = ""):
+        self.schoolID = schoolID
         self.nickName = nickName
         self.password = password
-        self.male = male
-        self.directionName = directionName
+        self.sex = sex
+        self.email = email
         self.qqNum = qqNum
         self.telNum = telNum
-        self.laboratoryName = laboratoryName
-        self.professionalClass = professional + '-' + gradle + '-' + classNum
+        self.directionId = directionId
+        self.laboratoryId = laboratoryId
+        self.professionalClassId = professionalClassId
         if self.roleId is None:
             self.roleId = Role.query.filter_by(default=True).first().id
         pass
@@ -47,42 +50,25 @@ class User(UserMixin, db.Model):
     def is_anonymous(self):
         return False
     def __repr__(self):
-        return "<User '{:s}>".format(self.userName)
+        return "<User '{:s}>".format(self.schoolID)
+
     def can(self, permissions):
         return self.role is not None and (self.role.permissions & permissions) == permissions
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
     @property
-    def role(self):
-        if self.roleId is None:
-            self.roleId = Role.query.filter_by(default=True).first().id
-        return Role.query.filter_by(id=self.roleId).first()
-    @role.setter
-    def role(self,roleId):
-        self.roleId = roleId
-    @property
-    def professionalClassX(self):
-        return self.professionalClass
-    @professionalClassX.setter
-    def professionalClassX(self, professionalClassX):
-        '''
-        :param professionalClass: professional+'-'+gradle+'-'+classNum
-        :return:
-        '''
-        self.professionalClass = professionalClassX
-    @property
-    def male(self):
-        if self.maleBool:
+    def sex(self):
+        if self.sexBool:
             return "male"
         else:
             return "female"
-    @male.setter
-    def male(self,male):
-        if male==1 or male=="1":
-            self.maleBool = True
+    @sex.setter
+    def sex(self, sex):
+        if sex == "0":
+            self.sexBool = True
         else:
-            self.maleBool = False
+            self.sexBool = False
     @property
     def password(self):
         raise AttributeError('不能直接获取明文密码！')
@@ -92,12 +78,33 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.passwordHash, password)
 
+    def fuzzySearchRule(self,file,listWords):
+        return and_(*[file.like('%'+w+'%') for w in listWords])
+
     def toBriefDict(self):
         return {
-            "userName":self.userName,
+            "id":self.id,
+            "schoolID":self.schoolID,
             "nickName":self.nickName,
-            "maleBool":self.maleBool,
-            "directionName":self.directionName,
-            "laboratoryName":self.laboratoryName,
-            "professionalClass":self.professionalClass,
+            "maleBool":self.sexBool,
+            "directionName":self.direction.name,
+            "directionImgName":self.direction.imgName,
+            "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
+            "professionalClass":self.professionalClass.getProfessionalClass(),
+            "markNumInYear":markControler.getMarkNum(self.id),
+        }
+    def toDict(self):
+        return {
+            "id":self.id,
+            "schoolID":self.schoolID,
+            "nickName":self.nickName,
+            "maleBool":self.sexBool,
+            "qqNum":self.qqNum,
+            "telNum":self.telNum,
+            "roleId":self.roleId,
+            "roleName":self.role.name,
+            "directionName":self.direction.name,
+            "directionImgName":self.direction.imgName,
+            "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
+            "professionalClass":self.professionalClass.getProfessionalClass(),
         }

@@ -4,7 +4,10 @@ from flask_login import current_user
 
 from src import db, MainLog
 from src.Model.LoginNoticeModel import LoginNotice
+from src.Model.UserModel import User
+from src.Model.RoleModel import Role
 from src.Util.FileUtil import fileUtil
+from src.Util.JsonUtil import JsonUtil
 
 
 class AdminControler:
@@ -14,7 +17,7 @@ class AdminControler:
         '''
         根据Id删除登陆界面的notice
         :param id: 待删除的Id
-        :return: 1 id为空 2 该idNotice不存在 3 数据库错误 0 删除成功
+        :return: 1 id为空 2 该idNotice不存在 3 数据库错误 4 文件删除错误 0 删除成功
         '''
         if not id:
             return 1
@@ -28,7 +31,10 @@ class AdminControler:
             MainLog.record(MainLog.level.ERROR,e)
             return 3
         db.session.commit()
-        return 0
+        if fileUtil.removeToWeb(path="user/img/rotation",fileName=loginNoticeX.backgroundImageSrc):
+            return 0
+        else:
+            return 4
     def addLoginNotice(self,form):
         '''
         :param form: 待提交表单
@@ -98,9 +104,42 @@ class AdminControler:
             else:
                 return 5
 
-    def permissionList(self):
-        pass
-    def givePermission(self,userId:int,permissionId:int):
-        pass
+    def givePermission(self,json):
+        '''
+        给予用户权限
+        :return: 1 用户不存在 2 数据库连接失败 0 修改成功
+        '''
+        # TODO 权限等级低的不能赋予别人高等级权限
+        try:
+            user = User.query.filter_by(id=json['userId']).first()
+            if user:
+                MainLog.record(MainLog.level.INFO,current_user.nickName+"将id为"+str(json['userId'])+"权限修改为"+str(json['permissionId']))
+                user.roleId = json['permissionId']
+                db.session.flush()
+            else:
+                return 1
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,e)
+            return 2
+        db.session.commit()
+        return 0
+    def getPermissionList(self):
+        roleList = Role.query.filter_by().all()
+        select = {
+            'CommonUser':[
+                'CommonUser',],
+            'LaboratiryModerator':[
+                'CommonUser',
+                'LaboratiryModerator',],
+            'Administrator':[
+                'CommonUser',
+                'LaboratiryModerator',
+                'Administrator',],
+        }
+        responseList = {}
+        for role in roleList:
+            if role.name in select.get(current_user.role.name):
+                responseList[role.id] = role.name
+        return JsonUtil().dictToJson(responseList)
 
 adminControler = AdminControler()

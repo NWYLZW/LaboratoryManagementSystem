@@ -1,4 +1,4 @@
-.mainx .top{
+.mainx .panelTop{
 	left: 100px;
 	width: calc(100% - 100px);
 }
@@ -11,8 +11,7 @@
 	font-size: 3rem;
 }
 .mainx .centerx_menu .item-title{
-	margin: 5px;
-	width: 90px;height: 90px;
+	width: 100px;height: 100px;
 	overflow: hidden;
 }
 .mainx .centerx_menu .item-title:hover{
@@ -36,9 +35,6 @@
 	top: 50%;left: 50%;
 	transform: translate(-50%, -50%);
 	font-size: 2.5rem;
-}
-.mainx .show_child{
-	max-height: 100px;
 }
 .interface{
 	left: 100px;

@@ -46,7 +46,7 @@ peopleContro = {
             Permission.DIRECTION_DATA_ADCS,
             Permission.ALL_FULL_DATA_S,
         ],
-        'name': "人员列表",
+        'name': "检索人员",
         'url': '#user-searchUser',
         'icoClass': 'fa fa-address-book fa-1_5x',
     }, {
@@ -59,6 +59,26 @@ peopleContro = {
         'url': '#peopple-change',
         'icoClass': 'fa fa-user-plus fa-1_5x',
     }, ]
+}
+adminContro = {
+    'name': "超级管理",
+    'url': '#4',
+    'icoClass': 'fa fa-cubes fa-1_5x',
+    'child': [{
+        'permission': [
+            Permission.ADMINISTER,
+        ],
+        'name': "权限修改",
+        'url': '#admin-editPermission',
+        'icoClass': 'fa fa-cube fa-1_5x',
+    },{
+        'permission': [
+            Permission.ADMINISTER,
+        ],
+        'name': "修改轮播图",
+        'url': '#admin-editLoginNotice',
+        'icoClass': 'fa fa-cube fa-1_5x',
+    },]
 }
 # moneyContro = {
 #     'name': "资金管理",
@@ -83,21 +103,33 @@ class PanelControler:
     def __init__(self):
         pass
     def getMenuDict(self):
-        useList = [commonUse,my,peopleContro]
-        for useMenu in useList:
-            for i in range(useMenu['child'].__len__()):
-                child = useMenu['child'][i]
+        useList = [commonUse.copy(),
+                   my.copy(),
+                   peopleContro.copy(),
+                   adminContro.copy(),]
+        responUseList = []
+        for i in range(useList.__len__()):
+            childs = []
+            useMenu = useList[i]
+            for j in range(useMenu['child'].__len__()):
+                child = useMenu['child'][j]
                 if not child.get('permission'):
                     continue
-                flag = True
+                flag = False
                 for permission in child['permission']:
                     if current_user.can(permission):
-                        flag = False
+                        flag = True
                         break
-                del child['permission']
                 if flag:
-                    del useMenu['child'][i]
-            if useMenu['child'].__len__() == 0: del useMenu
-        return JsonUtil().dictToJson(useList)
+                    # 返回json去除permission属性，防止窃取信息
+                    childs.append({
+                        'name': child['name'],
+                        'url': child['url'],
+                        'icoClass': child['icoClass'],
+                    })
+            if childs.__len__() != 0:
+                responUseList.append(useList[i])
+                useList[i]['child'] = childs
+        return JsonUtil().dictToJson(responUseList)
 
 panelControler = PanelControler()

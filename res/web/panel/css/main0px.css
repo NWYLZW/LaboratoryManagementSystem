@@ -1,4 +1,4 @@
-.mainx .top{
+.mainx .panelTop{
 	left: 0;
 	width: 100%;
 }
@@ -15,7 +15,7 @@
 	left: 0;
 	width: calc(100% - 40px);
 }
-.mainx .top .top-title{
+.mainx .panelTop .top-title{
 	padding-left: 80px;
 	width: 200px;
 }

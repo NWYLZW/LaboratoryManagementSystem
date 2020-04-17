@@ -24,16 +24,41 @@ class backImage {
 			backgroundImage: "url(../user/img/rotation/"+this.dictx.backgroundImageSrc+")",
 		})[0];
 		this.ele.appendChild(this.backImage);
-		this.pencilIco = $("<div class='fa fa-inverse fa-pencil fa-1_5x'></div>").
+		var backImage = this.backImage;
+		this.pencilIco = $('<div class="fa fa-inverse fa-pencil fa-1_5x">\
+		<input class="selectImage" type="file" name="backImage" style="display:none"/>\
+		</div>').
 		css({
 			float: "right",
 			display: "none",
 			cursor: "pointer",
-		})[0];
+		})
+		.click(
+		function(){
+			this.getElementsByClassName('selectImage')[0].click();
+			this.getElementsByClassName('selectImage')[0].addEventListener('change',function(){
+				var file = this.files[0];
+				var type = file.type.split("/");
+				if(type[0] != "image"){
+					alert("请选择图片");
+					return false;
+				}
+				var reader = new FileReader();
+				reader.readAsDataURL(file);  
+				reader.onloadend = function(){
+					var dataUrl = reader.result;
+					backImage.style.backgroundImage = "url("+dataUrl+")";
+				}
+			});
+		}
+		)[0];
 		this.backImage.appendChild(this.pencilIco);
 	}
 	getPencilIco(){
 		return this.pencilIco;
+	}
+	getInputImage(){
+		return this.pencilIco.getElementsByClassName('selectImage')[0];
 	}
 }
 
@@ -91,7 +116,7 @@ class midTop {
 		css({
 			position: "relative",
 			top: "calc(50% - 18px)",
-			paddingLeft: "20px",
+			paddingLeft: "10px",
 			height: "36px",
 			lineHeight: "36px",
 			color: "grey",
@@ -100,6 +125,9 @@ class midTop {
 		})[0];
 		this.ele.appendChild(this.title).textContent = this.dictx.title;
 		this.ele.appendChild(this.inputTitle).value = this.dictx.title;
+	}
+	getTitle(){
+		return this.inputTitle.value;
 	}
 }
 class midButtom {
@@ -140,7 +168,7 @@ class midButtom {
 			display: "none",
 		})[0];
 		this.ele.appendChild(this.content).textContent = this.dictx.content;
-		this.ele.appendChild(this.textereaContent).placeholder = this.dictx.content;
+		this.ele.appendChild(this.textereaContent).value = this.dictx.content;
 		
 		this.ele.appendChild($('<div></div>').
 		css({
@@ -160,6 +188,12 @@ class midButtom {
 			paddingRight: "5%",
 			color: "gray",
 		})[0]).textContent = this.dictx.date;
+	}
+	getContent(){
+		return this.textereaContent.value;
+	}
+	getId(){
+		return this.dictx.id;
 	}
 }
 
@@ -182,14 +216,14 @@ class right {
 		this.rightRight = new rightRight(this.dictx);
 		this.ele.appendChild(this.rightRight.ele);
 	}
-	getEditIco(){
-		return this.rightRight.editIco;
+	getEdit(){
+		return [this.rightRight.editIco,this.rightRight.editor];
 	}
-	getEditor(){
-		return this.rightRight.editor;
+	getSubmit(){
+		return [this.rightRight.submitIco,this.rightRight.submit];
 	}
-	getRightRight(){
-		return this.rightRight.ele;
+	changeStatu(statu){
+		this.rightRight.changeStatu(statu);
 	}
 }
 class rightLeft {
@@ -255,6 +289,10 @@ class rightLeft {
 			this.circleImg[0].onclick = function() {};
 		}
 	}
+	getIsShow(){
+		if(this.showDiv[0].textContent=="展示") return "True";
+		else return "False";
+	}
 }
 class rightRight {
 	constructor(dictx) {
@@ -269,15 +307,13 @@ class rightRight {
 			height: "100%",
 			userSelect:"none",
 		});
-		this.ele = this.jqEle[0];
 		this.editIco = ($('<div class="fa fa-edit fa-4x"></div>').
 		css({
 			height: "70%",
 			marginLeft: "38px",
 			lineHeight: "126px",
 		})
-		)[0];
-		this.ele.appendChild(this.editIco);
+		);
 		this.editor = ($('<div></div>').
 		css({
 			width: "100%",
@@ -286,8 +322,46 @@ class rightRight {
 			textAlign: "center",
 			cursor: "pointer",
 		})
-		)[0];
-		this.ele.appendChild(this.editor).textContent = "编辑";
+		.text("编辑")
+		);
+		
+		this.submitIco = ($('<div class="fa fa-save fa-4x"></div>').
+		css({
+			display:"none",
+			height: "70%",
+			marginLeft: "38px",
+			lineHeight: "126px",
+		})
+		);
+		this.submit = ($('<div></div>').
+		css({
+			display:"none",
+			width: "100%",
+			height: "30%",
+			fontSize: "20px",
+			textAlign: "center",
+			cursor: "pointer",
+		})
+		.text("提交")
+		);
+		this.ele = this.jqEle[0];
+		this.ele.appendChild(this.editIco[0]);
+		this.ele.appendChild(this.editor[0]);
+		this.ele.appendChild(this.submitIco[0]);
+		this.ele.appendChild(this.submit[0]);
+	}
+	changeStatu(statu){
+		if(statu === "submit"){
+			this.editIco.css({display:"none"});
+			this.editor.css({display:"none"});
+			this.submitIco.css({display:"block"});
+			this.submit.css({display:"block"});
+		}else if(statu === "edite"){
+			this.editIco.css({display:"block"});
+			this.editor.css({display:"block"});
+			this.submitIco.css({display:"none"});
+			this.submit.css({display:"none"});
+		}
 	}
 }
 
@@ -310,12 +384,12 @@ class deleteBtn {
 			cursor: "pointer",
 		});
 		this.ele = this.jqEle[0];
-		if(this.father){
-			var eleFather = this.father.ele;
-			this.ele.onclick = function(){
-				eleFather.remove();
-			}
-		}
+		// if(this.father){
+		// 	var eleFather = this.father.ele;
+		// 	this.ele.onclick = function(){
+		// 		eleFather.remove();
+		// 	}
+		// }
 	}
 }
 class loginNoticeInfo{
@@ -349,7 +423,10 @@ class loginNoticeInfo{
 		this.ele.appendChild(this.deleteBtn.ele);
 		
 		var ThisloginNoticeInfo = this;
-		this.right.getRightRight().onclick = function(){
+		this.right.getEdit()[0][0].onclick = function(){
+			ThisloginNoticeInfo.statu = "edite";
+		}
+		this.right.getEdit()[1][0].onclick = function(){
 			ThisloginNoticeInfo.statu = "edite";
 		}
 	}
@@ -359,10 +436,10 @@ class loginNoticeInfo{
 				var thisBackImage = this.backImage;
 				var thisRight = this.right;
 				var thisMid = this.mid;
-				thisBackImage.getPencilIco().style.display = "block";
-				thisRight.getEditIco().className = "fa fa-save fa-4x";
-				thisRight.getEditor().textContent = "提交";
+				thisRight.changeStatu('submit');
 				thisRight.rightLeft.canClick(true);
+				
+				thisBackImage.getPencilIco().style.display = "block";
 				thisMid.getTitle().style.display = "none";
 				thisMid.getInputTitle().style.display = "block";
 				thisMid.getContent().style.display = "none";
@@ -379,14 +456,24 @@ class loginNoticeContro {
 		var contex = this;
 		this.loginNoticeInfoList = [];
 		this.dictx = dictx;
-		this.jqEle = $('.loginNoticeContro');
+		this.jqEle = $('.loginNoticeContro'); 
 		this.ele = this.jqEle[0];
-		this.addBtnEle = $('.loginNoticeContro #addBottonWrraper .addBotton')[0];
+		this.addBtnEle = $('.loginNoticeContro #addBottonWrraper .addBottonLoginNotice')[0];
 		
 		this.initFormOption();
 		this.delLoginNotice = $("#delLoginNotice");
 		this.delLoginNotice.submit(function(){
 			$(this).ajaxSubmit(contex.delLoginNoticeOption);
+			return false;
+		});
+		this.editLoginNotice = $("#editLoginNotice");
+		this.editLoginNotice.submit(function(){
+			$(this).ajaxSubmit(contex.editLoginNoticeOption);
+			return false;
+		});
+		this.addLoginNotice = $("#addLoginNotice");
+		this.addLoginNotice.submit(function(){
+			$(this).ajaxSubmit(contex.addLoginNoticeOption);
 			return false;
 		});
 		
@@ -403,6 +490,32 @@ class loginNoticeContro {
 		loginNoticeInfoX.deleteBtn.ele.onclick = function(){
 			delLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
 			delLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+			Interval = new IntervalWrapper(
+			function(){
+				console.log(2);
+				Interval = null;
+				loginNoticeInfoX.ele.remove();
+			},function(){});
+		}
+		
+		var editLoginNoticeTemp = this.editLoginNotice[0];
+		loginNoticeInfoX.right.getSubmit()[0][0].onclick = function(){
+			if(loginNoticeInfoX.backImage.getInputImage().files.length==1)
+			editLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
+			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
+			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
+			editLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+		}
+		loginNoticeInfoX.right.getSubmit()[1][0].onclick = function(){
+			if(loginNoticeInfoX.backImage.getInputImage().files.length==1)
+			editLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
+			editLoginNoticeTemp.getElementsByClassName('id')[0].value = loginNoticeInfoX.dictx.id;
+			editLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			editLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			editLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
+			editLoginNoticeTemp.getElementsByClassName('submit')[0].click();
 		}
 	}
 	initFormOption(){
@@ -411,32 +524,95 @@ class loginNoticeContro {
 			success: this.delResponse,
 			timeout: 3000,
 		};
+		this.editLoginNoticeOption = {
+			beforeSubmit: function(formData, jqForm, options){return true;},
+			success: this.editResponse,
+			timeout: 3000,
+		}
+		this.addLoginNoticeOption = {
+			beforeSubmit: function(formData, jqForm, options){return true;},
+			success: this.addResponse,
+			timeout: 3000,
+		}
 	}
 	delResponse(data){
 		var JSONObject = JSON.parse(data);
-		console.log(JSONObject);
+		if(JSONObject.type == -3001){
+			Interval.isSuccess = true;
+			alert("删除成功");
+			location.reload(true);
+		}
+		else{
+			alert("删除失败");
+		}
+	}
+	editResponse(data){
+		var JSONObject = JSON.parse(data);
+		if(JSONObject.type == -3003){
+			alert("修改成功");
+			location.reload(true);
+		}
+		else{
+			alert("修改失败"+JSONObject.content);
+		}
+	}
+	addResponse(data){
+		var JSONObject = JSON.parse(data);
+		if(JSONObject.type == -3002){
+			alert("添加成功");
+			location.reload(true);
+		}
+		else{
+			alert("添加失败"+JSONObject.content);
+		}
+	}
+	initAddAjax(loginNoticeInfoX){
+		var addLoginNoticeTemp = this.addLoginNotice[0];
+		loginNoticeInfoX.right.getSubmit()[0][0].onclick = function(){
+			addLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
+			addLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			addLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			addLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
+			addLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+		}
+		loginNoticeInfoX.right.getSubmit()[1][0].onclick = function(){
+			addLoginNoticeTemp.appendChild(loginNoticeInfoX.backImage.getInputImage());
+			addLoginNoticeTemp.getElementsByClassName('title')[0].value = loginNoticeInfoX.mid.midTop.getTitle();
+			addLoginNoticeTemp.getElementsByClassName('content')[0].value = loginNoticeInfoX.mid.midButtom.getContent();
+			addLoginNoticeTemp.getElementsByClassName('isShow')[0].value = loginNoticeInfoX.right.rightLeft.getIsShow();
+			addLoginNoticeTemp.getElementsByClassName('submit')[0].click();
+		}
 	}
 	appendAddButtonClickListener(){
 		var father = this;
 		this.addBtnEle.onclick = function(){
-			var loginNoticeInfoX = new loginNoticeInfo();
+			var loginNoticeInfoX = new loginNoticeInfo({
+				title:"待添加标题",
+				content:"待添加内容",
+				backgroundImageSrc:"",
+			});
+			loginNoticeInfoX.statu = "edite";
+			father.initAddAjax(loginNoticeInfoX);
 			father.loginNoticeInfoList.push(loginNoticeInfoX);
-			father.appendChild(loginNoticeInfoX.ele);
+			father.ele.insertBefore(loginNoticeInfoX.ele,father.ele.childNodes[4]);
 		}
 	}
 }
-new myAjax({
-	url:"../notice/loginNotice",
-	method:"POST",
-	success:function(result){
-		dictObj = JSON.parse(result);
-		console.log(dictObj);
-		new loginNoticeContro(dictObj);
-	},
-	failure:function(error){
-		// console.log(error);
-	},
-	always:function(jqXHR){
-		// console.log(jqXHR);
-	}
-}).ajax();
+
+function IntervalWrapper(successCallback,timeOutCallback){
+	this.count = 0;
+	this.isSuccess = false;
+	var context = this;
+	this.fun = setInterval(function(){
+		context.count += 1;
+		if(context.isSuccess){
+			clearInterval(context.fun);
+			successCallback();
+		}
+		if(context.count === 100){
+			clearInterval(context.fun);
+			timeOutCallback();
+		}
+	},100);
+}
+var Interval = null;

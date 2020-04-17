@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>加入我们</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.8,minimum-scale=0.8,maximum-scale=0.8,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/label.css?v=2020-0324-0001"/>
+		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="../select-mania/css/select-mania.css"/>
+		<link rel="stylesheet" type="text/css" href="../select-mania/css/themes/select-mania-theme-blue.css">
+		<link rel="stylesheet" type="text/css" href="../baseLibrary/css/csshake.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../Notiflix-2.1.2/Unminified/notiflix-2.1.2.css"/>
+		<link rel="stylesheet" type="text/css" href="css/newRegister.css"/>
+		<style type="text/css">
+			body,html{width: 100%;height: 100%;background: url(img/25.png) 0 / cover fixed;}
+			.form{
+				width: 100%;height: 100%;
+			}
+		</style>
+		<script src="../baseLibrary/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.mailAutoComplete-4.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../select-mania/js/select-mania.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Notiflix-2.1.2/AIO/notiflix-aio-2.1.2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/ajax.js?v=2020-0412-0002" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/base.js?v=2020-0412-0001" type="text/javascript" charset="utf-8"></script>
+		<script src="js/newRegister.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/response.js?v=2020-0412-0002" type="text/javascript" charset="utf-8"></script>
+		<script src="js/LISTLINEControler.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../baseLibrary/js/SelectControler.js?v=2020-0412-0003" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<form class="form" action="/user/register" method="post" onkeydown="if (event.keyCode == 13) return false;">
+			<input type="submit" id="formSubmit" style="display: none;"/>
+		{{form.hidden_tag()}}
+		<div class="main">
+			<div class="formContent">
+				<div class="formContentWrraper">
+					<div class="formContentWrraper-item">
+						<img class="firstItemImage" src="img/7.png" height="60%" style="position: absolute;right: 0;bottom: 0;">
+						<h2 class="item-title">填写你的基本信息</h2>
+						<div class="schoolNumAndName" style="height: 76px;">
+							<div class="formContent-input schoolNum" tabindex="1" hidefocus="true">
+								<input type="text" name="schoolNum" value=""/>
+								<div class="formContent-input-label">学号</div>
+							</div>
+							<div class="formContent-input name" tabindex="1" hidefocus="true">
+								<input type="text" name="name" value=""/>
+								<div class="formContent-input-label">姓名</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="email" style="height: 76px;">
+							<div class="formContent-input emailWrraper" tabindex="1" hidefocus="true" style="
+							width: 300px;height: 36px;
+							">
+								<input class="inputMailList" type="text" name="email" value=""/>
+								<div class="formContent-input-label">你的电子邮箱</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="password" style="height: 76px;">
+							<div class="formContent-input pwd0" tabindex="1" hidefocus="true">
+								<input id="pwd0" type="password" name="password" value=""/>
+								<div class="formContent-input-label">密码</div>
+							</div>
+							<div class="formContent-input pwd1" tabindex="1" hidefocus="true">
+								<input id="pwd1" type="password" value=""/>
+								<div class="formContent-input-label">确认密码</div>
+							</div>
+							<svg onclick="
+							if(document.getElementById('hidenPWD')){
+								document.getElementById('hidenPWD').style.display = 'block';
+								this.style.display = 'none';
+								document.getElementById('pwd0').type = 'password';
+								document.getElementById('pwd1').type = 'password';
+							}
+							" style="display: none;" id="showPWD" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+								<path d="M12,7c-2.48,0-4.5,2.02-4.5,4.5S9.52,16,12,16s4.5-2.02,4.5-4.5S14.48,7,12,7z M12,14.2c-1.49,0-2.7-1.21-2.7-2.7 c0-1.49,1.21-2.7,2.7-2.7s2.7,1.21,2.7,2.7C14.7,12.99,13.49,14.2,12,14.2z"></path><path d="M12,4C7,4,2.73,7.11,1,11.5C2.73,15.89,7,19,12,19s9.27-3.11,11-7.5C21.27,7.11,17,4,12,4z M12,17 c-3.79,0-7.17-2.13-8.82-5.5C4.83,8.13,8.21,6,12,6s7.17,2.13,8.82,5.5C19.17,14.87,15.79,17,12,17z"></path>
+								<path fill="none" d="M0,0h24v24H0V0z"></path>
+							</svg>
+							<svg onclick="
+							if(document.getElementById('showPWD')){
+								document.getElementById('showPWD').style.display = 'block';
+								this.style.display = 'none';
+								document.getElementById('pwd0').type = 'text';
+								document.getElementById('pwd1').type = 'text';
+							}
+							" style="display: block;" id="hidenPWD" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+								<path d="M10.58,7.25l1.56,1.56c1.38,0.07,2.47,1.17,2.54,2.54l1.56,1.56C16.4,12.47,16.5,12,16.5,11.5C16.5,9.02,14.48,7,12,7 C11.5,7,11.03,7.1,10.58,7.25z"></path>
+								<path d="M12,6c3.79,0,7.17,2.13,8.82,5.5c-0.64,1.32-1.56,2.44-2.66,3.33l1.42,1.42c1.51-1.26,2.7-2.89,3.43-4.74 C21.27,7.11,17,4,12,4c-1.4,0-2.73,0.25-3.98,0.7L9.63,6.3C10.4,6.12,11.19,6,12,6z"></path><path d="M16.43,15.93l-1.25-1.25l-1.27-1.27l-3.82-3.82L8.82,8.32L7.57,7.07L6.09,5.59L3.31,2.81L1.89,4.22l2.53,2.53 C2.92,8.02,1.73,9.64,1,11.5C2.73,15.89,7,19,12,19c1.4,0,2.73-0.25,3.98-0.7l4.3,4.3l1.41-1.41l-3.78-3.78L16.43,15.93z M11.86,14.19c-1.38-0.07-2.47-1.17-2.54-2.54L11.86,14.19z M12,17c-3.79,0-7.17-2.13-8.82-5.5c0.64-1.32,1.56-2.44,2.66-3.33 l1.91,1.91C7.6,10.53,7.5,11,7.5,11.5c0,2.48,2.02,4.5,4.5,4.5c0.5,0,0.97-0.1,1.42-0.25l0.95,0.95C13.6,16.88,12.81,17,12,17z"></path>
+							</svg>
+						</div>
+						<div style="clear: both;"></div>
+						<h5 style="margin-top: 20px;margin-left: 20px;color: gray;">
+							使用 <span style="color: orangered;">6</span> 个或更多字符(字母、数字或符号的组合)
+						</h5>
+					</div>
+					<div class="formContentWrraper-item">
+						<h2 class="item-title">填写你的扩充信息</h2>
+						<div class="telNum" style="height: 76px;">
+							<div class="formContent-input" tabindex="1" hidefocus="true" style="
+							
+							">
+								<input type="text" name="telNum" value=""/>
+								<div class="formContent-input-label">电话号码</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="QQ" style="height: 76px;">
+							<div class="formContent-input" tabindex="1" hidefocus="true">
+								<input type="text" name="QQ" value=""/>
+								<div class="formContent-input-label">QQ</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="selectDirection">
+							<select class="direction" name="direction">
+							</select>
+						</div>
+						<div class="selectLaboratory">
+							<select class="laboratory" name="laboratory">
+							</select>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="selectProfessional">
+							<select class="professional" name="professional">
+							</select>
+						</div>
+						<div class="selectSex">
+							<select class="Sex" name="Sex">
+								<option data-icon="fa fa-mars" value="0">男</option>
+								<option data-icon="fa fa-venus" value="1">女</option>
+							</select>
+						</div>
+					</div>
+					<div class="formContentWrraper-item">
+						<h2 style="margin-top: 20px;">确认信息是否有误</h2>
+						<table>
+							<tr>
+								<th>学号</th>
+								<td class="tdValue_schoolId">201803120130</td>
+							</tr>
+							<tr>
+								<th>姓名</th>
+								<td class="tdValue_name">奉自利</td>
+							</tr>
+							<tr>
+								<th>性别</th>
+								<td class="tdValue_sex">男</td>
+							</tr>
+							<tr>
+								<th>电子邮箱</th>
+								<td class="tdValue_email">2284672637@gmail.com</td>
+							</tr>
+							<tr>
+								<th>QQ</th>
+								<td class="tdValue_QQ">2284672637</td>
+							</tr>
+							<tr>
+								<th>电话号码</th>
+								<td class="tdValue_telNum">18774225404</td>
+							</tr>
+							<tr>
+								<th>方向</th>
+								<td class="tdValue_direction">Java</td>
+							</tr>
+							<tr>
+								<th>实验室</th>
+								<td class="tdValue_laboratory">F608</td>
+							</tr>
+							<tr>
+								<th>专业班级</th>
+								<td class="tdValue_professional">网络工程-1801</td>
+							</tr>
+						</table>
+						<button type="button" class="confirmBTN" onclick="
+						if(LISTLINEContro){
+							this.style.backgroundColor = '#00FFAA';
+							LISTLINEContro.confirm();
+						}
+						">确认无误</button>
+					</div>
+				</div>
+			</div>
+			<div class="bottomLine">
+				<div class="LISTLINE">
+					<div class="LISTLINE-circle INTHIS">1</div>
+					<div class="LISTLINE-line"></div>
+					<div class="LISTLINE-circle">2</div>
+					<div class="LISTLINE-line"></div>
+					<div class="LISTLINE-circle">3</div>
+				</div>
+				<div id="preStep" class="BlueBtn" style="left: 20px;display: none;">上一步</div>
+				<div id="nextStep" class="BlueBtn" style="right: 20px;">下一步</div>
+			</div>
+		</div>
+		</form>
+	</body>
+	<script type="text/javascript">
+		new response("user",500,1000,"newRegister").start();
+		var LISTLINEContro = new LISTLINEControler().refresh();
+		var inputList = document.getElementsByClassName('formContent-input');
+		for (var i = inputList.length-1; i >= 0; i--) {
+			let inputLabel = inputList[i];
+			inputLabel.input = inputLabel.getElementsByTagName('input')[0];
+			inputLabel.input.addEventListener('focus',function(){
+				inputLabel.classList.add('formContent-inputClick');
+			})
+			inputLabel.input.addEventListener('blur',function(){
+				if(this.value==0)
+					inputLabel.classList.remove('formContent-inputClick');
+			})
+			inputLabel.onfocus = function(){
+				this.classList.add('formContent-inputClick');
+				this.input.focus();
+			}
+			inputLabel.onblur = function(){
+				if(this.value==0)
+					inputLabel.classList.remove('formContent-inputClick');
+			}
+			inputLabel.focus();
+		}
+		$(".inputMailList").mailAutoComplete();
+		var selectList = [
+			['.direction','请选择方向'],
+			['.laboratory','请选择实验室'],
+			['.professional','请选择专业'],
+			['.Sex','请选择性别'],
+		];
+		var slectContro = new SelectControler(selectList).refresh();
+		new myAjax({
+			url:'./getDirection',
+			method:"POST",
+			success:function(result){
+				result = JSON.parse(result);
+				let directionList = [];
+				for (let key in result) {
+					directionList.push({
+						value:key,
+						text:result[key].name,
+						ico:result[key].imgName+'Ico',
+					});
+				}
+				slectContro.appendOption($('.direction'),directionList);
+			},
+			failure:function(error){},
+			always:function(jqXHR){}
+		}).ajax();
+		new myAjax({
+			url:'./getLaboratory',
+			method:"POST",
+			success:function(result){
+				result = JSON.parse(result);
+				let blockList = {};
+				for (let key in result) {
+					if(!blockList.hasOwnProperty(result[key].blockNum)){
+						slectContro.appendOptGroup($('.laboratory'),result[key].blockNum);
+						blockList[result[key].blockNum] = [];
+					}
+					blockList[result[key].blockNum].push({
+						value:key,
+						text:result[key].blockNum+result[key].doorNum,
+					});
+				}
+				for (let key in blockList) {
+					slectContro.appendOption($('.laboratory optgroup[label="'+key+'"]'),blockList[key]);
+				}
+			},
+			failure:function(error){},
+			always:function(jqXHR){}
+		}).ajax();
+		new myAjax({
+			url:'./getProfessionalList',
+			method:"POST",
+			success:function(result){
+				result = JSON.parse(result);
+				let professionalList = [];
+				let professionalExistList = [];
+				for (let key in result) {
+					if(professionalExistList.indexOf(result[key].professional)==-1){
+						professionalExistList.push(result[key].professional);
+						professionalList.push({
+							value:key,
+							text:result[key].professional,
+						});
+					}
+				}
+				slectContro.appendOption($('.professional'),professionalList);
+			},
+			failure:function(error){},
+			always:function(jqXHR){}
+		}).ajax();
+		
+		$(".form").submit(function(){
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+	</script>
+</html>

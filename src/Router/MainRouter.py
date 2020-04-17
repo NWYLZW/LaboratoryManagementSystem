@@ -17,7 +17,7 @@ def index():
 def info(infoName):
     # TODO 获取用户的签到信息
     #  名字，签到次数
-    return mainControler.getInfoByName(infoName,current_user)
+    return mainControler.getInfoByName(infoName)
 @mainBluePrint.route("/buttonList",methods=['POST'])
 def buttonList():
     # TODO 登陆显示签到按钮

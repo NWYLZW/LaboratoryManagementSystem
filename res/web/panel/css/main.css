@@ -7,7 +7,7 @@
 	-moz-user-select: none;
 	-webkit-user-select: none;
 }
-.mainx .top{
+.mainx .panelTop{
 	position: absolute;
 	pointer-events: auto;
 	left: 0;top: 0;
@@ -16,23 +16,64 @@
 	box-shadow: 0 5px 15px gray;
 	transition: .5s;
 }
-.mainx .top .top-title{
+.mainx .panelTop .top-title{
 	position: relative;
 	left: 0;top: 0;
 	padding-left: 30px;
-	width: 270px;height: 100px;
+	width: 170px;height: 100px;
 	line-height: 100px;
 	font-size: 22px;
 	color: #D3D3D3;
 	transition: .5s;
 }
-.mainx .top i{
+.mainx .panelTop .top-headNav{
 	position: absolute;
-	right: 20px;top: 30px;
+	right: 20px;top: 0;
+	width: 64px;height: 100px;
+}
+.mainx .panelTop .top-headNav img{
+	position: relative;
+	margin-top: 18px;
+	border-radius: 50%;
+	box-shadow: 0 0 10px gray;
+}
+.mainx .panelTop .top-headNav .navigationList{
+	position: relative;
+	top: 14px;left: -120px;
+	width: 200px;max-height: 0;
+	transition: .5s;
+	overflow: hidden;
+	border-radius: 0 0 8px 8px;
+	background-color: #ffffff;
+}
+.mainx .panelTop .top-headNav .navigationList .navigationList-item{
+	position: relative;float: right;
+	width: 100%;height: 36px;
+	padding-top: 7px;padding-bottom: 7px;
+	line-height: 36px;
+	transition: .2s linear;
+}
+.mainx .panelTop .top-headNav .navigationList .navigationList-item:hover{
+	background-color: #ececec;
+}
+.mainx .panelTop .top-headNav:hover .navigationList{
+	max-height: 50px;
+}
+.mainx .panelTop .top-headNav h5{
+	position: relative;float: left;
+	width: calc(100% - 56px);
+	margin-left: 20px;
+	color: gray;
+}
+.mainx .panelTop .top-headNav i{
+	position: relative;float: left;
+	width: 36px;height: 36px;
+	color: gray;
+	line-height: 36px;
 	transition: .5s;
 }
-.mainx .top i:hover{
-	color: aliceblue;
+.mainx .panelTop .top-headNav i:hover{
+	color: palegreen;
 }
 .mainx .left_nav{
 	position: absolute;

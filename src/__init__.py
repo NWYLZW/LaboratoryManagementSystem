@@ -13,8 +13,8 @@ MainLog.setIgnoreLevel({
 })
 
 # 应用初始化
-from flask import Flask, redirect, url_for, render_template
-from flask_cors import *
+from flask import Flask, redirect, url_for
+from flask_cors import CORS
 from flask_login import LoginManager
 app = Flask(__name__,
             static_folder="../res/web",
@@ -22,7 +22,9 @@ app = Flask(__name__,
 CORS(app, supports_credentials=True)
 app.config.from_pyfile("./config.py")
 
+# 初始化数据库
 db = SQLAlchemy(app)
+# 初始化登陆管理插件
 login_manager = LoginManager(app)
 login_manager.login_view = "user.login"
 templatePath="../../res/web"
@@ -43,16 +45,9 @@ from src.Model.RoleModel import Role
 Role().insert_roles()
 # @app.context_processor
 # def inject_permissions():
-#     '''使用上下文处理器，是变量在模板全局中可访问'''
+#     '''使用上下文处理器，使变量在模板全局中可访问'''
 #     return dict(Permission=Permission)
 
 @app.route("/")
 def index():
     return redirect(url_for('main.index'))
-# TODO 写几个错误响应页面
-# @app.errorhandler(404)
-# def pageNotFound():
-#     return 'This page does not exist', 404
-# @app.errorhandler(403)
-# def cantDoIt():
-#     return 'Your permission can\'t do it', 403

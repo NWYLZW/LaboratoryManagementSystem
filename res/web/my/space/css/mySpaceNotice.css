@@ -1,0 +1,94 @@
+.mySpaceNotice-item{
+	position: relative;float: left;
+	margin-top: 20px;
+	left: 2.5%;
+	width: 95%;height: 164px;
+	background-color: rgba(250,250,250,.8);
+	box-shadow: 0 0 5px gray;
+	border-radius: 16px;
+	transition: .5s;
+}
+.mySpaceNotice-item-top{
+	position: relative;float: left;
+	width: 100%;height: 36px;
+	border-bottom: 2px solid gray;
+	transition: .5s;
+}
+.mySpaceNotice-item-title{
+	position: relative;float: left;
+	padding-left: 20px;padding-right: 20px;
+	height: 36px;
+	line-height: 36px;
+	color: rgb(59, 59, 59);
+	font-size: 18px;
+	font-weight: 600;
+	transition: .5s;
+}
+.mySpaceNotice-item-tag{
+	position: relative;float: left;
+	margin-left: 10px;
+	top: 6px;
+	width: 72px;height: 24px;
+	background-color: #00AAFF;
+	border-radius: 8px;
+	box-shadow: 0 0 5px gray;
+	text-align: center;
+	color: white;
+	line-height: 24px;
+	font-size: 14px;
+	user-select: none;
+	transition: .5s;
+}
+
+.mySpaceNotice-item-content{
+	position: relative;float: left;
+	padding: 10px;
+	width: calc(100% - 20px);height: calc(100% - 72px - 20px);
+	font-size: 14px;
+	color: gray;
+	overflow-x: hidden;
+	transition: .5s;
+}
+
+.mySpaceNotice-item-bottom{
+	position: relative;float: left;
+	width: 100%;height: 36px;
+	user-select: none;
+	transition: .5s;
+}
+.mySpaceNotice-item-author{
+	position: relative;float: left;
+	margin-left: 10px;
+	width: 36px;height: 100%;
+	transition: .5s;
+}
+.mySpaceNotice-item-author img{
+	position: relative;float: left;
+	margin-left: 2px;margin-top: 2px;
+	width: 32px;height: 32px;
+	border-radius: 50%;
+	box-shadow: 0 0 4px black;
+	transition: .5s;
+}
+.mySpaceNotice-item-viewNum{
+	position: relative;float: left;
+	margin-left: 20px;
+	height: 36px;
+	text-align: center;
+	line-height: 36px;
+	transition: .5s;
+}
+.mySpaceNotice-item-viewNum i{
+	margin-right: 10px;
+	color: #a1a1a1;
+}
+.mySpaceNotice-item-releaseTime{
+	position: relative;float: right;
+	margin-right: 20px;
+	height: 36px;
+	color: dimgray;
+	text-align: center;
+	font-size: 12px;
+	line-height: 36px;
+	transition: .5s;
+}
