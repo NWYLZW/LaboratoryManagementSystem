@@ -1,6 +1,19 @@
 # 启用虚拟环境
 
-## Linux
+## 根据系统选择虚拟环境
 ```shell script
-source venv/Scripts/bin/activate
+linux下使用venv环境
+windows下使用win_venv环境
 ```
+
+## 配置本地开发环境
+
+![image-20200418011628162](image-20200418011628162.png)
+
+![image-20200418011700167](image-20200418011700167.png)
+
+![image-20200418011804822](image-20200418011804822.png)
+
+![image-20200418011841978](image-20200418011841978.png)
+
+![image-20200418011927772](image-20200418011927772.png)
