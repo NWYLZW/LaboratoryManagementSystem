@@ -15,6 +15,12 @@ class Direction(db.Model):
         self.name = name
         self.imgName = imgName
         self.content = content
+    def toDict(self)->dict:
+        return {
+            'name':self.name,
+            'imgName':self.imgName,
+            'content':self.content,
+        }
     @staticmethod
     def getDict()->dict:
         directionDict = {}
@@ -41,3 +47,19 @@ class Direction(db.Model):
             return 1
         db.session.commit()
         return 0
+    @staticmethod
+    def getAllData():
+        directionList = []
+        try:
+            directions = Direction.query.filter_by().all()
+            for direction in directions:
+                directionDict = direction.toDict()
+                directionDict['users'] = [user.toBriefDict() for user in direction.users.all()]
+                directionList.append(directionDict)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"从数据库获取方向信息发生错误")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return directionList

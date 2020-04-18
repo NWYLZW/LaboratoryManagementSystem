@@ -12,22 +12,22 @@
 			this.Click();
 		}
 		initData(){
-			var content = this;
-			var $panelItemContro = $('\
+			const content = this;
+			let $panelItemContro = $('\
 				<div class="panel-item-Contro">\
 					<div class="panel-item-Contro-delete"><i class="fa fa-close fa-1x"></i>删除</div>\
 					<div class="panel-item-Contro-edit"><i class="fa fa-pencil fa-1x"></i>编辑</div>\
 				</div>');
 			for (let i = 0; i < this.data.length; i++) {
-				var temp$ = $panelItemContro.clone();
-				var item$ = this.generateItem(this.data[i],false).append(temp$);
+				let temp$ = $panelItemContro.clone();
+				let item$ = this.generateItem(this.data[i],false).append(temp$);
 				this.$PanelControler.append(item$);
 				
 				temp$.find('.panel-item-Contro-delete').unbind('click').click(function(){
 					content.delItem(content.data[i].id);
 				});
 				temp$.find('.panel-item-Contro-edit').unbind('click').click(function(){
-					var tempX$ = $('\
+					let tempX$ = $('\
 						<div class="panel-item-Contro">\
 							<div class="panel-item-Contro-delete"><i class="fa fa-close fa-1x"></i>取消</div>\
 							<div class="panel-item-Contro-edit"><i class="fa fa-check fa-1x"></i>确认</div>\
@@ -40,7 +40,7 @@
 						content.updataItem(itemTemp$);
 					});
 					
-					var itemTemp$ = content.generateItem(content.data[i],true).append(tempX$);
+					let itemTemp$ = content.generateItem(content.data[i],true).append(tempX$);
 					item$.after(itemTemp$).detach();
 				});
 			}

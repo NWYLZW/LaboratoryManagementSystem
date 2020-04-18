@@ -6,8 +6,8 @@
 }
 .adminMainControler-panel-wraper{
 	position: relative;
-	top: 0;left: 10%;
-	width: 80%;
+	top: 0;left: calc(50% - 768px);
+	width: 1536px;
 	transition: .5s;
 }
 .adminMainControler-panel-wraper .item-panel001{
@@ -258,7 +258,10 @@
 .professional-panelContent-item .professional-name,.professional-num{
 	position: relative;float: left;
 	padding-left: 10px;
-	width: calc(50% - 10px);height: 24px;
+	width: calc(65% - 10px);height: 24px;
+}
+.professional-panelContent-item .professional-num{
+	width: calc(35% - 10px);
 }
 .professional-panelContent-item .professional-personnelList{
 	position: relative;

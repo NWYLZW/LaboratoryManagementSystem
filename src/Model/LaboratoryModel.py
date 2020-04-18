@@ -15,6 +15,12 @@ class Laboratory(db.Model):
         self.blockNum = blockNum
         self.doorNum = doorNum
         self.content = content
+    def toDict(self)->dict:
+        return {
+            'blockNum':self.blockNum,
+            'doorNum':self.doorNum,
+            'content':self.content,
+        }
     @staticmethod
     def getDict()->dict:
         laboratoryDict = {}
@@ -40,3 +46,19 @@ class Laboratory(db.Model):
             return 1
         db.session.commit()
         return 0
+    @staticmethod
+    def getAllData():
+        laboratoryList = []
+        try:
+            laboratorys = Laboratory.query.filter_by().all()
+            for laboratory in laboratorys:
+                laboratoryDict = laboratory.toDict()
+                laboratoryDict['users'] = [user.toBriefDict() for user in laboratory.users.all()]
+                laboratoryList.append(laboratoryDict)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"从数据库获取方向信息发生错误")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return laboratoryList

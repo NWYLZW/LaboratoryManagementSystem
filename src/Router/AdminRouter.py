@@ -8,6 +8,7 @@ from src.Model.DirectionModel import Direction
 from src.Model.LaboratoryModel import Laboratory
 from src.Model.ProfessionalClassModel import ProfessionalClass
 from src.Util.ErrorUtil import errorUtil
+from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
 from src.form.LoginNoticeForm import LoginNoticeForm, editLoginNoticeForm
 
@@ -100,8 +101,8 @@ def getPermissionList():
     if request.method == 'POST':
         return adminControler.getPermissionList()
 
-@adminBluePrint.route("/adminMainControler",methods=['GET'])
-def adminMainControler():
+@adminBluePrint.route("/mainControler",methods=['GET'])
+def mainControler():
     return render_template('adminMainControler.html')
 
 @adminBluePrint.route("/updateDirection",methods=['POST'])
@@ -115,6 +116,13 @@ def updateDirection():
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
+@adminBluePrint.route("/getDirectionAllData",methods=['GET'])
+def getDirectionAllData():
+    result = Direction.getAllData()
+    if result != None:
+        return JsonUtil().dictToJson(result)
+    else:
+        return errorUtil.getData('dataBaseError')
 @adminBluePrint.route("/updateLaboratory",methods=['POST'])
 def updateLaboratory():
     messageDict = [
@@ -126,6 +134,13 @@ def updateLaboratory():
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
+@adminBluePrint.route("/getLaboratoryAllData",methods=['GET'])
+def getLaboratoryAllData():
+    result = Laboratory.getAllData()
+    if result != None:
+        return JsonUtil().dictToJson(result)
+    else:
+        return errorUtil.getData('dataBaseError')
 @adminBluePrint.route("/addProfessionalClass",methods=['POST'])
 def addProfessionalClass():
     messageDict = [
@@ -138,3 +153,10 @@ def addProfessionalClass():
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
+@adminBluePrint.route("/getProfessionalClassAllData",methods=['GET'])
+def getProfessionalClassAllData():
+    result = ProfessionalClass.getAllData()
+    if result != None:
+        return JsonUtil().dictToJson(result)
+    else:
+        return errorUtil.getData('dataBaseError')
