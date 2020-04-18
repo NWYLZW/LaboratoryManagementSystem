@@ -23,7 +23,7 @@ class LeaveMessage(db.Model):
         self.content = content
         self.dateTime = timeUtil.nowDateStr()
         if replyId != -1: self.replyId = replyId
-    def toDict(self):
+    def toDict(self,userId):
         return {
             'id':self.id,
             'authorId':self.authorId,
@@ -31,8 +31,9 @@ class LeaveMessage(db.Model):
             'isAnonymous':self.isAnonymous,
             'content':self.content,
             'dateTime':str(self.dateTime),
-            'isLike':False,
-            'replyMessages':[leaveMessage.toDict() for leaveMessage in self.replyMessages],
+            'isLike':(self.likeUsers.filter_by(userId=userId).count()!=0),
+            'likeNum':self.likeUsers.count(),
+            'replyMessages':[leaveMessage.toDict(userId) for leaveMessage in self.replyMessages],
         }
 
 class LeaveMessageLikeUsers(db.Model):
