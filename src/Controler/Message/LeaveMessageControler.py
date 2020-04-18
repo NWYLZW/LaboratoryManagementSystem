@@ -64,7 +64,16 @@ class LeaveMessageControler:
         '''
         try:
             if page <= 0 : page = 1
-            return [leaveMessage.toDict(userId) for leaveMessage in LeaveMessage.query.filter_by(replyId=None).limit(5*page).all()]
+            leaveMessagesList = [
+                leaveMessage.toDict(userId) for leaveMessage in
+                LeaveMessage.query.filter_by(replyId=None).all()
+            ]
+            leaveMessagesList.reverse()
+            leaveMessagesDict = {
+                'sumCount': len(leaveMessagesList),
+                'leaveMessages':leaveMessagesList[(page-1)*5:page*5],
+            }
+            return leaveMessagesDict
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,e)
             return None
