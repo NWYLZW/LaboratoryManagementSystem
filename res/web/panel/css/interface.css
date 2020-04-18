@@ -1,8 +1,7 @@
 .interface{
 	position: absolute;
 	left: 250px;top: 100px;
-	padding: 20px;
-	width: calc(100% - 290px);
+	width: calc(100% - 250px);
 	background-color: rgba(255,255,255,.5);
 	transition: .5s;
 	-webkit-filter: blur(0px);
