@@ -12,7 +12,7 @@ class SuccessUtil(Information):
             'editPermissionSuccess':-4001,
             'updateDirectionSuccess':-5001,
             'updateLaboratorySuccess':-5002,
-            'updateProfessionalClassSuccess':-5003,
+            'addProfessionalClassSuccess':-5003,
             **leaveMessage['typeDict'],
         },{
             -1001:"欢迎成为我们的一员",

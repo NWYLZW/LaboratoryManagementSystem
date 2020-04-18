@@ -110,29 +110,30 @@ def updateDirection():
         'updateDirectionSuccess',
         'dataBaseError',
     ]
-    result = Direction.updateDirection("Java", "Java", "Java世界最牛逼")
+    result = Direction.updateDirection(request.form["name"], request.form["directionImageName"], request.form["content"])
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
-@adminBluePrint.route("/updateLaboratory",methods=['GET'])
+@adminBluePrint.route("/updateLaboratory",methods=['POST'])
 def updateLaboratory():
     messageDict = [
         'updateLaboratorySuccess',
         'dataBaseError',
     ]
-    result = Laboratory.updateLaboratory("E", "601", "特别难爬的一实验室")
+    result = Laboratory.updateLaboratory(request.form["blockNum"], request.form["doorNum"], request.form["content"])
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
-@adminBluePrint.route("/addProfessionalClass",methods=['GET'])
+@adminBluePrint.route("/addProfessionalClass",methods=['POST'])
 def addProfessionalClass():
     messageDict = [
-        'updateProfessionalClassSuccess',
+        'addProfessionalClassSuccess',
         'dataBaseError',
+        'FormDataWrong',
     ]
-    result = ProfessionalClass.addProfessionalClass("网络工程", 16, 1)
+    result = ProfessionalClass.addProfessionalClass(request.form["professional"], 16, 1)
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:

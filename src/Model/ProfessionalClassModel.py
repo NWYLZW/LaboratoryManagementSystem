@@ -41,8 +41,21 @@ class ProfessionalClass(db.Model):
         return professionalClassList
     @staticmethod
     def addProfessionalClass(professional:str= "", gradle:int= -1, classNum:int= -1):
+        '''
+        :param professional: 专业名
+        :param gradle: 年级
+        :param classNum: 班级
+        :return: {
+        0:"添加成功",
+        1:"数据库错误",
+        2:"专业已存在",
+        }
+        '''
         try:
-            professionalClass = ProfessionalClass(professional,gradle,classNum)
+            professionalClass = ProfessionalClass.query.filter_by(professional=professional).first()
+            if professionalClass is None:
+                professionalClass = ProfessionalClass(professional,gradle,classNum)
+            else:return 2
             db.session.add(professionalClass)
             db.session.flush()
         except Exception as e:
