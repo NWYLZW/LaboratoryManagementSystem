@@ -110,8 +110,9 @@ def updateDirection():
     messageDict = [
         'updateDirectionSuccess',
         'dataBaseError',
+        'FormDataWrong',
     ]
-    result = Direction.updateDirection(request.form["name"], request.form["directionImageName"], request.form["content"])
+    result = Direction.updateDirection(request.form["id"], request.form["name"], request.form["directionImageName"], request.form["content"])
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:
@@ -128,8 +129,9 @@ def updateLaboratory():
     messageDict = [
         'updateLaboratorySuccess',
         'dataBaseError',
+        'FormDataWrong',
     ]
-    result = Laboratory.updateLaboratory(request.form["blockNum"], request.form["doorNum"], request.form["content"])
+    result = Laboratory.updateLaboratory(request.form["id"], request.form["blockNum"], request.form["doorNum"], request.form["content"])
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:
@@ -148,7 +150,7 @@ def addProfessionalClass():
         'dataBaseError',
         'FormDataWrong',
     ]
-    result = ProfessionalClass.addProfessionalClass(request.form["professional"], 16, 1)
+    result = ProfessionalClass.addProfessionalClass(request.form["id"], request.form["professional"], 16, 1)
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:

@@ -17,6 +17,7 @@ class Direction(db.Model):
         self.content = content
     def toDict(self)->dict:
         return {
+            'id':self.id,
             'name':self.name,
             'imgName':self.imgName,
             'content':self.content,
@@ -32,13 +33,16 @@ class Direction(db.Model):
             }
         return directionDict
     @staticmethod
-    def updateDirection(name:str= "", imgName:str= "", content:str= ""):
+    def updateDirection(id:str = "", name:str = "", imgName:str = "", content:str = ""):
         try:
-            direction = Direction.query.filter_by(name=name).first()
+            if not id.isdigit(): return 2
+            direction = Direction.query.filter_by(id=int(id)).first()
             if direction is None:
                 direction = Direction(name,imgName,content)
-            direction.imgName = imgName
-            direction.content = content
+            else:
+                direction.name = name
+                direction.imgName = imgName
+                direction.content = content
             db.session.add(direction)
             db.session.flush()
         except Exception as e:

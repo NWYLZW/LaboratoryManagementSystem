@@ -17,6 +17,7 @@ class Laboratory(db.Model):
         self.content = content
     def toDict(self)->dict:
         return {
+            'id':self.id,
             'blockNum':self.blockNum,
             'doorNum':self.doorNum,
             'content':self.content,
@@ -32,12 +33,16 @@ class Laboratory(db.Model):
             }
         return laboratoryDict
     @staticmethod
-    def updateLaboratory(blockNum:str= "", doorNum:str= "", content:str= ""):
+    def updateLaboratory(id:str= "", blockNum:str= "", doorNum:str= "", content:str= ""):
         try:
-            laboratory = Laboratory.query.filter_by(blockNum=blockNum,doorNum=doorNum).first()
+            if not id.isdigit(): return 2
+            laboratory = Laboratory.query.filter_by(id=id).first()
             if laboratory is None:
                 laboratory = Laboratory(blockNum,doorNum,content)
-            laboratory.content = content
+            else:
+                laboratory.blockNum = blockNum
+                laboratory.doorNum = doorNum
+                laboratory.content = content
             db.session.add(laboratory)
             db.session.flush()
         except Exception as e:

@@ -19,6 +19,7 @@ class ProfessionalClass(db.Model):
         return self.professional+'-'+"%02d"%self.gradle+"%02d"%self.classNum
     def toDict(self)->dict:
         return {
+            'id':self.id,
             'professional':self.professional,
             'gradle':self.gradle,
             'classNum':self.classNum,
