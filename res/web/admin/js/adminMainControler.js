@@ -179,8 +179,8 @@
 							for (var i = 0; i < dict.users.length; i++) {
 								personnelList$.append('<div class="professional-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].nickName+'</div>');
 							}
-							return item$;
 						}
+						return item$;
 					}
 					else{
 						var item$ = $('\

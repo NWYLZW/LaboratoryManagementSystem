@@ -46,8 +46,8 @@
 			}
 		}
 		Click(){
-			var content = this;
-			var $panelItemContro = $('\
+			const content = this;
+			let $panelItemContro = $('\
 				<div class="panel-item-Contro">\
 					<div class="panel-item-Contro-delete"><i class="fa fa-close fa-1x"></i>取消</div>\
 					<div class="panel-item-Contro-edit"><i class="fa fa-check fa-1x"></i>确认</div>\
@@ -55,12 +55,12 @@
 			');
 			this.$addBTN.unbind('click').click(function(){
 				this.style.height = '0';
-				var temp$ = $panelItemContro.clone();
-				var item$ = content.generateItem(null,true).append(temp$);
+				let temp$ = $panelItemContro.clone();
+				let item$ = content.generateItem(null,true).append(temp$);
 				
 				temp$.find('.panel-item-Contro-delete').unbind('click').click(function(){
 					item$.css('height','0');
-					setTimeout(function() {item$.remove();}, 500);
+					setTimeout(function() {item$.remove();}, 800);
 					content.$addBTN.css('height','');
 				});
 				temp$.find('.panel-item-Contro-edit').unbind('click').click(function(){
