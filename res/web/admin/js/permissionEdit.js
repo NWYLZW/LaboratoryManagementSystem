@@ -1,7 +1,7 @@
-var permissionList = {
-	"1":"CommonUser",
-};
-function loadEnd(){
+(() =>{
+	var permissionList = {
+		"1":"CommonUser",
+	};
 	new myAjax({
 		url:'../admin/getPermissionList',
 		method:"POST",
@@ -39,5 +39,4 @@ function loadEnd(){
 		failure:function(error){},
 		always:function(jqXHR){}
 	}).ajax();
-}
-loadEnd();
+})();
