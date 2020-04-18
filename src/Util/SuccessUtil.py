@@ -58,10 +58,14 @@ leaveMessage = {
     'typeDict': {
         'leaveMessageSuccess':-6001,
         'replyLeaveMessageSuccess':-6002,
+        'likeLeaveMessageSuccess':-6003,
+        'unlikeLeaveMessageSuccess':-6004,
     },
     'dict': {
         -6001:"留言成功",
         -6002:"回复留言成功",
+        -6003:"赞留言成功",
+        -6004:"取消赞留言成功",
     }
 }
 

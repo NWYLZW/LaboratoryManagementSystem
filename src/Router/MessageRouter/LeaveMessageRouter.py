@@ -37,7 +37,7 @@ def initChildRoute(bluePrint:Blueprint):
         messageDict = [
             'replyLeaveMessageSuccess',
             'dataBaseError',
-            'replyLeaveMessageIsNone',
+            'LeaveMessageIsNone',
         ]
         isAnonymous = request.json['isAnonymous']
         content = request.json['content']
@@ -64,6 +64,21 @@ def initChildRoute(bluePrint:Blueprint):
             return JsonUtil().dictToJson(result)
         else:
             return errorUtil.getData('dataBaseError')
+    @bluePrint.route(routeName+"/like",methods=['POST'])
+    @login_required
+    def likeLeaveMessage():
+        messageDict = [
+            'likeLeaveMessageSuccess',
+            'dataBaseError',
+            'unlikeLeaveMessageSuccess',
+            'LeaveMessageIsNone',
+        ]
+        leaveMessageId = request.json.get("leaveMessageId")
+        result = leaveMessageControler.likeLeaveMessageById(current_user.id,int(leaveMessageId))
+        if result == 0 or result == 2:
+            return successUtil.getData(messageDict[result])
+        else:
+            return errorUtil.getData(messageDict[result])
     @bluePrint.route(routeName+"/remove",methods=['GET'])
     @login_required
     def removeLeaveMessage():

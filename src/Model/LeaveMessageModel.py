@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from src import db
+from src import db, MainLog
 from src.Model.UserModel import User
 from src.Util.TimeUtil import timeUtil
 
@@ -35,6 +35,28 @@ class LeaveMessage(db.Model):
             'likeNum':self.likeUsers.count(),
             'replyMessages':[leaveMessage.toDict(userId) for leaveMessage in self.replyMessages],
         }
+    def like(self,userId):
+        try:
+            lmlu = LeaveMessageLikeUsers.query.filter_by(
+                userId=userId,
+                leaveMessageId=self.id
+            ).first()
+            if lmlu == None:
+                lmlu = LeaveMessageLikeUsers(
+                    userId=userId,
+                    leaveMessageId=self.id
+                )
+                db.session.add(lmlu)
+                rspType = 0
+            else:
+                db.session.delete(lmlu)
+                rspType = 2
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,e)
+            return 1
+        db.session.commit()
+        return rspType
 
 class LeaveMessageLikeUsers(db.Model):
     __tablename__ = 'LeaveMessageLikeUsers'

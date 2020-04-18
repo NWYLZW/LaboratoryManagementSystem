@@ -59,10 +59,10 @@ loginNotice = {
 }
 leaveMessage = {
     'typeDict': {
-        'replyLeaveMessageIsNone':4001,
+        'LeaveMessageIsNone':4001,
     },
     'dict': {
-        4001:"回复的留言不存在",
+        4001:"留言不存在",
     }
 }
 

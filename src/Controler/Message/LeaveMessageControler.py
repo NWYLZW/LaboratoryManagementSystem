@@ -11,8 +11,8 @@ class LeaveMessageControler:
         :param isAnonymous: 是否匿名
         :param content: 留言的内容
         :return: {
-        '0':'留言成功',
-        '1':'数据库错误',
+        0:'留言成功',
+        1:'数据库错误',
         }
         '''
         try:
@@ -35,9 +35,9 @@ class LeaveMessageControler:
         :param content: 回复留言的内容
         :param replyId: 回复的id号
         :return: {
-        '0':'留言成功',
-        '1':'数据库错误',
-        '2':'回复的留言id不存在',
+        0:'留言成功',
+        1:'数据库错误',
+        2:'回复的留言id不存在',
         }
         '''
         try:
@@ -55,7 +55,7 @@ class LeaveMessageControler:
             return 1
         db.session.commit()
         return 0
-    def getLeaveMessageByPage(self,userId, page:int=1):
+    def getLeaveMessageByPage(self, userId, page:int=1):
         '''
         :param authorId: 留言用户id
         :return: {
@@ -68,4 +68,22 @@ class LeaveMessageControler:
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,e)
             return None
+    def likeLeaveMessageById(self, userId, leaveMessageId):
+        '''
+        :param userId: 喜欢用户id
+        :param leaveMessageId: 喜欢的留言id
+        :return: {
+        0:'赞成功',
+        1:'数据库错误',
+        2:'取消赞',
+        3:'赞的留言不存在',
+        }
+        '''
+        try:
+            lm = LeaveMessage.query.filter_by(id=leaveMessageId).first()
+            if lm == None: return 3
+            return lm.like(userId)
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,e)
+            return 1
 leaveMessageControler = LeaveMessageControler()
