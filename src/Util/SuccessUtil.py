@@ -1,5 +1,5 @@
 from src.Bean.Information import Information
-
+from src.Information.NoticeInformation import notice
 
 class SuccessUtil(Information):
     def __init__(self):
@@ -8,7 +8,7 @@ class SuccessUtil(Information):
             "loginSuccess":-1002,
             **(editMyData['typeDict']),
             "markSuccess":-2001,
-            **loginNotice['typeDict'],
+            **(notice['s']['typeDict']),
             'editPermissionSuccess':-4001,
             'updateDirectionSuccess':-5001,
             'updateLaboratorySuccess':-5002,
@@ -19,7 +19,7 @@ class SuccessUtil(Information):
             -1002:"用户登陆成功",
             **(editMyData['dict']),
             -2001:"用户签到成功",
-            **loginNotice['dict'],
+            **(notice['s']['dict']),
             -4001:"修改权限成功",
             -5001:"更新方向信息成功",
             -5002:"更新实验室信息成功",
@@ -40,18 +40,6 @@ editMyData = {
             -1103:"密码修改成功",
             -1104:"方向修改申请成功",
             -1105:"实验室调换申请成功",
-    }
-}
-loginNotice = {
-    'typeDict': {
-        'delLoginNoticeSuccess':-3001,
-        'addLoginNoticeSuccess':-3002,
-        'editLoginNoticeSuccess':-3003,
-    },
-    'dict': {
-        -3001:"删除login轮播成功",
-        -3002:"添加login轮播成功",
-        -3003:"编辑login轮播成功",
     }
 }
 leaveMessage = {

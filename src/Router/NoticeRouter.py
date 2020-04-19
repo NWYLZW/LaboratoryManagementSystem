@@ -1,6 +1,9 @@
 from flask import Blueprint, request
 
 from src.Controler.NoticeControler import noticeControler
+from src.Util.ErrorUtil import errorUtil
+from src.Util.JsonUtil import JsonUtil
+from src.Util.SuccessUtil import successUtil
 
 noticeBluePrint = Blueprint(
     'notice',
@@ -19,10 +22,32 @@ def loginNoticeShow():
     return noticeControler.getLoginNotice(True)
 
 # TODO 权限检测
-# 公告信息
-@noticeBluePrint.route("/addNotice",methods=['GET'])
+@noticeBluePrint.route("/addNotice",methods=['POST'])
 def addNotice():
-    return noticeControler.addNotice(request.json)
+    messageDict = [
+        'addNoticeSuccess',
+        'dataBaseError',
+        'FormDataWrong',
+    ]
+    result = noticeControler.addNotice(request.json['title'],request.json['content'],request.json['kindNum'])
+    if result == 0:
+        return successUtil.getData(messageDict[result])
+    else:
+        return errorUtil.getData(messageDict[result])
+@noticeBluePrint.route("/getNotices",methods=['GET'])
+def getNotices():
+    return JsonUtil().dictToJson(noticeControler.getNotices())
 @noticeBluePrint.route("/viewNotice",methods=['GET'])
 def viewNotice():
-    return noticeControler.viewNotice(2)
+    messageDict = [
+        'viewNoticeSuccess',
+        'dataBaseError',
+        'FormDataWrong',
+        'NoticeNone',
+    ]
+    noticeId = request.args.get("noticeId")
+    result = noticeControler.viewNotice(noticeId)
+    if result == 0:
+        return successUtil.getData(messageDict[result])
+    else:
+        return errorUtil.getData(messageDict[result])

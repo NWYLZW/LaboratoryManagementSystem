@@ -1,4 +1,5 @@
 from src.Bean.Information import Information
+from src.Information.NoticeInformation import notice
 
 class ErrorUtil(Information):
     def __init__(self):
@@ -10,7 +11,7 @@ class ErrorUtil(Information):
             'dataBaseError':4,
             **(userData['typeDict']),
             'MarkIpError':2001,
-            **(loginNotice['typeDict']),
+            **(notice['e']['typeDict']),
             **leaveMessage['typeDict'],
         }, {
             0:"表单数据错误",
@@ -20,7 +21,7 @@ class ErrorUtil(Information):
             4:"数据库错误",
             **(userData['dict']),
             2001:"未在实验室内签到",
-            **(loginNotice['dict']),
+            **(notice['e']['dict']),
             **leaveMessage['dict'],
         })
 userData = {
@@ -37,24 +38,6 @@ userData = {
         1003:"schoolId用户已存在，若有错误请联系管理",
         1004:"头像修改失败",
         1005:"背景修改失败",
-    }
-}
-loginNotice = {
-    'typeDict':{
-        'LoginNoticeIdNone':3001,
-        'LoginNoticeNone':3002,
-        'LoginNoticeMax6':3003,
-        'addLoginNoticeImageError':3004,
-        'LoginNoticeMin2':3005,
-        'editLoginNoticeImageError':3006,
-    },
-    'dict':{
-        3001:"该Id loginNotice不存在",
-        3002:"loginNotice不存在",
-        3003:"LoginNotice最大为6",
-        3004:"添加LoginNoticeImage出现了错误",
-        3005:"LoginNotice最小为2",
-        3006:"修改LoginNoticeImage出现了错误",
     }
 }
 leaveMessage = {
