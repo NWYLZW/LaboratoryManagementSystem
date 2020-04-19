@@ -21,6 +21,7 @@
 				</div>');
 			for (let i = 0; i < this.data.length; i++) {
 				let temp$ = $panelItemContro.clone();
+				content.set$panelItemControHover(temp$);
 				let item$ = this.generateItem(this.data[i],false).append(temp$);
 				this.$PanelControler.append(item$);
 				
@@ -34,6 +35,7 @@
 							<div class="panel-item-Contro-edit"><i class="fa fa-check fa-1x"></i>确认</div>\
 						</div>\
 					');
+					content.set$panelItemControHover(temp$);
 					tempX$.find('.panel-item-Contro-delete').unbind('click').click(function(){
 						itemTemp$.after(item$).detach();
 					});
@@ -57,6 +59,7 @@
 			this.$addBTN.unbind('click').click(function(){
 				this.style.height = '0';
 				let temp$ = $panelItemContro.clone();
+				content.set$panelItemControHover(temp$);
 				let item$ = content.generateItem(null,true).append(temp$);
 				
 				temp$.find('.panel-item-Contro-delete').unbind('click').click(function(){
@@ -71,6 +74,24 @@
 				item$.css('height','0');
 				content.$PanelControler.prepend(item$);
 				setTimeout(function() {item$.css('height','');}, 50);
+			});
+		}
+		set$panelItemControHover($panelItemContro){
+			var $controDelete = $panelItemContro.find('.panel-item-Contro-delete');
+			var $controEdit = $panelItemContro.find('.panel-item-Contro-edit');
+			$controDelete.hover(function(){
+				$controDelete.css({borderRadius:'50%',width:'30px'});
+				$controDelete.text('').append($('<i class="fa fa-close fa-1x"></i>')[0]);
+			},function(){
+				$controDelete.css({borderRadius:'8px',width:'52px'});
+				$controDelete.text('取消').append($('<i class="fa fa-close fa-1x"></i>')[0]);
+			});
+			$controEdit.hover(function(){
+				$controEdit.css({borderRadius:'50%',width:'30px'});
+				$controEdit.text('').append($('<i class="fa fa-check fa-1x">')[0]);
+			},function(){
+				$controEdit.css({borderRadius:'8px',width:'52px'});
+				$controEdit.text('确认').append($('<i class="fa fa-check fa-1x">')[0]);
 			});
 		}
 		updataItem($node){
