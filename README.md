@@ -29,3 +29,125 @@ windows下使用win_venv环境
 ![image-20200418011841978](readmeRes/image-20200418011841978.png)
 
 ![image-20200418011927772](readmeRes/image-20200418011927772.png)
+
+## 项目开发手册
+
+### 文件介绍
+```
+该部分使用pychram查看源文件阅读查阅
+├─log										    #日志文件夹，服务运行均保存在这里
+├─readmeRes									#README.md文档的图片资源文件夹
+├─res										    #网页端资源文件夹
+```
+```
+│  ├─image									#网页端图片资源文件夹
+│  │  └─user								#用户图片文件夹
+│  │      ├─headPortrait					#头像
+│  │      └─mySpaceBackground				#个人空间背景
+```
+```
+│  ├─templates								#模版库，项目线上时将模版数据移至此处防止盗取html资源
+│  │  ├─panel								#
+│  │  └─user								#
+│  │      └─css								#
+```
+```
+│  └─web									    #网页端静态资源文件夹
+```
+```
+│      ├─admin								#
+│      │  ├─css								#
+│      │  │  └─adminMainControler			#
+│      │  └─js								#
+```
+```
+│      ├─artDialog							#
+```
+```
+│      ├─baseLibrary						    #
+│      │  ├─css						        #
+│      │  ├─img						        #
+│      │  │  ├─direction				    #
+│      │  │  ├─HeadPortrait			    #
+│      │  │  └─ico						    #
+│      │  └─js						        #
+```
+```
+│      ├─cropit-master					    #
+│      │  └─dist						    #
+```
+```
+│      ├─error						        #
+```
+```
+│      ├─font-awesome-4.7.0					#
+│      │  ├─css						        #
+│      │  └─fonts						    #
+```
+```
+│      ├─iscroll						        #
+```
+```
+│      ├─main						        #
+│      │  ├─css						        #
+│      │  ├─img						        #
+│      │  └─js						        #
+```
+```
+│      ├─my						            #
+│      │  ├─info						    #
+│      │  │  ├─css						    #
+│      │  │  └─js						    #
+│      │  └─space						    #
+│      │      ├─css						    #
+│      │      ├─img						    #
+│      │      └─js						    #
+```
+```
+│      ├─Notiflix-2.1.2						#
+│      │  ├─AIO						        #
+│      │  ├─Minified						#
+│      │  └─Unminified						#
+```
+```
+│      ├─panel						        #
+│      │  ├─css						        #
+│      │  └─js						        #
+```
+```
+│      ├─select-mania						#
+│      │  ├─css						        #
+│      │  │  └─themes						#
+│      │  ├─fonts						    #
+│      │  └─js						        #
+```
+```
+│      ├─user						        #
+│      │  ├─css						        #
+│      │  ├─img						        #
+│      │  │  └─rotation					#
+│      │  └─js						        #
+```
+```
+│      └─wavify						        #
+```
+```
+├─src						                    #
+│  ├─Bean						            #
+│  ├─Controler						        #
+│  │  ├─Message						        #
+│  ├─form						            #
+│  ├─Information						        #
+│  ├─Model						            #
+│  ├─Router						            #
+│  │  ├─MessageRouter						#
+│  ├─Util						            #
+│  ├─Wrap						            #
+```
+```
+├─venv						                #linux下的虚拟环境
+├─win_venv						            #windows下的虚拟环境
+├─.gitignore						            #git的忽略提交文件夹
+├─Main.py						                #项目启动文件
+├─README.md						            #项目介绍文件
+```
