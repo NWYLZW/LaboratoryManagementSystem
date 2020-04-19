@@ -143,14 +143,14 @@ def getLaboratoryAllData():
         return JsonUtil().dictToJson(result)
     else:
         return errorUtil.getData('dataBaseError')
-@adminBluePrint.route("/addProfessionalClass",methods=['POST'])
-def addProfessionalClass():
+@adminBluePrint.route("/addProfessional",methods=['POST'])
+def addProfessional():
     messageDict = [
         'addProfessionalClassSuccess',
         'dataBaseError',
         'FormDataWrong',
     ]
-    result = ProfessionalClass.addProfessionalClass(request.form["id"], request.form["professional"], 16, 1)
+    result = ProfessionalClass.addProfessionalClass(request.form["professional"], 16, 1)
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:

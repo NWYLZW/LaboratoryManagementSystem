@@ -35,7 +35,7 @@ class Direction(db.Model):
     @staticmethod
     def updateDirection(id:str = "", name:str = "", imgName:str = "", content:str = ""):
         try:
-            if not id.isdigit(): return 2
+            if not id.isdigit() and id!='-1': return 2
             direction = Direction.query.filter_by(id=int(id)).first()
             if direction is None:
                 direction = Direction(name,imgName,content)

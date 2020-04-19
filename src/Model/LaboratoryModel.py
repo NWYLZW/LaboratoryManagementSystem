@@ -35,7 +35,7 @@ class Laboratory(db.Model):
     @staticmethod
     def updateLaboratory(id:str= "", blockNum:str= "", doorNum:str= "", content:str= ""):
         try:
-            if not id.isdigit(): return 2
+            if not id.isdigit() and id!='-1': return 2
             laboratory = Laboratory.query.filter_by(id=id).first()
             if laboratory is None:
                 laboratory = Laboratory(blockNum,doorNum,content)

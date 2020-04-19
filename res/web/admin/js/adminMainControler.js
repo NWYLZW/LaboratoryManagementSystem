@@ -9,6 +9,7 @@
 			new PanelControler({
 				data:list,
 				panelName:'.direction-panelContent',
+				addURL:'../admin/updateDirection',
 				updataURL:'../admin/updateDirection',
 				deleteURL:'../admin/deleteDirection',
 				generateItemFun:function(dict,isEdit){
@@ -21,7 +22,7 @@
 								<input class="direction-ICODIV-input" type="text" name="directionImageName" style="display: none;" my-submit/>\
 							</div>\
 							<div class="direction-content">\
-								<div class="direction-name"><input type="text" name="name" my-submit/></div>\
+								<div class="direction-name"><input type="text" name="name" placeholder="方向名" my-submit/></div>\
 								<div class="direction-introduce"><textarea name="content" my-submit></textarea></div>\
 							</div>\
 						</div>');
@@ -32,7 +33,8 @@
 							wraper$.append('<div class="direction-ICODIV-wraperItem '+ICOList[i]+'Ico"></div>');
 						}
 						item$.find('.direction-ICODIV').prepend(wraper$).removeClass('AIIco');
-						if(dict!=null){
+						if(dict != null){
+							item$.id = dict.id;
 							currentIcoIndex = ICOList.indexOf(dict.imgName);
 							item$.find('.direction-name input').val(dict.name);
 							item$.find('.direction-introduce textarea').val(dict.content);
@@ -81,6 +83,7 @@
 						for (var i = 0; i < dict.users.length; i++) {
 							personnelList$.append('<div class="direction-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].nickName+'</div>')
 						}
+						item$.id = dict.id;
 						return item$;
 					}
 				},
@@ -102,6 +105,7 @@
 			new PanelControler({
 				data:list,
 				panelName:'.laboratory-panelContent',
+				addURL:'../admin/updateLaboratory',
 				updataURL:'../admin/updateLaboratory',
 				deleteURL:'../admin/deleteLaboratory',
 				generateItemFun:function(dict,isEdit){
@@ -109,14 +113,21 @@
 						var item$ = $('\
 							<div class="laboratory-panelContent-item EDIT">\
 								<div class="laboratory-content">\
-									<div class="laboratory-name"><input type="text" name="name" my-submit/></div>\
+									<div class="laboratory-blockNum">\
+										<input type="text" name="blockNum" placeholder="楼栋名" my-submit/>\
+									</div>\
+									<div class="laboratory-doorNum">\
+										<input type="text" name="doorNum" placeholder="实验室门牌号" my-submit/>\
+									</div>\
 									<div class="laboratory-introduce"><textarea name="content" my-submit></textarea></div>\
 									<div class="laboratory-personnelList"></div>\
 								</div>\
 							</div>\
 						');
-						if(dict!=null){
-							item$.find('.laboratory-name input').val(dict.blockNum+'-'+dict.doorNum);
+						if(dict != null){
+							item$.id = dict.id;
+							item$.find('.laboratory-blockNum input').val(dict.blockNum);
+							item$.find('.laboratory-doorNum input').val(dict.doorNum);
 							item$.find('.laboratory-introduce textarea').val(dict.content);
 							var personnelList$ = item$.find('.laboratory-personnelList');
 							for (var i = 0; i < dict.users.length; i++) {
@@ -140,6 +151,7 @@
 						for (var i = 0; i < dict.users.length; i++) {
 							personnelList$.append('<div class="laboratory-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].nickName+'</div>')
 						}
+						item$.id = dict.id;
 						return item$;
 					}
 				},
@@ -161,6 +173,7 @@
 			new PanelControler({
 				data:list,
 				panelName:'.professional-panelContent',
+				addURL:'../admin/addProfessional',
 				updataURL:'../admin/updateProfessional',
 				deleteURL:'../admin/deleteProfessional',
 				generateItemFun:function(dict,isEdit){
@@ -168,12 +181,13 @@
 						var item$ = $('\
 							<div class="professional-panelContent-item EDIT">\
 								<div class="professional-content">\
-									<div class="professional-name"><input type="text" name="name" my-submit/></div>\
+									<div class="professional-name"><input type="text" name="name" placeholder="专业名" my-submit/></div>\
 									<div class="professional-personnelList"></div>\
 								</div>\
 							</div>\
 						');
 						if(dict != null){
+							item$.id = dict.id;
 							item$.find('.professional-name input').val(dict.professional);
 							var personnelList$ = item$.find('.professional-personnelList');
 							for (var i = 0; i < dict.users.length; i++) {
@@ -199,6 +213,7 @@
 						for (var i = 0; i < dict.users.length; i++) {
 							personnelList$.append('<div class="professional-personnel"><i class="fa fa-user fa-1x"></i>'+dict.users[i].nickName+'</div>')
 						}
+						item$.id = dict.id;
 						return item$;
 					}
 				},

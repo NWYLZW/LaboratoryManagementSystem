@@ -47,6 +47,22 @@ class ProfessionalClass(db.Model):
                      professionalClass.professional))
         return professionalClassList
     @staticmethod
+    def getAllData():
+        professionalClassList = []
+        try:
+            professionalClasses = ProfessionalClass.query.filter_by().all()
+            for professionalClass in professionalClasses:
+                professionalClassDict = professionalClass.toDict()
+                professionalClassDict['users'] = [user.toBriefDict() for user in professionalClass.users.all()]
+                professionalClassList.append(professionalClassDict)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"从数据库获取方向信息发生错误")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return professionalClassList
+    @staticmethod
     def addProfessionalClass(professional:str= "", gradle:int= -1, classNum:int= -1):
         '''
         :param professional: 专业名
@@ -71,19 +87,3 @@ class ProfessionalClass(db.Model):
             return 1
         db.session.commit()
         return 0
-    @staticmethod
-    def getAllData():
-        professionalClassList = []
-        try:
-            professionalClasses = ProfessionalClass.query.filter_by().all()
-            for professionalClass in professionalClasses:
-                professionalClassDict = professionalClass.toDict()
-                professionalClassDict['users'] = [user.toBriefDict() for user in professionalClass.users.all()]
-                professionalClassList.append(professionalClassDict)
-            db.session.flush()
-        except Exception as e:
-            MainLog.record(MainLog.level.ERROR,"从数据库获取方向信息发生错误")
-            MainLog.record(MainLog.level.ERROR,e)
-            return None
-        db.session.commit()
-        return professionalClassList

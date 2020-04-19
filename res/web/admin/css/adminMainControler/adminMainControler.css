@@ -204,6 +204,11 @@
 	padding-left: 10px;
 	width: calc(50% - 10px);height: 24px;
 }
+.laboratory-panelContent-item .laboratory-blockNum,.laboratory-doorNum{
+	position: relative;float: left;
+	padding-left: 10px;
+	width: calc(50% - 10px);height: 24px;
+}
 .laboratory-panelContent-item .laboratory-introduce{
 	position: relative;
 	padding-left: 10px;

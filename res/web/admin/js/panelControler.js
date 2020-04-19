@@ -2,6 +2,7 @@
 	class PanelControler {
 		constructor(option) {
 			this.data = option.data;
+			this.addURL = option.addURL;
 			this.updataURL = option.updataURL;
 			this.deleteURL = option.deleteURL;
 			this.$PanelControler = $(option.panelName);
@@ -64,7 +65,7 @@
 					content.$addBTN.css('height','');
 				});
 				temp$.find('.panel-item-Contro-edit').unbind('click').click(function(){
-					content.updataItem(item$);
+					content.addItem(item$);
 				});
 				
 				item$.css('height','0');
@@ -79,15 +80,16 @@
 			for (var i = 0; i < textarea$.length; i++) {
 				submitForm.append($('<input type="text" name="'+textarea$[i].name+'" my-submit/>').val(textarea$[i].value));
 			}
+			submitForm.append($('<input type="text" name="id" my-submit/>').val($node.id));
 			if(this.violation(submitForm[0])){
-				var formData = new FormData(submitForm);
+				var formData = new FormData(submitForm[0]);
 				new myAjaxForm({
 					url:this.updataURL,
 					data:formData,
 					method:"POST",
 					typeSpecialDeal:{
 						'0':function(dictObj){
-							console.log(JSON.parse(dictObj.message));
+							console.log(dictObj);
 							Notiflix.Report.Failure(
 							'错误'
 							,"表单数据错误"
@@ -95,7 +97,38 @@
 						}
 					},
 					responseCorrect:function(){
-						Notiflix.Notify.Success('Sol lucet omnibus');
+						Notiflix.Notify.Success('更新数据成功');
+					},
+					responseError:function(){},
+					failureEnd:function(){},
+				}).ajax();
+			}
+		}
+		addItem($node){
+			var submitForm = $('<form></form>')
+			.append($node.find('input[my-submit]').clone());
+			var textarea$ = $node.find('textarea[my-submit]')
+			for (var i = 0; i < textarea$.length; i++) {
+				submitForm.append($('<input type="text" name="'+textarea$[i].name+'" my-submit/>').val(textarea$[i].value));
+			}
+			submitForm.append($('<input type="text" name="id" my-submit/>').val('-1'));
+			if(this.violation(submitForm[0])){
+				var formData = new FormData(submitForm[0]);
+				new myAjaxForm({
+					url:this.addURL,
+					data:formData,
+					method:"POST",
+					typeSpecialDeal:{
+						'0':function(dictObj){
+							console.log(dictObj);
+							Notiflix.Report.Failure(
+							'错误'
+							,"表单数据错误"
+							,'确认');
+						}
+					},
+					responseCorrect:function(){
+						Notiflix.Notify.Success('添加数据成功');
 					},
 					responseError:function(){},
 					failureEnd:function(){},
