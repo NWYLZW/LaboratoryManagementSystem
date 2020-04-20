@@ -1,9 +1,16 @@
 # 启用虚拟环境
 
 ## 根据系统选择虚拟环境
-```shell script
+```
 linux下使用venv环境
 windows下使用win_venv环境
+
+重要!!!:
+提交时千万不要提交pyvenv.cfg文件，防止对他人环境造成干扰
+
+windows下使用win_venv环境时需要更改文件夹下pyvenv.cfg文件
+home = C:\Program Files (x86)\Python37-32改成你操作系统对应版本python的安装路径
+version = 3.7.2改成你的python的版本号
 ```
 
 ![image-20200418013801384](readmeRes/image-20200418013801384.png)
