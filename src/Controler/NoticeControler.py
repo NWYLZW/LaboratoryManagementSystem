@@ -4,6 +4,7 @@ from sqlalchemy import and_, or_
 from src import db, MainLog
 from src.Model.LoginNoticeModel import LoginNotice
 from src.Model.NoticeModel import Notice
+from src.Model.RoleModel import Permission
 from src.Util.JsonUtil import JsonUtil
 
 
@@ -43,16 +44,25 @@ class NoticeControler:
         0:"添加成功",
         1:"数据库错误",
         2:"表单数据错误",
+        3:"无权限",
         }
         '''
-        # TODO 检测是否有权限发送该等级的公告
-        if kindNum.isdigit(): kindNum = int(kindNum)
+        NoticeEditPermission = [
+            Permission.PUBLISH_ALL_NOTICE,
+            Permission.PUBLISH_DIRECTION_NOTICE,
+            Permission.PUBLISH_LABORATORY_NOTICE,
+        ]
+        if kindNum.isdigit():
+            kindNum = int(kindNum)
+            if kindNum < 0 or kindNum > NoticeEditPermission.__len__(): return 2
         else: return 2
+        if current_user.can(NoticeEditPermission[kindNum]) and not current_user.is_administrator():return 3
         if kindNum == 1:
             message = current_user.direction.name
         elif kindNum == 2:
             message = current_user.laboratory.blockNum+'-'+current_user.laboratory.doorNum
-        else: message = ""
+        else:
+            message = ""
         return Notice.addNotice(
             title=title,
             content=content,
@@ -72,7 +82,7 @@ class NoticeControler:
         }
         '''
         try:
-            if noticeId.isdigit(): kindNum = int(noticeId)
+            if noticeId.isdigit(): noticeId = int(noticeId)
             else: return 2
             notice = Notice.query.filter_by(id=noticeId).first()
         except Exception as e:

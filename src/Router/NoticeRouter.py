@@ -28,6 +28,7 @@ def addNotice():
         'addNoticeSuccess',
         'dataBaseError',
         'FormDataWrong',
+        'permissionError',
     ]
     result = noticeControler.addNotice(request.json['title'],request.json['content'],request.json['kindNum'])
     if result == 0:

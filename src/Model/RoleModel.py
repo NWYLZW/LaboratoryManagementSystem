@@ -22,6 +22,12 @@ class Permission:
     ALL_MONEY_S = 0x000100
     # 所有实验室资金改删
     ALL_MONEY_CD = 0x000200
+    # 发布总公告
+    PUBLISH_ALL_NOTICE = 0x000400
+    # 发布实验室公告
+    PUBLISH_LABORATORY_NOTICE = 0x000800
+    # 发布方向公告
+    PUBLISH_DIRECTION_NOTICE = 0x002000
     ADMINISTER = 0xffffff
 
 class Role(db.Model):
@@ -47,12 +53,19 @@ class Role(db.Model):
                 Permission.LABORATORY_MONEY_S |
                 Permission.ALL_SIMPLE_DATA_S |
                 Permission.LABORATORY_DATA_ADCS |
+                Permission.PUBLISH_LABORATORY_NOTICE |
                 Permission.LABORATORY_MONEY_AD
                 , False),
-            # 'DirectionModerator':(
-            #     Permission.PERSON_DATA_ADSC |
-            #     Permission.DIRECTION_DATA_ADCS
-            #     ,False),
+            'DirectionModerator':(
+                Permission.PERSON_DATA_ADSC |
+                Permission.PUBLISH_DIRECTION_NOTICE |
+                Permission.DIRECTION_DATA_ADCS
+                ,False),
+            'DirectionTeacher':(
+                Permission.PERSON_DATA_ADSC |
+                Permission.PUBLISH_DIRECTION_NOTICE |
+                Permission.DIRECTION_DATA_ADCS
+                ,False),
             # 'Moderator':(
             #     Permission.PERSON_DATA_ADSC |
             #     Permission.ALL_DATA_ADC |
