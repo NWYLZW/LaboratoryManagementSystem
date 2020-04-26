@@ -32,6 +32,7 @@ class Notice(db.Model):
             'id':self.id,
             'authorId':self.authorId,
             'authorName':self.author.nickName,
+            'title':self.title,
             'content':self.content,
             'message':self.message,
             'dateTime':str(self.dateTime),

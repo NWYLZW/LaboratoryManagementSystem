@@ -29,6 +29,21 @@ class NoticeControler:
             })
         return JsonUtil().dictToJson(loginNoticeList)
     def getNotices(self):
+        notices = [Notice.query.filter(
+            Notice.message=="",
+        ).first()]
+        tempList = Notice.query.filter(
+            Notice.message==current_user.direction.name,
+        ).all()
+        tempList.reverse()
+        notices = notices + tempList[:2]
+        tempList = Notice.query.filter(
+            Notice.message==current_user.laboratory.blockNum+'-'+current_user.laboratory.doorNum,
+        ).all()
+        tempList.reverse()
+        notices = notices + tempList[:2]
+        return [notice.toDict(current_user.id) for notice in notices]
+    def getAllNotices(self):
         notices = Notice.query.filter(or_(
             Notice.message=="",
             Notice.message==current_user.direction.name,

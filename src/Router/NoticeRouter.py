@@ -38,6 +38,9 @@ def addNotice():
 @noticeBluePrint.route("/getNotices",methods=['GET'])
 def getNotices():
     return JsonUtil().dictToJson(noticeControler.getNotices())
+@noticeBluePrint.route("/getAllNotices",methods=['GET'])
+def getAllNotices():
+    return JsonUtil().dictToJson(noticeControler.getAllNotices())
 @noticeBluePrint.route("/viewNotice",methods=['GET'])
 def viewNotice():
     messageDict = [
