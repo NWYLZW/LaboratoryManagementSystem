@@ -1,6 +1,5 @@
 from src import db, MainLog
 
-
 class Laboratory(db.Model):
     __tablename__ = 'Laboratory'
     id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +14,13 @@ class Laboratory(db.Model):
         self.blockNum = blockNum
         self.doorNum = doorNum
         self.content = content
+    @property
+    def captal(self):
+        from src.Model.CaptalModel import Captal
+        captal = Captal.query.filter_by(self.id).first()
+        if captal!=None: return captal
+        else:
+            return Captal.new(self.id)
     def toDict(self)->dict:
         return {
             'id':self.id,
