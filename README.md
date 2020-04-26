@@ -158,3 +158,24 @@ version = 3.7.2改成你的python的版本号
 ├─Main.py						                #项目启动文件
 ├─README.md						            #项目介绍文件
 ```
+
+## 获取用户的真实id
+Nginx的配置,需要在转发的请求headers中设置好真实IP:
+```
+location /path { 
+  proxy_pass http://127.0.0.1:5000/; 
+  proxy_set_header X-Real-IP $remote_addr; 
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+}
+```
+然后在Flask中通过headers获取IP:
+```python
+from flask import request
+ip = request.headers.get('X-Real-IP')
+```
+如果用户使用了代理,获取的IP是代理后的IP，就需要获取上层IP。
+通过X-Forwarded-For获取IP的链路（结果是一个数组）,IP以逗号隔开：
+```python
+from flask import request
+ip = request.headers.get('X-Forwarded-For')
+```
