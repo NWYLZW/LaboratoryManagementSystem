@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for
+from flask import Blueprint, request, render_template, redirect, url_for, abort
 from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
@@ -7,6 +7,7 @@ from src.Controler.AdminControler import adminControler
 from src.Model.DirectionModel import Direction
 from src.Model.LaboratoryModel import Laboratory
 from src.Model.ProfessionalClassModel import ProfessionalClass
+from src.Model.RoleModel import Permission
 from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
@@ -25,6 +26,8 @@ def adminBeforeRequest():
         return redirect(url_for('user.login'))
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
+    if not current_user.can(Permission.ADMINISTER):
+        abort(403)
 
 @adminBluePrint.route("/delLoginNotice",methods=['POST'])
 def delLoginNotice():
