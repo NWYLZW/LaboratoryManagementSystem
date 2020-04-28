@@ -1,12 +1,12 @@
 (() =>{
-	var permissionList = {
+	window.permissionList = {
 		"1":"CommonUser",
 	};
 	new myAjax({
 		url:'../admin/getPermissionList',
 		method:"POST",
 		success:function(result){
-			permissionList = JSON.parse(result);
+			window.permissionList = JSON.parse(result);
 			$('.search').append(new searchControler({
 					height: 50,
 					backColor: 'rgba(50,150,250)',

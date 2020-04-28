@@ -54,6 +54,7 @@
 					.click(function(){
 						new myAjaxForm({
 							url:'../admin/editPermission',
+							isNormalAjax:true,
 							data:{
 								userId:root.dictx.id,
 								permissionId:content.getSelectItemId(),
@@ -61,11 +62,10 @@
 							method:"POST",
 							typeSpecialDeal:{
 								'-4001':function(dictObj){
-									dialog({
-										title: '消息提示',
-										content: dictObj.content,
-										padding: '40px',
-									}).show();
+									Notiflix.Report.Success(
+									'消息提示'
+									,dictObj.content
+									,'确认');
 									content.hiden();
 								}
 							},
