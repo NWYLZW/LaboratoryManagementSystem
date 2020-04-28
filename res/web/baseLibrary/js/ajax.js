@@ -10,7 +10,7 @@
 			this.always = options.always || function (jqXHR){console.log(jqXHR.status);};
 		}
 		ajax(){
-			if(this.isForm)
+			if(this.isForm && !this.isNormalAjax)
 				$.ajax({
 					url:this.url,
 					type:this.method,
@@ -79,6 +79,7 @@
 			}
 			this.always = options.always || function (jqXHR){};
 			this.success = this.newSuccess;
+			this.isNormalAjax = options.isNormalAjax || false;
 		}
 		newSuccess(result){
 			var dictObj = result;
