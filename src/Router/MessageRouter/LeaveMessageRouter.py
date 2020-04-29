@@ -73,7 +73,7 @@ def initChildRoute(bluePrint:Blueprint):
             'unlikeLeaveMessageSuccess',
             'LeaveMessageIsNone',
         ]
-        leaveMessageId = request.json.get("leaveMessageId")
+        leaveMessageId = request.json.get("leaveMessageId",'-1')
         result = leaveMessageControler.likeLeaveMessageById(current_user.id,int(leaveMessageId))
         if result == 0 or result == 2:
             return successUtil.getData(messageDict[result])

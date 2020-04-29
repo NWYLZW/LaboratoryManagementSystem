@@ -1,4 +1,5 @@
 from src.Bean.Information import Information
+from src.Information.CaptalInformation import captal
 from src.Information.NoticeInformation import notice
 
 class ErrorUtil(Information):
@@ -14,6 +15,7 @@ class ErrorUtil(Information):
             'MarkIpError':2001,
             **(notice['e']['typeDict']),
             **leaveMessage['typeDict'],
+            **(captal['e']['typeDict']),
         }, {
             0:"表单数据错误",
             1:"后端Error对象未配置参数，请附上url通知后端检查该接口",
@@ -25,6 +27,7 @@ class ErrorUtil(Information):
             2001:"未在实验室内签到",
             **(notice['e']['dict']),
             **leaveMessage['dict'],
+            **(captal['e']['dict']),
         })
 userData = {
     'typeDict':{
