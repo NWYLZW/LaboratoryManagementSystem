@@ -1,0 +1,34 @@
+.main{
+	height: 800px;
+}
+.controlLabListPanel{
+	float: none;
+	margin: 0;
+	margin-top: 10px;margin-bottom: 10px;
+	width: 100%;height: 110px;
+}
+.controlLabListPanel_item{
+	position: relative;float: left;
+	width: 100px;height: 36px;
+	border-bottom: 0px solid lightseagreen;
+}
+.controlLabListPanel_item:hover{
+	border-left: 0px solid lightseagreen;
+	border-bottom: 3px solid lightseagreen;
+}
+.controlLabListPanel_item.sel{
+	width: 100px;
+	border-left: 0px solid lightseagreen;
+	border-bottom: 3px solid lightseagreen;
+}
+.controlLabDataPanel{
+	float: none;
+    width: 100%;height: 100%;
+}
+.controlLabDataPanel_Content_BtnList{
+	height: 96px;
+}
+.controlLabDataPanel_Content_Table{
+	height: calc(100% - 148px);
+	overflow-x: hidden;
+}

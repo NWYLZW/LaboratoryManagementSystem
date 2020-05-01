@@ -36,7 +36,7 @@
 	line-height: 36px;font-size: 18px;
 	font-weight: 600;
 	border-left: 0px solid lightseagreen;
-	transition: .5s;
+	transition: .3s;
 }
 .controlLabListPanel_item.sel{
 	width: calc(100% - 28px);
@@ -84,6 +84,7 @@
     width: 100%;height: calc(100% - 40px);
 	background-color: white;
 }
+
 .controlLabDataPanel_Content_BtnList{
     position: relative;
     width: calc(100% - 3px);height: 48px;
