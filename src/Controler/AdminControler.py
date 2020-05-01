@@ -109,7 +109,7 @@ class AdminControler:
         给予用户权限
         :return: 1 用户不存在 2 数据库连接失败 0 修改成功
         '''
-        # TODO 权限等级低的不能赋予别人高等级权限
+        # TODO ！！！权限等级低的不能赋予别人高等级权限
         try:
             user = User.query.filter_by(id=json['userId']).first()
             if user:
@@ -131,9 +131,25 @@ class AdminControler:
             'LaboratiryModerator':[
                 'CommonUser',
                 'LaboratiryModerator',],
+            'DirectionModerator':[
+                'CommonUser',
+                'DirectionModerator',],
+            'DirectionTeacher':[
+                'CommonUser',
+                'DirectionModerator',
+                'DirectionTeacher',],
+            'Boos':[
+                'CommonUser',
+                'LaboratiryModerator',
+                'DirectionModerator',
+                'DirectionTeacher',
+                'Boos',],
             'Administrator':[
                 'CommonUser',
                 'LaboratiryModerator',
+                'DirectionModerator',
+                'DirectionTeacher',
+                'Boos',
                 'Administrator',],
         }
         responseList = {}
