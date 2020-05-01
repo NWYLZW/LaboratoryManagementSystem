@@ -72,11 +72,11 @@ class Role(db.Model):
             #     Permission.ALL_MONEY_S |
             #     Permission.ALL_MONEY_CD
             #     ,False),
-            # 'Boos':(
-            #     Permission.PERSON_DATA_ADSC |
-            #     Permission.ALL_DATA_ADC |
-            #     Permission.ALL_MONEY_S
-            #     ,False),
+            'Boos':(
+                Permission.PERSON_DATA_ADSC |
+                Permission.ALL_DATA_ADC |
+                Permission.ALL_MONEY_S
+                ,False),
             'Administrator':(Permission.ADMINISTER,False),
         }
         for r in roles:
