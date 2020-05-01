@@ -2,6 +2,8 @@ import decimal
 
 from src import db, MainLog
 from src.Model.UserModel import User
+from src.Util.TimeUtil import timeUtil
+
 
 class Captal(db.Model):
     __tablename__ = "Captal"
@@ -68,11 +70,13 @@ class JournalDaybook(db.Model):
         return User.query.filter_by(id=self.changeMoneyUserId).first()
     changeReason = db.Column(db.Text)
     changeMoney = db.Column(db.DECIMAL(10,2),nullable=False)
+    dateTime = db.Column(db.DateTime, nullable=False)
     def __init__(self,captalId,changeMoneyUserId,changeReason,changeMoney):
         self.captalId = captalId
         self.changeMoneyUserId = changeMoneyUserId
         self.changeReason = changeReason
         self.changeMoney = changeMoney
+        self.dateTime = timeUtil.nowDateStr()
         pass
     def toDict(self):
         return {
