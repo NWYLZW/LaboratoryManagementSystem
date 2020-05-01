@@ -50,7 +50,8 @@ class Captal(db.Model):
                 return 2
             journalDaybook = JournalDaybook(
                 captalId=self.laboratoryId,changeMoneyUserId=userId,
-                changeReason=changeReason,changeMoney=changeMoney)
+                changeReason=changeReason,changeMoney=changeMoney,
+                remainingMoney=changeMoney+self.remainingMoney)
             db.session.add(journalDaybook)
             self.remainingMoney += changeMoney
             db.session.flush()
@@ -71,11 +72,13 @@ class JournalDaybook(db.Model):
     changeReason = db.Column(db.Text)
     changeMoney = db.Column(db.DECIMAL(10,2),nullable=False)
     dateTime = db.Column(db.DateTime, nullable=False)
-    def __init__(self,captalId,changeMoneyUserId,changeReason,changeMoney):
+    remainingMoney = db.Column(db.DECIMAL(10,2),nullable=False)
+    def __init__(self,captalId,changeMoneyUserId,changeReason,changeMoney,remainingMoney):
         self.captalId = captalId
         self.changeMoneyUserId = changeMoneyUserId
         self.changeReason = changeReason
         self.changeMoney = changeMoney
+        self.remainingMoney = remainingMoney
         self.dateTime = timeUtil.nowDateStr()
         pass
     def toDict(self):
@@ -83,6 +86,7 @@ class JournalDaybook(db.Model):
             'id':self.id,
             'captalId':self.captalId,
             'changeMoneyUserId':self.changeMoneyUserId,
+            'changeMoneyUser':self.changeMoneyUser.toBriefDict(),
             'changeReason':self.changeReason,
             'changeMoney':str(self.changeMoney),
         }
