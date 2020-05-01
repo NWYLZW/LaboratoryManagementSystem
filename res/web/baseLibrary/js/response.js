@@ -11,7 +11,10 @@
 				this.linke_response = document.createElement('link');
 				this.linke_response.rel = "stylesheet";
 				this.linke_response.type = "text/css";
-				this.linke_response.href = "../"+this.proName+"/css/main.css";
+				if(this.htmlName==="main")
+					this.linke_response.href = "../"+this.proName+"/css/"+this.htmlName+".css";
+				else
+					this.linke_response.href = "../"+this.proName+"/css/"+this.htmlName+"/main.css";
 				document.head.appendChild(this.linke_response);
 			}
 		}
