@@ -8,7 +8,7 @@
 @Contact        :   yijie4188@gmail.com
 @Desciption     :   处理资金的路由
 '''
-from flask import Blueprint, redirect, url_for, request
+from flask import Blueprint, redirect, url_for, request, render_template
 from flask_login import current_user
 
 from src.Controler.CaptalControler import captalControler
@@ -30,6 +30,9 @@ def captalBeforeRequest():
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
 
+@captalBluePrint.route("/panel",methods=['GET'])
+def captalPanel():
+    return render_template('captalPanel.html')
 @captalBluePrint.route("/getJournalDaybook",methods=['GET'])
 @permission_required(Permission.ALL_MONEY_S)
 def getJournalDaybook():
