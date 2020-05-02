@@ -207,6 +207,7 @@
 			this.pageNum = Math.ceil(option.dataLDict.sumCount/5);
 			this.currentPage = currentPage;
 			this.goPage();
+			this.ajaxTimeList = [];
 		}
 		goPage(){
 			var content = this;
@@ -233,12 +234,18 @@
 		}
 		showCommentPage(){
 			const content = this;
+			let curTime = new Date().getTime();
+			
+			content.ajaxTimeList.push(curTime);
 			if($('.comment-page-content').html() != null && content.currentPage != -1){
 				$('.comment-page-content').empty();
 				new myAjax({
 					url:"/message/leave/get?page="+(content.currentPage+1),
 					method:"GET",
 					success:function(result){
+						console.log(content.ajaxTimeList);
+						if(curTime!=content.ajaxTimeList[content.ajaxTimeList.length-1]) return;
+						content.ajaxTimeList = [];
 						let dataLDict = JSON.parse(result);
 						content.leaveMessages = dataLDict.leaveMessages;
 						content.pageNum = Math.ceil(dataLDict.sumCount/5);
