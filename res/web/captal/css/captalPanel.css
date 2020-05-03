@@ -1,0 +1,224 @@
+.main{
+	position: relative;
+	width: calc(100% - 10px);height: 800px;
+	padding: 5px;
+	transition: .5s;
+}
+
+.controlLabListPanel{
+	position: relative;float: left;
+	margin-left: 10px;margin-right: 10px;
+	width: 200px;height: 100%;
+	background-color: rgba(245,245,245,1);
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 0 10px gray;
+}
+.controlLabListPanel_Head{
+	position: relative;float: left;
+	width: 100%;height: 50px;
+	text-align: center;line-height: 50px;
+	font-size: 18px;font-weight: 600;
+	background-color: rgba(50,100,245,1);
+	color: white;
+}
+.controlLabListPanel_Content{
+	position: relative;float: left;
+	border-top: 2px solid gray;
+    width: 100%;height: calc(100% - 2px);
+}
+.controlLabListPanel_item{
+	position: relative;float: left;
+	padding: 10px;
+	padding-left: 15px;
+	width: calc(100% - 25px);height: 36px;
+	user-select: none;
+	line-height: 36px;font-size: 18px;
+	font-weight: 600;
+	border-left: 0px solid lightseagreen;
+	transition: .3s;
+}
+.controlLabListPanel_item.sel{
+	width: calc(100% - 28px);
+	border-left: 3px solid lightseagreen;
+}
+.controlLabListPanel_item:hover{
+	color: white;
+	background-color: lightseagreen;
+}
+
+.controlLabDataPanel{
+	position: relative;float: left;
+    width: calc(100% - 230px);height: 100%;
+	background-color: rgba(245,245,245,1);
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 0 5px gray;
+}
+.controlLabDataPanel_Nav{
+	position: relative;
+    width: 100%;height: 40px;
+    overflow-y: hidden;
+    border-bottom: 2px solid gray;
+}
+.controlLabDataPanel_NavWraper{
+    position: absolute;
+    height: 100%;width: 280px;
+}
+.controlLabDataPanel_NavItem{
+	position: relative;float: left;
+    width: 140px;height: 40px;
+	text-align: center;line-height: 40px;
+	font-size: 16px;font-weight: 600;
+	color: black;
+	user-select: none;
+	transition: .2s;
+}
+.controlLabDataPanel_NavItem_In{
+	background-color: rgba(50,100,245,1);
+	color: white;
+}
+
+.controlLabDataPanel_Content{
+	position: relative;
+    width: 100%;height: calc(100% - 40px);
+	background-color: white;
+}
+
+.controlLabDataPanel_Content_BtnList{
+    position: relative;
+    width: calc(100% - 3px);height: 48px;
+    border-bottom: 2px solid gray;
+}
+.controlLabDataPanel_Content_Btn{
+    position: relative;float: left;
+    margin: 6px;
+    width: 98px;height: 34px;
+    line-height: 36px;
+    text-align: center;
+    background-color: rgba(50,150,250,1);
+    border: 1px solid gray;
+    border-radius: 8px;
+    box-shadow: 0 0 10px gray;
+    transition: .5s;
+}
+.controlLabDataPanel_Content_Btn:hover{
+    box-shadow: 0 0 0px gray;
+    border: 1px solid rgb(240,240,240);
+}
+.controlLabDataPanel_Content_Btn a{
+    color: white;
+}
+.controlLabDataPanel_Content_Filter{
+    position: relative;float: right;
+    width: 200px;height: 48px;
+    line-height: 48px;
+}
+.controlLabDataPanel_Content_Filter 
+i{
+    color: #3399ff;
+}
+.controlLabDataPanel_Content_Filter 
+input{
+    width: 150px;height: 30px;
+    padding-left: 10px;
+    border: 2px solid gray;
+    border-radius: 8px;
+}
+
+.controlLabDataPanel_Content_Table{
+    position: relative;
+    width: calc(100% - 3px);height: calc(100% - 100px);
+    border-bottom: 2px solid gray;
+}
+
+.controlLabDataPanel_Content_Footer{
+    position: relative;
+    width: calc(100% - 3px);height: 48px;
+}
+.controlLabDataPanel_PageContro{
+    position: absolute;
+    right: 20px;top: 0;
+    text-align: center;
+    line-height: 24px;
+	height: 100%;
+}
+.controlLabDataPanel_PageContro_pre{
+    position: relative;float: left;
+    top: calc(50% - 12px);
+    width: 24px;height: 24px;
+}
+.controlLabDataPanel_PageContro_list{
+    position: relative;float: left;
+    top: calc(50% - 12px);
+}
+.controlLabDataPanel_PageContro_list .page_num_item{
+    position: relative;float: left;
+    margin-left: 5px;margin-right: 5px;
+    width: 20px;height: 20px;
+    border: 2px solid gray;
+	user-select: none;
+    line-height: 20px;
+    border-radius: 4px;
+}
+.controlLabDataPanel_PageContro_list .page_num_item.sel{
+	color: #00AAFF;
+	border-color: #00AAFF;
+}
+.controlLabDataPanel_PageContro_next{
+    position: relative;float: left;
+    top: calc(50% - 12px);
+    width: 24px;height: 24px;
+}
+.controlLabDataPanel_PageContro_pre.banClick,
+.controlLabDataPanel_PageContro_next.banClick{
+	color: gray;
+}
+.controlLabDataPanel_PageContro_pre.banClick:hover,
+.controlLabDataPanel_PageContro_next.banClick:hover{cursor:not-allowed;}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: calc(100% - 20px);
+	table-layout: fixed;
+	margin: 10px;
+}
+td,th {
+	padding: 0;
+	text-align: right;
+}
+th {text-align: center;}
+.pure-table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	border: 1px solid #cbcbcb;
+}
+.pure-table caption {
+	color: #000;
+	font: italic 85%/1 arial,sans-serif;
+	padding: 1em 0;
+	text-align: center;
+}
+.pure-table td,.pure-table th {
+	border-left: 1px solid #cbcbcb;
+	border-width: 0 0 0 1px;
+	font-size: inherit;
+	margin: 0;
+	overflow-y: hidden;
+	padding: .5em 1em;
+}
+.pure-table thead {
+	background-color: #00a8f5;
+	color: #ffffff;
+	text-align: left;
+	vertical-align: bottom;
+}
+.pure-table td {
+	background-color: transparent;
+	height: 44px;
+}
+.pure-table-odd td {
+	background-color: #f2f2f2;
+}

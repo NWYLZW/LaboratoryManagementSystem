@@ -10,7 +10,7 @@
 			this.always = options.always || function (jqXHR){console.log(jqXHR.status);};
 		}
 		ajax(){
-			if(this.isForm)
+			if(this.isForm && !this.isNormalAjax){
 				$.ajax({
 					url:this.url,
 					type:this.method,
@@ -22,6 +22,7 @@
 					processData : false,
 					contentType : false,
 				}).always(this.always);
+			}
 			else{
 				if(this.data!=null)
 					this.data = JSON.stringify(this.data);
@@ -79,8 +80,10 @@
 			}
 			this.always = options.always || function (jqXHR){};
 			this.success = this.newSuccess;
+			this.isNormalAjax = options.isNormalAjax || false;
 		}
 		newSuccess(result){
+			if(!(result instanceof Object)) result = JSON.parse(result);
 			var dictObj = result;
 			if(typeSpecialDeal.hasOwnProperty(String(dictObj.type))){
 				typeSpecialDeal[dictObj.type](dictObj);

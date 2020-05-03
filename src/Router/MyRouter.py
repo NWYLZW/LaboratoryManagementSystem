@@ -47,12 +47,14 @@ def editMyBaseData():
 def editMyPrivacyData():
     form = EditMyPrivacyData(request.form)
     if form.validate_on_submit():
+        # TODO 完成修改隐私数据
         return "0"
     return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
 @myBluePrint.route("/editMyPWD", methods=['POST'])
 def editMyPWD():
     form = EditMyPWD(request.form)
     if form.validate_on_submit():
+        # TODO 完成修改密码
         return "0"
     return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
 @myBluePrint.route("/editDirection", methods=['POST'])

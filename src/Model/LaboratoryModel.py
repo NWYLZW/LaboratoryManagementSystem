@@ -1,6 +1,5 @@
 from src import db, MainLog
 
-
 class Laboratory(db.Model):
     __tablename__ = 'Laboratory'
     id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +14,20 @@ class Laboratory(db.Model):
         self.blockNum = blockNum
         self.doorNum = doorNum
         self.content = content
+    @property
+    def captal(self):
+        from src.Model.CaptalModel import Captal
+        captal = Captal.query.filter_by(self.id).first()
+        if captal!=None: return captal
+        else:
+            return Captal.new(self.id)
+    def toDict(self)->dict:
+        return {
+            'id':self.id,
+            'blockNum':self.blockNum,
+            'doorNum':self.doorNum,
+            'content':self.content,
+        }
     @staticmethod
     def getDict()->dict:
         laboratoryDict = {}
@@ -26,12 +39,16 @@ class Laboratory(db.Model):
             }
         return laboratoryDict
     @staticmethod
-    def updateLaboratory(blockNum:str= "", doorNum:str= "", content:str= ""):
+    def updateLaboratory(id:str= "", blockNum:str= "", doorNum:str= "", content:str= ""):
         try:
-            laboratory = Laboratory.query.filter_by(blockNum=blockNum,doorNum=doorNum).first()
+            if not id.isdigit() and id!='-1': return 2
+            laboratory = Laboratory.query.filter_by(id=id).first()
             if laboratory is None:
                 laboratory = Laboratory(blockNum,doorNum,content)
-            laboratory.content = content
+            else:
+                laboratory.blockNum = blockNum
+                laboratory.doorNum = doorNum
+                laboratory.content = content
             db.session.add(laboratory)
             db.session.flush()
         except Exception as e:
@@ -40,3 +57,19 @@ class Laboratory(db.Model):
             return 1
         db.session.commit()
         return 0
+    @staticmethod
+    def getAllData():
+        laboratoryList = []
+        try:
+            laboratorys = Laboratory.query.filter_by().all()
+            for laboratory in laboratorys:
+                laboratoryDict = laboratory.toDict()
+                laboratoryDict['users'] = [user.toBriefDict() for user in laboratory.users.all()]
+                laboratoryList.append(laboratoryDict)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"从数据库获取方向信息发生错误")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return laboratoryList

@@ -12,15 +12,15 @@ class navigationResponse extends response {
 		}, 500);
 		if(this.statux == 2){
 			$('.interface')[0].style.left = "100px";
-			$('.interface')[0].style.width = "calc(100% - 140px)";
+			$('.interface')[0].style.width = "calc(100% - 100px)";
 		}
 		else if(this.statux == 3){
 			$('.interface')[0].style.left = "250px";
-			$('.interface')[0].style.width = "calc(100% - 290px)";
+			$('.interface')[0].style.width = "calc(100% - 250px)";
 		}
 		if(document.documentElement.clientWidth <= 640){
 			$('.interface')[0].style.left = "0";
-			$('.interface')[0].style.width = "calc(100% - 40px)";
+			$('.interface')[0].style.width = "100%";
 		}
 	}
 	start() {

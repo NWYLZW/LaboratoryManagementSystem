@@ -53,8 +53,17 @@ class User(UserMixin, db.Model):
         return "<User '{:s}>".format(self.schoolID)
 
     def can(self, permissions):
+        '''
+        判断是否有权限
+        :param permissions: 权限类型
+        :return: 是否拥有某个权限
+        '''
         return self.role is not None and (self.role.permissions & permissions) == permissions
     def is_administrator(self):
+        '''
+        判断是否有管理权限
+        :return: 是否有超管权限
+        '''
         return self.can(Permission.ADMINISTER)
 
     @property

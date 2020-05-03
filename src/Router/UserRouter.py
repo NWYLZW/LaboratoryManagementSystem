@@ -28,7 +28,7 @@ def index():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('panel.index'))
-    # TAG 测试时关闭csrf保护，接口开发完毕打开
+    # TODO TAG 测试时关闭csrf保护，接口开发完毕打开
     form = LoginForm(request.form,csrf_enabled=False)
     if request.method == 'POST':
         if form.validate():

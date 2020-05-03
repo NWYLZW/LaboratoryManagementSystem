@@ -1,4 +1,6 @@
 from src.Bean.Information import Information
+from src.Information.CaptalInformation import captal
+from src.Information.NoticeInformation import notice
 
 class ErrorUtil(Information):
     def __init__(self):
@@ -8,18 +10,24 @@ class ErrorUtil(Information):
             "backEndWrong1":2,
             "backEndWrong2":3,
             'dataBaseError':4,
+            'permissionError':5,
             **(userData['typeDict']),
             'MarkIpError':2001,
-            **(loginNotice['typeDict']),
+            **(notice['e']['typeDict']),
+            **leaveMessage['typeDict'],
+            **(captal['e']['typeDict']),
         }, {
             0:"表单数据错误",
             1:"后端Error对象未配置参数，请附上url通知后端检查该接口",
             2:"后端Error对象参数配置错误，请附上url通知后端检查该接口",
             3:"后端程序错误",
             4:"数据库错误",
+            5:"无权限操作",
             **(userData['dict']),
             2001:"未在实验室内签到",
-            **(loginNotice['dict']),
+            **(notice['e']['dict']),
+            **leaveMessage['dict'],
+            **(captal['e']['dict']),
         })
 userData = {
     'typeDict':{
@@ -37,22 +45,13 @@ userData = {
         1005:"背景修改失败",
     }
 }
-loginNotice = {
-    'typeDict':{
-        'LoginNoticeIdNone':3001,
-        'LoginNoticeNone':3002,
-        'LoginNoticeMax6':3003,
-        'addLoginNoticeImageError':3004,
-        'LoginNoticeMin2':3005,
-        'editLoginNoticeImageError':3006,
+leaveMessage = {
+    'typeDict': {
+        'LeaveMessageIsNone':4001,
     },
-    'dict':{
-        3001:"该Id loginNotice不存在",
-        3002:"loginNotice不存在",
-        3003:"LoginNotice最大为6",
-        3004:"添加LoginNoticeImage出现了错误",
-        3005:"LoginNotice最小为2",
-        3006:"修改LoginNoticeImage出现了错误",
+    'dict': {
+        4001:"留言不存在",
     }
 }
+
 errorUtil = ErrorUtil()

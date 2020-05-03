@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for
+from flask import Blueprint, request, render_template, redirect, url_for, abort
 from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
@@ -7,7 +7,9 @@ from src.Controler.AdminControler import adminControler
 from src.Model.DirectionModel import Direction
 from src.Model.LaboratoryModel import Laboratory
 from src.Model.ProfessionalClassModel import ProfessionalClass
+from src.Model.RoleModel import Permission
 from src.Util.ErrorUtil import errorUtil
+from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
 from src.form.LoginNoticeForm import LoginNoticeForm, editLoginNoticeForm
 
@@ -24,6 +26,8 @@ def adminBeforeRequest():
         return redirect(url_for('user.login'))
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
+    if not current_user.can(Permission.ADMINISTER):
+        abort(403)
 
 @adminBluePrint.route("/delLoginNotice",methods=['POST'])
 def delLoginNotice():
@@ -100,8 +104,8 @@ def getPermissionList():
     if request.method == 'POST':
         return adminControler.getPermissionList()
 
-@adminBluePrint.route("/adminMainControler",methods=['GET'])
-def adminMainControler():
+@adminBluePrint.route("/mainControler",methods=['GET'])
+def mainControler():
     return render_template('adminMainControler.html')
 
 @adminBluePrint.route("/updateDirection",methods=['POST'])
@@ -109,31 +113,55 @@ def updateDirection():
     messageDict = [
         'updateDirectionSuccess',
         'dataBaseError',
+        'FormDataWrong',
     ]
-    result = Direction.updateDirection("Java", "Java", "Java世界最牛逼")
+    result = Direction.updateDirection(request.form["id"], request.form["name"], request.form["directionImageName"], request.form["content"])
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
-@adminBluePrint.route("/updateLaboratory",methods=['GET'])
+@adminBluePrint.route("/getDirectionAllData",methods=['GET'])
+def getDirectionAllData():
+    result = Direction.getAllData()
+    if result != None:
+        return JsonUtil().dictToJson(result)
+    else:
+        return errorUtil.getData('dataBaseError')
+@adminBluePrint.route("/updateLaboratory",methods=['POST'])
 def updateLaboratory():
     messageDict = [
         'updateLaboratorySuccess',
         'dataBaseError',
+        'FormDataWrong',
     ]
-    result = Laboratory.updateLaboratory("E", "601", "特别难爬的一实验室")
+    result = Laboratory.updateLaboratory(request.form["id"], request.form["blockNum"], request.form["doorNum"], request.form["content"])
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
-@adminBluePrint.route("/addProfessionalClass",methods=['GET'])
-def addProfessionalClass():
+@adminBluePrint.route("/getLaboratoryAllData",methods=['GET'])
+def getLaboratoryAllData():
+    result = Laboratory.getAllData()
+    if result != None:
+        return JsonUtil().dictToJson(result)
+    else:
+        return errorUtil.getData('dataBaseError')
+@adminBluePrint.route("/addProfessional",methods=['POST'])
+def addProfessional():
     messageDict = [
-        'updateProfessionalClassSuccess',
+        'addProfessionalClassSuccess',
         'dataBaseError',
+        'FormDataWrong',
     ]
-    result = ProfessionalClass.addProfessionalClass("网络工程", 16, 1)
+    result = ProfessionalClass.addProfessionalClass(request.form["professional"], 16, 1)
     if result == 0:
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
+@adminBluePrint.route("/getProfessionalClassAllData",methods=['GET'])
+def getProfessionalClassAllData():
+    result = ProfessionalClass.getAllData()
+    if result != None:
+        return JsonUtil().dictToJson(result)
+    else:
+        return errorUtil.getData('dataBaseError')

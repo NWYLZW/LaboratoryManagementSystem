@@ -50,6 +50,7 @@
 	height: calc(100% - 122px);
 	border-bottom: 1px solid royalblue;
 	transition: .5s;
+	overflow-x: hidden;
 }
 .messageBoard-foot{
 	width: 100%;

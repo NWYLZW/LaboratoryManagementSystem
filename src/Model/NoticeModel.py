@@ -13,7 +13,7 @@ class Notice(db.Model):
     # 类型信息 方向名 实验室门牌号
     message = db.Column(db.String, default="")
     # 查阅过的用户列表
-    viewUsers = db.relationship('ViewUsers', backref='notice', lazy='dynamic')
+    viewUsers = db.relationship('NoticeViewUsers', backref='notice', lazy='dynamic')
 
     authorId = db.Column(db.Integer, nullable=False)
     @property
@@ -27,6 +27,20 @@ class Notice(db.Model):
         self.kindNum = kindNum
         self.message = message
         self.authorId = authorId
+    def toDict(self,userId):
+        rspDict = {
+            'id':self.id,
+            'authorId':self.authorId,
+            'authorName':self.author.nickName,
+            'title':self.title,
+            'content':self.content,
+            'message':self.message,
+            'dateTime':str(self.dateTime),
+            'isView':(self.viewUsers.filter_by(userId=userId).count()!=0),
+            'viewCount':self.viewUsers.count(),
+        }
+        if userId == self.authorId:rspDict['viewUsers']=[viewUser.toDict() for viewUser in self.viewUsers]
+        return rspDict
     @staticmethod
     def addNotice(title:str="",content:str="",kindNum:int=-1,message:str="",authorId:int=-1):
         try:
@@ -40,17 +54,17 @@ class Notice(db.Model):
         return 0
     def viewThis(self,userId):
         try:
-            if ViewUsers.query.filter_by(userId=userId,noticeId=self.id).count() != 0:
+            if NoticeViewUsers.query.filter_by(userId=userId,noticeId=self.id).count() != 0:
                 return
-            db.session.add(ViewUsers(userId=userId,noticeId=self.id))
+            db.session.add(NoticeViewUsers(userId=userId,noticeId=self.id))
             db.session.flush()
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,"查看消息数据库记录用户错误")
             MainLog.record(MainLog.level.ERROR,e)
         db.session.commit()
     pass
-class ViewUsers(db.Model):
-    __tablename__ = 'ViewUsers'
+class NoticeViewUsers(db.Model):
+    __tablename__ = 'NoticeViewUsers'
     id = db.Column(db.Integer, primary_key=True)
     dateTime = db.Column(db.DateTime, nullable=False)
 
@@ -64,3 +78,10 @@ class ViewUsers(db.Model):
         self.dateTime = timeUtil.nowDateStr()
         self.userId = userId
         self.noticeId = noticeId
+    def toDict(self):
+        return {
+            'id':self.id,
+            'userId':self.userId,
+            'userName':self.user.nickName,
+            'dateTime':str(self.dateTime),
+        }

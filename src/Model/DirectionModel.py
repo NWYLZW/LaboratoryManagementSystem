@@ -15,6 +15,13 @@ class Direction(db.Model):
         self.name = name
         self.imgName = imgName
         self.content = content
+    def toDict(self)->dict:
+        return {
+            'id':self.id,
+            'name':self.name,
+            'imgName':self.imgName,
+            'content':self.content,
+        }
     @staticmethod
     def getDict()->dict:
         directionDict = {}
@@ -26,13 +33,16 @@ class Direction(db.Model):
             }
         return directionDict
     @staticmethod
-    def updateDirection(name:str= "", imgName:str= "", content:str= ""):
+    def updateDirection(id:str = "", name:str = "", imgName:str = "", content:str = ""):
         try:
-            direction = Direction.query.filter_by(name=name).first()
+            if not id.isdigit() and id!='-1': return 2
+            direction = Direction.query.filter_by(id=int(id)).first()
             if direction is None:
                 direction = Direction(name,imgName,content)
-            direction.imgName = imgName
-            direction.content = content
+            else:
+                direction.name = name
+                direction.imgName = imgName
+                direction.content = content
             db.session.add(direction)
             db.session.flush()
         except Exception as e:
@@ -41,3 +51,19 @@ class Direction(db.Model):
             return 1
         db.session.commit()
         return 0
+    @staticmethod
+    def getAllData():
+        directionList = []
+        try:
+            directions = Direction.query.filter_by().all()
+            for direction in directions:
+                directionDict = direction.toDict()
+                directionDict['users'] = [user.toBriefDict() for user in direction.users.all()]
+                directionList.append(directionDict)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"从数据库获取方向信息发生错误")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return directionList

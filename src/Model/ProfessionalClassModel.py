@@ -17,6 +17,13 @@ class ProfessionalClass(db.Model):
         self.classNum = classNum
     def getProfessionalClass(self):
         return self.professional+'-'+"%02d"%self.gradle+"%02d"%self.classNum
+    def toDict(self)->dict:
+        return {
+            'id':self.id,
+            'professional':self.professional,
+            'gradle':self.gradle,
+            'classNum':self.classNum,
+        }
 
     @staticmethod
     def getDict()->dict:
@@ -40,9 +47,38 @@ class ProfessionalClass(db.Model):
                      professionalClass.professional))
         return professionalClassList
     @staticmethod
-    def addProfessionalClass(professional:str= "", gradle:int= -1, classNum:int= -1):
+    def getAllData():
+        professionalClassList = []
         try:
-            professionalClass = ProfessionalClass(professional,gradle,classNum)
+            professionalClasses = ProfessionalClass.query.filter_by().all()
+            for professionalClass in professionalClasses:
+                professionalClassDict = professionalClass.toDict()
+                professionalClassDict['users'] = [user.toBriefDict() for user in professionalClass.users.all()]
+                professionalClassList.append(professionalClassDict)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"从数据库获取方向信息发生错误")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return professionalClassList
+    @staticmethod
+    def addProfessionalClass(professional:str= "", gradle:int= -1, classNum:int= -1):
+        '''
+        :param professional: 专业名
+        :param gradle: 年级
+        :param classNum: 班级
+        :return: {
+        0:"添加成功",
+        1:"数据库错误",
+        2:"专业已存在",
+        }
+        '''
+        try:
+            professionalClass = ProfessionalClass.query.filter_by(professional=professional).first()
+            if professionalClass is None:
+                professionalClass = ProfessionalClass(professional,gradle,classNum)
+            else:return 2
             db.session.add(professionalClass)
             db.session.flush()
         except Exception as e:
