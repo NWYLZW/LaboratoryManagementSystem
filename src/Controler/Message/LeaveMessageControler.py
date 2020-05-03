@@ -54,6 +54,7 @@ class LeaveMessageControler:
             MainLog.record(MainLog.level.ERROR,e)
             return 1
         db.session.commit()
+        self.addLeaveMessageObj = leaveMessage
         return 0
     def getLeaveMessageByPage(self, userId, page:int=1):
         '''
