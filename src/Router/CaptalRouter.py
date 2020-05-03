@@ -11,6 +11,7 @@
 from flask import Blueprint, redirect, url_for, request, render_template
 from flask_login import current_user
 
+from src import templatePath
 from src.Controler.CaptalControler import captalControler
 from src.Model.RoleModel import Permission
 from src.Util.ErrorUtil import errorUtil
@@ -21,7 +22,8 @@ from src.Wrap.PermissionWrap import permission_required
 captalBluePrint = Blueprint(
     'captal',
     __name__,
-    url_prefix='/captal'
+    url_prefix='/captal',
+    template_folder=templatePath+"/captal"
 )
 @captalBluePrint.before_request
 def captalBeforeRequest():

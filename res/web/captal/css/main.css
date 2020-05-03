@@ -87,7 +87,7 @@
 
 .controlLabDataPanel_Content_BtnList{
     position: relative;
-    width: calc(100% - 3px);height: 48px;
+    width: 100%;height: 48px;
     border-bottom: 2px solid gray;
 }
 .controlLabDataPanel_Content_Btn{
@@ -108,6 +108,8 @@
 }
 .controlLabDataPanel_Content_Btn a{
     color: white;
+	user-select: none;
+	cursor: pointer;
 }
 .controlLabDataPanel_Content_Filter{
     position: relative;float: right;
@@ -125,16 +127,21 @@ input{
     border: 2px solid gray;
     border-radius: 8px;
 }
+.controlLabDataPanel_Content_Filter 
+input:placeholder-shown{
+	font-size: 12px;
+}
 
 .controlLabDataPanel_Content_Table{
-    position: relative;
-    width: calc(100% - 3px);height: calc(100% - 100px);
-    border-bottom: 2px solid gray;
+	position: relative;
+	width: calc(100% - 20px);
+	padding: 10px;
 }
 
 .controlLabDataPanel_Content_Footer{
-    position: relative;
-    width: calc(100% - 3px);height: 48px;
+	position: relative;
+	width: 100%;height: 48px;
+	border-top: 2px solid gray;
 }
 .controlLabDataPanel_PageContro{
     position: absolute;
@@ -143,10 +150,12 @@ input{
     line-height: 24px;
 	height: 100%;
 }
-.controlLabDataPanel_PageContro_pre{
+.controlLabDataPanel_PageContro_pre,
+.controlLabDataPanel_PageContro_next{
     position: relative;float: left;
     top: calc(50% - 12px);
     width: 24px;height: 24px;
+	cursor: pointer;
 }
 .controlLabDataPanel_PageContro_list{
     position: relative;float: left;
@@ -160,29 +169,23 @@ input{
 	user-select: none;
     line-height: 20px;
     border-radius: 4px;
+	cursor: pointer;
 }
 .controlLabDataPanel_PageContro_list .page_num_item.sel{
 	color: #00AAFF;
 	border-color: #00AAFF;
 }
-.controlLabDataPanel_PageContro_next{
-    position: relative;float: left;
-    top: calc(50% - 12px);
-    width: 24px;height: 24px;
-}
 .controlLabDataPanel_PageContro_pre.banClick,
 .controlLabDataPanel_PageContro_next.banClick{
 	color: gray;
 }
-.controlLabDataPanel_PageContro_pre.banClick:hover,
-.controlLabDataPanel_PageContro_next.banClick:hover{cursor:not-allowed;}
+.banClick:hover{cursor:not-allowed;}
 
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-	width: calc(100% - 20px);
+	width: 100%;
 	table-layout: fixed;
-	margin: 10px;
 }
 td,th {
 	padding: 0;
