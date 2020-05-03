@@ -24,6 +24,16 @@ class FileUtil:
                 as_attachment=True))
         response.headers["Content-Disposition"] = "attachment; filename={}".format(fileName.encode().decode('latin-1'))
         return response
+    def makeReponse(self,fp,fName):
+        '''
+        :param fp: 文件指针
+        :param fName: 返回文件名
+        :return: 文件响应对象
+        '''
+        response = make_response(
+            send_file(fp,as_attachment=True))
+        response.headers["Content-Disposition"] = "attachment; filename={}".format(fName.encode().decode('latin-1'))
+        return response
     def copyWebToImageRes(self,webPath,resPath):
         try:
             shutil.copy(
