@@ -35,6 +35,7 @@
 				</div>\
 			').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));
 			content.container[0].appendChild(messageLeave$[0]);
+			
 			getHeadPortrait(messageLeave$.find('.headPortrait img')[0],content.dict.authorId);
 			messageLeave$.find('.userName').html(content.dict.authorName);
 			messageLeave$.find('.tag').html(content.dict.tag);
@@ -135,33 +136,76 @@
 			
 			messageLeave$.find('.reply').unbind('click').click(function(){
 				if(!(messageLeave$.find('.comment-editor')[0]))
-					new commentEditor(messageLeave$);
+					new commentEditor(messageLeave$,content.dict);
 			});
 		}
 	}
 	class commentEditor{
-		constructor(container) {
+		constructor(container,dict) {
 		    this.container = container;
+			this.dict = dict;
 			this.generateEle();
 		}
 		generateEle(){
-			var content = this;
-			var commentEditor$ = $('\
+			var content = this; //<i class="fa fa-check-circle-o fa-x"></i>
+				console.log(content.dict);
+			var commentEditor$ = $(('\
 				<div class="comment-editor">\
 					<textarea placeholder="写下你的评论"></textarea>\
 					<div class="release-cancle">\
+						<div class="select-isAnonymous"><i class="fa fa-circle-o fa-x">&nbsp;&nbsp;不匿名</i></div>\
 						<div class="cancle">取消</div>\
 						<div class="release">发布</div>\
 					</div>\
 				</div>\
-				');
+				').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));
 			content.container[0].appendChild(commentEditor$[0]);
-			
+			if(!content.dict.isAnonymous){
+				commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
+				commentEditor$.find('.select-isAnonymous i').html('&nbsp;&nbsp;' + '匿名');
+				commentEditor$.find('.select-isAnonymous i')[0].setAttribute("class", "fa fa-check-circle-o fa-x");
+			}
+			else{
+				commentEditor$.find('.select-isAnonymous').css('background-color','rgb(237, 25, 65)');
+				commentEditor$.find('.select-isAnonymous i').html('&nbsp;&nbsp;' + '不匿名');
+				commentEditor$.find('.select-isAnonymous i')[0].setAttribute("class", "fa fa-circle-o fa-x");
+			}
 			commentEditor$.find('.cancle').unbind('click').click(function(){
 				content.container[0].removeChild(commentEditor$[0]);
 			});
+			
+			commentEditor$.find('.select-isAnonymous i').unbind('click').click(function(){
+				if(!content.dict.isAnonymous){
+					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
+					$(this).html('&nbsp;&nbsp;' + '匿名');
+					this.setAttribute("class", "fa fa-check-circle-o fa-x");
+				}
+				else{
+					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(237, 25, 65)');
+					$(this).html('&nbsp;&nbsp;' + '不匿名');
+					this.setAttribute("class", "fa fa-circle-o fa-x");
+				}
+				content.dict.isAnonymous = !content.dict.isAnonymous;
+			});
 			commentEditor$.find('.release').unbind('click').click(function(){
-				
+				new myAjax({
+					url:'/message/leave/addReply',
+					data:{
+						isAnonymous:!content.dict.isAnonymous,
+						content:commentEditor$.find('textarea').val(),
+						replyId:content.dict.id,
+					},
+					method:"POST",
+					success:function(result){
+						console.log(result);
+					},
+					failure:function(error){
+						// console.log(error);
+					},
+					always:function(jqXHR){
+						// console.log(jqXHR);
+					}
+				}).ajax();
 			});
 		}
 	}
