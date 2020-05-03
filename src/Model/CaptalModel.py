@@ -89,4 +89,6 @@ class JournalDaybook(db.Model):
             'changeMoneyUser':self.changeMoneyUser.toBriefDict(),
             'changeReason':self.changeReason,
             'changeMoney':str(self.changeMoney),
+            'remainingMoney':str(self.remainingMoney),
+            'dateTime':str(self.dateTime),
         }
