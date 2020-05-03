@@ -62,28 +62,22 @@
 					typeSpecialDeal:{
 						'4':function(dictObj){
 							// 数据库错误
-							console.log(dictObj);
 						},
 						'4001':function(dictObj){
 							// 留言不存在
-							console.log(dictObj);
 						}
 					},
 					responseCorrect:function(dictObj){
 						if(dictObj.type===-6003){
 							// 赞成功
-							console.log(1);
 							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
 							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(++content.dict.likeNum));
-							console.log(dictObj);
 						}
 						else if(dictObj.type===-6004){
 							// 取消赞成功
-							console.log(2);
 							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
 							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(--content.dict.likeNum));
 							
-							console.log(dictObj);
 							
 						}else{}
 					},
@@ -101,7 +95,6 @@
 				messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum').unbind('click').click(function(){
 					if(showCommnetBtnState){
 						var commentChildList = messageLeave$.find('.comment-box')[0].childNodes;
-						console.log(commentChildList[0]);
 						for(let i = 1;i < content.dict.replyMessages.length;i++){
 							messageLeave$.find('.comment-box')[0].removeChild(commentChildList[1]);
 						}
@@ -147,7 +140,7 @@
 			this.generateEle();
 		}
 		generateEle(){
-			var content = this; //<i class="fa fa-check-circle-o fa-x"></i>
+			var content = this;
 				console.log(content.dict);
 			var commentEditor$ = $(('\
 				<div class="comment-editor">\
@@ -188,23 +181,29 @@
 				content.dict.isAnonymous = !content.dict.isAnonymous;
 			});
 			commentEditor$.find('.release').unbind('click').click(function(){
-				new myAjax({
+				new myAjaxForm({
 					url:'/message/leave/addReply',
+					method:"POST",
 					data:{
 						isAnonymous:!content.dict.isAnonymous,
 						content:commentEditor$.find('textarea').val(),
 						replyId:content.dict.id,
 					},
-					method:"POST",
-					success:function(result){
-						console.log(result);
+					isNormalAjax:true,
+					typeSpecialDeal:{
+						'4':function(dictObj){
+							// 数据库错误
+						},
+						'4001':function(dictObj){
+							// 留言不存在
+						}
 					},
-					failure:function(error){
-						// console.log(error);
+					responseCorrect:function(dictObj){
+						new messageLeave(dictObj.message,content.container.find('.comment-box'));
+						content.container[0].removeChild(commentEditor$[0]);
 					},
-					always:function(jqXHR){
-						// console.log(jqXHR);
-					}
+					responseError:function(dictObj){},
+					failureEnd:function(dictObj){},
 				}).ajax();
 			});
 		}
@@ -295,9 +294,6 @@
 						content.pageNum = Math.ceil(dataLDict.sumCount/5);
 						for(let i = 0;i < content.leaveMessages.length;i++)
 							new messageLeave(content.leaveMessages[i],$('.comment-page-content'));
-						
-						console.log(result);
-						console.log(dataLDict);
 					},
 					failure:function(error){},
 					always:function(jqXHR){}
