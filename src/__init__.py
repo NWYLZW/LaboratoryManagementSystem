@@ -29,6 +29,10 @@ login_manager = LoginManager(app)
 login_manager.login_view = "user.login"
 templatePath="../../res/web"
 
+# 自定义的转换器注册
+from src.Converter import addConverter
+addConverter(app)
+
 # 导入各个模块
 from src.Router import bluePrints
 from src.ComandManager import initManager

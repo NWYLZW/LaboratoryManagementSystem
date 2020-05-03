@@ -80,9 +80,11 @@ def searchUserTest():
 def searchAllUser():
     return userControler.getUserListData(request.json)
 
-@userBluePrint.route("/getHeadPortrait<int:ID>",methods=['GET'])
+@userBluePrint.route("/getHeadPortrait<positiveNegative:ID>",methods=['GET'])
 def getHeadPortrait(ID):
     try:
+        if ID == '-1':
+            return fileUtil.getFromRes(path="user/headPortrait", fileName="Anonymous.png")
         return fileUtil.getFromRes(path="user/headPortrait", fileName=str(ID) + ".png")
     except Exception as e:
         MainLog.record(MainLog.level.WARN,"可能发生了盗取用户信息")

@@ -26,10 +26,16 @@ class LeaveMessage(db.Model):
     def toDict(self,userId):
         replyMessages = [leaveMessage.toDict(userId) for leaveMessage in self.replyMessages]
         replyMessages.reverse()
+        if self.isAnonymous:
+            authorId = -1
+            authorName = '匿名'
+        else:
+            authorId = self.authorId
+            authorName = self.author.nickName
         return {
             'id':self.id,
-            'authorId':self.authorId,
-            'authorName':self.author.nickName,
+            'authorId':authorId,
+            'authorName':authorName,
             'isAnonymous':self.isAnonymous,
             'content':self.content,
             'dateTime':str(self.dateTime),
