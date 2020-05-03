@@ -28,11 +28,22 @@ class CaptalControler():
         if captal==None:
             captal = Captal.new(laboratoryId=laboratoryId)
             if captal == None: return {'laboratory':{},'journalDaybook':[]}
-        myLabJournalDaybook={
+        labJournalDaybook={
             'laboratory':captal.laboratory.toDict(),
             'journalDaybook':[journalDaybook.toDict() for journalDaybook in captal.journalDaybook]
         }
-        return myLabJournalDaybook
+        return labJournalDaybook
+    def getJournalDaybookExel(self,laboratoryId):
+        labJournalDaybook = self.getJournalDaybook(laboratoryId=laboratoryId)
+        '''
+        将labJournalDaybook中的journalDaybook转化为下面格式
+        再交给你的函数处理
+        [
+            ('时间','负责人','原因','金额变动','余额'),
+            ('','','','',''),
+        ]
+        '''
+        return
     def getMyLabJournalDaybook(self):
         from src.Model.CaptalModel import Captal
         captal = Captal.query.filter_by(laboratoryId=current_user.laboratoryId).first()
