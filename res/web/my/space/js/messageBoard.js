@@ -141,7 +141,6 @@
 		}
 		generateEle(){
 			var content = this;
-				console.log(content.dict);
 			var commentEditor$ = $(('\
 				<div class="comment-editor">\
 					<textarea placeholder="写下你的评论"></textarea>\
@@ -153,13 +152,13 @@
 				</div>\
 				').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));
 			content.container[0].appendChild(commentEditor$[0]);
-			if(!content.dict.isAnonymous){
+			if(content.dict.isAnonymous){
 				commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
 				commentEditor$.find('.select-isAnonymous i').html('&nbsp;&nbsp;' + '匿名');
 				commentEditor$.find('.select-isAnonymous i')[0].setAttribute("class", "fa fa-check-circle-o fa-x");
 			}
 			else{
-				commentEditor$.find('.select-isAnonymous').css('background-color','rgb(237, 25, 65)');
+				commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
 				commentEditor$.find('.select-isAnonymous i').html('&nbsp;&nbsp;' + '不匿名');
 				commentEditor$.find('.select-isAnonymous i')[0].setAttribute("class", "fa fa-circle-o fa-x");
 			}
@@ -168,13 +167,13 @@
 			});
 			
 			commentEditor$.find('.select-isAnonymous i').unbind('click').click(function(){
-				if(!content.dict.isAnonymous){
+				if(content.dict.isAnonymous){
 					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
 					$(this).html('&nbsp;&nbsp;' + '匿名');
 					this.setAttribute("class", "fa fa-check-circle-o fa-x");
 				}
 				else{
-					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(237, 25, 65)');
+					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
 					$(this).html('&nbsp;&nbsp;' + '不匿名');
 					this.setAttribute("class", "fa fa-circle-o fa-x");
 				}
@@ -286,7 +285,6 @@
 					url:"/message/leave/get?page="+(content.currentPage+1),
 					method:"GET",
 					success:function(result){
-						console.log(content.ajaxTimeList);
 						if(curTime!=content.ajaxTimeList[content.ajaxTimeList.length-1]) return;
 						content.ajaxTimeList = [];
 						let dataLDict = JSON.parse(result);
