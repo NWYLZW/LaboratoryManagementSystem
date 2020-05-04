@@ -62,7 +62,7 @@ def initChildRoute(bluePrint:Blueprint):
     def getLeaveMessage():
         page = request.args.get("page")
         if not page.isdigit() : return errorUtil.getData('FormDataWrong')
-        result = leaveMessageControler.getLeaveMessageByPage(current_user.id,int(page))
+        result = leaveMessageControler.getLeaveMessageByPage(current_user,int(page))
         if result != None:
             return JsonUtil().dictToJson(result)
         else:

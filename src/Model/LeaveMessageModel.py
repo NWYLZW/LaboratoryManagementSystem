@@ -27,9 +27,11 @@ class LeaveMessage(db.Model):
         self.content = content
         self.dateTime = timeUtil.nowDateStr()
         if replyId != -1: self.replyId = replyId
-    def toDict(self,userId):
-        replyMessages = [leaveMessage.toDict(userId) for leaveMessage in self.replyMessages]
-        replyMessages.reverse()
+    def toDict(self,user):
+        if len(self.replyMessages)>0:
+            replyMessages = [leaveMessage.toDict(user) for leaveMessage in self.replyMessages]
+            replyMessages.reverse()
+        else:replyMessages = []
         if self.isAnonymous:
             authorId = -1
             authorName = '匿名'
@@ -37,8 +39,13 @@ class LeaveMessage(db.Model):
             authorId = self.authorId
             authorName = self.author.nickName
         deleteAble = False
-        if self.author.is_administrator() or self.authorId==userId:
+        if user.is_administrator() or self.authorId==user.id:
             deleteAble = True
+        likeUsers = self.likeUsers.all()
+        isLike = False
+        for likeUser in likeUsers:
+            if likeUser.userId == user.id:
+                isLike = True;break
         return {
             'id':self.id,
             'authorId':authorId,
@@ -47,8 +54,8 @@ class LeaveMessage(db.Model):
             'deleteAble':deleteAble,
             'content':self.content,
             'dateTime':str(self.dateTime),
-            'isLike':(self.likeUsers.filter_by(userId=userId).count()!=0),
-            'likeNum':self.likeUsers.count(),
+            'isLike':isLike,
+            'likeNum':len(likeUsers),
             'replyMessages':replyMessages,
         }
     def like(self,userId):

@@ -56,7 +56,7 @@ class LeaveMessageControler:
         db.session.commit()
         self.addLeaveMessageObj = leaveMessage
         return 0
-    def getLeaveMessageByPage(self, userId, page:int=1):
+    def getLeaveMessageByPage(self, user, page:int=1):
         '''
         :param authorId: 留言用户id
         :return: {
@@ -66,7 +66,7 @@ class LeaveMessageControler:
         try:
             if page <= 0 : page = 1
             leaveMessagesList = [
-                leaveMessage.toDict(userId) for leaveMessage in
+                leaveMessage.toDict(user) for leaveMessage in
                 LeaveMessage.query.filter_by(replyId=None).all()
             ]
             leaveMessagesList.reverse()
