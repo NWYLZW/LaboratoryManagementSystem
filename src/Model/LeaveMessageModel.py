@@ -32,11 +32,15 @@ class LeaveMessage(db.Model):
         else:
             authorId = self.authorId
             authorName = self.author.nickName
+        deleteAble = False
+        if self.author.is_administrator() or self.author==userId:
+            deleteAble = True
         return {
             'id':self.id,
             'authorId':authorId,
             'authorName':authorName,
             'isAnonymous':self.isAnonymous,
+            'deleteAble':deleteAble,
             'content':self.content,
             'dateTime':str(self.dateTime),
             'isLike':(self.likeUsers.filter_by(userId=userId).count()!=0),
