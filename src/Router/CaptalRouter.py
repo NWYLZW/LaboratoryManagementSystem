@@ -31,8 +31,13 @@ def captalBeforeRequest():
         return redirect(url_for('user.login'))
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
+
 @captalBluePrint.route("/panel",methods=['GET'])
 def captalPanel():
+    canDownload = False
+    if current_user.is_administrator() or current_user.can(Permission.LABORATORY_MONEY_AD):
+        canDownload = True
+    # TODO czl 传入canDownload，控制添加按钮
     return render_template('captalPanel.html')
 @captalBluePrint.route("/getJournalDaybook",methods=['GET'])
 @permission_required(Permission.ALL_MONEY_S)
