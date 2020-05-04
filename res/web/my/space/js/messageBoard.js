@@ -90,7 +90,7 @@
 			if(content.dict.replyMessages.length)
 				new messageLeave(content.dict.replyMessages[0],messageLeave$.find('.comment-box'));
 			
-			if(content.dict.replyMessages.length){
+			if(content.dict.replyMessages.length > 1){
 				var showCommnetBtnState = false;
 				messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum').unbind('click').click(function(){
 					if(showCommnetBtnState){
@@ -154,12 +154,6 @@
 			content.container[0].appendChild(commentEditor$[0]);
 			
 			commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
-			commentEditor$.find('.select-isAnonymous i').html('&nbsp;&nbsp;' + '不匿名');
-			commentEditor$.find('.select-isAnonymous i')[0].setAttribute("class", "fa fa-circle-o fa-x");
-			commentEditor$.find('.cancle').unbind('click').click(function(){
-				content.container[0].removeChild(commentEditor$[0]);
-			});
-			
 			commentEditor$.find('.select-isAnonymous i').unbind('click').click(function(){
 				if(content.dict.isAnonymous){
 					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
@@ -172,6 +166,10 @@
 					this.setAttribute("class", "fa fa-circle-o fa-x");
 				}
 				content.dict.isAnonymous = !content.dict.isAnonymous;
+			});
+			
+			commentEditor$.find('.cancle').unbind('click').click(function(){
+				content.container[0].removeChild(commentEditor$[0]);
 			});
 			commentEditor$.find('.release').unbind('click').click(function(){
 				new myAjaxForm({
@@ -275,6 +273,7 @@
 			content.ajaxTimeList.push(curTime);
 			if($('.comment-page-content').html() != null && content.currentPage != -1){
 				$('.comment-page-content').empty();
+				Notiflix.Block.Pulse('.messageBoard', 'Please wait...');
 				new myAjax({
 					url:"/message/leave/get?page="+(content.currentPage+1),
 					method:"GET",
@@ -287,6 +286,7 @@
 						content.pageNum = Math.ceil(dataLDict.sumCount/5);
 						for(let i = 0;i < content.leaveMessages.length;i++)
 							new messageLeave(content.leaveMessages[i],$('.comment-page-content'));
+						Notiflix.Block.Remove('.messageBoard');
 					},
 					failure:function(error){},
 					always:function(jqXHR){}
@@ -296,6 +296,7 @@
 				content.currentPage++;
 				for(let i = 0;i < content.leaveMessages.length;i++)
 					new messageLeave(content.leaveMessages[i],$('.comment-page-content'));
+				Notiflix.Block.Remove('.messageBoard');
 			}
 			const page = $('.pages');
 			if(content.pageNum > 7){

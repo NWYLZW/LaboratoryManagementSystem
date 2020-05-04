@@ -182,6 +182,8 @@ function initMark() {
 			}
 		]
 	}];
+	
+	Notiflix.Block.Pulse('.messageBoard', 'Please wait...');
 	new myAjax({
 		url:"/message/leave/get?page="+'1',
 		method:"GET",
