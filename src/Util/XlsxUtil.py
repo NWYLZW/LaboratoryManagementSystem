@@ -22,20 +22,21 @@ class XlsxUtil():
             i += 1
         mid = self.getExcelName('%Y_%m_%d_%H_%M_%S')
         workbook.save(mid)
-        file = open(mid, mode='r')
-        file.close()
+        file = open(mid, mode='rb')
         return file
 
-    """
-    根据nametype的格式生成当前时间的流水文件
-    """
-
     def getExcelName(self, nametype):
+        '''
+        根据nametype的格式生成当前时间的流水文件
+        :param nametype:
+        :return:
+        '''
         return time.strftime(nametype) + '_' + str(random.randint(1, 1000)) + '.xls'
 
     def listTORepones(self, List: list, fileName: str):
         file = self.__listToXlsx(List)
         response = fileUtil.makeReponse(file, fileName)
+        file.close()
         os.remove(file.name)
         return response
 xlsxUtil = XlsxUtil()

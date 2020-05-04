@@ -41,14 +41,6 @@ class CaptalControler():
     def getJournalDaybookExel(self, laboratoryId):
         xlsxTaker = xlsxUtil
         labJournalDaybook = self.getJournalDaybook(laboratoryId=laboratoryId)
-        '''
-        将labJournalDaybook中的journalDaybook转化为下面格式
-        再交给你的函数处理
-        [
-            ('时间','负责人','原因','金额变动','余额'),
-            ('','','','',''),
-        ]
-        '''
         rsplist = [('时间', '负责人', '原因', '金额变动', '余额'),]
         for journalDaybookitem in labJournalDaybook.get('journalDaybook'):
             rsplist.append((

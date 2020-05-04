@@ -1,4 +1,5 @@
 # TODO 文件收发存储帮助类
+import mimetypes
 import os
 import shutil
 
@@ -30,8 +31,9 @@ class FileUtil:
         :param fName: 返回文件名
         :return: 文件响应对象
         '''
-        response = make_response(
-            send_file(fp,as_attachment=True))
+        response = make_response(fp.read())
+        mime_type = mimetypes.guess_type(fp.name)[0]
+        response.headers['Content-Type'] = mime_type
         response.headers["Content-Disposition"] = "attachment; filename={}".format(fName.encode().decode('latin-1'))
         return response
     def copyWebToImageRes(self,webPath,resPath):
