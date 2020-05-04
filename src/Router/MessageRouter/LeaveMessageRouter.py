@@ -82,10 +82,21 @@ def initChildRoute(bluePrint:Blueprint):
             return successUtil.getData(messageDict[result])
         else:
             return errorUtil.getData(messageDict[result])
-    @bluePrint.route(routeName+"/remove",methods=['GET'])
+    @bluePrint.route(routeName+"/delete",methods=['POST'])
     @login_required
-    def removeLeaveMessage():
-        return "remove"
+    def deleteLeaveMessage():
+        messageDict = [
+            'deleteLeaveMessageSuccess',
+            'dataBaseError',
+            'LeaveMessageIsNone',
+            'permissionError',
+        ]
+        leaveMessageId = request.json.get("leaveMessageId",'-1')
+        result = leaveMessageControler.deleteLeaveMessageById(current_user,int(leaveMessageId))
+        if result == 0:
+            return successUtil.getData(messageDict[result])
+        else:
+            return errorUtil.getData(messageDict[result])
     @bluePrint.route(routeName+"/alert",methods=['GET'])
     @login_required
     def alertLeaveMessage():

@@ -90,9 +90,29 @@ class LeaveMessageControler:
         }
         '''
         try:
+            if leaveMessageId == -1: return 3
             lm = LeaveMessage.query.filter_by(id=leaveMessageId).first()
             if lm == None: return 3
             return lm.like(userId)
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,e)
+            return 1
+    def deleteLeaveMessageById(self, user, leaveMessageId):
+        '''
+        :param userId: 当前用户id
+        :param leaveMessageId: 删除的留言id
+        :return: {
+        0:'删除成功',
+        1:'数据库错误',
+        2:'删除留言不存在',
+        3:'无权限',
+        }
+        '''
+        try:
+            if leaveMessageId == -1: return 2
+            lm = LeaveMessage.query.filter_by(id=leaveMessageId).first()
+            if lm == None: return 2
+            return lm.delete(user)
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,e)
             return 1
