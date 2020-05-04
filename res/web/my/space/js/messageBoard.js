@@ -16,7 +16,7 @@
 								<div class="userName"></div>\
 								<div class="tag"></div>\
 							</div>\
-							<div class="content"></div>\
+							<div class="reply-content"></div>\
 							<div class="message-foot">\
 								<div class="time"><i class="fa fa-clock-o fa-x"></i></div>\
 								<div class="likeNum"><i class="fa fa-thumbs-o-up fa-x"></i></div>\
@@ -39,7 +39,7 @@
 			getHeadPortrait(messageLeave$.find('.headPortrait img')[0],content.dict.authorId);
 			messageLeave$.find('.userName').html(content.dict.authorName);
 			messageLeave$.find('.tag').html(content.dict.tag);
-			messageLeave$.find('.content').html(content.dict.content);
+			messageLeave$.find('.reply-content').html(content.dict.content);
 			
 			var time = new dateInterval(content.dict.dateTime).judgeTime();
 			messageLeave$.find('.time i').html('&nbsp;'+time);
@@ -119,11 +119,11 @@
 			}
 			
 			var showElseInfoBtnState = false;
-			messageLeave$.find('.showElseInfoBtn').unbind('click').click(function(){
+			messageLeave$.find('.leaveMessage-'+content.dict.id+' .showElseInfoBtn').unbind('click').click(function(){
 				if(showElseInfoBtnState)
-					messageLeave$.find('.else-info').css('display','block');
+					messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','block');
 				else
-					messageLeave$.find('.else-info').css('display','none');
+					messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','none');
 				showElseInfoBtnState = !showElseInfoBtnState;
 			});
 			
