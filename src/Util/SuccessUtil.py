@@ -51,12 +51,14 @@ leaveMessage = {
         'replyLeaveMessageSuccess':-6002,
         'likeLeaveMessageSuccess':-6003,
         'unlikeLeaveMessageSuccess':-6004,
+        'deleteLeaveMessageSuccess':-6005,
     },
     'dict': {
         -6001:"留言成功",
         -6002:"回复留言成功",
         -6003:"赞留言成功",
         -6004:"取消赞留言成功",
+        -6005:"删除留言成功",
     }
 }
 
