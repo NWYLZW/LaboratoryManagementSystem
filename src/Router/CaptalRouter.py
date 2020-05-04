@@ -31,7 +31,6 @@ def captalBeforeRequest():
         return redirect(url_for('user.login'))
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
-
 @captalBluePrint.route("/panel",methods=['GET'])
 def captalPanel():
     return render_template('captalPanel.html')
@@ -60,3 +59,7 @@ def addSpend():
         return successUtil.getData(messageDict[result])
     else:
         return errorUtil.getData(messageDict[result])
+@captalBluePrint.route('/getJournalDaybookExel',methods=['GET'])
+def getJournalDaybookExel():
+    mid=request.args.get('laboratoryId')
+    return captalControler.getJournalDaybookExel(mid)
