@@ -54,16 +54,7 @@ class CaptalControler():
         return xlsxTaker.listTORepones(rsplist,laboratory['blockNum']+'-'+laboratory['doorNum']+'.xls')
 
     def getMyLabJournalDaybook(self):
-        from src.Model.CaptalModel import Captal
-        captal = Captal.query.filter_by(laboratoryId=current_user.laboratoryId).first()
-        if captal == None:
-            captal = Captal.new(laboratoryId=current_user.laboratoryId)
-            if captal == None: return {'laboratory': {}, 'journalDaybook': []}
-        myLabJournalDaybook = {
-            'laboratory': captal.laboratory.toDict(),
-            'journalDaybook': [journalDaybook.toDict() for journalDaybook in captal.journalDaybook]
-        }
-        return myLabJournalDaybook
+        return self.getJournalDaybook(current_user.laboratoryId)
 
     def addSpend(self, changeReason: str, changeMoney: str):
         '''
