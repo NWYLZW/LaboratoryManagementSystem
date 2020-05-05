@@ -134,9 +134,10 @@
 		}
 	}
 	class commentEditor{
-		constructor(container,dict) {
+		constructor(container,dict,isMe = false) {
 		    this.container = container;
 			this.dict = dict;
+			this.isMe = isMe;
 			this.generateEle();
 		}
 		generateEle(){
@@ -152,10 +153,9 @@
 				</div>\
 				').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));
 			content.container[0].appendChild(commentEditor$[0]);
-			
 			commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
 			commentEditor$.find('.select-isAnonymous i').unbind('click').click(function(){
-				if(content.dict.isAnonymous){
+				if(!content.dict.isAnonymous){
 					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
 					$(this).html('&nbsp;&nbsp;' + '匿名');
 					this.setAttribute("class", "fa fa-check-circle-o fa-x");
@@ -169,33 +169,63 @@
 			});
 			
 			commentEditor$.find('.cancle').unbind('click').click(function(){
+				if(content.isMe)
+					$('.addLeaveMessage-btn').css('display','block');
 				content.container[0].removeChild(commentEditor$[0]);
 			});
 			commentEditor$.find('.release').unbind('click').click(function(){
-				new myAjaxForm({
-					url:'/message/leave/addReply',
-					method:"POST",
-					data:{
-						isAnonymous:!content.dict.isAnonymous,
-						content:commentEditor$.find('textarea').val(),
-						replyId:content.dict.id,
-					},
-					isNormalAjax:true,
-					typeSpecialDeal:{
-						'4':function(dictObj){
-							// 数据库错误
+				if(content.isMe){//添加本人留言
+					$('.addLeaveMessage-btn').css('display','block');
+					new myAjaxForm({
+						url:'/message/leave/add',
+						data:{
+							isAnonymous:content.dict.isAnonymous,
+							content:commentEditor$.find('textarea').val(),
 						},
-						'4001':function(dictObj){
-							// 留言不存在
-						}
-					},
-					responseCorrect:function(dictObj){
-						new messageLeave(dictObj.message,content.container.find('.comment-box'));
-						content.container[0].removeChild(commentEditor$[0]);
-					},
-					responseError:function(dictObj){},
-					failureEnd:function(dictObj){},
-				}).ajax();
+						method:"POST",
+						isNormalAjax:true,
+						typeSpecialDeal:{
+							'4':function(dictObj){
+								// 数据库错误
+							},
+							'4001':function(dictObj){
+								// 留言不存在
+							}
+						},
+						responseCorrect:function(dictObj){
+							new messageLeave(dictObj.message,$('.comment-page-content'));
+							content.container[0].removeChild(commentEditor$[0]);
+						},
+						responseError:function(dictObj){},
+						failureEnd:function(dictObj){},
+					}).ajax();
+				}
+				else{//添加回复他人留言
+					new myAjaxForm({
+						url:'/message/leave/addReply',
+						method:"POST",
+						data:{
+							isAnonymous:content.dict.isAnonymous,
+							content:commentEditor$.find('textarea').val(),
+							replyId:content.dict.id,
+						},
+						isNormalAjax:true,
+						typeSpecialDeal:{
+							'4':function(dictObj){
+								// 数据库错误
+							},
+							'4001':function(dictObj){
+								// 留言不存在
+							}
+						},
+						responseCorrect:function(dictObj){
+							new messageLeave(dictObj.message,content.container.find('.comment-box'));
+							content.container[0].removeChild(commentEditor$[0]);
+						},
+						responseError:function(dictObj){},
+						failureEnd:function(dictObj){},
+					}).ajax();
+				}
 			});
 		}
 	}
@@ -241,6 +271,7 @@
 			this.pageNum = Math.ceil(option.dataLDict.sumCount/5);
 			this.currentPage = currentPage;
 			this.goPage();
+			this.addLeaveMessage();
 			this.ajaxTimeList = [];
 		}
 		goPage(){
@@ -269,8 +300,8 @@
 		showCommentPage(){
 			const content = this;
 			let curTime = new Date().getTime();
-			
 			content.ajaxTimeList.push(curTime);
+			
 			if($('.comment-page-content').html() != null && content.currentPage != -1){
 				$('.comment-page-content').empty();
 				Notiflix.Block.Pulse('.messageBoard', 'Please wait...');
@@ -330,6 +361,25 @@
 					page[i].stylecolor = '#00BFFF';
 				}
 			}
+		}
+		addLeaveMessage(){
+			var content = this;
+			var addLeaveMessage = $(('\
+				<div class="addLeaveMessage">\
+					<div class="addLeaveMessage-editor">\
+					</div>\
+					<div class="addLeaveMessage-btn">添加留言</div>\
+				</div>\
+			').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));
+			$('.messageBoard-content')[0].appendChild(addLeaveMessage[0]);
+			
+			content.dict = {
+				'isAnonymous':false
+			};
+			addLeaveMessage.find('.addLeaveMessage-btn').unbind('click').click(function(){
+				addLeaveMessage.find('.addLeaveMessage-btn').css('display','none');
+				new commentEditor(addLeaveMessage.find('.addLeaveMessage-editor'),content.dict,true);
+			});
 		}
 	}
 	window.commentPage = commentPage;
