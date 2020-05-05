@@ -36,7 +36,7 @@ def captalBeforeRequest():
 def captalPanel():
     addSpendAbel = False
     if current_user.is_administrator() or current_user.can(Permission.LABORATORY_MONEY_AD):
-        canDownload = True
+        addSpendAbel = True
     return render_template('captalPanel.html',addSpendAbel=addSpendAbel)
 @captalBluePrint.route("/getJournalDaybook",methods=['GET'])
 @permission_required(Permission.ALL_MONEY_S)
