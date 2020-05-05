@@ -35,7 +35,7 @@ def captalBeforeRequest():
 @captalBluePrint.route("/panel",methods=['GET'])
 def captalPanel():
     addSpendAbel = False
-    if current_user.is_administrator() or current_user.can(Permission.LABORATORY_MONEY_AD):
+    if current_user.can(Permission.LABORATORY_MONEY_AD):
         addSpendAbel = True
     return render_template('captalPanel.html',addSpendAbel=addSpendAbel)
 @captalBluePrint.route("/getJournalDaybook",methods=['GET'])
@@ -60,7 +60,7 @@ def addSpend():
     changeMoney = request.json.get('changeMoney',None)
     result = captalControler.addSpend(changeReason,changeMoney)
     if result == 0:
-        return successUtil.getData(messageDict[result])
+        return successUtil.getData(messageDict[result],message=captalControler.journalDaybookObj.toDict())
     else:
         return errorUtil.getData(messageDict[result])
 @captalBluePrint.route('/getJournalDaybookExel',methods=['GET'])

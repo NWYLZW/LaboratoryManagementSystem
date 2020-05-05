@@ -32,9 +32,11 @@ class CaptalControler():
         if captal == None:
             captal = Captal.new(laboratoryId=laboratoryId)
             if captal == None: return {'laboratory': {}, 'journalDaybook': []}
+        tempList = [journalDaybook.toDict() for journalDaybook in captal.journalDaybook]
+        tempList.reverse()
         labJournalDaybook = {
             'laboratory': captal.laboratory.toDict(),
-            'journalDaybook': [journalDaybook.toDict() for journalDaybook in captal.journalDaybook]
+            'journalDaybook': tempList
         }
         return labJournalDaybook
 
@@ -82,8 +84,11 @@ class CaptalControler():
         if captal == None:
             captal = Captal.new(laboratoryId=current_user.laboratoryId)
             if captal == None: return 1
-        return captal.cost(current_user.id, changeReason, changeMoney)
-
+        rsp = captal.cost(current_user.id, changeReason, changeMoney)
+        if isinstance(rsp,tuple):
+            self.journalDaybookObj = rsp[1]
+            return rsp[0]
+        else: return rsp
 
 captalControler = CaptalControler()
 

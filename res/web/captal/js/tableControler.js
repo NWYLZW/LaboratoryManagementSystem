@@ -107,11 +107,123 @@
 				}
 			});
 			this.addSpend$ = this.$.find('.addSpend');
-			this.addSpend$.click(function(){
-				Notiflix.Report.Warning(
-				'警告',
-				'未完成，待开发',
-				'知道了');
+			this.addSpend$.unbind('click').click(function(){
+				let dialog_content$ = $('\
+					<div class="addSpend_dialog_content">\
+						<style type="text/css">\
+							.addSpend_dialog_content_item{\
+								height: 36px;\
+								color: dimgray;\
+								font-size: 16px;font-weight: 600;\
+								line-height: 36px;\
+								user-select: none;\
+							}\
+							.addSpend_dialog_content_item input{\
+								height: 28px;padding-left: 10px;\
+								margin-left: 10px;\
+								line-height: 30px;\
+								border: 1px solid gray;\
+								border-radius: 10px;\
+								box-shadow: 0 0 4px gray;\
+							}\
+						</style>\
+						<div class="addSpend_dialog_content_item">\
+							<label>变动原因:</label><input class="RESON" type="text" autofocus />\
+						</div>\
+						<div class="addSpend_dialog_content_item">\
+							<label>变动金额:</label><input class="MONEY" type="text" />\
+						</div>\
+					</div>');
+				dialog({
+					title: '添加资金变动',
+					content: dialog_content$,
+					okValue: '提交',
+					ok: function () {
+						const dialog = this;
+						let RESON = dialog_content$.find('.RESON').val();
+						let MONEY = dialog_content$.find('.MONEY').val();
+						function verify(){
+							if(RESON===""){
+								Notiflix.Report.Failure(
+								'错误',
+								'变动原因不得为空',
+								'知道了');
+								return false;
+							}
+							if(MONEY===""){
+								Notiflix.Report.Failure(
+								'错误',
+								'变动金额不得为空',
+								'知道了');
+								return false;
+							}
+							if(!(/^[\+|\-]?[0-9]{1,10}\.?[0-9]{0,2}$/.test(MONEY))){
+								Notiflix.Report.Failure(
+								'错误',
+								'变动金额格式错误',
+								'知道了');
+								return false;
+							}
+							return true;
+						}
+						if(!verify()) return false;
+						MONEY = (() =>{
+							let MONEY_s = MONEY.split('.');
+							if(MONEY_s.length===1 
+								|| (MONEY_s.length===2 && MONEY_s[1] === "")){
+								return MONEY_s[0]+'.00';
+							}
+							if(MONEY_s.length===2 
+								&& MONEY_s[1].length===1){
+								return MONEY_s[0]+'.'+MONEY_s[1]+'0';
+							}
+							return MONEY;
+						})();
+						
+						this.title('提交中…');
+						Notiflix.Block.Dots('.addSpend_dialog_content');
+						function end(){
+							Notiflix.Block.Remove('.addSpend_dialog_content');
+							dialog.close().remove();
+						}
+						new myAjaxForm({
+							url:'/captal/addSpend',
+							data:{
+								changeReason:RESON,
+								changeMoney:MONEY,
+							},
+							isNormalAjax:true,
+							method:"POST",
+							typeSpecialDeal:{
+								'0':function(dictObj){
+									// 表单数据错误
+								},
+								'4':function(dictObj){
+									// 数据库错误
+								},
+								'4001':function(dictObj){
+									// 留言不存在
+								},
+							},
+							responseCorrect:function(dictObj){
+								end();
+								content.sourceDataList.unshift([
+									dictObj.message.dateTime,
+									dictObj.message.changeMoneyUser.nickName,
+									dictObj.message.changeReason,
+									dictObj.message.changeMoney,
+									dictObj.message.remainingMoney,
+								]);
+								content.tc.pageContro.toStart();
+							},
+							responseError:function(){},
+							failureEnd:function(){},
+						}).ajax();
+						return false;
+					},
+					cancelValue: '取消',
+					cancel: function () {}
+				}).showModal();
 			});
 			this.download$ = this.$.find('.download');
 			this.download$.find('a')[0].href = "../captal/getJournalDaybookExel?laboratoryId="+this.tc.labID;

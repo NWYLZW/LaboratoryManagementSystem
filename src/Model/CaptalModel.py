@@ -60,7 +60,7 @@ class Captal(db.Model):
             MainLog.record(MainLog.level.ERROR,e)
             return 1
         db.session.commit()
-        return 0
+        return 0,journalDaybook
 class JournalDaybook(db.Model):
     __tablename__ = "JournalDaybook"
     id = db.Column(db.INTEGER,primary_key=True)
