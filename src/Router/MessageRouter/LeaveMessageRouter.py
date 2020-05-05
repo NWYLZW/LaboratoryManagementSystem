@@ -31,7 +31,7 @@ def initChildRoute(bluePrint:Blueprint):
             return successUtil.getData(
                 messageDict[result]
                 ,message=leaveMessageControler.addLeaveMessageObj
-                    .toDict(current_user.id))
+                    .toDict(current_user))
         else:
             return errorUtil.getData(messageDict[result])
     @bluePrint.route(routeName+"/addReply",methods=['POST'])
@@ -57,7 +57,7 @@ def initChildRoute(bluePrint:Blueprint):
             return successUtil.getData(
                 messageDict[result]
                 ,message=leaveMessageControler.addLeaveMessageObj
-                    .toDict(current_user.id))
+                    .toDict(current_user))
         else:
             return errorUtil.getData(messageDict[result])
     @bluePrint.route(routeName+"/get",methods=['GET'])
