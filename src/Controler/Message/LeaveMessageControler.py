@@ -27,6 +27,7 @@ class LeaveMessageControler:
             MainLog.record(MainLog.level.ERROR,e)
             return 1
         db.session.commit()
+        self.addLeaveMessageObj = leaveMessage
         return 0
     def addReplyLeaveMessage(self, authorId:int=-1, isAnonymous:bool=False, content:str="",replyId:int=-1):
         '''

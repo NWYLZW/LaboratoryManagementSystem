@@ -28,7 +28,10 @@ def initChildRoute(bluePrint:Blueprint):
         except Exception:
             return errorUtil.getData('FormDataWrong')
         if result == 0:
-            return successUtil.getData(messageDict[result])
+            return successUtil.getData(
+                messageDict[result]
+                ,message=leaveMessageControler.addLeaveMessageObj
+                    .toDict(current_user.id))
         else:
             return errorUtil.getData(messageDict[result])
     @bluePrint.route(routeName+"/addReply",methods=['POST'])
