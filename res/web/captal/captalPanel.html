@@ -33,7 +33,7 @@
 				</div>
 				<div class="controlLabDataPanel_Content">
 					<div class="controlLabDataPanel_Content_BtnList">
-						<div class="controlLabDataPanel_Content_Btn addSpend"><a>新增花销</a></div>
+						{% if canDownload %}<div class="controlLabDataPanel_Content_Btn addSpend"><a>新增花销</a></div>{% endif %}
 						<div class="controlLabDataPanel_Content_Btn download"><a href="../captal/getJournalDaybookExel?laboratoryId=1" download="">下载数据</a></div>
 						<div class="controlLabDataPanel_Content_Filter">
 							<i class="fa fa-filter fa-1_5x"></i>
