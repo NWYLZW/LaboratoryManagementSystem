@@ -4,11 +4,16 @@
 	(() =>{
 		const dataList = [
 			{
-				'labID':1,
-				'labName':'E601',
-			},{
-				'labID':2,
-				'labName':'F608',
+				'id':1,
+				'blockNum':'E',
+				'doorNum':'601',
+				'content':'',
+			},
+			{
+				'id':2,
+				'blockNum':'F',
+				'doorNum':'608',
+				'content':'',
 			},
 		];
 		class controlLabListPanel{
@@ -24,14 +29,14 @@
 						.append(
 							$('<div class="controlLabListPanel_item '+(() =>{
 									if(i==0) return "sel";
-								})()+'">'+this.dataList[i].labName+'</div>').click(() =>{
+								})()+'">'+this.dataList[i].blockNum+'-'+this.dataList[i].doorNum+'</div>').click(() =>{
 									content.$controlLabListPanel.find('.sel').removeClass('sel');
 									content.$controlLabListPanel.find('.controlLabListPanel_item')[i].classList.add('sel');
-									generateTableControler(content.dataList[i].labID);
+									generateTableControler(content.dataList[i].id);
 								})
 						);
 				}
-				generateTableControler(content.dataList[0].labID);
+				generateTableControler(content.dataList[0].id);
 			}
 		}
 		let CLL = new controlLabListPanel({
@@ -74,7 +79,12 @@
 		// };
 		
 		new myAjax({
-			url:'/captal/getJournalDaybook?laboratoryId='+labID,
+			url:(() =>{
+				if($('.controlLabDataPanel_Content_Btn.addSpend').length==1)
+					return '/captal/getJournalDaybook?laboratoryId='+labID;
+				else
+					return '/captal/getMyLabJournalDaybook';
+			})(),
 			method:"GET",
 			success:function(result){
 				__g(JSON.parse(result));
@@ -98,6 +108,7 @@
 			let tc = new TableControler({
 				thNameList:['时间','负责人','原因','金额变动','余额'],
 				dataList:dataDict.journalDaybook,
+				labID:labID,
 				generateTR:function(isOdd,dict,i){
 					dict = {
 						'time':dict[i][0],

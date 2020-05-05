@@ -114,6 +114,7 @@
 				'知道了');
 			});
 			this.download$ = this.$.find('.download');
+			this.download$.find('a')[0].href = "../captal/getJournalDaybookExel?laboratoryId="+this.tc.labID;
 		}
 		generateFilter(filterStr){
 			let filterStrArr = filterStr.split(',')
@@ -157,6 +158,7 @@
 		constructor(option) {
 			this.thNameList = option.thNameList || ['None'];
 			this.dataList = option.dataList;
+			this.labID = option.labID;
 			this.generateTR = option.generateTR;
 			this.generate$();
 		}
