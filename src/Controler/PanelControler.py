@@ -60,6 +60,19 @@ peopleContro = {
         'icoClass': 'fa fa-user-plus fa-1_5x',
     }, ]
 }
+moneyContro = {
+    'name': "资金管理",
+    'url': '#5',
+    'icoClass': 'fa fa-bank fa-1_5x',
+    'child': [{
+        'permission': [
+            Permission.PERSON_DATA_ADSC,
+        ],
+        'name': "管理面板",
+        'url': '#captal-panel',
+        'icoClass': 'fa fa-calendar fa-1_5x',
+    },]
+}
 adminContro = {
     'name': "超级管理",
     'url': '#4',
@@ -80,12 +93,6 @@ adminContro = {
         'icoClass': 'fa fa-cube fa-1_5x',
     },]
 }
-# moneyContro = {
-#     'name': "资金管理",
-#     'url': '#5',
-#     'icoClass': 'fa fa-bank fa-1_5x',
-#     'child': []
-# }
 # resourceContro = {
 #     'name': "资源管理",
 #     'url': '#4',
@@ -106,6 +113,7 @@ class PanelControler:
         useList = [commonUse.copy(),
                    my.copy(),
                    peopleContro.copy(),
+                   moneyContro.copy(),
                    adminContro.copy(),]
         responUseList = []
         for i in range(useList.__len__()):
@@ -130,6 +138,7 @@ class PanelControler:
             if childs.__len__() != 0:
                 responUseList.append(useList[i])
                 useList[i]['child'] = childs
+        print(responUseList)
         return JsonUtil().dictToJson(responUseList)
 
 panelControler = PanelControler()
