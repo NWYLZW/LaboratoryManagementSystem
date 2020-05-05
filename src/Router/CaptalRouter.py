@@ -34,10 +34,9 @@ def captalBeforeRequest():
 
 @captalBluePrint.route("/panel",methods=['GET'])
 def captalPanel():
-    addSpendAbel = False
-    if current_user.can(Permission.LABORATORY_MONEY_AD):
-        addSpendAbel = True
-    return render_template('captalPanel.html',addSpendAbel=addSpendAbel)
+    addSpendAbel = current_user.can(Permission.LABORATORY_MONEY_AD)
+    allMoneySearchAbel = current_user.can(Permission.ALL_MONEY_S)
+    return render_template('captalPanel.html',addSpendAbel=addSpendAbel,allMoneySearchAbel=allMoneySearchAbel)
 @captalBluePrint.route("/getJournalDaybook",methods=['GET'])
 @permission_required(Permission.ALL_MONEY_S)
 def getJournalDaybook():

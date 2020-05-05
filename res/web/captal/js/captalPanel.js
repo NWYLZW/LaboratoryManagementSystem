@@ -80,7 +80,7 @@
 		
 		new myAjax({
 			url:(() =>{
-				if($('.controlLabDataPanel_Content_Btn.addSpend').length==1)
+				if($('#allMoneySearchAbel').length==1)
 					return '/captal/getJournalDaybook?laboratoryId='+labID;
 				else
 					return '/captal/getMyLabJournalDaybook';
