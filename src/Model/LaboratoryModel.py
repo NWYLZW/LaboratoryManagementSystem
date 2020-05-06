@@ -58,13 +58,13 @@ class Laboratory(db.Model):
         db.session.commit()
         return 0
     @staticmethod
-    def getAllData():
+    def getAllData(haveUser:bool=True):
         laboratoryList = []
         try:
             laboratorys = Laboratory.query.filter_by().all()
             for laboratory in laboratorys:
                 laboratoryDict = laboratory.toDict()
-                laboratoryDict['users'] = [user.toBriefDict() for user in laboratory.users.all()]
+                if haveUser: laboratoryDict['users'] = [user.toBriefDict() for user in laboratory.users.all()]
                 laboratoryList.append(laboratoryDict)
             db.session.flush()
         except Exception as e:

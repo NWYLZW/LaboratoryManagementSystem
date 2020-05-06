@@ -13,6 +13,7 @@ from flask_login import current_user
 
 from src import templatePath
 from src.Controler.CaptalControler import captalControler
+from src.Model.LaboratoryModel import Laboratory
 from src.Model.RoleModel import Permission
 from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
@@ -80,6 +81,11 @@ def getJournalDaybookExel():
     if not mid.isdigit() or int(mid)<0:
         abort(405)
     if mid == str(current_user.laboratoryId) or current_user.can(Permission.ALL_MONEY_S):
-        print("I do")
         return captalControler.getJournalDaybookExel(mid)
     abort(403)
+@captalBluePrint.route('getLabList',methods=['GET'])
+def getLabList():
+    if current_user.can(Permission.ALL_MONEY_S):
+        return JsonUtil().dictToJson(Laboratory.getAllData(haveUser=False))
+    else:
+        return JsonUtil().dictToJson([current_user.laboratory.toDict()])
