@@ -4,11 +4,12 @@
 			this.dict = dict;
 			this.container = container;
 			this.generateEle();
+			this.accuseAndDeleteMenu();
 		}
 		generateEle(){
 			var content = this;
 			var messageLeave$ = $(('\
-				<div class="receive-box">\
+				<div class="receive-box receive-box-'+content.dict.id+'">\
 					<div class="message-box leaveMessage-'+content.dict.id+'">\
 						<div class="headPortrait"><img></div>\
 						<div class="message-information">\
@@ -23,10 +24,6 @@
 								<div class="commentNum"><i class="fa fa-comments-o fa-x"></i></div>\
 								<div class="reply"><i class="fa fa-mail-reply fa-x">&nbsp;回复</i></div>\
 								<div class="showElseInfoBtn"><i class="fa fa-ellipsis-h fa-x"></i></div>\
-								<div class="else-info">\
-									<div class="accuse"><i class="fa fa-flag fa-x">举报</i></div>\
-									<div class="delete"><i class="fa fa-remove fa-x">删除</i></div>\
-								</div>\
 							</div>\
 						</div>\
 					</div>\
@@ -131,6 +128,39 @@
 				if(!(messageLeave$.find('.comment-editor')[0]))
 					new commentEditor(messageLeave$,content.dict);
 			});
+		}
+		accuseAndDeleteMenu(){
+			var content = this;
+			console.log(content.dict);
+			var mune$ = $('\
+						<div class="else-info '+content.dict.id+'">\
+							<div class="accuse"><i class="fa fa-flag fa-x">举报</i></div>\
+						</div>\
+					');
+				$('.leaveMessage-'+content.dict.id+' .message-foot')[0].appendChild(mune$[0]);
+			if(content.dict.deleteAble){
+				var $delete = $('<div class="delete"><i class="fa fa-remove fa-x">删除</i></div>');
+				mune$[0].appendChild($delete[0]);
+				$delete.unbind('click').click(function(){
+					new myAjaxForm({
+						url:'/message/leave/delete',
+						data:{
+							leaveMessageId:content.dict.id,
+						},
+						isNormalAjax:true,
+						method:"POST",
+						typeSpecialDeal:{
+							'':function(){
+							}
+						},
+						responseCorrect:function(){
+							$('.comment-page-content')[0].removeChild($('.receive-box.receive-box-' + content.dict.id)[0]);
+						},
+						responseError:function(){},
+						failureEnd:function(){},
+					}).ajax();
+				});
+			}
 		}
 	}
 	class commentEditor{
