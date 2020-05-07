@@ -10,7 +10,6 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from src import db, MainLog
 
-
 class User(UserMixin, db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
@@ -136,14 +135,14 @@ class User(UserMixin, db.Model):
             "professionalClass": self.professionalClass.getProfessionalClass(),
         }
 
-
 class UserRegisterTime(db.Model):
-    RegisterTime = db.Column(db.datetime, nullable=False)
-    userId = db.Column(db.Integer, nullable=False)
+    __tablename__ = 'UserRegisterTime'
+    userId = db.Column(db.Integer,primary_key=True)
+    registerTime = db.Column(db.DateTime, nullable=False)
 
     def __init__(self,userId:int=-1):
         if userId == -1:
             return None
         self.userId=userId
-        if self.RegisterTime == None:
-            self.RegisterTime = timeUtil.nowDateStr()
+        if self.registerTime == None:
+            self.registerTime = timeUtil.nowDateStr()
