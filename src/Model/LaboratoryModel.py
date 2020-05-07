@@ -59,6 +59,10 @@ class Laboratory(db.Model):
         return 0
     @staticmethod
     def getAllData(haveUser:bool=True):
+        """
+        :param haveUser:当值为True时会返回实验室成员信息
+        :return:
+        """
         laboratoryList = []
         try:
             laboratorys = Laboratory.query.filter_by().all()

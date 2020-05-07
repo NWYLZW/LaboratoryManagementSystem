@@ -3,11 +3,13 @@ from sqlalchemy import and_
 
 from src.Controler.MarkControler import markControler
 from src.Model.RoleModel import Role, Permission
+from src.Util.TimeUtil import timeUtil
 
 pymysql.install_as_MySQLdb()
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from src import db
+from src import db, MainLog
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'User'
@@ -28,7 +30,7 @@ class User(UserMixin, db.Model):
     def __init__(self,
                  schoolID: str = "", nickName: str = "", password: str = "", sex: int = 1,
                  directionId: int = -1, qqNum: str = "", telNum: str = "", laboratoryId: str = "",
-                 professionalClassId: str = "", email:str = ""):
+                 professionalClassId: str = "", email: str = ""):
         self.schoolID = schoolID
         self.nickName = nickName
         self.password = password
@@ -87,33 +89,61 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.passwordHash, password)
 
-    def fuzzySearchRule(self,file,listWords):
-        return and_(*[file.like('%'+w+'%') for w in listWords])
+    @property
+    def registerTime(self):
+        userRegisterTime = UserRegisterTime.query.filter_by(self.userId).first()
+        if userRegisterTime != None:
+            return userRegisterTime
+        try:
+            userRegisterTime = UserRegisterTime(userId=self.id)
+            db.session.add(userRegisterTime)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,"获取专业班级失败 错误信息:")
+            MainLog.record(MainLog.level.ERROR,e)
+            return None
+        db.session.commit()
+        return userRegisterTime
+    def fuzzySearchRule(self, file, listWords):
+        return and_(*[file.like('%' + w + '%') for w in listWords])
 
     def toBriefDict(self):
         return {
-            "id":self.id,
-            "schoolID":self.schoolID,
-            "nickName":self.nickName,
-            "maleBool":self.sexBool,
-            "directionName":self.direction.name,
-            "directionImgName":self.direction.imgName,
-            "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
-            "professionalClass":self.professionalClass.getProfessionalClass(),
-            "markNumInYear":markControler.getMarkNum(self.id),
+            "id": self.id,
+            "schoolID": self.schoolID,
+            "nickName": self.nickName,
+            "maleBool": self.sexBool,
+            "directionName": self.direction.name,
+            "directionImgName": self.direction.imgName,
+            "laboratoryName": self.laboratory.blockNum + '-' + self.laboratory.doorNum,
+            "professionalClass": self.professionalClass.getProfessionalClass(),
+            "markNumInYear": markControler.getMarkNum(self.id),
         }
+
     def toDict(self):
         return {
-            "id":self.id,
-            "schoolID":self.schoolID,
-            "nickName":self.nickName,
-            "maleBool":self.sexBool,
-            "qqNum":self.qqNum,
-            "telNum":self.telNum,
-            "roleId":self.roleId,
-            "roleName":self.role.name,
-            "directionName":self.direction.name,
-            "directionImgName":self.direction.imgName,
-            "laboratoryName":self.laboratory.blockNum+'-'+self.laboratory.doorNum,
-            "professionalClass":self.professionalClass.getProfessionalClass(),
+            "id": self.id,
+            "schoolID": self.schoolID,
+            "nickName": self.nickName,
+            "maleBool": self.sexBool,
+            "qqNum": self.qqNum,
+            "telNum": self.telNum,
+            "roleId": self.roleId,
+            "roleName": self.role.name,
+            "directionName": self.direction.name,
+            "directionImgName": self.direction.imgName,
+            "laboratoryName": self.laboratory.blockNum + '-' + self.laboratory.doorNum,
+            "professionalClass": self.professionalClass.getProfessionalClass(),
         }
+
+
+class UserRegisterTime(db.Model):
+    RegisterTime = db.Column(db.datetime, nullable=False)
+    userId = db.Column(db.Integer, nullable=False)
+
+    def __init__(self,userId:int=-1):
+        if userId == -1:
+            return None
+        self.userId=userId
+        if self.RegisterTime == None:
+            self.RegisterTime = timeUtil.nowDateStr()
