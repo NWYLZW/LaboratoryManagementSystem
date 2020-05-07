@@ -2,20 +2,6 @@
 	new response("captal",439,1000).start();
 	
 	(() =>{
-		const dataList = [
-			{
-				'id':1,
-				'blockNum':'E',
-				'doorNum':'601',
-				'content':'',
-			},
-			{
-				'id':2,
-				'blockNum':'F',
-				'doorNum':'608',
-				'content':'',
-			},
-		];
 		class controlLabListPanel{
 			constructor(option) {
 				this.dataList = option.dataList;
@@ -39,9 +25,33 @@
 				generateTableControler(content.dataList[0].id);
 			}
 		}
-		let CLL = new controlLabListPanel({
-			dataList:dataList,
-		});
+		new myAjax({
+			url:'../captal/getLabList',
+			method:"GET",
+			success:function(result){
+				let CLL = new controlLabListPanel({
+					dataList:JSON.parse(result),
+				});
+			},
+			failure:function(error){
+			},
+			always:function(jqXHR){
+			}
+		}).ajax();
+		// const dataList = [
+		// 	{
+		// 		'id':1,
+		// 		'blockNum':'E',
+		// 		'doorNum':'601',
+		// 		'content':'',
+		// 	},
+		// 	{
+		// 		'id':2,
+		// 		'blockNum':'F',
+		// 		'doorNum':'608',
+		// 		'content':'',
+		// 	},
+		// ];
 	})();
 	
 	function generateTableControler(labID){
