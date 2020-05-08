@@ -35,6 +35,7 @@ class Notice(db.Model):
             'title':self.title,
             'content':self.content,
             'message':self.message,
+            'kindNum':self.kindNum,
             'dateTime':str(self.dateTime),
             'isView':(self.viewUsers.filter_by(userId=userId).count()!=0),
             'viewCount':self.viewUsers.count(),
