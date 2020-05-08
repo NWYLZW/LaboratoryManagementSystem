@@ -131,7 +131,6 @@
 		}
 		accuseAndDeleteMenu(){
 			var content = this;
-			console.log(content.dict);
 			var mune$ = $('\
 						<div class="else-info '+content.dict.id+'">\
 							<div class="accuse"><i class="fa fa-flag fa-x">举报</i></div>\
@@ -142,23 +141,32 @@
 				var $delete = $('<div class="delete"><i class="fa fa-remove fa-x">删除</i></div>');
 				mune$[0].appendChild($delete[0]);
 				$delete.unbind('click').click(function(){
-					new myAjaxForm({
-						url:'/message/leave/delete',
-						data:{
-							leaveMessageId:content.dict.id,
+					Notiflix.Confirm.Show(
+						'删除确认', 
+						'是否删除该留言', 
+						'是', '否', 
+						function(){
+							new myAjaxForm({
+								url:'/message/leave/delete',
+								data:{
+									leaveMessageId:content.dict.id,
+								},
+								isNormalAjax:true,
+								method:"POST",
+								typeSpecialDeal:{
+									'':function(){
+									}
+								},
+								responseCorrect:function(){
+									$('.receive-box.receive-box-' + content.dict.id)[0].remove();
+								},
+								responseError:function(){},
+								failureEnd:function(){},
+							}).ajax();
 						},
-						isNormalAjax:true,
-						method:"POST",
-						typeSpecialDeal:{
-							'':function(){
+							function(){ 
 							}
-						},
-						responseCorrect:function(){
-							$('.comment-page-content')[0].removeChild($('.receive-box.receive-box-' + content.dict.id)[0]);
-						},
-						responseError:function(){},
-						failureEnd:function(){},
-					}).ajax();
+					);
 				});
 			}
 		}
@@ -205,7 +213,6 @@
 			});
 			commentEditor$.find('.release').unbind('click').click(function(){
 				if(content.isMe){//添加本人留言
-					$('.addLeaveMessage-btn').css('display','block');
 					new myAjaxForm({
 						url:'/message/leave/add',
 						data:{
@@ -225,6 +232,7 @@
 						responseCorrect:function(dictObj){
 							new messageLeave(dictObj.message,$('.comment-page-content'));
 							content.container[0].removeChild(commentEditor$[0]);
+							$('.addLeaveMessage-btn').css('display','block');
 						},
 						responseError:function(dictObj){},
 						failureEnd:function(dictObj){},

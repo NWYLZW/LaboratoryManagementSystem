@@ -132,7 +132,7 @@
 	width: 90px;
 	height: auto;
 	display: none;
-	z-index: 100;
+	z-index: 2000;
 	line-height: 30px;
 	background-color: white;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
