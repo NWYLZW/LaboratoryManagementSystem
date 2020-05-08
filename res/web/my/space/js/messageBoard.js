@@ -132,11 +132,18 @@
 		accuseAndDeleteMenu(){
 			var content = this;
 			var mune$ = $('\
-						<div class="else-info '+content.dict.id+'">\
+						<div class="else-info else-info-'+content.dict.id+'">\
 							<div class="accuse"><i class="fa fa-flag fa-x">举报</i></div>\
 						</div>\
 					');
 				$('.leaveMessage-'+content.dict.id+' .message-foot')[0].appendChild(mune$[0]);
+			$('.else-info.else-info-' + content.dict.id).find('.accuse').unbind('click').click(function(){
+				 Notiflix.Report.Warning( 
+					'警告', 
+					'举报功能尚未开发', 
+					'返回' 
+				 ); 
+			});
 			if(content.dict.deleteAble){
 				var $delete = $('<div class="delete"><i class="fa fa-remove fa-x">删除</i></div>');
 				mune$[0].appendChild($delete[0]);
@@ -154,7 +161,14 @@
 								isNormalAjax:true,
 								method:"POST",
 								typeSpecialDeal:{
-									'':function(){
+									'4':function(dictObj){
+										// 数据库错误
+									},
+									'5':function(dictObj){
+										//权限错误
+									},
+									'4001':function(dictObj){
+										// 留言不存在
 									}
 								},
 								responseCorrect:function(){
@@ -164,8 +178,7 @@
 								failureEnd:function(){},
 							}).ajax();
 						},
-							function(){ 
-							}
+						function(){}
 					);
 				});
 			}
@@ -350,7 +363,6 @@
 						if(curTime!=content.ajaxTimeList[content.ajaxTimeList.length-1]) return;
 						content.ajaxTimeList = [];
 						let dataLDict = JSON.parse(result);
-						console.log(dataLDict);
 						content.leaveMessages = dataLDict.leaveMessages;
 						content.pageNum = Math.ceil(dataLDict.sumCount/5);
 						for(let i = 0;i < content.leaveMessages.length;i++)
@@ -398,6 +410,22 @@
 					page[i].style.backgroundColor = '#f4f4f4';
 					page[i].stylecolor = '#00BFFF';
 				}
+			}
+			if(content.currentPage == 0){
+				$('.prePage').addClass('banClick');
+				$('.nextPage').removeClass('banClick');
+			}
+			else if(content.currentPage > 0 && content.currentPage < content.pageNum - 1){
+				$('.prePage').removeClass('banClick');
+				$('.nextPage').removeClass('banClick');
+			}
+			else if(content.currentPage == content.pageNum - 1){
+				$('.prePage').removeClass('banClick');
+				$('.nextPage').addClass('banClick');
+			}
+			if(content.currentPage == 0 && content.pageNum == 1){
+				$('.prePage').addClass('banClick');
+				$('.nextPage').addClass('banClick');
 			}
 		}
 		addLeaveMessage(){

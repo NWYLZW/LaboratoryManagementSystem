@@ -240,11 +240,11 @@
 
 .comment-page-content {
 	position: relative;
-	margin-bottom: 60px;
+	margin-bottom: 80px;
 	width: 100%;
 	height: auto;
 }
-
+.banClick:hover{cursor: not-allowed;}
 .comment-page-list {
 	position: relative;
 	top: calc(50% - 15px);
