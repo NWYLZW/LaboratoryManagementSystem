@@ -51,9 +51,9 @@ class EditMyPrivacyData(FlaskForm):
         kwargs['csrf_enabled'] = False
         FlaskForm.__init__(self, *args, **kwargs)
 class EditMyPWD(FlaskForm):
-    oldPWD = StringField(
-        'oldPWD',
-        validators=[Length(min=6,max=20),DataRequired('oldPWD 不得为空')]
+    email = StringField(
+        'email',
+        validators=[DataRequired('email 不得为空'),Email('email格式错误')]
     )
     newPWD = StringField(
         'newPWD',

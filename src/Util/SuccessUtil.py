@@ -1,5 +1,6 @@
 from src.Bean.Information import Information
 from src.Information.CaptalInformation import captal
+from src.Information.MyInformation import my
 from src.Information.NoticeInformation import notice
 
 class SuccessUtil(Information):
@@ -16,6 +17,7 @@ class SuccessUtil(Information):
             'addProfessionalClassSuccess':-5003,
             **leaveMessage['typeDict'],
             **(captal['s']['typeDict']),
+            **(my['s']['typeDict']),
         },{
             -1001:"欢迎成为我们的一员",
             -1002:"用户登陆成功",
@@ -28,6 +30,7 @@ class SuccessUtil(Information):
             -5003:"添加专业班级信息成功",
             **leaveMessage['dict'],
             **(captal['s']['dict']),
+            **(my['s']['dict']),
         })
 editMyData = {
     'typeDict':{

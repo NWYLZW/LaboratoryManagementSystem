@@ -1,5 +1,6 @@
 from src.Bean.Information import Information
 from src.Information.CaptalInformation import captal
+from src.Information.MyInformation import my
 from src.Information.NoticeInformation import notice
 
 class ErrorUtil(Information):
@@ -16,6 +17,7 @@ class ErrorUtil(Information):
             **(notice['e']['typeDict']),
             **leaveMessage['typeDict'],
             **(captal['e']['typeDict']),
+            **(my['e']['typeDict']),
         }, {
             0:"表单数据错误",
             1:"后端Error对象未配置参数，请附上url通知后端检查该接口",
@@ -28,6 +30,7 @@ class ErrorUtil(Information):
             **(notice['e']['dict']),
             **leaveMessage['dict'],
             **(captal['e']['dict']),
+            **(my['e']['dict']),
         })
 userData = {
     'typeDict':{

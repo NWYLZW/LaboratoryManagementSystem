@@ -3,6 +3,7 @@ from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
 from src import templatePath, MainLog
+from src.Controler.MyControler import myControler
 from src.Controler.UserControler import userControler
 from src.Util.ErrorUtil import errorUtil
 from src.Util.FileUtil import fileUtil
@@ -43,12 +44,20 @@ def editMyBaseData():
         else: return errorUtil.getData('dataBaseError')
     return errorUtil.getData('FormDataWrong',message=form.errors)
 
-@myBluePrint.route("/editMyPrivacyData", methods=['POST'])
+@myBluePrint.route("/editMyEmail", methods=['POST'])
 def editMyPrivacyData():
     form = EditMyPrivacyData(request.form)
     if form.validate_on_submit():
-        # TODO 完成修改隐私数据
-        return "0"
+        messageDict = [
+            'editMyEmailSuccess',
+            'dataBaseError',
+            'oldEmailIsWrong',
+        ]
+        result = myControler.editMyEmail(current_user,form.oldEmail.data,form.newEmail.data)
+        if result == 0:
+            return successUtil.getData(messageDict[result])
+        else:
+            return errorUtil.getData(messageDict[result])
     return errorUtil.getData('FormDataWrong',message=form.errors)
 @myBluePrint.route("/editMyPWD", methods=['POST'])
 def editMyPWD():
