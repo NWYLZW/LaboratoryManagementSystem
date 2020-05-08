@@ -8,19 +8,19 @@
 		generateEle(){
 			var content = this;
 			this.$ = $('\
-			<div class="mySpaceNotice-item">\
-				<div class="mySpaceNotice-item-top">\
-					<div class="mySpaceNotice-item-title">'+this.dict.title+'</div>\
-				</div>\
-				<div class="mySpaceNotice-item-content">'
-				+this.dict.content+
-				'</div>\
-				<div class="mySpaceNotice-item-bottom">\
-					<div class="mySpaceNotice-item-author"><img></div>\
-					<div class="mySpaceNotice-item-viewNum"><i class="fa fa-eye fa-1x"></i>'+this.dict.viewCount+'人已阅</div>\
-					<div class="mySpaceNotice-item-releaseTime">发布时间: '+this.dict.dateTime+'</div>\
-				</div>\
-			</div>');
+				<div class="mySpaceNotice-item">\
+					<div class="mySpaceNotice-item-top">\
+						<div class="mySpaceNotice-item-title">'+this.dict.title+'</div>\
+					</div>\
+					<div class="mySpaceNotice-item-content">'
+					+this.dict.content+
+					'</div>\
+					<div class="mySpaceNotice-item-bottom">\
+						<div class="mySpaceNotice-item-author"><img></div>\
+						<div class="mySpaceNotice-item-viewNum"><i class="fa fa-eye fa-1x"></i>'+this.dict.viewCount+'人已阅</div>\
+						<div class="mySpaceNotice-item-releaseTime">发布时间: '+this.dict.dateTime+'</div>\
+					</div>\
+				</div>');
 			this.$tag = $('<div class="mySpaceNotice-item-tag"></div>');
 			this.$.find('.mySpaceNotice-item-top')
 			.append(this.$tag.clone().html(this.tagNameList[this.dict.kindNum]));
@@ -44,9 +44,12 @@
 						content.dict.content,
 						'查阅', '点错了',
 						function(){
+							// TODO 对接公告接口组的查阅接口
+							//  成功执行下面这条语句
 							Notiflix.Notify.Success('已查阅');
 						}, function(){
-					});
+						}
+					);
 				});
 			}
 		}
