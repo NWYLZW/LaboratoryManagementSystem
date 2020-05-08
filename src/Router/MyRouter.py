@@ -63,8 +63,16 @@ def editMyPrivacyData():
 def editMyPWD():
     form = EditMyPWD(request.form)
     if form.validate_on_submit():
-        # TODO 完成修改密码
-        return "0"
+        messageDict = [
+            'editMyPWDSuccess',
+            'dataBaseError',
+            'oldEmailIsWrong',
+        ]
+        result = myControler.editMyPWD(current_user,form.email.data,form.newPWD.data)
+        if result == 0:
+            return successUtil.getData(messageDict[result])
+        else:
+            return errorUtil.getData(messageDict[result])
     return errorUtil.getData('FormDataWrong',message=form.errors)
 @myBluePrint.route("/editDirection", methods=['POST'])
 def editDirection():

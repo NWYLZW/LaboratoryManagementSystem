@@ -35,5 +35,26 @@ class MyControler:
             MainLog.record(MainLog.level.ERROR,e)
         db.session.commit()
         return 0
+    def editMyPWD(self,user,email,newPWD):
+        '''
+        :param user: 用户对象
+        :param email: 邮箱
+        :param newPWD: 新密码
+        :return: {
+        0:"邮箱修改成功",
+        1:"数据库错误",
+        2:"邮箱错误",
+        }
+        '''
+        if not user.email == email: return 2
+        try:
+            user.password = newPWD
+            db.session.add(user)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR,user.id+" 邮箱修改时数据库错误")
+            MainLog.record(MainLog.level.ERROR,e)
+        db.session.commit()
+        return 0
 
 myControler = MyControler()

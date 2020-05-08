@@ -13,8 +13,10 @@ __all__ = ['my']
 my = {'s':{
     'typeDict': {
         'editMyEmailSuccess':-8001,
+        'editMyPWDSuccess':-8002,
     }, 'dict': {
         -8001:"修改自己邮箱信息成功",
+        -8002:"修改自己密码成功",
     }},'e':{
     'typeDict': {
         'oldEmailIsWrong':6001,
