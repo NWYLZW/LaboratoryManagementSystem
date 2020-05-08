@@ -39,7 +39,7 @@ def login():
                     return successUtil.getData('loginSuccess')
                 return errorUtil.getData('PasswordWrong')
             return errorUtil.getData('UserNameNone')
-        return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+        return errorUtil.getData('FormDataWrong',message=form.errors)
     return render_template('login.html', form=form)
 
 @userBluePrint.route('/logout', methods=['GET'])
@@ -63,7 +63,7 @@ def register():
                         return errorUtil.getData('backEndWrong2')
                 return errorUtil.getData('FormDataWrong')
             return errorUtil.getData('UserNameExist')
-        return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+        return errorUtil.getData('FormDataWrong',message=form.errors)
     return render_template('newRegister.html', form=form)
 
 @userBluePrint.route('/searchUser', methods=['GET','POST'])

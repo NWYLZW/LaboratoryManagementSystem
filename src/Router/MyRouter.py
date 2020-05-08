@@ -41,7 +41,7 @@ def editMyBaseData():
     if form.validate_on_submit():
         if userControler.editUser(current_user.id,form): return successUtil.getData('editMyBaseDataSuccess')
         else: return errorUtil.getData('dataBaseError')
-    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+    return errorUtil.getData('FormDataWrong',message=form.errors)
 
 @myBluePrint.route("/editMyPrivacyData", methods=['POST'])
 def editMyPrivacyData():
@@ -49,26 +49,26 @@ def editMyPrivacyData():
     if form.validate_on_submit():
         # TODO 完成修改隐私数据
         return "0"
-    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+    return errorUtil.getData('FormDataWrong',message=form.errors)
 @myBluePrint.route("/editMyPWD", methods=['POST'])
 def editMyPWD():
     form = EditMyPWD(request.form)
     if form.validate_on_submit():
         # TODO 完成修改密码
         return "0"
-    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+    return errorUtil.getData('FormDataWrong',message=form.errors)
 @myBluePrint.route("/editDirection", methods=['POST'])
 def editDirection():
     form = EditDirection(request.form)
     if form.validate_on_submit():
         return "0"
-    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+    return errorUtil.getData('FormDataWrong',message=form.errors)
 @myBluePrint.route("/editLaboratory", methods=['POST'])
 def editLaboratory():
     form = EditLaboratory(request.form)
     if form.validate_on_submit():
         return "0"
-    return errorUtil.getData('FormDataWrong',message=JsonUtil().dictToJson(form.errors))
+    return errorUtil.getData('FormDataWrong',message=form.errors)
 
 @myBluePrint.route("/changeHeadPortrait", methods=['GET','POST'])
 def changeHeadPortrait():
