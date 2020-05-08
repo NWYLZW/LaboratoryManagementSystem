@@ -27,7 +27,6 @@ captalBluePrint = Blueprint(
     template_folder=templatePath + "/captal"
 )
 
-
 @captalBluePrint.before_request
 def captalBeforeRequest():
     if not current_user:
@@ -35,27 +34,20 @@ def captalBeforeRequest():
     if not current_user.is_authenticated:
         return redirect(url_for('user.login'))
 
-
 @captalBluePrint.route("/panel", methods=['GET'])
 def captalPanel():
     addSpendAbel = current_user.can(Permission.LABORATORY_MONEY_AD)
     allMoneySearchAbel = current_user.can(Permission.ALL_MONEY_S)
     return render_template('captalPanel.html', addSpendAbel=addSpendAbel, allMoneySearchAbel=allMoneySearchAbel)
-
-
 @captalBluePrint.route("/getJournalDaybook", methods=['GET'])
 @permission_required(Permission.ALL_MONEY_S)
 def getJournalDaybook():
     laboratoryId = request.args.get('laboratoryId', '-1')
     return JsonUtil().dictToJson(captalControler.getJournalDaybook(laboratoryId))
-
-
 @captalBluePrint.route("/getMyLabJournalDaybook", methods=['GET'])
 @permission_required(Permission.LABORATORY_MONEY_S)
 def getMyLabJournalDaybook():
     return JsonUtil().dictToJson(captalControler.getMyLabJournalDaybook())
-
-
 @captalBluePrint.route("/addSpend", methods=['POST'])
 @permission_required(Permission.LABORATORY_MONEY_AD)
 def addSpend():
@@ -72,8 +64,6 @@ def addSpend():
         return successUtil.getData(messageDict[result], message=captalControler.journalDaybookObj.toDict())
     else:
         return errorUtil.getData(messageDict[result])
-
-
 @captalBluePrint.route('/getJournalDaybookExel', methods=['GET'])
 def getJournalDaybookExel():
     mid = request.args.get('laboratoryId',"1")
