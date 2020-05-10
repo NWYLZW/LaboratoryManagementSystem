@@ -18,9 +18,11 @@
 					<div class="mySpaceNotice-item-bottom">\
 						<div class="mySpaceNotice-item-author"><img></div>\
 						<div class="mySpaceNotice-item-viewNum"><i class="fa fa-eye fa-1x"></i>'+this.dict.viewCount+'人已阅</div>\
-						<div class="mySpaceNotice-item-releaseTime">发布时间: '+this.dict.dateTime+'</div>\
+						<div class="mySpaceNotice-item-releaseTime">发布时间: '+new dateInterval(this.dict.dateTime).judgeTime()+'</div>\
 					</div>\
 				</div>');
+			this.$.find('.mySpaceNotice-item-releaseTime').attr('title',this.dict.dateTime);
+				
 			this.$tag = $('<div class="mySpaceNotice-item-tag"></div>');
 			this.$.find('.mySpaceNotice-item-top')
 			.append(this.$tag.clone().html(this.tagNameList[this.dict.kindNum]));
