@@ -83,24 +83,26 @@
 			var content = this;
 			var formData = new FormData(
 				$('<form></form>')
-				.append($('.oldEmail').clone().val($('.oldEmail').val()))
+				.append($('.oldEmail').clone())
 				.append($('.newEmail').clone())[0]
 			);
 			formData.set('oldEmail',$('.oldEmail input').val());
 			formData.set('newEmail',$('.newEmail input').val());
-			
-			new myAjax({
-				url:'../../my/editMyBaseData',
+			new myAjaxForm({
+				url:'../../my/editMyEmail',
 				data:formData,
 				method:"POST",
-				success:function(result){
+				typeSpecialDeal:{
+					'0':function(dictObj){
+						console.log(dictObj);
+					}
 				},
-				failure:function(error){
-					// console.log(error);
+				responseCorrect:function(dictObj){
+					$('.oldEmail input').val('');
+					$('.newEmail input').val('');
 				},
-				always:function(jqXHR){
-					// console.log(jqXHR);
-				}
+				responseError:function(dictObj){},
+				failureEnd:function(dictObj){},
 			}).ajax();
 		}
 		validationEmailData(){
@@ -147,24 +149,29 @@
 			var content = this;
 			var formData = new FormData(
 				$('<form></form>')
-				.append($('.oldEmail').clone().val($('.oldEmail').val()))
+				.append($('.oldEmail').clone())
 				.append($('.newPWD').clone())[0]
 			);
-			
-			formData.set('oldEmail',$('.oldEmail input').val());
+			formData.set('email',$('.oldEmail input').val());
 			formData.set('newPWD',$('.newPWD input').val());
-			new myAjax({
-				url:'../../my/editMyBaseData',
-				data:formData,
+			new myAjaxForm({
+				url:'../../my/editMyPWD',
 				method:"POST",
-				success:function(result){
+				data:formData,
+				isNormalAjax:false,//非form表单提交用true
+				typeSpecialDeal:{
+					'0':function(dictObj){
+						console.log(dictObj);
+					}
 				},
-				failure:function(error){
-					// console.log(error);
+				responseCorrect:function(){
+					$('.oldEmail input').val('');
+					$('.newPWD input').val('');
+					$('.PWDConfirm input').val('');
+					// content.Click();
 				},
-				always:function(jqXHR){
-					// console.log(jqXHR);
-				}
+				responseError:function(){},
+				failureEnd:function(){},
 			}).ajax();
 		}
 		validationPWDData(){
@@ -195,15 +202,15 @@
 				}
 			})) return false;
 			if(!checkValue("确认密码",submitForm.password,true,function(){//
-				if (this.checkValueX !== content.$newPWD.value){
-					console.log('content.$newPWD.value',content.$newPWD.value);
+				if (this.checkValueX !== $('.PWDConfirm input').val()){
 					this.failed('1',"与新密码不相符");
 					return false;
 				}
+				return true;
 			},function(errorType){
 				switch (errorType){
 					case '0':case '1':
-						alertError(content.$PWDConfirm.find('input')[0],"shake",errorTypeDict[errorType]);
+						alertError(content.$newPWD.find('input')[0],"shake",errorTypeDict[errorType]);
 						break;
 					default:
 						break;
