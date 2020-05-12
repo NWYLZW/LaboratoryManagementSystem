@@ -58,6 +58,9 @@ def register():
             if form.validate_userName(form.schoolNum):
                 if form.validata_Num():
                     if userControler.addUser(form):
+                        user=User()
+                        mid=user.registerTime
+                        user.addRegisterTime(mid)
                         return successUtil.getData('registerSuccess')
                     else:
                         return errorUtil.getData('backEndWrong2')
