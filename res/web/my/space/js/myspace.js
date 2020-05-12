@@ -85,10 +85,10 @@ function initMark() {
 		url:"/message/leave/get?page="+'1',
 		method:"GET",
 		success:function(result){
-			new generatePage({
+			new pageList({
 				dataLDict: JSON.parse(result),
 			});
-			new commentPage({
+			new turnPage({
 				dataLDict: JSON.parse(result),
 			},-1).showCommentPage();
 		},
