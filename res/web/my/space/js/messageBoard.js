@@ -4,7 +4,6 @@
 			this.dict = dict;
 			this.replyMessagesNum = dict.replyMessages.length;
 			this.preML = preML;
-			this.ajaxTimeList = [];
 			this.messageList = [];
 		}
 		generateEle(){
@@ -50,43 +49,47 @@
 				content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
 			else
 				content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
-				
+			
+			var canAjax = true;	
 			content.messageLeave$.find('.likeNum i').unbind('click').click(function(){
-				let curTime = new Date().getTime();
-				content.ajaxTimeList.push(curTime);
-				new myAjaxForm({
-					url:'/message/leave/like',
-					data:{
-						leaveMessageId:content.dict.id,
-					},
-					isNormalAjax:true,
-					method:"POST",
-					typeSpecialDeal:{
-						'4':function(dictObj){
-							// 数据库错误
+				if(canAjax){
+					canAjax = false;
+					new myAjaxForm({
+						url:'/message/leave/like',
+						data:{
+							leaveMessageId:content.dict.id,
 						},
-						'4001':function(dictObj){
-							// 留言不存在
-						}
-					},
-					responseCorrect:function(dictObj){
-						if(curTime!=content.ajaxTimeList[content.ajaxTimeList.length-1]) return;
-						content.ajaxTimeList = [];
-						if(dictObj.type===-6003){
-							// 赞成功
-							content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
-							content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(++content.dict.likeNum));
-						}
-						else if(dictObj.type===-6004){
-							// 取消赞成功
-							content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
-							content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(--content.dict.likeNum));
-							
-						}else{}
-					},
-					responseError:function(){},
-					failureEnd:function(){},
-				}).ajax();
+						isNormalAjax:true,
+						method:"POST",
+						typeSpecialDeal:{
+							'4':function(dictObj){
+								// 数据库错误
+							},
+							'4001':function(dictObj){
+								// 留言不存在
+							}
+						},
+						responseCorrect:function(dictObj){
+							canAjax = true;
+							if(dictObj.type===-6003){
+								// 赞成功
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(++content.dict.likeNum));
+							}
+							else if(dictObj.type===-6004){
+								// 取消赞成功
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(--content.dict.likeNum));
+								
+							}else{}
+						},
+						responseError:function(){},
+						failureEnd:function(){},
+					}).ajax();
+				}
+				else{
+					Notiflix. Notify. Warning('伺服器正在处理你的操作，请稍后');
+				}
 			});
 		}
 		showMessage(){
