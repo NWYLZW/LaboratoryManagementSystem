@@ -1,27 +1,30 @@
 (()=>{
 	class messageLeave {
-		constructor(dict,container) {
+		constructor(dict,preML) {
 			this.dict = dict;
-			this.container = container;
-			this.generateEle();
-			this.accuseAndDeleteMenu();
+			this.replyMessagesNum = dict.replyMessages.length;
+			this.preML = preML;
+			this.messageList = [];
 		}
 		generateEle(){
 			var content = this;
-			var messageLeave$ = $(('\
+			for(var i = 0;i < content.dict.replyMessages.length;i++)
+				content.messageList.push(content.dict.replyMessages[i]);
+			content.messageList
+			content.messageLeave$ = $(('\
 				<div class="receive-box receive-box-'+content.dict.id+'">\
 					<div class="message-box leaveMessage-'+content.dict.id+'">\
 						<div class="headPortrait"><img></div>\
 						<div class="message-information">\
 							<div class="userNameAndTag">\
-								<div class="userName"></div>\
+								<div class="userName">'+content.dict.authorName+'</div>\
 								<div class="tag"></div>\
 							</div>\
-							<div class="reply-content"></div>\
+							<div class="reply-content">'+content.dict.content+'</div>\
 							<div class="message-foot">\
-								<div class="time"><i class="fa fa-clock-o fa-x"></i></div>\
-								<div class="likeNum"><i class="fa fa-thumbs-o-up fa-x"></i></div>\
-								<div class="commentNum"><i class="fa fa-comments-o fa-x"></i></div>\
+								<div class="time"><i class="fa fa-clock-o fa-x"> '+new dateInterval(content.dict.dateTime).judgeTime()+'</i></div>\
+								<div class="likeNum"><i class="fa fa-thumbs-o-up fa-x"> '+content.dict.likeNum+'</i></div>\
+								<div class="commentNum"><i class="fa fa-comments-o fa-x"> '+content.replyMessagesNum+'</i></div>\
 								<div class="reply"><i class="fa fa-mail-reply fa-x">&nbsp;回复</i></div>\
 								<div class="showElseInfoBtn"><i class="fa fa-ellipsis-h fa-x"></i></div>\
 							</div>\
@@ -31,102 +34,115 @@
 					</div>\
 				</div>\
 			').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));
-			content.container[0].appendChild(messageLeave$[0]);
-			
-			getHeadPortrait(messageLeave$.find('.headPortrait img')[0],content.dict.authorId);
-			messageLeave$.find('.userName').html(content.dict.authorName);
-			messageLeave$.find('.tag').html(content.dict.tag);
-			messageLeave$.find('.reply-content').html(content.dict.content);
-			
-			var time = new dateInterval(content.dict.dateTime).judgeTime();
-			messageLeave$.find('.time i').html('&nbsp;'+time);
-			messageLeave$.find('.time i').attr('title',content.dict.dateTime);
-			
-			messageLeave$.find('.likeNum i').html('&nbsp;'+content.dict.likeNum);
+			content.messageLeave$.find('.time i').attr('title',content.dict.dateTime);
+			getHeadPortrait(content.messageLeave$.find('.headPortrait img')[0],content.dict.authorId);
+			content.setLike();
+			content.showMessage();
+			content.showElseInfo();
+			content.accuseAndDeleteMenu();
+			content.replyMessage();
+			return content.messageLeave$;
+		}
+		setLike(){
+			var content = this;
 			if(content.dict.isLike)
-				messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
+				content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
 			else
-				messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
+				content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
 			
-			messageLeave$.find('.likeNum i').unbind('click').click(function(){
-				new myAjaxForm({
-					url:'/message/leave/like',
-					data:{
-						leaveMessageId:content.dict.id,
-					},
-					isNormalAjax:true,
-					method:"POST",
-					typeSpecialDeal:{
-						'4':function(dictObj){
-							// 数据库错误
+			var canAjax = true;	
+			content.messageLeave$.find('.likeNum i').unbind('click').click(function(){
+				if(canAjax){
+					canAjax = false;
+					new myAjaxForm({
+						url:'/message/leave/like',
+						data:{
+							leaveMessageId:content.dict.id,
 						},
-						'4001':function(dictObj){
-							// 留言不存在
-						}
-					},
-					responseCorrect:function(dictObj){
-						if(dictObj.type===-6003){
-							// 赞成功
-							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
-							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(++content.dict.likeNum));
-						}
-						else if(dictObj.type===-6004){
-							// 取消赞成功
-							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
-							messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(--content.dict.likeNum));
-							
-							
-						}else{}
-					},
-					responseError:function(){},
-					failureEnd:function(){},
-				}).ajax();
+						isNormalAjax:true,
+						method:"POST",
+						typeSpecialDeal:{
+							'4':function(dictObj){
+								// 数据库错误
+							},
+							'4001':function(dictObj){
+								// 留言不存在
+							}
+						},
+						responseCorrect:function(dictObj){
+							canAjax = true;
+							if(dictObj.type===-6003){
+								// 赞成功
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#00BFFF');
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(++content.dict.likeNum));
+							}
+							else if(dictObj.type===-6004){
+								// 取消赞成功
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').css('color','#808080');
+								content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .likeNum i').html('&nbsp;'+(--content.dict.likeNum));
+								
+							}else{}
+						},
+						responseError:function(){},
+						failureEnd:function(){},
+					}).ajax();
+				}
+				else{
+					Notiflix. Notify. Warning('伺服器正在处理你的操作，请稍后');
+				}
 			});
-			
-			messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum i').html('&nbsp;'+content.dict.replyMessages.length);
-			if(content.dict.replyMessages.length)
-				new messageLeave(content.dict.replyMessages[0],messageLeave$.find('.comment-box'));
-			
-			if(content.dict.replyMessages.length > 1){
+		}
+		showMessage(){
+			var content = this;
+			var thisCommentBox = content.messageLeave$.find('.comment-box');
+			var thisCommentNumI = content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum i');
+			if(content.replyMessagesNum)
+				thisCommentBox[0].appendChild(new messageLeave(content.messageList[0],content).generateEle()[0]);
+			if(content.replyMessagesNum > 1){
 				var showCommnetBtnState = false;
-				messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum').unbind('click').click(function(){
+				content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum').unbind('click').click(function(){
 					if(showCommnetBtnState){
-						var commentChildList = messageLeave$.find('.comment-box')[0].childNodes;
-						for(let i = 1;i < content.dict.replyMessages.length;i++){
-							messageLeave$.find('.comment-box')[0].removeChild(commentChildList[1]);
+						var commentChildList = thisCommentBox[0].childNodes;
+						for(let i = 1;i < content.replyMessagesNum;i++){
+							thisCommentBox[0].removeChild(commentChildList[1]);
 						}
-						messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum i').html('&nbsp;'+'展开');
+						thisCommentNumI.html('&nbsp;'+'展开');
 					}
 					else{
-						for(let i = 1;i < content.dict.replyMessages.length;i++){
-							new messageLeave(content.dict.replyMessages[i],messageLeave$.find('.comment-box'));
+						thisCommentBox.empty();
+						for(let i = 0;i < content.replyMessagesNum;i++){
+							thisCommentBox[0].appendChild(new messageLeave(content.messageList[i],content).generateEle()[0]);
 						}
-						messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum i').html('&nbsp;'+'收起');
+						thisCommentNumI.html('&nbsp;'+'收起');
 					}
 					showCommnetBtnState = !showCommnetBtnState;
 				});
-				messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum').hover(function(){
+				content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum').hover(function(){
 					if(!showCommnetBtnState)
-						messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum i').html('&nbsp;'+'展开');
+						thisCommentNumI.html('&nbsp;'+'展开');
 					else
-						messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum i').html('&nbsp;'+'收起');
+						thisCommentNumI.html('&nbsp;'+'收起');
 				},function(){
-					messageLeave$.find('.leaveMessage-'+content.dict.id+' .commentNum i').html('&nbsp;'+content.dict.replyMessages.length);
+					thisCommentNumI.html('&nbsp;'+content.replyMessagesNum);
 				});
 			}
-			
+		}
+		showElseInfo(){
+			var content = this;
 			var showElseInfoBtnState = false;
-			messageLeave$.find('.leaveMessage-'+content.dict.id+' .showElseInfoBtn').unbind('click').click(function(){
+			content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .showElseInfoBtn').unbind('click').click(function(){
 				if(showElseInfoBtnState)
-					messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','block');
+					content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','block');
 				else
-					messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','none');
+					content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','none');
 				showElseInfoBtnState = !showElseInfoBtnState;
 			});
-			
-			messageLeave$.find('.leaveMessage-'+content.dict.id+' .reply').unbind('click').click(function(){
-				if(!(messageLeave$.find('.comment-editor')[0]))
-					new commentEditor(messageLeave$,content.dict);
+		}
+		replyMessage(){
+			var content = this;
+			content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .reply').unbind('click').click(function(){
+				if(!(content.messageLeave$.find('.comment-editor')[0]))
+					content.messageLeave$[0].appendChild(new messageEditor(content.dict,false,content).generateEle()[0]);
 			});
 		}
 		accuseAndDeleteMenu(){
@@ -136,7 +152,8 @@
 							<div class="accuse"><i class="fa fa-flag fa-x">举报</i></div>\
 						</div>\
 					');
-				$('.leaveMessage-'+content.dict.id+' .message-foot')[0].appendChild(mune$[0]);
+					
+			content.messageLeave$.find('.message-foot')[0].appendChild(mune$[0]);
 			$('.else-info.else-info-' + content.dict.id).find('.accuse').unbind('click').click(function(){
 				 Notiflix.Report.Warning( 
 					'警告', 
@@ -171,7 +188,12 @@
 										// 留言不存在
 									}
 								},
-								responseCorrect:function(){
+								responseCorrect:function(dictObj){
+									if(content.preML !== null){
+										$('.receive-box.receive-box-' + content.dict.id).
+										parent('.comment-box').prev('.message-box').find('.commentNum i').
+										html(content.preML.countMessageNum(false,null,content.dict.id));
+									}
 									$('.receive-box.receive-box-' + content.dict.id)[0].remove();
 								},
 								responseError:function(){},
@@ -183,17 +205,33 @@
 				});
 			}
 		}
+		countMessageNum(operation,addMessage,delIndex){
+			var content = this;
+			if(operation){
+				content.messageList.unshift(addMessage);
+				content.replyMessagesNum++;
+			}
+			else{
+				for(var i = 0;i < content.messageList.length;i++){
+					if(content.messageList[i].id === delIndex){
+						content.messageList.splice(i,1);
+						break;
+					}
+				}
+				content.replyMessagesNum--;
+			}
+			return content.replyMessagesNum;
+		}
 	}
-	class commentEditor{
-		constructor(container,dict,isMe = false) {
-		    this.container = container;
+	class messageEditor {
+		constructor(dict,isMe,preML) {
 			this.dict = dict;
 			this.isMe = isMe;
-			this.generateEle();
+			this.preML = preML;
 		}
 		generateEle(){
 			var content = this;
-			var commentEditor$ = $(('\
+			content.commentEditor$ = $(('\
 				<div class="comment-editor">\
 					<textarea placeholder="写下你的评论"></textarea>\
 					<div class="release-cancle">\
@@ -202,35 +240,42 @@
 						<div class="release">发布</div>\
 					</div>\
 				</div>\
-				').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));
-			content.container[0].appendChild(commentEditor$[0]);
-			commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
-			commentEditor$.find('.select-isAnonymous i').unbind('click').click(function(){
+			').replace(/\t/g, "").replace(/\r/g, "").replace(/\n/g, ""));	
+			content.setAnonymous();
+			content.cancleAndRelease();
+			return content.commentEditor$;
+		}
+		setAnonymous(){
+			var content = this;
+			content.commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
+			content.commentEditor$.find('.select-isAnonymous i').unbind('click').click(function(){
 				if(!content.dict.isAnonymous){
-					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
+					content.commentEditor$.find('.select-isAnonymous').css('background-color','rgb(65, 168, 99)');
 					$(this).html('&nbsp;&nbsp;' + '匿名');
 					this.setAttribute("class", "fa fa-check-circle-o fa-x");
 				}
 				else{
-					commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
+					content.commentEditor$.find('.select-isAnonymous').css('background-color','rgb(150, 150 , 150)');
 					$(this).html('&nbsp;&nbsp;' + '不匿名');
 					this.setAttribute("class", "fa fa-circle-o fa-x");
 				}
 				content.dict.isAnonymous = !content.dict.isAnonymous;
 			});
-			
-			commentEditor$.find('.cancle').unbind('click').click(function(){
+		}
+		cancleAndRelease(){
+			var content = this;
+			content.commentEditor$.find('.cancle').unbind('click').click(function(){
 				if(content.isMe)
 					$('.addLeaveMessage-btn').css('display','block');
-				content.container[0].removeChild(commentEditor$[0]);
+				content.commentEditor$[0].remove();
 			});
-			commentEditor$.find('.release').unbind('click').click(function(){
+			content.commentEditor$.find('.release').unbind('click').click(function(){
 				if(content.isMe){//添加本人留言
 					new myAjaxForm({
 						url:'/message/leave/add',
 						data:{
 							isAnonymous:content.dict.isAnonymous,
-							content:commentEditor$.find('textarea').val(),
+							content:content.commentEditor$.find('textarea').val(),
 						},
 						method:"POST",
 						isNormalAjax:true,
@@ -243,8 +288,8 @@
 							}
 						},
 						responseCorrect:function(dictObj){
-							new messageLeave(dictObj.message,$('.comment-page-content'));
-							content.container[0].removeChild(commentEditor$[0]);
+							$('.comment-page-content').prepend(new messageLeave(dictObj.message,null).generateEle());
+							content.commentEditor$[0].remove();
 							$('.addLeaveMessage-btn').css('display','block');
 						},
 						responseError:function(dictObj){},
@@ -257,7 +302,7 @@
 						method:"POST",
 						data:{
 							isAnonymous:content.dict.isAnonymous,
-							content:commentEditor$.find('textarea').val(),
+							content:content.commentEditor$.find('textarea').val(),
 							replyId:content.dict.id,
 						},
 						isNormalAjax:true,
@@ -270,8 +315,10 @@
 							}
 						},
 						responseCorrect:function(dictObj){
-							new messageLeave(dictObj.message,content.container.find('.comment-box'));
-							content.container[0].removeChild(commentEditor$[0]);
+							$('.leaveMessage-'+content.dict.id+' .commentNum i').html('&nbsp;'+content.preML.countMessageNum(true,dictObj.message,-1));
+							content.commentEditor$.parent('.receive-box').find('.comment-box')[0].
+							prepend(new messageLeave(dictObj.message,content.preML).generateEle()[0]);
+							content.commentEditor$[0].remove();
 						},
 						responseError:function(dictObj){},
 						failureEnd:function(dictObj){},
@@ -280,7 +327,7 @@
 			});
 		}
 	}
-	class generatePage{
+	class pageList {
 		constructor(option) {
 			this.container = $('.messageBoard .messageBoard-content');
 			this.pageNum = Math.ceil(option.dataLDict.sumCount/5);
@@ -316,9 +363,9 @@
 			pageList[0].appendChild($('<li class="nextPage">></li>')[0]);
 		}
 	}
-	class commentPage{
+	class turnPage {
 		constructor(option,currentPage) {
-		    this.leaveMessages = option.dataLDict.leaveMessages;
+			this.leaveMessages = option.dataLDict.leaveMessages;
 			this.pageNum = Math.ceil(option.dataLDict.sumCount/5);
 			this.currentPage = currentPage;
 			this.goPage();
@@ -350,6 +397,7 @@
 		}
 		showCommentPage(){
 			const content = this;
+			
 			let curTime = new Date().getTime();
 			content.ajaxTimeList.push(curTime);
 			
@@ -366,7 +414,7 @@
 						content.leaveMessages = dataLDict.leaveMessages;
 						content.pageNum = Math.ceil(dataLDict.sumCount/5);
 						for(let i = 0;i < content.leaveMessages.length;i++)
-							new messageLeave(content.leaveMessages[i],$('.comment-page-content'));
+							$('.comment-page-content')[0].appendChild(new messageLeave(content.leaveMessages[i],null).generateEle()[0]);
 						Notiflix.Block.Remove('.messageBoard');
 					},
 					failure:function(error){},
@@ -376,7 +424,7 @@
 			if(content.currentPage == -1){
 				content.currentPage++;
 				for(let i = 0;i < content.leaveMessages.length;i++)
-					new messageLeave(content.leaveMessages[i],$('.comment-page-content'));
+					$('.comment-page-content')[0].appendChild(new messageLeave(content.leaveMessages[i],null).generateEle()[0]);
 				Notiflix.Block.Remove('.messageBoard');
 			}
 			const page = $('.pages');
@@ -444,10 +492,11 @@
 			};
 			addLeaveMessage.find('.addLeaveMessage-btn').unbind('click').click(function(){
 				addLeaveMessage.find('.addLeaveMessage-btn').css('display','none');
-				new commentEditor(addLeaveMessage.find('.addLeaveMessage-editor'),content.dict,true);
+				addLeaveMessage.find('.addLeaveMessage-editor')[0].
+				appendChild(new messageEditor(content.dict,true,null).generateEle()[0]);
 			});
 		}
 	}
-	window.commentPage = commentPage;
-	window.generatePage = generatePage;
+	window.turnPage = turnPage;
+	window.pageList = pageList;
 })();

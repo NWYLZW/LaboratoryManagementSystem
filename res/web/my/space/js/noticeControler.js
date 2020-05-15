@@ -46,8 +46,25 @@
 						content.dict.content,
 						'查阅', '点错了',
 						function(){
-							// TODO 对接公告接口组的查阅接口
-							//  成功执行下面这条语句
+							new myAjaxForm({
+								url:'/notice/viewNotice',
+								method:"GET",
+								data:{
+									noticeId:content.dict.id
+								},
+								isNormalAjax:true,//非form表单提交用true
+								typeSpecialDeal:{
+									'4':function(dictObj){//数据库错误
+										console.log(dictObj);
+									},
+									'3101':function(dictObj){//该公告不存在
+										console.log(dictObj);
+									},
+								},
+								responseCorrect:function(dictObj){},
+								responseError:function(dictObj){},
+								failureEnd:function(dictObj){},
+							}).ajax();
 							Notiflix.Notify.Success('已查阅');
 						}, function(){
 						}
