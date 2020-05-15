@@ -50,3 +50,15 @@
 .bottom-left-right{
 	width: calc(100% - 120px);
 }
+.mySpaceNotice-item{
+	height: 200px;
+}
+.mySpaceNotice-item-top{
+	height: 72px;
+}
+.mySpaceNotice-item-content{
+	height: calc(100% - 72px - 56px);
+}
+.mySpaceNotice-item-title{
+	float: none;
+}
