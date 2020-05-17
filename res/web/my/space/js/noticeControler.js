@@ -18,39 +18,62 @@
 					<div class="mySpaceNotice-item-bottom">\
 						<div class="mySpaceNotice-item-author"><img></div>\
 						<div class="mySpaceNotice-item-viewNum"><i class="fa fa-eye fa-1x"></i>'+this.dict.viewCount+'人已阅</div>\
-						<div class="mySpaceNotice-item-releaseTime">发布时间: '+this.dict.dateTime+'</div>\
+						<div class="mySpaceNotice-item-releaseTime">发布时间: '+new dateInterval(this.dict.dateTime).judgeTime()+'</div>\
 					</div>\
 				</div>');
+			this.$.find('.mySpaceNotice-item-releaseTime').attr('title',this.dict.dateTime);
+				
 			this.$tag = $('<div class="mySpaceNotice-item-tag"></div>');
 			this.$.find('.mySpaceNotice-item-top')
 			.append(this.$tag.clone().html(this.tagNameList[this.dict.kindNum]));
+			
 			if(this.dict.message)
 				this.$.find('.mySpaceNotice-item-top')
 				.append(this.$tag.clone().html(this.dict.message));
 			if(this.dict.isView){
 				this.$.find('.mySpaceNotice-item-viewNum i').css('color','#00AAFF');
-				this.$.find('.mySpaceNotice-item-content').click(function(){
+			}
+			this.$.find('.mySpaceNotice-item-content').click(function(){
+				content.check();
+			});
+		}
+		check(){
+			var content = this;
+			if(this.dict.isView){
 					Notiflix.Report.Info(
 					content.dict.title,
 					content.dict.content,
 					'已查阅');
-				});
 			}
 			else{
-				this.$.find('.mySpaceNotice-item-content').click(function(){
-					Notiflix.Confirm.Init({rtl:true,messageFontSize:"16px",titleFontSize:"20px", });
-					Notiflix.Confirm.Show(
-						content.dict.title,
-						content.dict.content,
-						'查阅', '点错了',
-						function(){
-							// TODO 对接公告接口组的查阅接口
-							//  成功执行下面这条语句
-							Notiflix.Notify.Success('已查阅');
-						}, function(){
-						}
-					);
-				});
+				Notiflix.Confirm.Init({rtl:true,messageFontSize:"16px",titleFontSize:"20px", });
+				Notiflix.Confirm.Show(
+					content.dict.title,
+					content.dict.content,
+					'查阅', '点错了',
+					function(){
+						new myAjaxForm({
+							url:'/notice/viewNotice?noticeId='+content.dict.id,
+							method:"GET",
+							isNormalAjax:true,//非form表单提交用true
+							typeSpecialDeal:{
+								'4':function(dictObj){//数据库错误
+									console.log(dictObj);
+								},
+								'3101':function(dictObj){//该公告不存在
+									console.log(dictObj);
+								},
+							},
+							responseCorrect:function(dictObj){},
+							responseError:function(dictObj){
+								Notiflix.Notify.Success('已查阅');
+							},
+							failureEnd:function(dictObj){},
+						}).ajax();
+						
+					}, function(){
+					}
+				);
 			}
 		}
 		setHeadPortrait(){
