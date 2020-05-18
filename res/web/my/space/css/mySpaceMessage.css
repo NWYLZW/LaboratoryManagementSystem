@@ -321,3 +321,46 @@
 	background-color: white;
 	border-radius: 8px;
 }
+
+.reasonBox{
+	width: 100%;
+	height: auto;
+	transition: .5s;
+}
+.reasonBoxL{
+	width: 360px;
+	height: 40px;
+	line-height: 40px;
+}
+.reasonBoxL input{
+	float: left;
+	padding-left: 5px;
+	width: 65%;
+	height: 100%;
+	display: none;
+	background-color: #fafafa;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+}
+.reasonBox li{
+	width: 33.3333%;
+	height: 100%;
+	float: left;
+	list-style: none;
+}
+.reasonBox li i{
+	cursor: pointer;
+}
+.reasonBox textarea{
+	position: relative;
+	left: 10px;
+	margin-top: 20px;
+	padding: 10px;
+	width: calc(100% - 40px);
+	height: 200px;
+	resize:none;
+	outline: none;
+	background-color: #fafafa;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+}
