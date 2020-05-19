@@ -129,13 +129,14 @@
 		}
 		showElseInfo(){
 			var content = this;
-			var showElseInfoBtnState = false;
 			content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .showElseInfoBtn').unbind('click').click(function(){
-				if(showElseInfoBtnState)
-					content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','block');
-				else
-					content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').css('display','none');
-				showElseInfoBtnState = !showElseInfoBtnState;
+					content.messageLeave$.find('.leaveMessage-'+content.dict.id+' .else-info').toggle();
+			});
+			$('body').unbind('click').click(function(event){
+				if(event.target.className !== 'showElseInfoBtn' && event.target.className !== 'fa fa-ellipsis-h fa-x'){
+					console.log(event.target.className);
+					$('.else-info').hide();
+				}
 			});
 		}
 		replyMessage(){
@@ -154,12 +155,13 @@
 					');
 					
 			content.messageLeave$.find('.message-foot')[0].appendChild(mune$[0]);
-			$('.else-info.else-info-' + content.dict.id).find('.accuse').unbind('click').click(function(){
-				 Notiflix.Report.Warning( 
-					'警告', 
-					'举报功能尚未开发', 
-					'返回' 
-				 ); 
+			mune$.find('.accuse').unbind('click').click(function(){
+				content.accuse();
+				 // Notiflix.Report.Warning( 
+					// '警告', 
+					// '举报功能尚未开发', 
+					// '返回' 
+				 // ); 
 			});
 			if(content.dict.deleteAble){
 				var $delete = $('<div class="delete"><i class="fa fa-remove fa-x">删除</i></div>');
@@ -204,6 +206,41 @@
 					);
 				});
 			}
+		}
+		accuse(){
+			var tempI = 0;
+			var tagList = ['违法违规','色情','低俗','赌博诈骗','人身攻击','侵犯隐私','垃圾广告','引战','刷屏','抢楼','内容不相关','青少年不良信息','其他'];
+			var reasonBox$ = $('<div class="reasonBox"></div>');
+			for(let i = 0;i < tagList.length;i++){
+				if(i%3 === 0){
+					var reasonBoxL$ = $('<div class="reasonBoxL"></div>');
+					reasonBox$[0].appendChild(reasonBoxL$[0]);
+				}
+				var reasonTag$ = $('<li><i class="fa fa-circle-o fa-lg"></i> '+tagList[i]+'</li>');
+				reasonTag$.find('i').unbind('click').click(function(){
+					reasonBoxL$.find('input').hide();
+					if(tempI !== i){
+						reasonBox$.find('li i')[tempI].setAttribute('class','fa fa-circle-o fa-lg');
+						reasonBox$.find('li i')[tempI].style.color = '#333333';
+						tempI = i;
+					}
+					this.setAttribute('class','fa fa-dot-circle-o fa-lg');
+					this.style.color = '#00a1d6';
+					if(tempI === tagList.length-1 )
+						reasonBoxL$.find('input').show();
+				});
+				reasonBoxL$[0].appendChild(reasonTag$[0]);
+			}
+			reasonBoxL$[0].appendChild($('<input placeholder="自定义理由"></input>')[0]);
+			reasonBox$[0].appendChild($('<textarea placeholder="请输入详细理由"></textarea>')[0]);
+			dialog({
+				title: '请选择举报理由',
+				content: reasonBox$,
+				okValue: '提交',
+				ok: function () {},
+				cancelValue: '取消',
+				cancel: function () {}
+			}).showModal();
 		}
 		countMessageNum(operation,addMessage,delIndex){
 			var content = this;

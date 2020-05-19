@@ -1,40 +1,46 @@
 function initMark() {
 	$('.mark').click(function() {
-		new myAjax({
-			url: "../../mark/",
-			method: "POST",
-			success: function(result) {
-				var JSONObject = JSON.parse(result);
-				switch (JSONObject.type) {
-					case -2001:
-						Notiflix.Report.Success(
-							'信息',
-							JSONObject.content,
-							'确认',
-							function() {
-								$('.mark img')[0].src = "../../my/space/img/mark.png";
-							});
-						$('.mark img')[0].src = "../../my/space/img/markSuccess.png";
-						yearCalendarX.mark();
-						break;
-					default:
-						Notiflix.Report.Success(
-							'错误',
-							JSONObject.content,
-							'确认',
-							function() {
-								$('.mark img')[0].src = "../../my/space/img/mark.png";
-							});
-						break;
+		var curTime = new Date().getHours();//
+		if((curTime > 7 && curTime < 12)||(curTime > 14 && curTime < 16)||(curTime > 18 && curTime < 22)){
+			new myAjax({
+				url: "../../mark/",
+				method: "POST",
+				success: function(result) {
+					var JSONObject = JSON.parse(result);
+					switch (JSONObject.type) {
+						case -2001:
+							Notiflix.Report.Success(
+								'信息',
+								JSONObject.content,
+								'确认',
+								function() {
+									$('.mark img')[0].src = "../../my/space/img/mark.png";
+								});
+							$('.mark img')[0].src = "../../my/space/img/markSuccess.png";
+							yearCalendarX.mark();
+							break;
+						default:
+							Notiflix.Report.Success(
+								'错误',
+								JSONObject.content,
+								'确认',
+								function() {
+									$('.mark img')[0].src = "../../my/space/img/mark.png";
+								});
+							break;
+					}
+				},
+				failure: function(e) {
+					console.log(e);
+				},
+				always: function(jqXHR) {
+					// console.log(jqXHR);
 				}
-			},
-			failure: function(e) {
-				console.log(e);
-			},
-			always: function(jqXHR) {
-				// console.log(jqXHR);
-			}
-		}).ajax();
+			}).ajax();
+		}
+		else{
+			Notiflix. Notify. Warning('此时不在打卡时间范围内');
+		}
 	});
 }
 (() => {

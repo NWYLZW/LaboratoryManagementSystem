@@ -128,7 +128,7 @@
 							}\
 						</style>\
 						<div class="addSpend_dialog_content_item">\
-							<label>变动原因:</label><input class="RESON" type="text" autofocus />\
+							<label>变动原因:</label><input class="REASON" type="text" autofocus />\
 						</div>\
 						<div class="addSpend_dialog_content_item">\
 							<label>变动金额:</label><input class="MONEY" type="text" />\
@@ -140,10 +140,10 @@
 					okValue: '提交',
 					ok: function () {
 						const dialog = this;
-						let RESON = dialog_content$.find('.RESON').val();
+						let REASON = dialog_content$.find('.REASON').val();
 						let MONEY = dialog_content$.find('.MONEY').val();
 						function verify(){
-							if(RESON===""){
+							if(REASON===""){
 								Notiflix.Report.Failure(
 								'错误',
 								'变动原因不得为空',
@@ -189,7 +189,7 @@
 						new myAjaxForm({
 							url:'/captal/addSpend',
 							data:{
-								changeReason:RESON,
+								changeReason:REASON,
 								changeMoney:MONEY,
 							},
 							isNormalAjax:true,

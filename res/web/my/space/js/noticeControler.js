@@ -26,50 +26,54 @@
 			this.$tag = $('<div class="mySpaceNotice-item-tag"></div>');
 			this.$.find('.mySpaceNotice-item-top')
 			.append(this.$tag.clone().html(this.tagNameList[this.dict.kindNum]));
+			
 			if(this.dict.message)
 				this.$.find('.mySpaceNotice-item-top')
 				.append(this.$tag.clone().html(this.dict.message));
 			if(this.dict.isView){
 				this.$.find('.mySpaceNotice-item-viewNum i').css('color','#00AAFF');
-				this.$.find('.mySpaceNotice-item-content').click(function(){
+			}
+			this.$.find('.mySpaceNotice-item-content').click(function(){
+				content.check();
+			});
+		}
+		check(){
+			var content = this;
+			if(this.dict.isView){
 					Notiflix.Report.Info(
 					content.dict.title,
 					content.dict.content,
 					'已查阅');
-				});
 			}
 			else{
-				this.$.find('.mySpaceNotice-item-content').click(function(){
-					Notiflix.Confirm.Init({rtl:true,messageFontSize:"16px",titleFontSize:"20px", });
-					Notiflix.Confirm.Show(
-						content.dict.title,
-						content.dict.content,
-						'查阅', '点错了',
-						function(){
-							new myAjaxForm({
-								url:'/notice/viewNotice',
-								method:"GET",
-								data:{
-									noticeId:content.dict.id
+				Notiflix.Confirm.Init({rtl:true,messageFontSize:"16px",titleFontSize:"20px", });
+				Notiflix.Confirm.Show(
+					content.dict.title,
+					content.dict.content,
+					'查阅', '点错了',
+					function(){
+						new myAjaxForm({
+							url:'/notice/viewNotice?noticeId='+content.dict.id,
+							method:"GET",
+							isNormalAjax:true,//非form表单提交用true
+							typeSpecialDeal:{
+								'4':function(dictObj){//数据库错误
+									console.log(dictObj);
 								},
-								isNormalAjax:true,//非form表单提交用true
-								typeSpecialDeal:{
-									'4':function(dictObj){//数据库错误
-										console.log(dictObj);
-									},
-									'3101':function(dictObj){//该公告不存在
-										console.log(dictObj);
-									},
+								'3101':function(dictObj){//该公告不存在
+									console.log(dictObj);
 								},
-								responseCorrect:function(dictObj){},
-								responseError:function(dictObj){},
-								failureEnd:function(dictObj){},
-							}).ajax();
-							Notiflix.Notify.Success('已查阅');
-						}, function(){
-						}
-					);
-				});
+							},
+							responseCorrect:function(dictObj){},
+							responseError:function(dictObj){
+								Notiflix.Notify.Success('已查阅');
+							},
+							failureEnd:function(dictObj){},
+						}).ajax();
+						
+					}, function(){
+					}
+				);
 			}
 		}
 		setHeadPortrait(){
