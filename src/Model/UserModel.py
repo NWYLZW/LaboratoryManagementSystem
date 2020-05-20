@@ -134,6 +134,7 @@ class User(UserMixin, db.Model):
             "maleBool": self.sexBool,
             "qqNum": self.qqNum,
             "telNum": self.telNum,
+            "email": self.email,
             "roleId": self.roleId,
             "roleName": self.role.name,
             "directionName": self.direction.name,
