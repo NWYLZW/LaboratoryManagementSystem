@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
+from flask_login import current_user
+
 from src import MainLog, db
-from src.Model.LeaveMessageModel import LeaveMessage
+from src.Model.LeaveMessageModel import LeaveMessage, LeaveMessageViolation
+from src.Util import JsonUtil
+
 
 class LeaveMessageControler:
     def __init__(self):
@@ -117,4 +121,15 @@ class LeaveMessageControler:
         except Exception as e:
             MainLog.record(MainLog.level.ERROR,e)
             return 1
+    def addReportLeavemessage(self,form):
+        try:
+            mid = LeaveMessageViolation(form.get('reportReason'),
+                                        form.get('reportTag'), form.get('messageId')
+                                        , current_user.id)
+            db.session.add(mid)
+            db.session.flush()
+        except Exception as e:
+            return 1
+        db.session.commit()
+        return 0
 leaveMessageControler = LeaveMessageControler()

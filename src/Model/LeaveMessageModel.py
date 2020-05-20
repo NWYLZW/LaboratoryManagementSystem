@@ -96,6 +96,7 @@ class LeaveMessage(db.Model):
         db.session.commit()
         return 0
 
+
 class LeaveMessageLikeUsers(db.Model):
     __tablename__ = 'LeaveMessageLikeUsers'
     id = db.Column(db.Integer, primary_key=True)
@@ -112,3 +113,28 @@ class LeaveMessageLikeUsers(db.Model):
         self.dateTime = timeUtil.nowDateStr()
         self.userId = userId
         self.leaveMessageId = leaveMessageId
+class LeaveMessageViolation(db.Model):
+    __tablename__="LeaveMessageViolation"
+    id=db.Column(db.Integer,primary_key=True)
+    messageId=db.Column(db.Integer,nullable=False)
+    userId=db.Column(db.Integer,nullable=False)
+    dateTime=db.Column(db.DateTime,nullable=False)
+    reportTag=db.Column(db.String,nullable=False)
+    reportReason=db.Column(db.String,nullable=True)
+    def __init__(self,reportReason:str=None,
+                 reportTag:str=None,messageId:int=-1,userId:int=-1):
+        self.userId=userId
+        self.reportTag=reportTag
+        self.reportReason=reportReason
+        self.dateTime=timeUtil.nowDateStr()
+        self.messageId=messageId
+    def toDict(self,taker):
+        temp={
+            "messageId":self.messageId,
+            "dateTime":str(self.dateTime),
+            "reportTag":self.reportTag,
+            "reportReason":self.reportReason
+        }
+        if(taker.is_administrator()):
+            temp["userId"]=self.userId
+        return  temp

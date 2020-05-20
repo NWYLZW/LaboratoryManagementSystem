@@ -61,6 +61,7 @@ class UserControler:
                 laboratoryId = form.laboratory.data,
                 professionalClassId = professionalClass.id,
             )
+            user.addRegisterTime(user.registerTime)
             db.session.add(user)
             db.session.flush()
             # TODO 删除用户时删除头像与壁纸
