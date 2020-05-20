@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
-from src import templatePath, MainLog
+from src import templatePath
 from src.Controler.MyControler import myControler
 from src.Controler.UserControler import userControler
 from src.Util.ErrorUtil import errorUtil
@@ -118,3 +118,7 @@ def changeBackground():
 @myBluePrint.route("/getBackground",methods=['GET'])
 def getBackground():
     return fileUtil.getFromRes(path="user/mySpaceBackground", fileName=str(current_user.id) + ".png")
+@myBluePrint.route('/getRegisterTime',methods=['GET'])
+def getRegisterTime():
+    temp=current_user.registerTime.registerTime
+    return  str(temp)

@@ -90,7 +90,7 @@ class User(UserMixin, db.Model):
 
     @property
     def registerTime(self):
-        userRegisterTime = UserRegisterTime.query.filter_by(self.userId).first()
+        userRegisterTime = UserRegisterTime.query.filter_by(userId=self.id).first()
         if userRegisterTime != None:
             return userRegisterTime
         try:
@@ -98,14 +98,21 @@ class User(UserMixin, db.Model):
             db.session.add(userRegisterTime)
             db.session.flush()
         except Exception as e:
-            MainLog.record(MainLog.level.ERROR,"获取专业班级失败 错误信息:")
+            MainLog.record(MainLog.level.ERROR,"获取注册时间失败 错误信息:")
             MainLog.record(MainLog.level.ERROR,e)
             return None
         db.session.commit()
         return userRegisterTime
     def fuzzySearchRule(self, file, listWords):
         return and_(*[file.like('%' + w + '%') for w in listWords])
-
+    def addRegisterTime(self,userRegisterTime):
+        try:
+            db.session.add(userRegisterTime)
+            db.session.flush()
+        except Exception as e:
+            MainLog.record(MainLog.level.ERROR, "添加时间失败 错误信息:")
+            MainLog.record(MainLog.level.ERROR, e)
+            return None
     def toBriefDict(self):
         return {
             "id": self.id,

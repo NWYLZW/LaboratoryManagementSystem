@@ -2,7 +2,9 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
 
+from src import db
 from src.Controler.Message.LeaveMessageControler import leaveMessageControler
+from src.Model.LeaveMessageModel import LeaveMessageViolation
 from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
 from src.Util.SuccessUtil import successUtil
@@ -104,3 +106,30 @@ def initChildRoute(bluePrint:Blueprint):
     @login_required
     def alertLeaveMessage():
         return "alert"
+
+    @bluePrint.route(routeName+'/ReportLeaveMessage', methods=['POST'])
+    def addReportLeavemessage():
+        messageDict = [
+            'deleteLeaveMessageSuccess',
+            'dataBaseError',
+            'LeaveMessageIsNone',
+            'permissionError',
+        ]
+        resule=leaveMessageControler.addReportLeavemessage(request.form)
+        if resule==0:
+            return successUtil.getData(messageDict[resule])
+        return errorUtil.getData(messageDict[resule])
+
+    @bluePrint.route(routeName+'/getLeaveMessageViolation', methods=['POST', 'GET'])
+    def getLeaveMessageViolation():
+        indexOf = request.form.get('id')
+        if indexOf != None:
+            temp = LeaveMessageViolation.query.filter_by(id=indexOf).first()
+            if temp != None:
+                return JsonUtil().dictToJson(temp.toDict(current_user))
+            return errorUtil.getData('LeaveMessageIsNone')
+        temp=LeaveMessageViolation.query.filter_by().all()
+        listOfLeavemessage=[]
+        for x in temp:
+            listOfLeavemessage.append(x.toDict(current_user))
+        return JsonUtil().dictToJson(listOfLeavemessage)

@@ -195,3 +195,25 @@ ip = request.headers.get('X-Real-IP')
 from flask import request
 ip = request.headers.get('X-Forwarded-For')
 ```
+##路由开发须知
+```python
+@myBluePrint.route("/xxx", methods=['xxx'])
+def xxx():
+    form = xxxForm(request.form)
+    if form.validate_on_submit():
+        messageDict = [
+        #     返回消息类型字符串
+        #     在Information或successUtil中添加对应的键
+        ]
+        # Controler执行函数
+        result = xxxControler.xxxMethod(args)
+        if result == 0:
+            # 正确执行successUtil将对应的消息类型字符串所对应的返回信息返回
+            # message添加附加信息
+            return successUtil.getData(messageDict[result],message={})
+        else:
+            # 错误执行errorUtil将对应的消息类型字符串所对应的返回信息返回
+            return errorUtil.getData(messageDict[result])
+    return errorUtil.getData('FormDataWrong',message=form.errors)
+
+```
