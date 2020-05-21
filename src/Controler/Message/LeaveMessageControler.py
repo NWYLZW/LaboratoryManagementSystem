@@ -122,6 +122,10 @@ class LeaveMessageControler:
             MainLog.record(MainLog.level.ERROR,e)
             return 1
     def addReportLeavemessage(self,form):
+        '''
+        :param form:请求form体 reoprtReason可为空值
+        :return: 1为数据有误，0是创建成功
+        '''
         try:
             mid = LeaveMessageViolation(form.get('reportReason'),
                                         form.get('reportTag'), form.get('messageId')
@@ -132,4 +136,25 @@ class LeaveMessageControler:
             return 1
         db.session.commit()
         return 0
+    def getReportLeavemessage(self,indexOf:int=1):
+        '''
+        :param indexOf:被举报信息的页数，每十个一页
+        :return:被举报消息的字典化对象列表
+        '''
+        indexOf=int(indexOf)
+        temp=LeaveMessageViolation.query.filter_by().all()
+        listOfMessage=[]
+        temp=list(reversed(temp))
+        if indexOf*10<=len(temp):
+            midList=temp[(indexOf-1)*10:indexOf*10]
+        else:
+            midList=temp[(indexOf-1)*10:len(temp)]
+        for x in midList:
+            mid=x.toDict(current_user)
+            listOfMessage.append(mid)
+            print(mid['dateTime'])
+        if listOfMessage==None:
+            return None
+        return listOfMessage
+
 leaveMessageControler = LeaveMessageControler()

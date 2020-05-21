@@ -107,7 +107,7 @@ def initChildRoute(bluePrint:Blueprint):
     def alertLeaveMessage():
         return "alert"
 
-    @bluePrint.route(routeName+'/ReportLeaveMessage', methods=['POST'])
+    @bluePrint.route(routeName+'/reportLeaveMessage', methods=['POST'])
     def addReportLeavemessage():
         messageDict = [
             'deleteLeaveMessageSuccess',
@@ -120,16 +120,10 @@ def initChildRoute(bluePrint:Blueprint):
             return successUtil.getData(messageDict[resule])
         return errorUtil.getData(messageDict[resule])
 
-    @bluePrint.route(routeName+'/getLeaveMessageViolation', methods=['POST', 'GET'])
+    @bluePrint.route(routeName+'/getLeaveMessageViolationList', methods=['POST', 'GET'])
     def getLeaveMessageViolation():
         indexOf = request.form.get('id')
-        if indexOf != None:
-            temp = LeaveMessageViolation.query.filter_by(id=indexOf).first()
-            if temp != None:
-                return JsonUtil().dictToJson(temp.toDict(current_user))
-            return errorUtil.getData('LeaveMessageIsNone')
-        temp=LeaveMessageViolation.query.filter_by().all()
-        listOfLeavemessage=[]
-        for x in temp:
-            listOfLeavemessage.append(x.toDict(current_user))
-        return JsonUtil().dictToJson(listOfLeavemessage)
+        temp=leaveMessageControler.getReportLeavemessage(indexOf)
+        if temp==None:
+            return errorUtil.getData("LeaveMessageIsNone")
+        return JsonUtil().dictToJson(temp)
