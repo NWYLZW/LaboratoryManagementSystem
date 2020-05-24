@@ -1,0 +1,178 @@
+.task-search{
+    position: absolute;
+	top: 0;
+    padding: 10px 0 10px 0;
+    width: calc(100% - 180px);
+	height: 50px;
+	background-color: white;
+	z-index: 10;
+}
+.search-content{
+	position: relative;
+	float: left;
+	width: calc(100% - 80px);
+	height: 100%;
+	text-align: center;
+}
+.search-content input{
+	margin-left: 20px;
+	padding-left: 20px;
+	width: calc(100% - 40px);
+	height: 100%;
+	background-color: #fafafa;
+    border-radius: 10px;
+	border: 1px solid gray;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+}
+.search-ico{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+}
+.set-ico{
+	float: right;
+	width: 60px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+}
+.set-main{
+	position: absolute;
+	top: 50px;
+	right: 0;
+	width: 280px;
+	height: auto;
+    box-shadow: 0 0 5px grey;
+    border-radius: 8px;
+	display: none;
+	background-color: white;
+	list-style: none;
+	font-size: 18px;
+}
+.set-main li{
+	margin-left: 5%;
+	width: 95%;
+	height: 40px;
+	line-height: 40px;
+}
+.rectangular{    
+	position: absolute;
+	top: 6px;
+	padding: 2px 0 2px 0;
+	right: 15px;
+	width: 70px;
+	height: 24px;
+	box-shadow: 0 0 5px grey;
+	border-radius: 15px;
+	border: 1px solid gray;
+}
+.circle{
+	float: left;
+	margin-left: 2px;
+	width: 24px;
+    height: 24px;
+    background-color: rgb(60, 175, 108);
+    border-radius: 50%;
+    box-shadow: 0 0 5px grey;
+	cursor: pointer;
+}
+.task-box-wrapper{
+	margin-top: 80px;
+	width: 100%;
+	height: auto;
+}
+.task-box{
+	margin: 5px 20px 5px 20px;
+	width: calc(100% - 40px);
+	height: 60px;
+	background-color: rgb(240,240,240);
+    box-shadow: 0 0 5px grey;
+    border-radius: 5px;
+}
+.task-box:hover{
+	background-color: #dfedf9;
+}
+.task-headPortrait{
+	float: left;
+	margin: 10px 0 0 10px;
+	width: 40px;
+	height: 40px;
+}
+.task-headPortrait img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.task-content{
+	float: left;
+	width: calc(100% - 230px);
+	height: 100%;
+	line-height: 60px;
+}
+.task-complete{
+	float: left;
+	margin-top: 5px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+}
+.task-TAG{
+	float: left;
+	margin-top: 20px;
+	padding: 0 5px 0 5px;
+	width: 50px;
+	height: 20px;
+	background-color: #00AAFF;
+    border-radius: 8px;
+    box-shadow: 0 0 5px grey;
+    text-align: center;
+    color: white;
+	line-height: 20px;
+    font-size: 10px;
+    user-select: none;
+    transition: .5s;
+}
+.task-title{
+	float: left;
+	margin-left: 20px;
+	width: calc(100% - 130px);
+	height: 100%;
+	line-height: 60px;
+}
+.task-ico{
+	float: left;
+	width: 180px;
+	height: 100%;
+}
+.task-ico-clock{
+	float:left;
+	width:60px;
+	height:100%;
+	line-height:60px;
+	text-align:center;
+	cursor: pointer;
+}
+.task-ico-collect{
+	float:left;
+	width:60px;
+	height:100%;
+	line-height:60px;
+	text-align:center;
+	cursor: pointer;
+}
+.task-ico-calendar{
+	float:left;
+	width:60px;
+	height:100%;
+	line-height:60px;
+	text-align:center;
+	cursor: pointer;
+}

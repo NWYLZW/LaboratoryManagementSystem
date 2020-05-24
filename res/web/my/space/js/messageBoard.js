@@ -134,7 +134,6 @@
 			});
 			$('body').unbind('click').click(function(event){
 				if(event.target.className !== 'showElseInfoBtn' && event.target.className !== 'fa fa-ellipsis-h fa-x'){
-					console.log(event.target.className);
 					$('.else-info').hide();
 				}
 			});

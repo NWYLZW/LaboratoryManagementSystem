@@ -25,11 +25,12 @@
 	background-color: #4169E1;
 	transition: .5s;
 }
-.bottom-left-right{
+.taskBoard{
 	float: left;
 	width: calc(100% - 160px);
 	height: 100%;
-	background-color: #69E411;
+	background-color: #ffffff;
+	overflow-x: hidden;
 	transition: .5s;
 }
 .bottom-right-top{

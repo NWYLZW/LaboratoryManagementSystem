@@ -101,4 +101,152 @@ function initMark() {
 		failure:function(error){},
 		always:function(jqXHR){}
 	}).ajax();
+	
+	var dict = [
+		{
+			"id":10001,
+			"publishUser":{
+				"id":1001,
+			},
+			"title":"title",
+			"note":"note",
+			"TAG":"TAG",
+			"HistoricalChanges":[
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+			],
+			"isSuccess":true,
+			"isCollect":true,
+			"isRemind":true,
+			"remindTime": "2020-01-01 00:00:00",
+		},
+		{
+			"id":10001,
+			"publishUser":{
+				"id":1001,
+			},
+			"title":"title1",
+			"note":"note1",
+			"TAG":"TAG1",
+			"HistoricalChanges":[
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+			],
+			"isSuccess":true,
+			"isCollect":true,
+			"isRemind":true,
+			"remindTime": "2020-01-01 00:00:00",
+		},
+		{
+			"id":10001,
+			"publishUser":{
+				"id":1001,
+			},
+			"title":"title2",
+			"note":"note2",
+			"TAG":"TAG2",
+			"HistoricalChanges":[
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+			],
+			"isSuccess":true,
+			"isCollect":true,
+			"isRemind":true,
+			"remindTime": "2020-01-01 00:00:00",
+		},
+		{
+			"id":10001,
+			"publishUser":{
+				"id":1001,
+			},
+			"title":"title3",
+			"note":"note3",
+			"TAG":"TAG3",
+			"HistoricalChanges":[
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+			],
+			"isSuccess":true,
+			"isCollect":true,
+			"isRemind":true,
+			"remindTime": "2020-01-01 00:00:00",
+		},
+		{
+			"id":10001,
+			"publishUser":{
+				"id":1001,
+			},
+			"title":"title3",
+			"note":"note3",
+			"TAG":"TAG3",
+			"HistoricalChanges":[
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+			],
+			"isSuccess":true,
+			"isCollect":true,
+			"isRemind":true,
+			"remindTime": "2020-01-01 00:00:00",
+		},
+		{
+			"id":10001,
+			"publishUser":{
+				"id":1001,
+			},
+			"title":"title3",
+			"note":"note3",
+			"TAG":"TAG3",
+			"HistoricalChanges":[
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+			],
+			"isSuccess":true,
+			"isCollect":true,
+			"isRemind":true,
+			"remindTime": "2020-01-01 00:00:00",
+		},
+		{
+			"id":10001,
+			"publishUser":{
+				"id":1001,
+			},
+			"title":"title3",
+			"note":"note3",
+			"TAG":"TAG3",
+			"HistoricalChanges":[
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+				["2020-01-01 00:00:00","修改了备注"],
+			],
+			"isSuccess":true,
+			"isCollect":true,
+			"isRemind":true,
+			"remindTime": "2020-01-01 00:00:00",
+		},
+	]
+	
+	// Notiflix.Block.Pulse('.taskBoard', 'Please wait...');
+	$('.taskBoard').prepend(new tasksearch(dict).generateEle());
+	for(let i = 0;i < dict.length;i++)
+		$('.task-box-wrapper')[0].appendChild(new taskLeave(dict[i]).generateEle()[0]);
 })();
