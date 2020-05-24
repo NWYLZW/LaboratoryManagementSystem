@@ -9,6 +9,9 @@
 			this.$PWDConfirm = $('.PWDConfirm');
 			this.Click();
 		}
+		setEmail(Email){
+			$('#nowEmail').text(Email.substr(0,4)+'*****@'+Email.split("@")[1]);
+		}
 		Click(){
 			var content = this;
 			content.setInput([0,1,2,3],false);
@@ -98,6 +101,7 @@
 					}
 				},
 				responseCorrect:function(dictObj){
+					content.setEmail($('.newEmail input').val());
 					$('.oldEmail input').val('');
 					$('.newEmail input').val('');
 				},
