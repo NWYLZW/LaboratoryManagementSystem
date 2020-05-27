@@ -132,6 +132,7 @@
 	class setting {
 		constructor(dictList) {
 			this.dictList = dictList;
+			this.open = this.getCookie();
 		}
 		generateEle(){
 			var content = this;
@@ -141,28 +142,62 @@
 					<li><i class="fa fa-sort fa-fw"></i> 排序依据</li>\
 				</ul>\
 			');
-			content.switchcontr();
+			content.setCookie();
+			content.initSwitch();
+			content.switchcontrol();
 			return content.setList;
 		}
-		switchcontr(){
+		initSwitch(){
 			var content = this;
-			var open = false;
+			//content.open = content.getCookie();
+			console.log(content.open);
+			if(content.open){
+				content.setList.find('.circle').css({
+					float:'left',
+					marginLeft:'2px',
+					backgroundColor:'rgb(60, 175, 108)'
+				});
+				console.log(content.open);
+				console.log('green');
+			}
+			else{
+				content.setList.find('.circle').css({
+					float:'right',
+					marginRight:'2px',
+					backgroundColor:'#afada8'
+				});
+				console.log(content.open);
+				console.log('grey');
+			}
+		}
+		switchcontrol(){
+			var content = this;
+			
 			content.setList.find('.circle').unbind('click').click(function(){
-				if(open){
-					this.style.float = 'left';
-					this.style.marginLeft = '2px';
-					this.style.backgroundColor = 'rgb(60, 175, 108)';
-				}
-				else{
-					this.style.float = 'right';
-					this.style.marginRight = '2px';
-					this.style.backgroundColor = 'gray';
-				}
-				open = !open;
+				content.open = !content.open;
+				content.initSwitch();
+				content.setCookie();
 			});
 		}
 		setCookie(){
-			
+			var content = this;
+			var nextMonthDate = new Date(new Date().getTime() + 30*24*60*60*1000); 
+			var expires = "expires="+nextMonthDate.toGMTString();
+			document.cookie = "isShowTaskCompleted=" + content.open+ "; " +expires;
+		}
+		getCookie(){ 
+			var content = this;
+			var name = "isShowTaskCompleted=";
+		    var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++) {
+			var c = ca[i].trim();
+				if (c.indexOf(name)==0) {
+					content.open = c.substring(name.length,c.length);
+					content.open = (content.open == 'true') ? true : false;
+					return content.open;
+				}
+			}
+			return false;
 		}
 	}
 	window.tasksearch = tasksearch;
