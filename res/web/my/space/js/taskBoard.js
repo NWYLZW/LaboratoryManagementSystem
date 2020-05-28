@@ -130,7 +130,7 @@
 		}
 	}
 	class setting {
-		constructor(dictList) {
+		constructor(dictList){
 			this.dictList = dictList;
 			this.open = this.getCookie();
 		}
@@ -149,16 +149,15 @@
 		}
 		initSwitch(){
 			var content = this;
-			//content.open = content.getCookie();
-			console.log(content.open);
+			setTimeout(function(){
+				content.refresh();
+			},100);
 			if(content.open){
 				content.setList.find('.circle').css({
 					float:'left',
 					marginLeft:'2px',
 					backgroundColor:'rgb(60, 175, 108)'
 				});
-				console.log(content.open);
-				console.log('green');
 			}
 			else{
 				content.setList.find('.circle').css({
@@ -166,13 +165,10 @@
 					marginRight:'2px',
 					backgroundColor:'#afada8'
 				});
-				console.log(content.open);
-				console.log('grey');
 			}
 		}
 		switchcontrol(){
 			var content = this;
-			
 			content.setList.find('.circle').unbind('click').click(function(){
 				content.open = !content.open;
 				content.initSwitch();
@@ -189,15 +185,31 @@
 			var content = this;
 			var name = "isShowTaskCompleted=";
 		    var ca = document.cookie.split(';');
-			for(var i=0; i<ca.length; i++) {
+			for(var i=0; i<ca.length; i++){
 			var c = ca[i].trim();
-				if (c.indexOf(name)==0) {
+				if (c.indexOf(name)==0){
 					content.open = c.substring(name.length,c.length);
 					content.open = (content.open == 'true') ? true : false;
 					return content.open;
 				}
 			}
-			return false;
+			return true;
+		}
+		refresh(){
+			var content = this;
+			$('.task-box-wrapper').empty();
+			
+			console.log($('.task-box-wrapper')[0]);
+			if(!content.open){
+				for(let i = 0;i < content.dictList.length;i++){
+						if(!content.dictList[i].isSuccess)
+							$('.task-box-wrapper')[0].appendChild(new taskLeave(content.dictList[i]).generateEle()[0]);
+				}
+			}
+			else{
+				for(let i = 0;i < content.dictList.length;i++)
+					$('.task-box-wrapper')[0].appendChild(new taskLeave(content.dictList[i]).generateEle()[0]);
+			}
 		}
 	}
 	window.tasksearch = tasksearch;

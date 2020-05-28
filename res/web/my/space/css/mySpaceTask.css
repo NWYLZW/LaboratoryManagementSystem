@@ -60,6 +60,7 @@
 	width: 95%;
 	height: 40px;
 	line-height: 40px;
+	cursor: pointer;
 }
 .rectangular{    
 	position: absolute;
