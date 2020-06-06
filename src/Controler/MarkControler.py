@@ -49,12 +49,6 @@ class MarkControler():
             )
         )
     def __validation(self,ip:str,nowTime:datetime)->int:
-        # TODO 验证IP是否为实验室IP 错误返回 1
-        #  实验室IP特点123.123.*.*
-        #  验证是否为签到时间段 8 - 12 14 - 17 18 - 22 错误返回 2
-        #  验证签到次数 每个时间段最多签到俩次 一天最多签到六次 错误返回 3 4
-        #  验证回签 只有在当前时间段签到了一次，相隔2小时才能签第二次 错误返回 5
-        #  均正确返回 0
         temp=nowTime.hour
         if re.match("123\.123\.\d{1,3}\.\d{1,3}", ip) is not None:
             return 1
@@ -79,21 +73,27 @@ class MarkControler():
             else: return 0
         else: return 2
     def mark(self):
-        messageList = [
-            "markSuccess",
-            "markIpError"
+        '''
+        :return: [
+        0: 签到成功,
+        1: 数据库错误,
+        2: 不为指定实验室IP,
+        3: 未在签到时间段内,
+        4: 时间段内只能签到2次,
+        5: 一天最多签到6次,
+        6: 距离上次签到未抵达2小时,
         ]
+        '''
         nowTime = timeUtil.nowDateObj()
         flag = self.__validation('123.123.0.0',nowTime)
         if flag == 0:
             try:
                 db.session.add(Mark(dateTime=nowTime,userId=current_user.id))
-            except:
-                return errorUtil.getData("dataBaseError")
+                db.session.flush()
+            except: return 1
             db.session.commit()
-            return successUtil.getData(messageList[flag])
-        else:
-            return errorUtil.getData(messageList[flag])
+            return 0
+        return flag + 1
     def getMarkNum(self, userId):
         markNumSum = 0
         for markItem in self.__searchMarkByTimeAndUserId(self.__lastYearTime(),userId):
