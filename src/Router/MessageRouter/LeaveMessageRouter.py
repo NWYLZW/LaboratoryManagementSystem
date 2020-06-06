@@ -127,3 +127,6 @@ def initChildRoute(bluePrint:Blueprint):
         if temp==None:
             return errorUtil.getData("LeaveMessageIsNone")
         return JsonUtil().dictToJson(temp)
+    @bluePrint.route(routeName+'/judgeReportLeaveMessage',methods=['POST'])
+    def judgeReportLeaveMessage():
+        pass
