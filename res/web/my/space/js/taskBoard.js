@@ -20,7 +20,7 @@
 				</div>\
 			</div>\
 			');
-			getHeadPortrait(content.taskBox$.find('.task-headPortrait img')[0],50);//content.dict.publishUser.id
+			getHeadPortrait(content.taskBox$.find('.task-headPortrait img')[0],50);
 			content.completeState();
 			content.collectState();
 			content.showClock();
@@ -94,9 +94,10 @@
 						<div class="search-ico"><i class="fa fa-search fa-lg"></i></div>\
 					</div>\
 					<div class="set-ico"><i class="fa fa-cog fa-lg"></i></div>\
+					<div class="set-item"></div>\
 				</div>\
 			');
-			content.taskSearch$[0].appendChild(new setting(content.dictList).generateEle()[0]);
+			content.taskSearch$.find('.set-item')[0].appendChild(new setting(content.dictList).generateEle()[0]);
 			content.searchClick();
 			content.setClick();
 			return content.taskSearch$;
@@ -118,7 +119,7 @@
 		setClick(){
 			var content = this;
 			content.taskSearch$.find('.set-ico').unbind('click').click(function(){
-				$('.set-main').toggle();
+				content.taskSearch$.find('.set-main').toggle();
 			});
 		}
 		refresh(){
@@ -139,9 +140,14 @@
 			content.setList = $('\
 				<ul class="set-main">\
 					<li><i class="fa fa-eye fa-fw"></i> 是否显示已完成<div class="rectangular"><div class="circle"></div></div></li>\
-					<li><i class="fa fa-sort fa-fw"></i> 排序依据</li>\
+					<li class="sortLi">\
+						<i class="fa fa-sort fa-fw"></i> 排序依据\
+						<div class="set-wrapper"></div>\
+					</li>\
 				</ul>\
 			');
+			
+			content.setList.find('.set-wrapper')[0].appendChild(new sortKinds(content.dictList).generateEle()[0]);
 			content.setCookie();
 			content.initSwitch();
 			content.switchcontrol();
@@ -199,7 +205,6 @@
 			var content = this;
 			$('.task-box-wrapper').empty();
 			
-			console.log($('.task-box-wrapper')[0]);
 			if(!content.open){
 				for(let i = 0;i < content.dictList.length;i++){
 						if(!content.dictList[i].isSuccess)
@@ -210,6 +215,24 @@
 				for(let i = 0;i < content.dictList.length;i++)
 					$('.task-box-wrapper')[0].appendChild(new taskLeave(content.dictList[i]).generateEle()[0]);
 			}
+		}
+	}
+	class sortKinds {
+		constructor(dictList) {
+			this.dictList = dictList;
+		}
+		generateEle(){
+			var content = this;
+			content.sortList = $('\
+				<ul class = "sort-main">\
+					<li><i class="fa fa-star fa-fw"></i> 收藏时间</li>\
+					<li><i class="fa fa-calendar fa-fw"></i> 到期日期</li>\
+					<li><i class="fa fa-sort-alpha-asc fa-fw"></i> 字母顺序</li>\
+					<li><i class="fa fa-calendar-plus-o fa-fw"></i> 创建日期</li>\
+				</ul>\
+			');
+			
+			return content.sortList;
 		}
 	}
 	window.tasksearch = tasksearch;
