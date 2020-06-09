@@ -22,9 +22,14 @@ def mark():
     messageList = [
         "markSuccess",
         "dataBaseError",
-        "markIpError"
+        "MarkIpError",
+        'OutOfTimeError',
+        'MarkTimeExceedError',
+        'TotalMarkTimeExceedError',
+        'MarkTimeNotEnoughError'
     ]
     result = markControler.mark()
+
     if result == 0:
         return successUtil.getData(messageList[result])
     else:

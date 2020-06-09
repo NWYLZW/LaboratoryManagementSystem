@@ -32,7 +32,7 @@ class MarkControler():
         return Mark.query.filter(and_(
             Mark.dateTime.between(searchStartTime,time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())),
             Mark.userId == userId,)).all()
-    def __getSqlDateByTime(self, userId:int, startHour:time, endHour:time, startTime: datetime.date):
+    def __getSqlDateByTime(self, userId:int, startHour:datetime.time, endHour:datetime.time, startTime: datetime.date):
         '''
         :param startHour: 开始的时间
         :param endHour:结束的时间
@@ -41,36 +41,37 @@ class MarkControler():
         '''
         begin=datetime.datetime.combine(startTime,startHour)
         end=datetime.datetime.combine(startTime,endHour)
-        return Mark.qurry.filter(
+        return Mark.query.filter(
             and_(
                 Mark.userId==userId,
                 Mark.dateTime>=begin,
                 Mark.dateTime<=end
             )
-        )
+        ).all()
     def __validation(self,ip:str,nowTime:datetime)->int:
         temp=nowTime.hour
-        if re.match("123\.123\.\d{1,3}\.\d{1,3}", ip) is not None:
+        userId=current_user.id
+        if re.match("123\.123\.\d{1,3}\.\d{1,3}", ip) is None:
             return 1
         if (12 >= temp >= 8) or (17 >= temp >= 14) or (18 <= temp <= 22):
             start=datetime.date(year=nowTime.year,month=nowTime.month,day=nowTime.day)
-            userMark=Mark.qurry.filter_by(
-                userId=current_user.userId,
+            userMark=Mark.query.filter_by(
+                userId=userId,
                 dateTime=start
-            )
-            if userMark.length>6:
+            ).all()
+            if len(userMark)>6:
                 return 4
             if 12 >= temp >= 8:
-                userMark=self.__getSqlDateByTime(current_user.userId, time(8, 00, 00), time(12, 00, 00), start)
+                userMark=self.__getSqlDateByTime(userId, datetime.time(8,00,00), datetime.time(12, 00, 00), start)
             elif 17 >= temp >= 14:
-                userMark=self.__getSqlDateByTime(current_user.userId, time(14, 00, 00), time(17, 00, 00), start)
+                userMark=self.__getSqlDateByTime(userId, datetime.time(14, 00, 00), datetime.time(17, 00, 00), start)
             elif 22 >= temp >= 18:
-                userMark=self.__getSqlDateByTime(current_user.userId, time(18, 00, 00), time(22, 00, 00), start)
-            if userMark.length>=2: return 3
-            elif userMark.length==1:
-                if temp-userMark[0].hour>=2: return 0
+                userMark=self.__getSqlDateByTime(userId, datetime.time(18, 00, 00), datetime.time(22, 00, 00), start)
+            if len(userMark)>=2: return 3
+            elif len(userMark)==1:
+                if temp-userMark[len(userMark)-1].dateTime.hour>=2:return 0
                 else: return 5
-            else: return 0
+            else:return 0
         else: return 2
     def mark(self):
         '''
