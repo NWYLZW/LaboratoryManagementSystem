@@ -7,9 +7,7 @@ from sqlalchemy import and_
 
 from src import db
 from src.Model.MarkModel import Mark
-from src.Util.ErrorUtil import errorUtil
 from src.Util.JsonUtil import JsonUtil
-from src.Util.SuccessUtil import successUtil
 from src.Util.TimeUtil import timeUtil
 
 
