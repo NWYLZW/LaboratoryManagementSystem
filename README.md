@@ -20,7 +20,7 @@ pip freeze > requirements.txt
 ```
 实验室管理
 用户名:201801010101
-密码:u3Ji4gWsDVVs9nk
+密码:123qwe
 普通用户
 用户名:201801010102
 密码:123qwe
