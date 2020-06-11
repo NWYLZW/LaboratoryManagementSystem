@@ -11,6 +11,9 @@ windows下使用win_venv环境
 windows下使用win_venv环境时需要更改文件夹下pyvenv.cfg文件
 home = C:\Program Files (x86)\Python37-32改成你操作系统对应版本python的安装路径
 version = 3.7.2改成你的python的版本号
+
+发布前先解析依赖
+pip freeze > requirements.txt
 ```
 
 ## 几个开发账号
