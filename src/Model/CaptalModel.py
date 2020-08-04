@@ -34,6 +34,8 @@ class Captal(db.Model):
             return None
         db.session.commit()
         return captal
+    def test(self):
+        return ""
     def cost(self,userId:int,changeReason:str,changeMoney:decimal):
         '''
         :param userId:
